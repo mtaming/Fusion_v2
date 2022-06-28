@@ -31,7 +31,7 @@ namespace Fusion_v2
         private void homePageLogout_Click(object sender, RoutedEventArgs e)
         {
 
-            if (MessageBox.Show("Are you sure you want to close Logout?", "Fusion Logout", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+            if (MessageBox.Show("Are you sure you want to Logout?", "Fusion Logout", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
             {
 
             }

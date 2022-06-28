@@ -115,7 +115,7 @@
                                     <materialDesign:PackIcon Kind="ViewList" HorizontalAlignment="Right" Margin="0 5 160 0"  Foreground="Black" Width="30" Height="30"/>
                                     <!-- program files -->
                                     <DataGrid Name="dgProgramFiles" IsReadOnly="True" AutoGenerateColumns="False" Width="475" VerticalGridLinesBrush="Transparent" 
-                                            FontSize="13" Margin="10,45,0,10" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" MouseDoubleClick="dgProgramFiles_MouseDoubleClick" MouseLeftButtonUp="dgProgramFiles_MouseLeftButtonUp" KeyDown="dgProgramFiles_KeyDown" >
+                                            FontSize="13" Margin="10,45,0,10" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" MouseDoubleClick="dgProgramFiles_MouseDoubleClick" MouseLeftButtonUp="dgProgramFiles_MouseLeftButtonUp" KeyDown="dgProgramFiles_KeyDown" PreviewKeyDown="dgProgramFiles_PreviewKeyDown" >
 
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="ID" Binding="{Binding id}" Visibility="Collapsed"/>

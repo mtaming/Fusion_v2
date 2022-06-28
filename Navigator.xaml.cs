@@ -949,5 +949,10 @@ namespace Fusion_v2
         {
             gridMach.Visibility = Visibility.Visible;
         }
+
+        private void dgProgramFiles_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
     }
 }

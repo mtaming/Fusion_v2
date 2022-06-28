@@ -31,9 +31,13 @@
                         <SolidColorBrush Color="Black" Opacity="0.3" />
                     </Border.Background>
                 </Border>
-                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="200" Width="500" Margin="0,160,0,25">
-                    
+                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="150" Width="500" Margin="0,70,0,25">
+                    <Image Source="Images/user.png"></Image>
+                </Grid>
+                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="200" Width="500" Margin="0,220,0,25">
+
                     <StackPanel Grid.IsSharedSizeScope="True" UseLayoutRounding="True">
+                        
                         <Border HorizontalAlignment="Center" Background="White" Height="50" CornerRadius="10" Width="350">
                             <DockPanel>
                                 <materialDesign:PackIcon Kind="User" Foreground="Black" Width="30" Height="25" Margin="35,12,20,0" />

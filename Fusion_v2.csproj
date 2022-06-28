@@ -176,6 +176,7 @@
     <Resource Include="Images\latestlogo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\user.png" />
     <Resource Include="Images\bg4.jpg" />
     <Resource Include="Images\bbb.jpg" />
     <Resource Include="Images\orangebg.jpg" />
