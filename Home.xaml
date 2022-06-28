@@ -1,0 +1,69 @@
+﻿<mah:MetroWindow x:Class="Fusion_v2.Home"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                 xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:local="clr-namespace:Fusion_v2"
+        mc:Ignorable="d"
+        Title="Fusion PDO - Homepage" Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+             Height="{x:Static SystemParameters.PrimaryScreenHeight}" WindowState="Maximized">
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <Image Source="/Images/fusionlogo_outline.ico" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Click="homePageLogout_Click">
+                <DockPanel>
+                    <materialDesign:PackIcon Kind="Logout" Width="20" Height="20" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Logout" Margin="5,2,0,0" />
+                </DockPanel>
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
+    <Window.Background>
+
+        <VisualBrush>
+            <VisualBrush.Visual>
+                <Image Source="/Images/bg.jpg" />
+
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+    </Window.Background>
+
+    <Grid>
+        <Image  Source="Images/latestlogo.png" Width="480" Height="250" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-10,50,0,0" />
+
+        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,320,0,0" Height="200">
+            <Grid Name="cpGrid" Height="190" Width="150" MouseEnter="cpGrid_MouseEnter" MouseLeave="cpGrid_MouseLeave" >
+                <Border CornerRadius="10">
+                    <Border.Background>
+                        <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusY="0.9" RadiusX="0.9">
+                            <GradientStop Color="#FFED7C1D" Offset="0.727"/>
+                            <GradientStop Color="#FFEC8C5F" Offset="0.297" />
+                        </RadialGradientBrush>
+                    </Border.Background>
+                    <Button x:Name="button" Height="190" Background="Transparent" BorderThickness="0" Click="toControlProgram_Click" >
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="SettingsApplications" Width="100" Height="100"/>
+                            <TextBlock Text="  Control&#10;Programs" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="17">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" Opacity="0.5" BlurRadius="4"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Border>
+            </Grid>
+        </DockPanel>
+
+        
+
+    </Grid>
+</mah:MetroWindow>
