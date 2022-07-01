@@ -192,6 +192,7 @@
     </mah:MetroWindow.LeftWindowCommands>
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            
             <Button Click="cpLogout_Click">
                 <DockPanel>
                     <materialDesign:PackIcon Kind="Logout" Width="20" Height="20" HorizontalAlignment="Center"/>

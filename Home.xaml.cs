@@ -25,7 +25,6 @@ namespace Fusion_v2
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, "Light.Orange");
-            
         }
 
         private void homePageLogout_Click(object sender, RoutedEventArgs e)

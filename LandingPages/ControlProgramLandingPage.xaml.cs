@@ -23,7 +23,6 @@ namespace Fusion_v2.LandingPages
             ThemeManager.Current.ChangeTheme(this, "Light.Orange");
             Style = (Style)FindResource(typeof(Window));
             xpndMachine.Width = 72;
-
         }
 
         private void cpLogout_Click(object sender, RoutedEventArgs e)
