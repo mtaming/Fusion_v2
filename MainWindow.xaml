@@ -54,7 +54,7 @@
 
                         <CheckBox Name="chkRem" Content="Remember Me" HorizontalAlignment="Right" Foreground="White" FontSize="13" Margin="0,15,80,0"/>
 
-                        <Button Content="SUBMIT"  FontSize="15" Width="350" Margin="0,15,0,0" HorizontalAlignment="Center" x:Name="login" Foreground="White" Height="40" BorderThickness="0" Click="Login_Click" />
+                        <Button Content="SUBMIT"  FontSize="15" Width="350" Margin="0,15,0,0" HorizontalAlignment="Center" x:Name="login" Foreground="White" Height="40" BorderThickness="0" Click="Login_Click"  IsDefault="True"/>
                     </StackPanel>
                 </Grid>
             </Grid>

@@ -6,9 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Fusion_v2.LandingPages"
+                 
         mc:Ignorable="d"
-        Title="Control Progam" Width="1374"
-             Height="741" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Control Program" Width="1374"
+             Height="741" WindowStartupLocation="CenterScreen" WindowState="Maximized" SizeToContent="WidthAndHeight">
 
     <Window.Background>
         <ImageBrush TileMode="None" ImageSource="../Images/bg4.jpg" />
@@ -209,10 +210,10 @@
 
             <Expander ExpandDirection="Right"  HorizontalAlignment="Left" Margin="-2,0,0,0" Foreground="Black" Name="xpndMachine" Collapsed="xCP_Collapsed" Expanded="xCP_Expanded" Template="{DynamicResource ExpanderControlTemplateProcess}" Height="710" VerticalAlignment="Top" >
                 <Expander.Header>
-                    <Grid Background="#FFFEA443" Width="280" Height="700" Margin="0,-25,0,0">
+                    <Grid Name="gridXP"  Background="#FFFEA443" Width="280" Height="700" Margin="0,-25,0,0">
                         <TreeView Name="sideBarContProg" Visibility="Collapsed">
 
-                            <Image Name="logoExpanded" Source="../Images/latestlogo.png" Width="180" Height="150" Margin="15,0,0,0" Visibility="Collapsed"/>
+                            <Image Name="logoExpanded" Source="../Images/Fusion.gif" Width="180" Height="150" Margin="15,0,0,0" Visibility="Collapsed"/>
                             <!-- HOME-->
                             <TreeViewItem Margin="0,0,0,0">
                                 <TreeViewItem.Header>

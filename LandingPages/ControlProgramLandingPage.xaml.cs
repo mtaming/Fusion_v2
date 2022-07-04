@@ -42,6 +42,7 @@ namespace Fusion_v2.LandingPages
         private void xCP_Collapsed(object sender, RoutedEventArgs e)
         {
             xpndMachine.Width = 72;
+            gridXP.Opacity = 1;
             sideBarContProg.Visibility = Visibility.Collapsed;
             logoExpanded.Visibility = Visibility.Collapsed;
             gridIcon.Visibility = Visibility.Visible;
@@ -50,6 +51,7 @@ namespace Fusion_v2.LandingPages
         private void xCP_Expanded(object sender, RoutedEventArgs e)
         {
             xpndMachine.Width = 300;
+            gridXP.Opacity = 0.8;
             sideBarContProg.Visibility = Visibility.Visible;
             logoExpanded.Visibility = Visibility.Visible;
             gridIcon.Visibility = Visibility.Collapsed;

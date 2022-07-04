@@ -130,5 +130,29 @@ namespace Fusion_v2.Properties {
                 this["loginChkRem"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int dgLastSelected {
+            get {
+                return ((int)(this["dgLastSelected"]));
+            }
+            set {
+                this["dgLastSelected"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int dgLastSelectedID {
+            get {
+                return ((int)(this["dgLastSelectedID"]));
+            }
+            set {
+                this["dgLastSelectedID"] = value;
+            }
+        }
     }
 }

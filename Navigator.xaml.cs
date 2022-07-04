@@ -43,8 +43,9 @@ namespace Fusion_v2
             ProgressBar1.Maximum = 100;
             worker.RunWorkerAsync();
             dgProgramFiles.IsEnabled = false;
-            dgProgramFiles.SelectedIndex = 0;
-            
+           
+            FillComboBoxCntrlPgrmGrp(cmbBoxCntrlPgrm);
+            FillComboBoxAssocCust(cmbBoxAssocCust);
         }
 
         //background worker
@@ -88,11 +89,10 @@ namespace Fusion_v2
             cbFilter.SelectedIndex = 0;
             dgProgramFiles.ItemsSource = contProgram().DefaultView;
             dgProgramFiles.IsEnabled = true;
-            dgProgramFiles.SelectedIndex = 0;
+            dgProgramFiles.SelectedIndex = Properties.Settings.Default.dgLastSelected;
             dgProgramFiles.Focus();
-            LoadTextBoxesData();
-            FillComboBoxCntrlPgrmGrp(cmbBoxCntrlPgrm);
-            FillComboBoxAssocCust(cmbBoxAssocCust);
+            //MessageBox.Show(Properties.Settings.Default.dgLastSelected.ToString());
+            //LoadTextBoxesData();
         }
         //end background worker
         
@@ -233,78 +233,7 @@ namespace Fusion_v2
                 }
             }
         }
-
-        private void LoadTextBoxesData()
-        {
-            string id = contProgram().Rows[0]["id"].ToString();
-            string customerId = "";
-            lstBoxAssocCus.Items.Clear();
-            try
-            {
-                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-                sqlCon.Open();
-                String query = "SELECT * from[NCPROG] INNER JOIN[Machine_Groups] ON NCPROG.fkMachGroupId = machine_group_id WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
-                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                SqlDataReader reader = sqlCmd.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    txtFilename.Text = reader["filename"].ToString();
-                    txtBoxPath.Text = reader["programPointer"].ToString();
-                    txtBoxCntrllPgrmGrp.Text = reader["machine_group_name"].ToString();
-
-                    txtBoxRefID.Text = reader["UniqueReference"].ToString();
-                    txtBoxRemReqId.Text = reader["remoteCallId"].ToString();
-                    txtBoxRev.Text = reader["revision_date"].ToString();
-
-                    string filePath = reader["programPointer"].ToString();
-                    DateTime modification = File.GetLastWriteTime(filePath); //last modification date of actual file
-                    txtBoxLastModified.Text = modification.ToString();
-                    txtBoxFileSize.Text = new FileInfo(filePath).Length.ToString() + " " + "Bytes";
-
-                    string custId = reader["fkCustId"].ToString();
-
-                    customerId = custId;
-                    if (custId == "")
-                    {
-                        customerId = "1";
-                    }
-
-                    byte[] test = File.ReadAllBytes(filePath).Skip(0).Take(512).ToArray();
-                    txtTopView.Text = Encoding.UTF8.GetString(test) + "\n\n**This is only a quick view of the top of the file**\n**Double click to edit file**";
-
-                    txtBotView.Text = "**This is only a quick view of the bottom of the file**\n**Double click to edit file**\n\n" + BottomViewOfFile(filePath, 512);
-                    txtBotView.ScrollToEnd();
-
-                }
-                reader.Close();
-                sqlCon.Close();
-
-                sqlCon.Open();
-                String query2 = "SELECT * FROM CUSTOMERS  WHERE customer_id = '" + customerId + "' ";
-                SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
-                SqlDataReader dr2 = sqlCmd2.ExecuteReader();
-
-                if (dr2.HasRows)
-                {
-                    while (dr2.Read())
-                    {
-                        //string cusid = dr2["customer_id"].ToString();
-                        int cusid = int.Parse(dr2["customer_id"].ToString());
-                        string cusnm = dr2["customer_name"].ToString();
-
-                        if (customerId == cusid.ToString())
-                        {
-                            lstBoxAssocCus.Items.Add(cusnm);
-                        }
-                    }
-                }
-                dr2.Close();
-                sqlCon.Close();
-
-            }
-            catch (Exception e) { e.ToString(); }
-        }
+        
         public static string BottomViewOfFile(string filename, int numChars)
         {
             var fileInfo = new FileInfo(filename);
@@ -343,18 +272,20 @@ namespace Fusion_v2
             {
                 DataRowView row_selected = e.AddedItems[0] as DataRowView;
                 DataTable dt = new DataTable();
-                string customerId = "";
-                string id = row_selected.Row[0].ToString();
+                lstBoxAssocCus.Items.Clear();
+                string id = row_selected.Row["id"].ToString();
                 DataGrid dataGrid = sender as DataGrid;
                 dgSelRow = int.Parse(dataGrid.SelectedIndex.ToString());
                 dataGrid.ScrollIntoView(dataGrid.SelectedItem);
+                Properties.Settings.Default.dgLastSelected = dgSelRow;
+                Properties.Settings.Default.Save();
                 if (row_selected != null)
                 {
                     try
                     {
                         SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
                         sqlCon.Open();
-                        String query = "SELECT * from[NCPROG] INNER JOIN[Machine_Groups] ON NCPROG.fkMachGroupId = machine_group_id WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
+                        String query = "SELECT * FROM NCPROG INNER JOIN Machine_Groups ON NCPROG.fkMachGroupId=Machine_Groups.machine_group_id INNER JOIN CtrlProgCustMGAssoc ON NCPROG.UniqueReference=CtrlProgCustMGAssoc.urid WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
                         SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                         SqlDataAdapter da = new SqlDataAdapter(sqlCmd);
                         da.Fill(dt);
@@ -373,15 +304,8 @@ namespace Fusion_v2
                             txtBoxLastModified.Text = modification.ToString();
                             txtBoxFileSize.Text = new FileInfo(filePath).Length.ToString() + " " + "Bytes";
 
-                            string custId = dt.Rows[0]["fkCustId"].ToString();
-                            string r = dt.Rows[0]["UniqueReference"].ToString();
-                            //refer = r;
-                            customerId = custId;
-                            if (custId == "")
-                            {
-                                customerId = "1";
-                            }
-
+                            lstBoxAssocCus.Items.Add(dt.Rows[0]["custName"].ToString());
+                            
                             byte[] test = File.ReadAllBytes(filePath).Skip(0).Take(512).ToArray();
                             txtTopView.Text = Encoding.UTF8.GetString(test) + "\n\n**This is only a quick view of the top of the file**\n**Double click to edit file**";
 
@@ -395,28 +319,7 @@ namespace Fusion_v2
                         da.Dispose();
                         sqlCon.Close();
 
-                        lstBoxAssocCus.Items.Clear();
-                        sqlCon.Open();
-                        String query2 = "SELECT * from CUSTOMERS WHERE customer_id = '" + customerId + "' ";
-                        SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
-                        SqlDataReader dr2 = sqlCmd2.ExecuteReader();
-
-                        if (dr2.HasRows)
-                        {
-                            while (dr2.Read())
-                            {
-                                //string cusid = dr2["customer_id"].ToString();
-                                int cusid = int.Parse(dr2["customer_id"].ToString());
-                                string cusnm = dr2["customer_name"].ToString();
-
-                                if (customerId == cusid.ToString())
-                                {
-                                    lstBoxAssocCus.Items.Add(cusnm);
-                                }
-                            }
-                        }
-                        dr2.Close();
-                        sqlCon.Close();
+                        
                     }
                     catch (Exception ex) { ex.ToString(); }
                 }
@@ -434,7 +337,7 @@ namespace Fusion_v2
             {
                 DataRowView row_selected = e.AddedItems[0] as DataRowView;
                 DataTable dt = new DataTable();
-                string customerId = "";
+                lstBoxAssocCus.Items.Clear();
                 string id = row_selected.Row[0].ToString();
                 DataGrid dataGrid = sender as DataGrid;
                 dgSelRow = int.Parse(dataGrid.SelectedIndex.ToString());
@@ -445,7 +348,7 @@ namespace Fusion_v2
                     {
                         SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
                         sqlCon.Open();
-                        String query = "SELECT * from[NCPROG] INNER JOIN[Machine_Groups] ON NCPROG.fkMachGroupId = machine_group_id WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
+                        String query = "SELECT * FROM NCPROG INNER JOIN Machine_Groups ON NCPROG.fkMachGroupId=Machine_Groups.machine_group_id INNER JOIN CtrlProgCustMGAssoc ON NCPROG.UniqueReference=CtrlProgCustMGAssoc.urid WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
                         SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                         SqlDataAdapter da = new SqlDataAdapter(sqlCmd);
                         da.Fill(dt);
@@ -464,14 +367,7 @@ namespace Fusion_v2
                             txtBoxLastModified.Text = modification.ToString();
                             txtBoxFileSize.Text = new FileInfo(filePath).Length.ToString() + " " + "Bytes";
 
-                            string custId = dt.Rows[0]["fkCustId"].ToString();
-                            string r = dt.Rows[0]["UniqueReference"].ToString();
-                            //refer = r;
-                            customerId = custId;
-                            if (custId == "")
-                            {
-                                customerId = "1";
-                            }
+                            lstBoxAssocCus.Items.Add(dt.Rows[0]["custName"]);
 
                             byte[] test = File.ReadAllBytes(filePath).Skip(0).Take(512).ToArray();
                             txtTopView.Text = Encoding.UTF8.GetString(test) + "\n\n**This is only a quick view of the top of the file**\n**Double click to edit file**";
@@ -486,28 +382,6 @@ namespace Fusion_v2
                         da.Dispose();
                         sqlCon.Close();
 
-                        lstBoxAssocCus.Items.Clear();
-                        sqlCon.Open();
-                        String query2 = "SELECT * from CUSTOMERS WHERE customer_id = '" + customerId + "' ";
-                        SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
-                        SqlDataReader dr2 = sqlCmd2.ExecuteReader();
-
-                        if (dr2.HasRows)
-                        {
-                            while (dr2.Read())
-                            {
-                                //string cusid = dr2["customer_id"].ToString();
-                                int cusid = int.Parse(dr2["customer_id"].ToString());
-                                string cusnm = dr2["customer_name"].ToString();
-
-                                if (customerId == cusid.ToString())
-                                {
-                                    lstBoxAssocCus.Items.Add(cusnm);
-                                }
-                            }
-                        }
-                        dr2.Close();
-                        sqlCon.Close();
                     }
                     catch (Exception ex) { ex.ToString(); }
                 }
@@ -525,7 +399,7 @@ namespace Fusion_v2
             {
                 DataRowView row_selected = e.AddedItems[0] as DataRowView;
                 DataTable dt = new DataTable();
-                string customerId = "";
+                lstBoxAssocCus.Items.Clear();
                 string id = row_selected.Row[0].ToString();
                 DataGrid dataGrid = sender as DataGrid;
                 dgSelRow = int.Parse(dataGrid.SelectedIndex.ToString());
@@ -536,7 +410,7 @@ namespace Fusion_v2
                     {
                         SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
                         sqlCon.Open();
-                        String query = "SELECT * from[NCPROG] INNER JOIN[Machine_Groups] ON NCPROG.fkMachGroupId = machine_group_id WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
+                        String query = "SELECT * FROM NCPROG INNER JOIN Machine_Groups ON NCPROG.fkMachGroupId=Machine_Groups.machine_group_id INNER JOIN CtrlProgCustMGAssoc ON NCPROG.UniqueReference=CtrlProgCustMGAssoc.urid WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
                         SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                         SqlDataAdapter da = new SqlDataAdapter(sqlCmd);
                         da.Fill(dt);
@@ -555,14 +429,7 @@ namespace Fusion_v2
                             txtBoxLastModified.Text = modification.ToString();
                             txtBoxFileSize.Text = new FileInfo(filePath).Length.ToString() + " " + "Bytes";
 
-                            string custId = dt.Rows[0]["fkCustId"].ToString();
-                            string r = dt.Rows[0]["UniqueReference"].ToString();
-                            //refer = r;
-                            customerId = custId;
-                            if (custId == "")
-                            {
-                                customerId = "1";
-                            }
+                            lstBoxAssocCus.Items.Add(dt.Rows[0]["custName"].ToString());
 
                             byte[] test = File.ReadAllBytes(filePath).Skip(0).Take(512).ToArray();
                             txtTopView.Text = Encoding.UTF8.GetString(test) + "\n\n**This is only a quick view of the top of the file**\n**Double click to edit file**";
@@ -577,28 +444,6 @@ namespace Fusion_v2
                         da.Dispose();
                         sqlCon.Close();
 
-                        lstBoxAssocCus.Items.Clear();
-                        sqlCon.Open();
-                        String query2 = "SELECT * from CUSTOMERS WHERE customer_id = '" + customerId + "' ";
-                        SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
-                        SqlDataReader dr2 = sqlCmd2.ExecuteReader();
-
-                        if (dr2.HasRows)
-                        {
-                            while (dr2.Read())
-                            {
-                                //string cusid = dr2["customer_id"].ToString();
-                                int cusid = int.Parse(dr2["customer_id"].ToString());
-                                string cusnm = dr2["customer_name"].ToString();
-
-                                if (customerId == cusid.ToString())
-                                {
-                                    lstBoxAssocCus.Items.Add(cusnm);
-                                }
-                            }
-                        }
-                        dr2.Close();
-                        sqlCon.Close();
                     }
                     catch (Exception ex) { ex.ToString(); }
                 }
@@ -679,6 +524,7 @@ namespace Fusion_v2
 
         private void cntrlPgrmSelect_Click(object sender, RoutedEventArgs e)
         {
+            lstBoxAssocCus.Items.Clear();
             cntrlPgrmFilter.Visibility = Visibility.Collapsed;
             cntrlPgrmCancel.Visibility = Visibility.Visible;
             gridSearch.Visibility = Visibility.Collapsed;
@@ -767,7 +613,7 @@ namespace Fusion_v2
             refID.ScrollIntoView(refID.SelectedItem);
             reqID.ScrollIntoView(reqID.SelectedItem);
             dgSelRow = 0;
-            LoadTextBoxesData();
+            //LoadTextBoxesData();
             FillComboBoxCntrlPgrmGrp(cmbBoxCntrlPgrm);
         }
 
@@ -815,10 +661,6 @@ namespace Fusion_v2
                     txtBoxLastModified.Text = modification.ToString();
                     txtBoxFileSize.Text = new FileInfo(filePath).Length.ToString() + " " + "Bytes";
 
-                    lstBoxAssocCus.Items.Add(dt.Rows[0]["custName"]);
-                    //txtBoxNotes.Text = dt.Rows[0]["notes"].ToString();
-                    //txtBoxDesc.Text = dt.Rows[0]["desc"].ToString();
-
                     byte[] test = File.ReadAllBytes(filePath).Skip(0).Take(512).ToArray();
                     txtTopView.Text = Encoding.UTF8.GetString(test) + "\n\n**This is only a quick view of the top of the file**\n**Double click to edit file**";
 
@@ -863,7 +705,7 @@ namespace Fusion_v2
             refID.ScrollIntoView(refID.SelectedItem);
             reqID.ScrollIntoView(reqID.SelectedItem);
             dgSelRow = 0;
-            LoadTextBoxesData();
+            //LoadTextBoxesData();
             FillComboBoxAssocCust(cmbBoxAssocCust);
         }
 
@@ -952,7 +794,7 @@ namespace Fusion_v2
         {
             txtSearch.Text = "";
             btnSearchCancel.Visibility = Visibility.Hidden;
-            LoadTextBoxesData();
+            //LoadTextBoxesData();
             dgProgramFiles.ItemsSource = contProgram().DefaultView;
             refID.ItemsSource = referenceID().DefaultView;
             reqID.ItemsSource = requestID().DefaultView;
@@ -995,7 +837,7 @@ namespace Fusion_v2
             reqID.SelectedIndex = 0;
             reqID.Focus();
             txtSearch.Text = "";
-            LoadTextBoxesData();
+            //LoadTextBoxesData();
             dgProgramFiles.ScrollIntoView(dgProgramFiles.SelectedItem);
             refID.ScrollIntoView(refID.SelectedItem);
             reqID.ScrollIntoView(reqID.SelectedItem);
@@ -1121,6 +963,10 @@ namespace Fusion_v2
         {
             gridMach.Visibility = Visibility.Collapsed;
         }
+        private void cancelMach_Click(object sender, RoutedEventArgs e)
+        {
+            gridMach.Visibility = Visibility.Collapsed;
+        }
 
         private void ctxMenu_SendToMach_Click(object sender, RoutedEventArgs e)
         {
@@ -1143,7 +989,7 @@ namespace Fusion_v2
             dgProgramFiles.ScrollIntoView(dgProgramFiles.SelectedItem);
             refID.ScrollIntoView(refID.SelectedItem);
             reqID.ScrollIntoView(reqID.SelectedItem);
-            LoadTextBoxesData();
+            //LoadTextBoxesData();
         }
         private void removeSelectedCP()
         {
@@ -1191,6 +1037,11 @@ namespace Fusion_v2
             
         }
 
+        private void editCtrlPgrmCancel_Click(object sender, RoutedEventArgs e)
+        {
+            editGrid.Visibility = Visibility.Collapsed;
+        }
+
         private void editPrgrmPointerBrowse_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -1201,5 +1052,6 @@ namespace Fusion_v2
             }
         }
 
+        
     }
 }

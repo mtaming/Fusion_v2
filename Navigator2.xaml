@@ -1,0 +1,202 @@
+﻿<Page x:Class="Fusion_v2.Navigator2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fusion_v2"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+      Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+      Title="Navigator2">
+
+    <Page.Resources>
+        <Style x:Key="{x:Type DataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontFamily" Value="Tahoma" />
+        </Style>
+        <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Margin" Value="10,7,0,0" />
+            <Setter Property="Height" Value="25" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FFE69B5C"/>
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid Name="NavMainGrid" Margin="5" >
+
+            <Border VerticalAlignment="Top" CornerRadius="10" Margin="5" Height="55">
+                <Viewbox>
+                    <DockPanel >
+                        <Button Name="btnSendBrowse" Height="35" Margin="5,0,3,0" ToolTip="Select a File to Send to Machine" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="Send" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Send Browse" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+
+                        <Button Name="btnSendToMach" Height="35" Margin="0,0,3,0" ToolTip="Send currently selected Control Program to Machine" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="FileSend" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Send To Machine" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+
+                        <Button Name="btnPrintCtrlPgrm" Height="35" Margin="0,0,3,0" ToolTip="Print Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="PrinterView" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Print Control Program" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+
+                        <Button Name="btnPrint" Height="35" Margin="0,0,3,0" ToolTip="Print/Report" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="Printer" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Print/Report" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+
+                        <Button Name="btnRefresh" Height="35" Margin="0,0,3,0" ToolTip="Refresh" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="Refresh" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Refresh" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+
+                        <Button Name="btnCreateNew" Height="35" Margin="0,0,3,0" ToolTip="Add New Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="Add" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Create New" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+
+                        <Button Name="btnEdit" Height="35" Margin="0,0,3,0" ToolTip="Edit Selected Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="Edit" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Edit" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+                        <Button Name="btnRemove"  Height="35" Margin="0,0,3,0" ToolTip="Remove Selected Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F"  >
+                            <DockPanel>
+                                <materialDesign:PackIcon Kind="Remove" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Remove" FontSize="14" Margin="10,0,0,0"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                </Viewbox>
+            </Border>
+
+            <Border BorderThickness="3" BorderBrush="#FFDC5A0F" Margin="5,60,5,95" CornerRadius="10" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="521*"/>
+                        <ColumnDefinition Width="819*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="2" CornerRadius="10,0,0,0" Background="LightGray">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <ComboBox Grid.Row="0" Name="cbFilter" HorizontalAlignment="Right" Width="180" Margin="0 0 10 0" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="30 10 10 10"  ToolTip="Filter List" Background="WhiteSmoke" BorderThickness="0">
+                                    <ComboBoxItem Content="Control Program Files" IsSelected="True"/>
+                                </ComboBox>
+                                <materialDesign:PackIcon Kind="ViewList" HorizontalAlignment="Right" Margin="0 10 160 0"  Foreground="Black" Width="30" Height="30"/>
+
+
+                                <DataGrid Grid.Row="1" Name="dgProgramFiles" IsReadOnly="True" AutoGenerateColumns="False" VerticalGridLinesBrush="Transparent" FontSize="13" Margin="5" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" IsTextSearchCaseSensitive="False"
+                     IsTextSearchEnabled="True"
+                     TextSearch.TextPath="filename" ColumnWidth="*">
+
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding id}" Visibility="Collapsed" />
+                                        <DataGridTextColumn Header="Filename" Width="*" Binding="{Binding filename}"/>
+                                    </DataGrid.Columns>
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu FontSize="11">
+                                            <MenuItem Header="Archive and Assign New" Icon="{materialDesign:PackIcon Kind=ArchiveAdd}"/>
+                                            <MenuItem Header="Archive and Edit" Icon="{materialDesign:PackIcon Kind=ArchiveEdit}"/>
+                                            <MenuItem Header="Archive and Remove" Icon="{materialDesign:PackIcon Kind=ArchiveRemove}"/>
+                                            <MenuItem Header="Edit File" Icon="{materialDesign:PackIcon Kind=Edit}"  />
+                                            <MenuItem Header="Lock and Unlock" Icon="{materialDesign:PackIcon Kind=Lock}"/>
+                                            <MenuItem Header="Assign to Control Program Group" Icon="{materialDesign:PackIcon Kind=SettingsApplications}"/>
+                                            <MenuItem Header="Remove Selected Control Program(s)" Icon="{materialDesign:PackIcon Kind=Remove}" />
+                                            <MenuItem Header="Send to Machine" Icon="{materialDesign:PackIcon Kind=FileSend}" />
+                                            <MenuItem Header="Simulate DNC using this File" Icon="{materialDesign:PackIcon Kind=Settings}"/>
+                                            <MenuItem Header="Print Control Program" Icon="{materialDesign:PackIcon Kind=Printer}"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1" BorderBrush="Transparent" BorderThickness="2" CornerRadius="0,0,0,10" Background="LightGray">
+
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <StackPanel VerticalAlignment="Bottom" Height="95">
+                <Grid>
+                    <StackPanel>
+                        <Viewbox>
+                            <DockPanel VerticalAlignment="Top" Margin="10,5,10,5">
+                                <TextBlock Background="Transparent" Text="Search" Margin="15,10" FontSize="15" Foreground="Black" FontWeight="DemiBold"/>
+                                <TextBox Name="txtSearch" FontSize="14" BorderThickness="1" Background="WhiteSmoke" Padding="5,5" TextWrapping="Wrap"  Height="30" Width="1100" Margin="0,0,15,0" />
+                                <Button x:Name="btnSearchCancel" Background="Transparent" BorderBrush="Transparent" Foreground="Red"  Height="30" Width="40" Margin="-70 0 0 0" Visibility="Collapsed" FontWeight="ExtraBlack" >
+                                    <Grid Margin="-8,-5">
+                                        <materialDesign:PackIcon Kind="Close" Width="17" Height="17"/>
+                                    </Grid>
+                                </Button>
+                                <Button Name="btnSearch" Height="30" Margin="5,5,15,5"  ToolTip="Search Control Program Navigator" Background="#FFEC551D" >
+                                    <Grid Margin="-8,-5">
+                                        <materialDesign:PackIcon Kind="Magnify" Width="17" Height="17"/>
+                                    </Grid>
+                                </Button>
+                            </DockPanel>
+                        </Viewbox>
+                        <Viewbox>
+                            <DockPanel>
+                                <CheckBox Name="cbRemReqId" Margin="100,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" >Remote Request ID</CheckBox>
+                                <CheckBox Name="cbRefId" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" >Reference ID</CheckBox>
+                                <CheckBox Name="cbCpg" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" >Control Program Group</CheckBox>
+                                <CheckBox Name="cbAssCus" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" >Associated Customers</CheckBox>
+                                <CheckBox Name="cbFileNm" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" >Filename</CheckBox>
+                                <CheckBox Name="cbDesc" Margin="60,0,100,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" >Description</CheckBox>
+                            </DockPanel>
+                        </Viewbox>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

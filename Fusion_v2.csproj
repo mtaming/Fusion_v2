@@ -87,8 +87,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LandingPages\CtrlPgrmLandingPage.xaml.cs">
+      <DependentUpon>CtrlPgrmLandingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Navigator.xaml.cs">
       <DependentUpon>Navigator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Navigator2.xaml.cs">
+      <DependentUpon>Navigator2.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlMenuItem.xaml.cs">
       <DependentUpon>UserControlMenuItem.xaml</DependentUpon>
@@ -100,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LandingPages\ControlProgramLandingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LandingPages\CtrlPgrmLandingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,6 +132,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Navigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Navigator2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +190,7 @@
     <Resource Include="Images\latestlogo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Fusion.gif" />
     <Resource Include="Images\user.png" />
     <Resource Include="Images\bg4.jpg" />
     <Resource Include="Images\bbb.jpg" />

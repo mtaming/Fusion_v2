@@ -45,7 +45,8 @@ namespace Fusion_v2
 
         private void toControlProgram_Click(object sender, RoutedEventArgs e)
         {
-            LandingPages.ControlProgramLandingPage cp = new LandingPages.ControlProgramLandingPage();
+            //LandingPages.ControlProgramLandingPage cp = new LandingPages.ControlProgramLandingPage();
+            LandingPages.CtrlPgrmLandingPage cp = new LandingPages.CtrlPgrmLandingPage();
             cp.Show();
             this.Close();
         }
