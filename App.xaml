@@ -17,17 +17,23 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
-           
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#90AFC5"/>
-            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFE65C1C"/>
 
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFFF700B"/>
+
+            <!--PRIMARY -->
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#90AFC5"/>
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#333333"/>
+
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#336B87"/>
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
 
-            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFDC7F20"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#2A3132"/>
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
 
+            <!--ACCENT-->
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#689f38"/>
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
+
+            <!--GLOBAL FONT FAMILY-->
             <Style TargetType="{x:Type Window}">
                 <Setter Property="FontFamily" Value="Trebuchet"/>
             </Style>
@@ -39,7 +45,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

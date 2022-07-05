@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      Width="{x:Static SystemParameters.PrimaryScreenWidth}"
-      Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+      Width="1096"
+      Height="708" 
       Title="Navigator">
 
 
@@ -19,6 +19,7 @@
             <Setter Property="FontFamily" Value="Tahoma" />
         </Style>
         <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Foreground" Value="Black" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Margin" Value="10,7,0,0" />
@@ -35,7 +36,7 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#FFE69B5C"/>
+                    <Setter Property="Background" Value="#90AFC5"/>
                     <Setter Property="BorderBrush" Value="Transparent" />
                 </Trigger>
             </Style.Triggers>
@@ -45,83 +46,97 @@
     <Grid>
         <Grid Name="MainGrid">
             <Grid Name="NavGrid">
-                <ScrollViewer>
-                    <Border VerticalAlignment="Top" CornerRadius="10" Margin="5 5 15 5" Height="55">
+                <Border VerticalAlignment="Top" CornerRadius="10" Margin="5 5 15 5" Height="55">
 
-                    <Grid  Margin="0,0,0,0" VerticalAlignment="Bottom" Height="63">
+                        <Viewbox>
                         <DockPanel>
-                            <Button Name="btnSendBrowse" Width="150" Height="35" Margin="5,0,3,0" ToolTip="Select a File to Send to Machine" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <Button Name="btnSendBrowse"  Height="35" Margin="5,0,3,0" ToolTip="Select a File to Send to Machine" BorderBrush="Black" BorderThickness="1.5"  >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="Send" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Send Browse" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
-                            <Button Name="btnSendToMach" Width="170" Height="35" Margin="0,0,3,0" ToolTip="Send currently selected Control Program to Machine" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" Click="btnSendToMach_Click" >
+                            <Button Name="btnSendToMach" Height="35" Margin="0,0,3,0" ToolTip="Send currently selected Control Program to Machine" BorderBrush="Black" BorderThickness="1.5"  Click="btnSendToMach_Click" >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="FileSend" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Send To Machine" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
-                            <Button Name="btnPrintCtrlPgrm" Width="210" Height="35" Margin="0,0,3,0" ToolTip="Print Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <Button Name="btnPrintCtrlPgrm"  Height="35" Margin="0,0,3,0" ToolTip="Print Control Program" BorderBrush="Black" BorderThickness="1.5"  >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="PrinterView" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Print Control Program" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
-                            <Button Name="btnPrint" Width="150" Height="35" Margin="0,0,3,0" ToolTip="Print/Report" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <Button Name="btnPrint"  Height="35" Margin="0,0,3,0" ToolTip="Print/Report" BorderBrush="Black" BorderThickness="1.5" >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="Printer" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Print/Report" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
-                            <Button Name="btnRefresh" Width="120" Height="35" Margin="0,0,3,0" ToolTip="Refresh" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" Click="btnRefresh_Click" >
+                            <Button Name="btnRefresh"  Height="35" Margin="0,0,3,0" ToolTip="Refresh" BorderBrush="Black" BorderThickness="1.5" Click="btnRefresh_Click" >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="Refresh" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Refresh" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
-                            <Button Name="btnCreateNew" Width="140" Height="35" Margin="0,0,3,0" ToolTip="Add New Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" >
+                            <Button Name="btnCreateNew"  Height="35" Margin="0,0,3,0" ToolTip="Add New Control Program" BorderBrush="Black" BorderThickness="1.5"  >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="Add" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Create New" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
-                            <Button Name="btnEdit" Width="155" Height="35" Margin="0,0,3,0" ToolTip="Edit Selected Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" Click="btnEditOpen_Click" >
+                            <Button Name="btnEdit" Height="35" Margin="0,0,3,0" ToolTip="Edit Selected Control Program" BorderBrush="Black" BorderThickness="1.5"  Click="btnEditOpen_Click" >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="Edit" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Edit" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
-                            <Button Name="btnRemove" Width="135" Height="35" Margin="0,0,3,0" ToolTip="Remove Selected Control Program" BorderBrush="Black" BorderThickness="1.5" Background="#FFE2830F" Click="btnRemove_Click" >
+                            <Button Name="btnRemove" Height="35" Margin="0,0,3,0" ToolTip="Remove Selected Control Program" BorderBrush="Black" BorderThickness="1.5"  Click="btnRemove_Click" >
                                 <DockPanel>
                                     <materialDesign:PackIcon Kind="Remove" Width="20" Height="20" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Remove" FontSize="14" Margin="10,0,0,0"/>
                                 </DockPanel>
                             </Button>
                         </DockPanel>
-                    </Grid>
+                        </Viewbox>
 
                 </Border>
-                </ScrollViewer>
+
 
                 <!-- -->
-                <Border BorderThickness="3" BorderBrush="#FFDC5A0F" Margin="5,50,15,112" CornerRadius="10" Background="White">
-                    <DockPanel>
-                        <!--left panel-->
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                            <Border BorderBrush="Transparent" BorderThickness="2" CornerRadius="10,0,0,0" Background="LightGray" Width="500" Height="280">
+                <Border BorderThickness="3" BorderBrush="#FF336B87" Margin="5,60,5,95" CornerRadius="10" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="521*"/>
+                            <ColumnDefinition Width="819*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="2" CornerRadius="10,0,0,0" Background="LightGray" >
                                 <Grid>
-                                    
-                                    <ComboBox Name="cbFilter" Margin="0 0 10 235" HorizontalAlignment="Right" Width="180" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="30 10 10 10" SelectionChanged="cbFIilter_SelectionChanged" ToolTip="Filter List" Background="WhiteSmoke" BorderThickness="0">
-                                        
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <ComboBox Name="cbFilter" Width="180" Margin="0 0 10 0"  HorizontalAlignment="Right"  FontFamily="Trebuchet" FontWeight="DemiBold" Padding="30 10 10 10" SelectionChanged="cbFIilter_SelectionChanged" ToolTip="Filter List" Background="WhiteSmoke" BorderThickness="0">
+
                                     </ComboBox>
-                                    <materialDesign:PackIcon Kind="ViewList" HorizontalAlignment="Right" Margin="0 5 160 0"  Foreground="Black" Width="30" Height="30"/>
-                                    <!-- program files -->
-                                    <DataGrid Name="dgProgramFiles" IsReadOnly="True" AutoGenerateColumns="False" Width="475" VerticalGridLinesBrush="Transparent" 
-                                            FontSize="13" Margin="10,45,0,10" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" MouseDoubleClick="dgProgramFiles_MouseDoubleClick" KeyDown="dgProgramFiles_KeyDown"  HorizontalGridLinesBrush="#FFD0CACA" SelectionChanged="dgProgramFiles_SelectionChanged"  IsTextSearchCaseSensitive="False"
+                                    <materialDesign:PackIcon Kind="ViewList" HorizontalAlignment="Right" Margin="0 10 160 0"   Foreground="Black" Width="30" Height="30"/>
+                                    
+                                    
+                                    <!-- datagrid -->
+
+                                    <DataGrid Grid.Row="1" Name="dgProgramFiles" IsReadOnly="True" AutoGenerateColumns="False" VerticalGridLinesBrush="Transparent" 
+                                            FontSize="11"  Margin="5 0 5 5"  HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" MouseDoubleClick="dgProgramFiles_MouseDoubleClick" KeyDown="dgProgramFiles_KeyDown"  HorizontalGridLinesBrush="#FFD0CACA" SelectionChanged="dgProgramFiles_SelectionChanged"  IsTextSearchCaseSensitive="False"
                      IsTextSearchEnabled="True"
-                     TextSearch.TextPath="filename" ColumnWidth="*">
-                                        
+                     TextSearch.TextPath="filename" ColumnWidth="*" SelectionMode="Single">
+
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="ID" Binding="{Binding id}" Visibility="Collapsed" />
                                             <DataGridTextColumn Header="Filename" Width="*" Binding="{Binding filename}"/>
@@ -143,10 +158,10 @@
                                     </DataGrid>
 
                                     <!-- Reference Id -->
-                                    <DataGrid Name="refID" IsReadOnly="True" AutoGenerateColumns="False" Width="475" VerticalGridLinesBrush="Transparent" 
-                                            FontSize="13" Margin="10,45,0,10" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" Visibility="Hidden" MouseDoubleClick="refId_MouseDoubleClick" SelectionChanged="refID_SelectionChanged" IsTextSearchCaseSensitive="False"
+                                    <DataGrid Grid.Row="1" Name="refID" IsReadOnly="True" AutoGenerateColumns="False" VerticalGridLinesBrush="Transparent" 
+                                            FontSize="13" Margin="5 0 5 5" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" Visibility="Hidden" MouseDoubleClick="refId_MouseDoubleClick" SelectionChanged="refID_SelectionChanged" IsTextSearchCaseSensitive="False"
                      IsTextSearchEnabled="True"
-                     TextSearch.TextPath="UniqueReference">
+                     TextSearch.TextPath="UniqueReference" SelectionMode="Single">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="ID" Binding="{Binding id}" Visibility="Collapsed"/>
                                             <DataGridTextColumn Header="Reference ID" Width="*" Binding="{Binding UniqueReference}"/>
@@ -168,10 +183,10 @@
                                     </DataGrid>
 
                                     <!-- Remote Request Id -->
-                                    <DataGrid Name="reqID" IsReadOnly="True" AutoGenerateColumns="False" Width="475" VerticalGridLinesBrush="Transparent" 
-                                            FontSize="13" Margin="10,45,0,10" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" Visibility="Collapsed" MouseDoubleClick="reqId_MouseDoubleClick" SelectionChanged="reqID_SelectionChanged" IsTextSearchCaseSensitive="False"
+                                    <DataGrid Grid.Row="1" Name="reqID" IsReadOnly="True" AutoGenerateColumns="False" VerticalGridLinesBrush="Transparent" 
+                                            FontSize="13" Margin="5 0 5 5" HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="#DD000000" BorderBrush="#89615555"  SelectionUnit="FullRow" GridLinesVisibility="Horizontal" Visibility="Collapsed" MouseDoubleClick="reqId_MouseDoubleClick" SelectionChanged="reqID_SelectionChanged" IsTextSearchCaseSensitive="False"
                      IsTextSearchEnabled="True"
-                     TextSearch.TextPath="remoteCallId" >
+                     TextSearch.TextPath="remoteCallId" SelectionMode="Single">
 
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="ID" Binding="{Binding id}" Visibility="Collapsed"/>
@@ -193,119 +208,151 @@
                                         </DataGrid.ContextMenu>
                                     </DataGrid>
 
-                                    <TextBlock x:Name="Loading" Text="Loading Data..." Margin="10,30,10,10" Grid.Row="1" Foreground="Black" TextAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
-                                    <ProgressBar Grid.Row="1" x:Name="ProgressBar1" Height="10" Margin="10,245,10,0" Visibility="Visible"/>
+                                    <TextBlock  x:Name="Loading" Text="Loading Data..." Margin="10,30,10,10" Grid.Row="1" Foreground="Black" TextAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                                    <ProgressBar Grid.Row="1" x:Name="ProgressBar1" Height="4" Margin="10,70,10,10" Visibility="Visible" HorizontalAlignment="Center" Width="120"/>
                                 </Grid>
                             </Border>
 
-                            <Border BorderBrush="Transparent" Background="LightGray" BorderThickness="2" Height="255" CornerRadius="0,0,0,10" Width="500" HorizontalAlignment="Left">
+
+                            <Border Grid.Row="1" BorderBrush="Transparent" Background="LightGray" BorderThickness="2" CornerRadius="0,0,0,10" >
                                 <Grid>
-                                    <DockPanel VerticalAlignment="Top">
-                                        <TextBlock Text="Top View of File" FontSize="11" Margin="10,10,360,5" Foreground="Black" FontWeight="DemiBold"/>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                                        <TextBlock Text="Top View of File" FontSize="11" Margin="10,10,0,5" Foreground="Black" FontWeight="DemiBold" HorizontalAlignment="Stretch"/>
                                     </DockPanel>
-                                    <TextBox x:Name="txtTopView" Margin="10,30,10,125" Padding="5,0,0,0" FontSize="12" IsReadOnly="True" Background="WhiteSmoke"  VerticalContentAlignment="Top" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" MouseDoubleClick="txtTopView_MouseDoubleClick" TextWrapping="Wrap"/>
-                                    <TextBox x:Name="txtBotView" Margin="10,131,10,26" Padding="5,0,0,0" FontSize="12" IsReadOnly="True" Background="WhiteSmoke"  AcceptsReturn="True" AcceptsTab="True" VerticalContentAlignment="Top" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" MouseDoubleClick="txtBotView_MouseDoubleClick" />
-                                    <TextBlock Text="Bottom View of File" FontSize="11" Margin="10,230,360,5" Foreground="Black" FontWeight="DemiBold"/>
+                                    <TextBox Grid.Row="0" Margin="5 30 5 1" x:Name="txtTopView"  Padding="5,0,0,0" FontSize="11" IsReadOnly="True" Background="WhiteSmoke"  VerticalContentAlignment="Top" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" MouseDoubleClick="txtTopView_MouseDoubleClick"/>
+
+                                    <TextBox Grid.Row="1" Margin="5 1 5 25" x:Name="txtBotView" Padding="5,0,0,0" FontSize="11" IsReadOnly="True" Background="WhiteSmoke"  AcceptsReturn="True" AcceptsTab="True" VerticalContentAlignment="Top" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" MouseDoubleClick="txtBotView_MouseDoubleClick"/>
+
+                                    <DockPanel Grid.Row="1" VerticalAlignment="Bottom">
+                                        <TextBlock Grid.Row="1" Text="Bottom View of File" FontSize="11" Margin="10,0,0,5" Foreground="Black" FontWeight="DemiBold" />
+                                    </DockPanel>
+
                                 </Grid>
                             </Border>
-                        </StackPanel>
 
+                        </Grid>
+                        <!-- rignt panel -->
+                        <Grid Grid.Column="1">
+                            <Border BorderBrush="Transparent" BorderThickness="2" CornerRadius="0,10,10,0" Background="LightGray" >
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <DockPanel Margin="0,0,0,0">
+                                            <StackPanel>
+                                                <Viewbox>
+                                                    <DockPanel Margin="0 10 0 0">
+                                                        <TextBlock Text="Control Program Filename and Path" Margin="10,0,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
+                                                        <TextBox IsReadOnly="True" Name="txtBoxPath" Width="500" HorizontalAlignment="Left" Margin="15,0,10,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0" Height="30"/>
+                                                        
+                                                    </DockPanel>
+                                                </Viewbox>
+                                                <Viewbox>
+                                                    <DockPanel Margin="0 5 0 0">
+                                                        <TextBlock Text="Control Program Group" Margin="10,0,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
+                                                        <Button Name="cntrlPgrmCancel" Width="30" Height="25" Margin="50,0,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" Click="cntrlPgrmCancel_Click">
+                                                            <Grid Margin="-9,-2">
+                                                                <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                            </Grid>
+                                                        </Button>
+                                                        <Button Name="cntrlPgrmOpen" Width="30" Height="25" Margin="5,0,0,0" ToolTip="Filter Control Program Group" Click="cntrlPgrmOpen_Click" >
+                                                            <Grid Margin="-9,-2">
+                                                                <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                            </Grid>
+                                                        </Button>
+                                                        <TextBox Name="txtBoxCntrllPgrmGrp" Width="460" HorizontalAlignment="Left" FontSize="13" Height="30" Margin="5,0,10,0" Background="WhiteSmoke" BorderThickness="0" IsReadOnly="True" Padding="5"/>
+                                                    </DockPanel>
+                                                </Viewbox>
+                                            </StackPanel>
+                                        </DockPanel>
 
-                        <!--right panel-->
-                        <StackPanel>
-                            <Border BorderBrush="Transparent" BorderThickness="2" CornerRadius="0,10,10,0" Background="LightGray" Height="535">
-                                <StackPanel>
-                                    <DockPanel Height="80" Margin="0,-5,0,0">
-                                        <StackPanel>
-                                            <DockPanel Margin="0 10 0 0">
-                                                <TextBlock Text="Control Program Filename and Path" Margin="10,0,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
-                                                <TextBox IsReadOnly="True" Name="txtBoxPath" Width="500" HorizontalAlignment="Left" Margin="15,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0" Height="30"/>
-                                                <TextBlock Visibility="Hidden" Name="txtFilename"/>
+                                        <DockPanel>
+                                            <Viewbox>
+                                                <DockPanel>
+                                                    <TextBlock Text="Associated Customers" Margin="10,5,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
+                                                    <Button Name="assocCustCancel" Width="30" Height="25" Margin="60,-85,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" Click="assocCustCancel_Click">
+                                                        <Grid Margin="-9,-2">
+                                                            <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                        </Grid>
+                                                    </Button>
+                                                    <Button Name="assocCustOpen" Width="30" Height="25" Margin="5,-85,0,0" ToolTip="Filter Associated Customers" Click="assocCustOpen_Click" >
+                                                        <Grid Margin="-9,-2">
+                                                            <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                        </Grid>
+                                                    </Button>
+                                                    <ListBox Name="lstBoxAssocCus" Width="460" Margin="5,5,10,5" Height="110" Background="WhiteSmoke" FontSize="13"/>
+                                                </DockPanel>
+                                            </Viewbox>
+                                        </DockPanel>
+
+                                        <Viewbox>
+                                            <DockPanel  Margin="0 20 0 0">
+                                                <DockPanel>
+                                                    <TextBlock Text="Reference ID" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
+                                                    <TextBox IsReadOnly="True" Name="txtBoxRefID" Width="240" Height="25" HorizontalAlignment="Left" Margin="15,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
+                                                </DockPanel>
+                                                <DockPanel>
+                                                    <TextBlock Text="Remote Request ID" Margin="20,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
+                                                    <TextBox IsReadOnly="True" Name="txtBoxRemReqId" Width="248" Height="25" HorizontalAlignment="Left" Margin="15,0,15,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
+                                                </DockPanel>
                                             </DockPanel>
-                                            <DockPanel Margin="0 10 0 0">
-                                                <TextBlock Text="Control Program Group" Margin="10,0,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
-                                                <Button Name="cntrlPgrmCancel" Width="30" Height="25" Margin="50,0,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" Click="cntrlPgrmCancel_Click">
-                                                    <Grid Margin="-9,-2">
-                                                        <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                    </Grid>
-                                                </Button>
-                                                <Button Name="cntrlPgrmOpen" Width="30" Height="25" Margin="5,0,0,0" ToolTip="Filter Control Program Group" Click="cntrlPgrmOpen_Click" >
-                                                    <Grid Margin="-9,-2">
-                                                        <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                    </Grid>
-                                                </Button>
-                                                <TextBox Name="txtBoxCntrllPgrmGrp" Width="467" HorizontalAlignment="Left" FontSize="13" Height="30" Margin="5,0,15,0" Background="WhiteSmoke" BorderThickness="0" IsReadOnly="True" Padding="5"/>
+                                        </Viewbox>
+
+                                        <Viewbox>
+                                            <DockPanel Margin="0 5 0 0">
+                                                <DockPanel>
+                                                    <TextBlock Text="Revision" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
+                                                    <TextBox IsReadOnly="True" Name="txtBoxRev" Width="240" Height="25" HorizontalAlignment="Left" Margin="42,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
+                                                </DockPanel>
+                                                <DockPanel>
+                                                    <TextBlock Text="Last Modified" Margin="20,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
+                                                    <TextBox IsReadOnly="True" Name="txtBoxLastModified" Width="248" Height="25" HorizontalAlignment="Left" Margin="47,0,15,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
+                                                </DockPanel>
                                             </DockPanel>
-                                        </StackPanel>
+                                        </Viewbox>
 
-                                    </DockPanel>
+                                        <Viewbox>
+                                            <DockPanel Margin="0 5 0 0">
+                                                <TextBlock Text="File Size" Margin="10,4,0,0" FontSize="12" Foreground="Black" FontWeight="Medium" />
+                                                <TextBox IsReadOnly="True" Name="txtBoxFileSize" Margin="30,0,0,0" Padding="5" FontSize="13" Height="25" Background="WhiteSmoke" BorderThickness="0" HorizontalAlignment="Left" Width="215"/>
 
-                                    <DockPanel Margin="0,5,0,0">
-                                        <DockPanel>
-                                            <TextBlock Text="Associated Customers" Margin="10,5,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
-                                            <Button Name="assocCustCancel" Width="30" Height="25" Margin="60,-85,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" Click="assocCustCancel_Click">
-                                                <Grid Margin="-9,-2">
-                                                    <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Name="assocCustOpen" Width="30" Height="25" Margin="5,-85,0,0" ToolTip="Filter Associated Customers" Click="assocCustOpen_Click" >
-                                                <Grid Margin="-9,-2">
-                                                    <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                </Grid>
-                                            </Button>
-                                            <ListBox Name="lstBoxAssocCus" Width="470" Margin="5,5,15,5" Height="110" Background="WhiteSmoke" FontSize="13"/>
-                                        </DockPanel>
-                                    </DockPanel>
+                                                <TextBlock Text="File Name" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" Visibility="Hidden"/>
+                                                <TextBox IsReadOnly="True" Name="txtFilename" Margin="44,0,0,0" Padding="5" FontSize="13" Height="25" Background="WhiteSmoke" BorderThickness="0" HorizontalAlignment="Left" Width="240" Visibility="Hidden"/>
+                                            </DockPanel>
+                                        </Viewbox>
 
-                                    <DockPanel Height="30" Margin="0 20 0 0">
-                                        <DockPanel>
-                                            <TextBlock Text="Reference ID" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
-                                            <TextBox IsReadOnly="True" Name="txtBoxRefID" Width="240" Height="25" HorizontalAlignment="Left" Margin="15,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
-                                        </DockPanel>
-                                        <DockPanel>
-                                            <TextBlock Text="Remote Request ID" Margin="20,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
-                                            <TextBox IsReadOnly="True" Name="txtBoxRemReqId" Width="248" Height="25" HorizontalAlignment="Left" Margin="15,0,15,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
-                                        </DockPanel>
-                                    </DockPanel>
+                                        <Grid Margin="10" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="200*"/>
+                                                <ColumnDefinition Width="200*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                    <DockPanel Height="30" Margin="0 5 0 0">
-                                        <DockPanel>
-                                            <TextBlock Text="Revision" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
-                                            <TextBox IsReadOnly="True" Name="txtBoxRev" Width="240" Height="25" HorizontalAlignment="Left" Margin="42,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
-                                        </DockPanel>
-                                        <DockPanel>
-                                            <TextBlock Text="Last Modified" Margin="20,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
-                                            <TextBox IsReadOnly="True" Name="txtBoxLastModified" Width="248" Height="25" HorizontalAlignment="Left" Margin="47,0,15,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
-                                        </DockPanel>
-                                    </DockPanel>
+                                            <StackPanel Grid.Column="0"  >
+                                                <TextBlock Text="Notes" FontSize="13" Margin="15,3,10,0" Foreground="Black" FontWeight="DemiBold"/>
+                                                <TextBox IsReadOnly="True" Name="txtBoxNotes" Margin="10,10,10,10" Padding="5,0,0,0" Height="200" FontSize="11" Background="WhiteSmoke" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalContentAlignment="Top" BorderThickness="0"/>
+                                            </StackPanel>
 
-                                    <DockPanel Height="30" Margin="0 5 0 0">
-                                        <TextBlock Text="File Size" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
-                                        <TextBox IsReadOnly="True" Name="txtBoxFileSize" Margin="44,0,0,0" Padding="5" FontSize="13" Height="25" Background="WhiteSmoke" BorderThickness="0" HorizontalAlignment="Left" Width="240"/>
-                                    </DockPanel>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="Description" FontSize="13" Margin="10,3,0,0" Foreground="Black" FontWeight="DemiBold"/>
+                                                <TextBox IsReadOnly="True" Name="txtBoxDesc" Margin="10,10,10,10" Padding="5,0,0,0" Height="200" FontSize="11" Background="WhiteSmoke" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalContentAlignment="Top" BorderThickness="0"/>
+                                            </StackPanel>
 
-
-                                    <DockPanel Margin="10">
-                                        <StackPanel Width="355" HorizontalAlignment="Left">
-                                            <TextBlock Text="Notes" FontSize="13" Margin="15,3,10,0" Foreground="Black" FontWeight="DemiBold"/>
-                                            <TextBox IsReadOnly="True" Name="txtBoxNotes" Margin="10,10,10,10" Padding="5,0,0,0" Height="150" FontSize="13" Background="WhiteSmoke" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalContentAlignment="Top" BorderThickness="0"/>
-                                        </StackPanel>
-
-                                        <StackPanel>
-                                            <TextBlock Text="Description" FontSize="13" Margin="10,3,0,0" Foreground="Black" FontWeight="DemiBold"/>
-                                            <TextBox IsReadOnly="True" Name="txtBoxDesc" Margin="10,10,10,10" Padding="5,0,0,0" Height="150" FontSize="13" Background="WhiteSmoke" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalContentAlignment="Top" BorderThickness="0"/>
-                                        </StackPanel>
-                                    </DockPanel>
-
-                                </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </ScrollViewer>
                             </Border>
-                        </StackPanel>
-                    </DockPanel>
+                        </Grid>
+                        
+                    </Grid>
                 </Border>
 
-                <StackPanel VerticalAlignment="Bottom" Height="115">
+                <StackPanel VerticalAlignment="Bottom" Height="95">
                     <Grid>
                         <StackPanel>
+                            <Viewbox>
                             <DockPanel VerticalAlignment="Top" Margin="10,5,10,5">
                                 <TextBlock Background="Transparent" Text="Search" Margin="15,10" FontSize="15" Foreground="Black" FontWeight="DemiBold"/>
                                 <TextBox Name="txtSearch" FontSize="14" BorderThickness="1" Background="WhiteSmoke" Padding="5,5" TextWrapping="Wrap"  Height="30" Width="1100" Margin="0,0,15,0" KeyDown="txtSearch_KeyDown"/>
@@ -314,72 +361,30 @@
                                         <materialDesign:PackIcon Kind="Close" Width="17" Height="17"/>
                                     </Grid>
                                 </Button>
-                                <Button Name="btnSearch" Height="30" Margin="5,5,15,5"  ToolTip="Search Control Program Navigator" Background="#FFEC551D" Click="btnSearch_Click">
+                                <Button Name="btnSearch" Height="30" Margin="5,5,15,5"  ToolTip="Search Control Program Navigator"  Click="btnSearch_Click">
                                     <Grid Margin="-8,-5">
                                         <materialDesign:PackIcon Kind="Magnify" Width="17" Height="17"/>
                                     </Grid>
                                 </Button>
                             </DockPanel>
+                            </Viewbox>
+                            <Viewbox>
                             <DockPanel>
-                                <CheckBox Name="cbRemReqId" Margin="120,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbRemReqId_Checked" Unchecked="cbRemReqId_Unchecked">Remote Request ID</CheckBox>
+                                <CheckBox Name="cbRemReqId" Margin="100,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbRemReqId_Checked" Unchecked="cbRemReqId_Unchecked">Remote Request ID</CheckBox>
                                 <CheckBox Name="cbRefId" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbRefId_Checked" Unchecked="cbRefId_Unchecked">Reference ID</CheckBox>
                                 <CheckBox Name="cbCpg" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbCpg_Checked" Unchecked="cbCpg_Unchecked">Control Program Group</CheckBox>
                                 <CheckBox Name="cbAssCus" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbAssCus_Checked" Unchecked="cbAssCus_Unchecked">Associated Customers</CheckBox>
                                 <CheckBox Name="cbFileNm" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbFileNm_Checked" Unchecked="cbFileNm_Unchecked">Filename</CheckBox>
-                                <CheckBox Name="cbDesc" Margin="60,0,0,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbDesc_Checked" Unchecked="cbDesc_Unchecked">Description</CheckBox>
+                                <CheckBox Name="cbDesc" Margin="60,0,100,2" FontSize="13" FontWeight="SemiBold" Foreground="Black" Checked="cbDesc_Checked" Unchecked="cbDesc_Unchecked">Description</CheckBox>
                             </DockPanel>
+                            </Viewbox>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
-
+                
             </Grid>
 
-            <Grid Name="gridSearch" Visibility="Collapsed">
-                <Grid.Background>
-                    <SolidColorBrush Color="Black" Opacity="0.2" />
-                </Grid.Background>
-                <Border Name="cntrlPgrmFilter" BorderBrush="DarkOrange" BorderThickness="2" Background="Gray" Margin="300 300" Visibility="Collapsed">
-                    <StackPanel>
-                        <DockPanel>
-                            <Label Content="Control Program Group" FontSize="17" FontWeight="DemiBold" Margin="25,5,0,0"/>
-                            <Button Name="cntrlPgrmClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="430,0,0,0" BorderThickness="0" Foreground="Red" Click="cntrlPgrmClose_Click">
-                                <Grid Margin="-10,-5">
-                                    <materialDesign:PackIcon Kind="CloseBox" Width="17" Height="17"/>
-                                </Grid>
-                            </Button>
-                        </DockPanel>
-                        <DockPanel Margin="10">
-                            <ComboBox Name="cmbBoxCntrlPgrm" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="10" ToolTip="Control Programs" Background="WhiteSmoke" BorderThickness="0" Width="600"></ComboBox>
-                            <Button Name="cntrlPgrmSelect" Height="30" Width="50" ToolTip="Submit" Background="DarkGreen" BorderThickness="0" Click="cntrlPgrmSelect_Click" >
-                                <Grid Margin="-10,-5">
-                                    <materialDesign:PackIcon Kind="Check" Width="17" Height="17"/>
-                                </Grid>
-                            </Button>
-                        </DockPanel>
-                    </StackPanel>
-                </Border>
-
-                <Border Name="assocCustFilter" BorderBrush="DarkOrange" BorderThickness="2" Background="Gray" Margin="300 300" Visibility="Collapsed">
-                    <StackPanel>
-                        <DockPanel>
-                            <Label Content="Associated Customers" FontSize="17" FontWeight="DemiBold" Margin="25,5,0,0"/>
-                            <Button Name="assocCustClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="430,0,0,0" BorderThickness="0" Foreground="Red" Click="assocCustClose_Click">
-                                <Grid Margin="-10,-5">
-                                    <materialDesign:PackIcon Kind="CloseBox" Width="17" Height="17"/>
-                                </Grid>
-                            </Button>
-                        </DockPanel>
-                        <DockPanel Margin="10">
-                            <ComboBox Name="cmbBoxAssocCust" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="10" ToolTip="Associated Customers" Background="WhiteSmoke" BorderThickness="0" Width="600"></ComboBox>
-                            <Button Name="assocCustSelect" Height="30" Width="50" ToolTip="Submit" Background="DarkGreen" BorderThickness="0" Click="assocCustSelect_Click" >
-                                <Grid Margin="-10,-5">
-                                    <materialDesign:PackIcon Kind="Check" Width="17" Height="17"/>
-                                </Grid>
-                            </Button>
-                        </DockPanel>
-                    </StackPanel>
-                </Border>
-            </Grid>
+            
 
             <Grid Name="gridMach" Visibility="Collapsed">
                 <Grid.Background>
@@ -435,11 +440,11 @@
                 </Border>
             </Grid>
 
-            <Grid Name="editGrid" Visibility="Collapsed">
+            <Grid Name="editGrid" Visibility="Hidden">
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.2" />
                 </Grid.Background>
-                <Border Name="editCtrlProg" CornerRadius="20" BorderBrush="DarkOrange" BorderThickness="2" Margin="200,20" Background="LightGray" Visibility="Visible">
+                <Border Name="editCtrlProg" CornerRadius="20" BorderBrush="DarkOrange" BorderThickness="2" Margin="120,20" Background="LightGray" Visibility="Hidden">
                     <StackPanel>
                         <DockPanel>
                             <Label Content="Edit Control Program" FontSize="17" FontWeight="Bold" Margin="25,10,0,0"/>
@@ -465,7 +470,7 @@
                                 </Grid>
                             </Button>
                         </DockPanel>
-                        
+
                         <DockPanel Height="520" Margin="10">
                             <Border BorderThickness="3" CornerRadius="0,0,0,20"  Height="520" VerticalAlignment="Top" Width="435">
                                 <StackPanel Width="435" HorizontalAlignment="Left" Margin="0" >
@@ -504,7 +509,7 @@
                                         <TextBox Name="txtBotEdit" FontSize="10" BorderThickness="1" Background="WhiteSmoke" Padding="5,5" TextWrapping="Wrap"  Margin="10 2 10 0" Height="80" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
                                     </StackPanel>
                                 </StackPanel>
-                                
+
                             </Border>
                             <Border BorderThickness="3" CornerRadius="0,0,20,0"  Width="435" >
                                 <StackPanel Width="435" HorizontalAlignment="Left" Margin="0" >
@@ -513,16 +518,16 @@
                                         <ComboBox Name="cbCPEdit" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="30 5 5 5" ToolTip="Control Program Group" Background="WhiteSmoke" BorderThickness="0" Height="25" Margin="10 2 10 0"/>
                                         <Label Content="Customers Group" FontWeight="Bold" FontSize="12"/>
                                         <ComboBox Name="cbCustEdit" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="30 5 5 5" ToolTip="Associated Customers" Background="WhiteSmoke" BorderThickness="0" Height="25" Margin="10 2 10 0"/>
-                                       <Label Content="Revision" FontWeight="Bold" FontSize="12"/> 
+                                        <Label Content="Revision" FontWeight="Bold" FontSize="12"/>
                                         <TextBox Name="txtRevEdit" FontSize="14" BorderThickness="1" Background="WhiteSmoke" Padding="5,5" TextWrapping="Wrap"  Margin="10 2 10 0"/>
                                         <Label Content="Description" FontWeight="Bold" FontSize="12"/>
                                         <TextBox Name="txtDescEdit" FontSize="12" BorderThickness="1" Background="WhiteSmoke" Padding="5,5" TextWrapping="Wrap"  Margin="10 2 10 0" Height="80"/>
                                         <Label Content="Notes" FontWeight="Bold" FontSize="12"/>
                                         <TextBox Name="txtNotesEdit" FontSize="12" BorderThickness="1" Background="WhiteSmoke" Padding="5,5
 " TextWrapping="Wrap"  Margin="10 2 10 0" Height="150"/>
-                                        
+
                                         <Separator Margin="0 10 0 0"></Separator>
-                                        
+
                                         <DockPanel HorizontalAlignment="Right" Margin="10">
                                             <Button Name="editCtrlPgrmSave" Height="30" Width="100" ToolTip="Save Changes" Background="#FFEC7715" Margin="0,10,0,0" BorderThickness="0" >
                                                 <Grid Margin="-10,-5">
@@ -543,6 +548,66 @@
                         </DockPanel>
                     </StackPanel>
                 </Border>
+            </Grid>
+
+
+            <Grid Name="gridSearch" Visibility="Collapsed">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.2" />
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Border Name="cntrlPgrmFilter" BorderBrush="DarkOrange" BorderThickness="2" Background="Gray"  Width="500" Height="100" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <DockPanel HorizontalAlignment="Left">
+                                <Label Content="Control Program Group" FontSize="17" FontWeight="DemiBold" Margin="25,5,0,0"/>
+                                <Button Name="cntrlPgrmClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="250,0,0,0" BorderThickness="0" Foreground="Red" Click="cntrlPgrmClose_Click">
+                                <Grid Margin="-10,-5">
+                                    <materialDesign:PackIcon Kind="CloseBox" Width="17" Height="17"/>
+                                </Grid>
+                                </Button>
+                            </DockPanel>
+
+                            <DockPanel Margin="10" HorizontalAlignment="Left">
+                                <ComboBox Name="cmbBoxCntrlPgrm" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="10" ToolTip="Control Programs" Background="WhiteSmoke" BorderThickness="0" Width="410"></ComboBox>
+                                <Button Name="cntrlPgrmSelect" Height="30" Width="50" ToolTip="Submit" Background="DarkGreen" BorderThickness="0" Click="cntrlPgrmSelect_Click" Margin="10 10 0 10" >
+                                    <Grid Margin="-10,-5">
+                                        <materialDesign:PackIcon Kind="Check" Width="17" Height="17"/>
+                                    </Grid>
+                                </Button>
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                    
+                </Grid>
+
+                <Grid Grid.Column="0">
+                    <Border Name="assocCustFilter" BorderBrush="DarkOrange" BorderThickness="2" Background="Gray" Width="500" Height="100" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <DockPanel HorizontalAlignment="Left">
+                                <Label Content="Associated Customers" FontSize="17" FontWeight="DemiBold" Margin="25,5,0,0"/>
+                                <Button Name="assocCustClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="250,0,0,0" BorderThickness="0" Foreground="Red" Click="assocCustClose_Click">
+                                    <Grid Margin="-10,-5">
+                                        <materialDesign:PackIcon Kind="CloseBox" Width="17" Height="17"/>
+                                    </Grid>
+                                </Button>
+                            </DockPanel>
+
+                            <DockPanel HorizontalAlignment="Left" Margin="10">
+                                <ComboBox Name="cmbBoxAssocCust" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="10" ToolTip="Associated Customers" Background="WhiteSmoke" BorderThickness="0" Width="410"></ComboBox>
+                                <Button Name="assocCustSelect" Height="30" Width="50" ToolTip="Submit" Background="DarkGreen" BorderThickness="0" Click="assocCustSelect_Click" Margin="10 10 0 10">
+                                    <Grid Margin="-10,-5">
+                                        <materialDesign:PackIcon Kind="Check" Width="17" Height="17"/>
+                                    </Grid>
+                                </Button>
+
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </Grid>
 
         </Grid>

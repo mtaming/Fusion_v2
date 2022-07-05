@@ -178,27 +178,17 @@
     <Resource Include="Images\fusionlogo_outline.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\latestlogo1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\latestlogo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\bg5.jpg" />
+    <Resource Include="Images\logoCPG.jpg" />
+    <Resource Include="Images\logo3.jpg" />
     <Resource Include="Images\Fusion.gif" />
     <Resource Include="Images\user.png" />
-    <Resource Include="Images\bg4.jpg" />
-    <Resource Include="Images\bbb.jpg" />
-    <Resource Include="Images\orangebg.jpg" />
-    <Resource Include="Images\b.jpg" />
-    <Content Include="Images\background_.mp4" />
-    <Resource Include="Images\bg3.gif" />
-    <Resource Include="Images\bg2.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

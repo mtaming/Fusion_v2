@@ -20,7 +20,7 @@ namespace Fusion_v2.LandingPages
         public CtrlPgrmLandingPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Light.Orange");
+            ThemeManager.Current.ChangeTheme(this, "Light.Blue");
         }
         bool MenuClosed = false;
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -52,7 +52,7 @@ namespace Fusion_v2.LandingPages
 
         private void cpNavigator_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Navigator2 n = new Navigator2();
+            Navigator n = new Navigator();
             PageFrame.Content = n.Content;
             this.Title = "Control Program Navigator";
             title.Text = "Navigator";
@@ -64,6 +64,20 @@ namespace Fusion_v2.LandingPages
             h.Show();
             this.Close();
             title.Text = "";
+        }
+
+        private void ctrlPgrmLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to Logout?", "Fusion Logout", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+            {
+
+            }
+            else
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                this.Close();
+            }
         }
     }
 }

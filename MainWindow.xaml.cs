@@ -21,7 +21,7 @@ namespace Fusion_v2
         public MainWindow()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Light.Orange");
+            ThemeManager.Current.ChangeTheme(this, "Light.Blue");
             Style = (Style)FindResource(typeof(Window));
             getConnStringData();
             iniData();

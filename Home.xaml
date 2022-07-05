@@ -30,7 +30,7 @@
 
         <VisualBrush>
             <VisualBrush.Visual>
-                <Image Source="/Images/bg.jpg" />
+                <Image Source="/Images/bg5.jpg" />
 
             </VisualBrush.Visual>
         </VisualBrush>
@@ -45,8 +45,8 @@
                 <Border CornerRadius="10">
                     <Border.Background>
                         <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusY="0.9" RadiusX="0.9">
-                            <GradientStop Color="#FFED7C1D" Offset="0.727"/>
-                            <GradientStop Color="#FFEC8C5F" Offset="0.297" />
+                            <GradientStop Color="#FFB96740" Offset="0.727"/>
+                            <GradientStop Color="#FFAF6142" Offset="0.297" />
                         </RadialGradientBrush>
                     </Border.Background>
                     <Button x:Name="button" Height="190" Background="Transparent" BorderThickness="0" Click="toControlProgram_Click" >

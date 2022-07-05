@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                 xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Fusion_v2"
         mc:Ignorable="d"
@@ -17,8 +18,9 @@
 
         <VisualBrush>
             <VisualBrush.Visual>
-                <Image Source="/Images/bg.jpg" />
-
+                <Image gif:ImageBehavior.AnimatedSource="../Images/Fusion.gif"
+                   gif:ImageBehavior.AutoStart="True"
+                   gif:ImageBehavior.RepeatBehavior="1"/>
             </VisualBrush.Visual>
         </VisualBrush>
 
@@ -28,7 +30,7 @@
             <Grid HorizontalAlignment="Center" Height="500" Width="700">
                 <Border Width="600" Height="400" CornerRadius="8">
                     <Border.Background>
-                        <SolidColorBrush Color="Black" Opacity="0.3" />
+                        <SolidColorBrush Color="Black" Opacity="0.5" />
                     </Border.Background>
                 </Border>
                 <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="150" Width="500" Margin="0,70,0,25">
