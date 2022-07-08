@@ -154,5 +154,17 @@ namespace Fusion_v2.Properties {
                 this["dgLastSelectedID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string idCreationRulesChecked {
+            get {
+                return ((string)(this["idCreationRulesChecked"]));
+            }
+            set {
+                this["idCreationRulesChecked"] = value;
+            }
+        }
     }
 }

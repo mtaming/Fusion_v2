@@ -14,6 +14,8 @@ using System.Windows.Data;
 using DataGrid = System.Windows.Controls.DataGrid;
 using System.Collections.Generic;
 using Microsoft.Win32;
+using System.Collections;
+using System.Windows.Documents;
 
 namespace Fusion_v2
 {
@@ -27,7 +29,11 @@ namespace Fusion_v2
         public string selCbFilterAC = "";
         public string tempselCbFilterCPG = "";
         public string tempselCbFilterAC = "";
-        public int dgSelRow = 0;   
+        public int dgSelRow = 0;
+        public string filePath = "";
+        public int maxNCID = 0;
+        public int maxCpMgAssoId = 0;
+        public int maxcount = 0;
         public Navigator()
         {
             InitializeComponent();
@@ -40,7 +46,7 @@ namespace Fusion_v2
             worker.WorkerSupportsCancellation = true;
 
             ProgressBar1.Minimum = 1;
-            ProgressBar1.Maximum = 100;
+            ProgressBar1.Maximum = 50;
             worker.RunWorkerAsync();
             dgProgramFiles.IsEnabled = false;
            
@@ -93,6 +99,11 @@ namespace Fusion_v2
             dgProgramFiles.Focus();
             //MessageBox.Show(Properties.Settings.Default.dgLastSelected.ToString());
             //LoadTextBoxesData();
+            btnSendToMach.IsEnabled = true;
+            btnRefresh.IsEnabled = true;
+            btnCreateNew.IsEnabled = true;
+            btnRemove.IsEnabled = true;
+            btnEdit.IsEnabled = true;
         }
         //end background worker
         
@@ -285,7 +296,7 @@ namespace Fusion_v2
                     {
                         SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
                         sqlCon.Open();
-                        String query = "SELECT * FROM NCPROG INNER JOIN Machine_Groups ON NCPROG.fkMachGroupId=Machine_Groups.machine_group_id INNER JOIN CtrlProgCustMGAssoc ON NCPROG.UniqueReference=CtrlProgCustMGAssoc.urid WHERE NCPROG.id = " + id + "  ORDER BY filename ASC";
+                        String query = "SELECT * FROM NCPROG INNER JOIN Machine_Groups ON NCPROG.fkMachGroupId=Machine_Groups.machine_group_id INNER JOIN CtrlProgCustMGAssoc ON NCPROG.UniqueReference=CtrlProgCustMGAssoc.urid WHERE NCPROG.id = " + id + " ";
                         SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                         SqlDataAdapter da = new SqlDataAdapter(sqlCmd);
                         da.Fill(dt);
@@ -845,45 +856,6 @@ namespace Fusion_v2
             btnRefresh.IsEnabled = true;
         }
 
-        private static Key lastKey;
-        private static int lastFoundIndex = 0;
-        private void dgProgramFiles_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataGrid dataGrid = sender as DataGrid;
-
-            if ((dataGrid.Items.Count == 0) && !(e.Key >= Key.A && e.Key <= Key.Z))
-            {
-                return;
-            }
-
-            if ((lastKey != e.Key) || (lastFoundIndex == dataGrid.Items.Count - 1))
-            {
-                lastFoundIndex = 0;
-            }
-
-            for (int i = lastFoundIndex; i < dataGrid.Items.Count; i++)
-            {
-                if (dataGrid.SelectedIndex == i)
-                {
-                    continue;
-                }
-                
-                DataRowView row = dataGrid.SelectedItem as DataRowView;
-                //string myCellValue = rowView.Row[0].ToString();
-                string filename = row["id"].ToString();
-                if (filename.StartsWith(e.Key.ToString(), true, CultureInfo.CurrentCulture))
-                {
-                    dataGrid.ScrollIntoView(filename);
-                    dataGrid.SelectedItem = filename;
-
-                    lastFoundIndex = i;
-
-                    break;
-                }
-            }
-
-            lastKey = e.Key;
-        }
 
         private void cbRemReqId_Checked(object sender, RoutedEventArgs e)
         {
@@ -972,19 +944,19 @@ namespace Fusion_v2
         {
             gridMach.Visibility = Visibility.Visible;
         }
-        private void Load()
+        private void deleteSuccess()
         {
             dgProgramFiles.ItemsSource = contProgram().DefaultView;
             dgProgramFiles.IsEnabled = true;
-            dgProgramFiles.SelectedIndex = 0;
+            dgProgramFiles.SelectedIndex = dgSelRow;
             dgProgramFiles.Focus();
             refID.ItemsSource = referenceID().DefaultView;
             refID.IsEnabled = true;
-            refID.SelectedIndex = 0;
+            refID.SelectedIndex = dgSelRow;
             refID.Focus();
             reqID.ItemsSource = requestID().DefaultView;
             reqID.IsEnabled = true;
-            reqID.SelectedIndex = 0;
+            reqID.SelectedIndex = dgSelRow;
             reqID.Focus();
             dgProgramFiles.ScrollIntoView(dgProgramFiles.SelectedItem);
             refID.ScrollIntoView(refID.SelectedItem);
@@ -993,21 +965,40 @@ namespace Fusion_v2
         }
         private void removeSelectedCP()
         {
+            //string id_to_del = txtBoxRefID.Text;
             if (MessageBox.Show("Removing <" + txtFilename.Text + "> from Control Program \n\n Do you want to continue?", "Fusion PDO - Control Program Navigator", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
                 sqlCon.Open();
-                String query = "DELETE from NCPROG WHERE UniqueReference = '" + txtBoxRefID.Text + "' ";
+                String query = "DELETE from NCPROG WHERE programPointer = '" + txtBoxPath.Text + "' ";
                 SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                 sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+
+                sqlCon.Open();
+                String query2 = "DELETE from CtrlProgCustMGAssoc WHERE urid  = '" + txtBoxRefID.Text + "' ";
+                SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
 
                 MessageBox.Show(" '" + this.txtFilename.Text + "' was successfully deleted.", "FUSION PDO - Control Program Navigator", MessageBoxButton.OK, MessageBoxImage.Information);
                 sqlCon.Close();
-                Load();
+
+                if (txtSearch.Text != "")
+                {
+                    SearchFunc();
+                }
+                else
+                {
+                    deleteSuccess();
+                }
+               // deleteSuccess();
+
+                
             }
             else
             {
-                Load();
+                
             }
         }
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -1017,24 +1008,344 @@ namespace Fusion_v2
 
         private void ctxMenuRemove_Click(object sender, RoutedEventArgs e)
         {
-            removeSelectedCP();
+           
+            if (txtSearch.Text != "")
+            {
+                removeSelectedCP();
+                SearchFunc();
+            }
+            else
+            {
+                removeSelectedCP();
+            }
         }
 
+        //START CREATE NEW FUNCTIONS
+        private void createNew_Click(object sender, RoutedEventArgs e)
+        {
+            addNewGrid.Visibility = Visibility.Visible;
+            rbStackPanel.IsEnabled = false;
+            rbAdd_current.IsEnabled = false;
+            FillComboBoxCntrlPgrmGrp(cbCPAdd);
+            FillComboBoxAssocCust(cbCustAdd);
+
+            string maxRefID = "";
+            string tmpMaxRefID = "";
+            SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+            String query = "SELECT MAX(UniqueReference) as UniqueReference FROM NCPROG";
+
+            SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+            var dr = sqlCmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    string UnqRef = dr["UniqueReference"].ToString();
+                    tmpMaxRefID = UnqRef;
+                    int UnqRefParse = int.Parse(tmpMaxRefID);
+                    maxRefID = (UnqRefParse + 1).ToString();
+
+                    while (maxRefID.Length < 7)
+                    {
+                        maxRefID = "0" + maxRefID;
+                    }
+                }
+            }
+            sqlCon.Close();
+            dr.Close();
+
+            sqlCon.Open();
+            String query2 = "SELECT MAX(id) as id FROM NCPROG";
+            SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
+            var dr2 = sqlCmd2.ExecuteReader();
+            dr2.Read();
+            maxNCID = int.Parse(dr2["id"].ToString());
+            sqlCon.Close();
+            dr2.Close();
+
+            sqlCon.Open();
+            String query3 = "SELECT MAX(id) as cid FROM CtrlProgCustMGAssoc";
+            SqlCommand sqlCmd3 = new SqlCommand(query3, sqlCon);
+            var dr3 = sqlCmd3.ExecuteReader();
+            dr3.Read();
+            maxCpMgAssoId = int.Parse(dr3["cid"].ToString());
+            sqlCon.Close();
+            dr3.Close();
+
+            sqlCon.Open();
+            String query4 = "SELECT COUNT(*) FROM NCPROG";
+            SqlCommand sqlCmd4 = new SqlCommand(query4, sqlCon);
+            var countNav = sqlCmd4.ExecuteScalar();
+
+            maxcount = int.Parse(countNav.ToString());
+            sqlCon.Close();
+
+            txtAddRefID.Text = maxRefID.ToString();
+            txtAddmReqID.Text = maxRefID.ToString();
+            filePath = txtAddPgrmPointer.Text;
+
+        }
+
+        private void AddCtrPrgrmClose_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtAddPgrmPointer.Text != "") { removeID();  }
+            addNewGrid.Visibility = Visibility.Collapsed;
+            txtAddmReqID.Text = null;
+            txtAddRefID.Text = null;
+            txtAddPgrmPointer.Text = null;
+            txtAddTopView.Text = null;
+            txtAddBotView.Text = null;
+            txtRevAdd.Text = null;
+            txtNotesAdd.Text = null;
+            
+        }
+
+        private void AddCtrlPgrmCancel_Click(object sender, RoutedEventArgs e)
+        {
+            addNewGrid.Visibility = Visibility.Collapsed;
+            txtAddmReqID.Text = null;
+            txtAddRefID.Text = null;
+            txtAddPgrmPointer.Text = null;
+            txtAddTopView.Text = null;
+            txtAddBotView.Text = null;
+            txtRevAdd.Text = null;
+            txtNotesAdd.Text = null;
+            
+        }
+
+        private void addPgrmPointer_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            while (openFileDialog.ShowDialog() == true)
+            {
+                txtAddPgrmPointer.Text = openFileDialog.FileName;
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                String query = "SELECT COUNT(*) FROM NCPROG WHERE programPointer = '" + txtAddPgrmPointer.Text + "' ";
+                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                int count = (int)sqlCmd.ExecuteScalar();
+                if (count > 0)
+                {
+                    MessageBox.Show("Program Pointer is already associated to a control program.\nPlease select another Program Pointer.", "Control Program", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtAddPgrmPointer.Text = "";
+                    continue;
+                }
+                else
+                {
+                    txtAddTopView.Text = File.ReadAllText(openFileDialog.FileName);
+                    rbStackPanel.IsEnabled = true;
+                    break;
+                }
+            }
+        }
+        private void btnAdd_insertID_Click(object sender, RoutedEventArgs e)
+        {
+            string strFile = txtAddPgrmPointer.Text;
+            int insertAtLineNumber = 1;
+            string textToInsert = "(REFID = " + txtAddRefID.Text + " DNCID = " + txtAddmReqID.Text + ")";
+
+            if (strFile == "")
+            {
+                MessageBox.Show("No program pointer selected.", "Control Program", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (txtAddmReqID.Text == "")
+            {
+                MessageBox.Show("Please supply valid Remote Request ID.", "Control Program", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtAddmReqID.Focus();
+            }
+            else
+            {
+                ArrayList lines = new ArrayList();
+                StreamReader sr = new StreamReader(strFile);
+
+                string line;
+                while ((line = sr.ReadLine()) != null) lines.Add(line);
+                sr.Close();
+
+                if (lines.Count > insertAtLineNumber) lines.Insert(insertAtLineNumber, textToInsert);
+
+                if (!(File.ReadAllText(strFile).Contains(textToInsert)))
+                {
+                    StreamWriter sw = new StreamWriter(strFile);
+                    foreach (string newLine in lines) sw.WriteLine(newLine);
+                    sw.Close();
+                }
+
+                FileInfo fi = new FileInfo(strFile);
+                FileStream fs = fi.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                
+                byte[] fileBytes = new byte[500];
+                int numBytesToRead = (int)fileBytes.Length;
+
+                int numBytesRead = 0;
+
+                while (numBytesToRead > 0)
+                {
+                    int n = fs.Read(fileBytes, numBytesRead, numBytesToRead);
+
+                    if (n == 0)
+                        break;
+
+                    numBytesRead += n;
+                    numBytesToRead -= n;
+                }
+
+                string filestring = Encoding.UTF8.GetString(fileBytes);
+                fs.Close();
+                txtAddTopView.Text = filestring;
+            }
+        }
+
+        private void AddCtrlPgrmSave_Click(object sender, RoutedEventArgs e)
+        {
+            string rcid = txtAddmReqID.Text;
+            string unqRef = txtAddRefID.Text;
+            string pgrmPtr = txtAddPgrmPointer.Text;
+            string desc = txtDescAdd.Text;
+            string notes = txtNotesAdd.Text;
+            string rev = txtRevAdd.Text;
+            string filenm = Path.GetFileName(txtAddPgrmPointer.Text);
+
+            int cpg_id = int.Parse(cbCPAdd.SelectedValue.ToString());
+            string cpg_name = cbCPAdd.Text;
+
+            int cusId = int.Parse(cbCustAdd.SelectedValue.ToString());
+            string custNm = cbCustAdd.Text;
+
+            int ncid = maxNCID + 1;
+            int mid = maxCpMgAssoId + 1;
+
+            SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+
+            String query = "INSERT INTO NCPROG(id, UniqueReference, remoteCallId, programPointer, descr, notes, revision, revision_date, NCFile, fkMachGroupId,  filename) VALUES "+"( '" + ncid + "', '" + unqRef + "', '" + rcid + "', '" + pgrmPtr + "', '" + desc + "', '" + notes + "', '" + rev + "', '" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "', '" + pgrmPtr + "', '" + cusId + "', '" + filenm + "'  )";
+            SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+
+
+            sqlCon.Open();
+            String query2 = "INSERT INTO CtrlProgCustMGAssoc(id, custid, urid, mgid, custName) VALUES "+"( '" + mid + "', '" + cusId + "', '" + unqRef + "', '" + cpg_id + "', '" + custNm + "' )";
+            SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
+            sqlCmd2.ExecuteNonQuery();
+            sqlCon.Close();
+
+            MessageBox.Show(" '" + pgrmPtr + "' was successfully saved.", "Fusion PDO - Control Program Navigator", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            dgProgramFiles.ItemsSource = contProgram().DefaultView;
+            dgProgramFiles.IsEnabled = true;
+            dgProgramFiles.SelectedIndex = maxcount-1;
+            dgProgramFiles.Focus();
+            //refID.ItemsSource = referenceID().DefaultView;
+            //refID.IsEnabled = true;
+            //refID.SelectedIndex = 0;
+            //refID.Focus();
+            //reqID.ItemsSource = requestID().DefaultView;
+            //reqID.IsEnabled = true;
+            //reqID.SelectedIndex = 0;
+            //reqID.Focus();
+            dgProgramFiles.ScrollIntoView(dgProgramFiles.SelectedItem);
+            //refID.ScrollIntoView(refID.SelectedItem);
+            //reqID.ScrollIntoView(reqID.SelectedItem);
+
+            addNewGrid.Visibility = Visibility.Collapsed;
+            addNewGrid.Visibility = Visibility.Collapsed;
+            txtAddmReqID.Text = null;
+            txtAddRefID.Text = null;
+            txtAddPgrmPointer.Text = null;
+            txtAddTopView.Text = null;
+            txtAddBotView.Text = null;
+            txtRevAdd.Text = null;
+            txtNotesAdd.Text = null;
+        }
+
+        private void btnAdd_removeID_Click(object sender, RoutedEventArgs e)
+        {
+            string strFile = txtAddPgrmPointer.Text;
+            if (strFile == "")
+            {
+                MessageBox.Show("No program pointer selected.", "Control Program", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                removeID();
+            }
+        }
+
+        void removeID()
+        {
+            string strFile = txtAddPgrmPointer.Text;
+            var file = new List<string>(System.IO.File.ReadAllLines(strFile));
+            string textToInsert = "(REFID = " + txtAddRefID.Text + " DNCID = " + txtAddmReqID.Text + ")";
+            if (file.Contains(textToInsert))
+            {
+                file.RemoveAt(1);
+                File.WriteAllLines(txtAddPgrmPointer.Text, file.ToArray());
+            }
+            else
+            {
+                File.WriteAllLines(txtAddPgrmPointer.Text, file.ToArray());
+            }
+            txtAddTopView.Text = File.ReadAllText(strFile);
+        }
+
+        private void rbAdd_flWoExt_Click(object sender, RoutedEventArgs e)
+        {
+            string strFile = txtAddPgrmPointer.Text;
+            txtAddmReqID.Text = Path.GetFileNameWithoutExtension(strFile).ToUpper();
+            AddCtrlPgrmSave.IsEnabled = true;
+            txtAddmReqID.IsEnabled = false;
+        }
+
+        private void rbAdd_flWtExt_Click(object sender, RoutedEventArgs e)
+        {
+            string strFile = txtAddPgrmPointer.Text;
+            txtAddmReqID.Text = Path.GetFileName(strFile).ToUpper();
+            AddCtrlPgrmSave.IsEnabled = true;
+            txtAddmReqID.IsEnabled = false;
+        }
+
+        private void rbAdd_userDefined_Click(object sender, RoutedEventArgs e)
+        {
+            txtAddmReqID.Text = "";
+            txtAddmReqID.IsEnabled = true;
+            txtAddmReqID.Focus();
+            AddCtrlPgrmSave.IsEnabled = false;
+        }
+
+        private void txtAddmReqID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _ = txtAddmReqID.Text.Trim().Length > 0 ? AddCtrlPgrmSave.IsEnabled = true : AddCtrlPgrmSave.IsEnabled = false;
+        }
+
+
+        //START EDIT FUNCTIONS
+        public int mid = 0;
+        public int cusid = 0;
+        public string cusname = "";
         private void btnEditOpen_Click(object sender, RoutedEventArgs e)
         {
+            FillComboBoxCntrlPgrmGrp(cbCPEdit);
+            FillComboBoxAssocCust(cbCustEdit);
             editGrid.Visibility = Visibility.Visible;
-            txtRemReqIdEdit.Text = txtBoxRemReqId.Text;
-            txtRefIdEdit.Text = txtBoxRefID.Text;
-            txtPgrmPointerEdit.Text = txtBoxPath.Text;
-            txtTopEdit.Text = txtTopView.Text;
-            txtBotEdit.Text = txtBotView.Text;
-            txtBotEdit.ScrollToEnd();
+            txtEditRefID.Text = txtBoxRefID.Text;
+            txtEditPgrmPointer.Text = txtBoxPath.Text;
+            rbEdit_current.IsChecked = true;
+            txtEditReqID.Text = txtBoxRemReqId.Text;
+            readFile();
+        }
+
+        void readFile()
+        {
+            txtEditTopView.Text = File.ReadAllText(txtEditPgrmPointer.Text);
         }
 
         private void editCtrPrgrmClose_Click(object sender, RoutedEventArgs e)
         {
             editGrid.Visibility = Visibility.Collapsed;
-            
+
         }
 
         private void editCtrlPgrmCancel_Click(object sender, RoutedEventArgs e)
@@ -1045,13 +1356,83 @@ namespace Fusion_v2
         private void editPrgrmPointerBrowse_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
+            while (openFileDialog.ShowDialog() == true)
             {
-                txtPgrmPointerEdit.Text = openFileDialog.FileName;
+                txtEditPgrmPointer.Text = openFileDialog.FileName;
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                String query = "SELECT COUNT(*) FROM NCPROG WHERE programPointer = '" + txtEditPgrmPointer.Text + "' ";
+                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                int count = (int)sqlCmd.ExecuteScalar();
+                if (count > 0)
+                {
+                    MessageBox.Show("Program Pointer is already associated to a control program.\nPlease select another Program Pointer.", "Control Program", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtEditPgrmPointer.Text = "";
+                    continue;
+                }
+                else
+                {
+                    txtEditTopView.Text = File.ReadAllText(openFileDialog.FileName);
+                    //rbStackPanel.IsEnabled = true;
+                    break;
+                }
             }
         }
 
-        
+        private void EditCtrlPgrmSave_Click(object sender, RoutedEventArgs e)
+        {
+            string rcid = txtBoxRemReqId.Text;
+            string unqRef = txtBoxRefID.Text;
+            string pgrmPtr = txtEditPgrmPointer.Text;
+            string desc = txtDescEdit.Text;
+            string notes = txtNotesEdit.Text;
+            string rev = txtRevEdit.Text;
+            string filenm = Path.GetFileName(txtEditPgrmPointer.Text);
+            int m = mid;
+            int cus = cusid;
+            string cm = cusname;
+
+            SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+            String query2 = "UPDATE NCPROG SET UniqueReference = '" + unqRef + "', remoteCallId = '" + rcid + "', programPointer = '" + pgrmPtr + "',  descr = '" + desc + "', notes = '" + notes + "', revision = '" + rev + "', revision_date = '" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "', NCFile = '" + pgrmPtr + "', fkMachGroupId = '" + m + "', filename = '" + filenm + "' WHERE UniqueReference = '" + unqRef + "' ";
+            SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
+            sqlCmd2.ExecuteNonQuery();
+            sqlCon.Close();
+
+            sqlCon.Open();
+            String query3 = "UPDATE CtrlProgCustMGAssoc SET custid = '" + cus + "',  mgid = '" + m + "', custName = '" + cm + "' WHERE urid = '" + unqRef + "' ";
+            SqlCommand sqlCmd3 = new SqlCommand(query3, sqlCon);
+            sqlCmd3.ExecuteNonQuery();
+            sqlCon.Close();
+
+            MessageBox.Show(" '" + txtEditPgrmPointer.Text + "' was successfully updated. '" + pgrmPtr.ToString() +"'", "Fusion PDO - Control Program Navigator", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            dgProgramFiles.ItemsSource = contProgram().DefaultView;
+            dgProgramFiles.IsEnabled = true;
+            dgProgramFiles.SelectedIndex = 0;
+            dgProgramFiles.Focus();
+            //refID.ItemsSource = referenceID().DefaultView;
+            //refID.IsEnabled = true;
+            //refID.SelectedIndex = 0;
+            //refID.Focus();
+            //reqID.ItemsSource = requestID().DefaultView;
+            //reqID.IsEnabled = true;
+            //reqID.SelectedIndex = 0;
+            //reqID.Focus();
+            dgProgramFiles.ScrollIntoView(dgProgramFiles.SelectedItem);
+            //refID.ScrollIntoView(refID.SelectedItem);
+            //reqID.ScrollIntoView(reqID.SelectedItem);
+
+            editGrid.Visibility = Visibility.Collapsed;
+
+            txtEditRefID.Text = null;
+            txtEditReqID.Text = null;
+            txtEditPgrmPointer.Text = null;
+            txtEditTopView.Text = null;
+            txtEditBotView.Text = null;
+            txtRevEdit.Text = null;
+            txtNotesEdit.Text = null;
+            txtDescEdit.Text = null;
+        }
     }
 }

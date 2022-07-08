@@ -43,6 +43,7 @@
         </Style>
     </Page.Resources>
 
+    
     <Grid>
         <Grid Name="NavMainGrid" Margin="5" >
 
@@ -198,18 +199,20 @@
                                         <Viewbox>
                                             <DockPanel Margin="0 5 0 0">
                                                 <TextBlock Text="Control Program Group" Margin="10,0,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
-                                                <Button Name="cntrlPgrmCancel" Width="30" Height="25" Margin="50,0,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" >
-                                                    <Grid Margin="-9,-2">
-                                                        <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                    </Grid>
-                                                </Button>
-                                                <Button Name="cntrlPgrmOpen" Width="30" Height="25" Margin="5,0,0,0" ToolTip="Filter Control Program Group" >
-                                                    <Grid Margin="-9,-2">
-                                                        <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                    </Grid>
-                                                </Button>
-                                                <TextBox Name="txtBoxCntrllPgrmGrp" Width="460" HorizontalAlignment="Left" FontSize="13" Height="30" Margin="5,0,10,0" Background="WhiteSmoke" BorderThickness="0" IsReadOnly="True" Padding="5"/>
-                                            </DockPanel>
+                                                
+                                                
+                                                <TextBox Name="txtBoxCntrllPgrmGrp" Width="463" HorizontalAlignment="Left" FontSize="13" Height="30" Margin="85,0,0,0" Background="WhiteSmoke" BorderThickness="0" IsReadOnly="True" Padding="5"/>
+                                                    <Button Name="cntrlPgrmCancel" Width="30" Height="25" Margin="-30,0,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" >
+                                                        <Grid Margin="-9,-2">
+                                                            <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                        </Grid>
+                                                    </Button>
+                                                    <Button Name="cntrlPgrmOpen" Width="30" Height="25" Margin="5,0,10,0" ToolTip="Filter Control Program Group" >
+                                                        <Grid Margin="-9,-2">
+                                                            <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                        </Grid>
+                                                    </Button>
+                                                </DockPanel>
                                         </Viewbox>
                                         
                                     </StackPanel>
@@ -220,18 +223,20 @@
                                     <Viewbox >
                                         <DockPanel>
                                             <TextBlock Text="Associated Customers" Margin="10,5,0,5" FontSize="13" Foreground="Black" FontWeight="Medium"/>
-                                            <Button Name="assocCustCancel" Width="30" Height="25" Margin="60,-85,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" >
-                                                <Grid Margin="-9,-2">
-                                                    <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Name="assocCustOpen" Width="30" Height="25" Margin="5,-85,0,0" ToolTip="Filter Associated Customers" >
-                                                <Grid Margin="-9,-2">
-                                                    <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
-                                                </Grid>
-                                            </Button>
-                                            <ListBox Name="lstBoxAssocCus" Width="460" Margin="5,5,10,5" Height="110" Background="WhiteSmoke" FontSize="13"/>
-                                        </DockPanel>
+                                            
+                                            
+                                            <ListBox Name="lstBoxAssocCus" Width="460" Margin="95,5,0,5" Height="110" Background="WhiteSmoke" FontSize="13"/>
+                                                <Button Name="assocCustCancel" Width="30" Height="25" Margin="-35,-85,0,0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Visible" >
+                                                    <Grid Margin="-9,-2">
+                                                        <materialDesign:PackIcon Kind="Cancel" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                    </Grid>
+                                                </Button>
+                                                <Button Name="assocCustOpen" Width="30" Height="25" Margin="5,-85,10,0" ToolTip="Filter Associated Customers" >
+                                                    <Grid Margin="-9,-2">
+                                                        <materialDesign:PackIcon Kind="FileSearch" Width="15" Height="15" HorizontalAlignment="Center" />
+                                                    </Grid>
+                                                </Button>
+                                            </DockPanel>
                                     </Viewbox>
                                 </DockPanel>
 
@@ -252,7 +257,7 @@
                                     <DockPanel Margin="0 5 0 0">
                                         <DockPanel>
                                             <TextBlock Text="Revision" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
-                                            <TextBox IsReadOnly="True" Name="txtBoxRev" Width="240" Height="25" HorizontalAlignment="Left" Margin="42,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
+                                            <TextBox IsReadOnly="True" Name="txtBoxRev" Width="240" Height="25" HorizontalAlignment="Left" Margin="41,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
                                         </DockPanel>
                                         <DockPanel>
                                             <TextBlock Text="Last Modified" Margin="20,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
@@ -260,17 +265,22 @@
                                         </DockPanel>
                                     </DockPanel>
                                 </Viewbox>
-                                <Viewbox>
-                                    <DockPanel Margin="0 5 0 0">
-                                        <TextBlock Text="File Size" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
-                                        <TextBox IsReadOnly="True" Name="txtBoxFileSize" Margin="30,0,0,0" Padding="5" FontSize="13" Height="25" Background="WhiteSmoke" BorderThickness="0" HorizontalAlignment="Left" Width="215"/>
 
-                                        <TextBlock Text="File Name" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" Visibility="Hidden"/>
-                                        <TextBox IsReadOnly="True" Name="txtFilename" Margin="44,0,0,0" Padding="5" FontSize="13" Height="25" Background="WhiteSmoke" BorderThickness="0" HorizontalAlignment="Left" Width="240" Visibility="Hidden"/>
-                                    </DockPanel>
-                                </Viewbox>
-                                
-                                <Grid Margin="10">
+                                    <Viewbox>
+                                        <DockPanel Margin="0 5 0 0">
+                                            <DockPanel>
+                                                <TextBlock Text="File Size" Margin="10,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
+                                                <TextBox IsReadOnly="True" Name="txtBoxFileSize" Width="240" Height="25" HorizontalAlignment="Left" Margin="35,0,0,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Filename" Margin="0,4,0,0" FontSize="13" Foreground="Black" FontWeight="Medium" />
+                                                <TextBox IsReadOnly="True" Name="txtFilename" Width="248" Height="25" HorizontalAlignment="Left" Margin="47,0,15,0" Padding="5" FontSize="13" Background="WhiteSmoke" BorderThickness="0"/>
+                                            </DockPanel>
+                                        </DockPanel>
+                                    </Viewbox>
+
+
+                                    <Grid Margin="10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="200*"/>
                                         <ColumnDefinition Width="200*"/>

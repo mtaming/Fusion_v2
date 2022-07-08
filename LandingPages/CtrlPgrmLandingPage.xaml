@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:Fusion_v2.LandingPages"
         mc:Ignorable="d"
         Title="CONTROL PROGRAM" Width="{x:Static SystemParameters.PrimaryScreenWidth}"
-      Height="{x:Static SystemParameters.PrimaryScreenHeight}" WindowStartupLocation="CenterScreen" WindowState="Maximized" MinWidth="1000" MinHeight="650" >
+      Height="{x:Static SystemParameters.PrimaryScreenHeight}" WindowStartupLocation="CenterScreen" WindowState="Maximized" MinWidth="1100" MinHeight="650" >
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
