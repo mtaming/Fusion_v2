@@ -25,18 +25,25 @@
         </VisualBrush>
 
     </Window.Background>
+    
+    
+   
     <Grid>
         <Grid>
             <Grid HorizontalAlignment="Center" Height="500" Width="700">
-                <Border Width="600" Height="400" CornerRadius="8">
+
+                <Border Width="600" Height="400" CornerRadius="10">
                     <Border.Background>
-                        <SolidColorBrush Color="Black" Opacity="0.5" />
+                        <SolidColorBrush Color="Black" Opacity="0.3"></SolidColorBrush>
                     </Border.Background>
                 </Border>
+
+                <!--
                 <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="150" Width="500" Margin="0,70,0,25">
                     <Image Source="Images/user.png"></Image>
                 </Grid>
-                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="200" Width="500" Margin="0,220,0,25">
+                -->
+                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="200" Width="500" Margin="0,150,0,25">
 
                     <StackPanel Grid.IsSharedSizeScope="True" UseLayoutRounding="True">
                         
@@ -44,19 +51,41 @@
                             <DockPanel>
                                 <materialDesign:PackIcon Kind="User" Foreground="Black" Width="30" Height="25" Margin="35,12,20,0" />
                                 <TextBox x:Name="txtUserName" Width="250" FontSize="16" Foreground="Black" VerticalContentAlignment="Center" CaretBrush="Black" Margin="-15,0,40,10" BorderThickness="0"/>
+                                <TextBlock IsHitTestVisible="False" Text="Username" FontSize="15" VerticalAlignment="Center" Margin="-280,0,0,0" Foreground="DarkGray">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=txtUserName}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </DockPanel>
                         </Border>
 
                         <Border HorizontalAlignment="Center" Background="White" Height="50" CornerRadius="10" Margin="0,10,0,0" Width="350">
                             <DockPanel HorizontalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Password" Foreground="Black" Width="30" Height="25" Margin="35,10,20,0" />
-                                <PasswordBox x:Name="txtPassword" Width="250" FontSize="16" VerticalContentAlignment="Center"  Foreground="Black" CaretBrush="Black" Margin="-15,0,40,10" BorderThickness="0"/>
+                                <PasswordBox x:Name="txtPassword" Width="250" FontSize="16" VerticalContentAlignment="Center"  Foreground="Black" CaretBrush="Black" Margin="-15,0,40,10" BorderThickness="0" PasswordChanged="txtPassword_PasswordChanged"  >
+                                    
+                                </PasswordBox>
+                                <TextBlock Name="txtPassWatermark" Text="Password" FontSize="15" VerticalAlignment="Center" Margin="-280,0,0,0" Foreground="DarkGray"/>
                             </DockPanel>
                         </Border>
 
                         <CheckBox Name="chkRem" Content="Remember Me" HorizontalAlignment="Right" Foreground="White" FontSize="13" Margin="0,15,80,0"/>
 
-                        <Button Content="SUBMIT"  FontSize="15" Width="350" Margin="0,15,0,0" HorizontalAlignment="Center" x:Name="login" Foreground="White" Height="40" BorderThickness="0" Click="Login_Click"  IsDefault="True"/>
+                        <Button Width="350" Margin="0,15,0,0" HorizontalAlignment="Center" x:Name="login" Foreground="White" Height="40" BorderThickness="0" Click="Login_Click"  IsDefault="True">
+                            <DockPanel>
+                                <TextBlock Text="SUBMIT" FontSize="15" Margin="10,0,5,0"/>
+                                <materialDesign:PackIcon Kind="Login" Width="20" Height="20" HorizontalAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                        
+                        
                     </StackPanel>
                 </Grid>
             </Grid>

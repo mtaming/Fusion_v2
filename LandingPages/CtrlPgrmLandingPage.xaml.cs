@@ -8,8 +8,8 @@ using MaterialDesignThemes.Wpf;
 using Fusion_v2.ViewMenu;
 using System.Windows.Media.Animation;
 using System.Windows.Media;
-using Fusion_v2.LandingPages;
-
+using System.IO;
+using System.Threading.Tasks;
 namespace Fusion_v2.LandingPages
 {
     /// <summary>
@@ -21,7 +21,33 @@ namespace Fusion_v2.LandingPages
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, "Light.Blue");
+
+            if (Properties.Settings.Default.defaultHome == "Navigator")
+            {
+                Navigator np = new Navigator();
+                PageFrame.Content = np.Content;
+            }
+            else if (Properties.Settings.Default.defaultHome == "IFM")
+            {
+                nav np = new nav();
+                PageFrame.Content = np.Content;
+            }
+            else
+            {
+                PageFrame.Content = "";
+            }
+
+            //Closing += new System.ComponentModel.CancelEventHandler(MainWindow_Closing);
         }
+
+        //void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    if (MessageBox.Show("Are you sure you want to close fusion?", "Fusion Closing", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+        //    {
+        //        e.Cancel = true;
+        //    }
+        //}
+
         bool MenuClosed = false;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -40,16 +66,6 @@ namespace Fusion_v2.LandingPages
             MenuClosed = !MenuClosed;
         }
 
-        private void cntrlProgram_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            cntrlProgram.IsExpanded = true;
-        }
-
-        private void cntrlProgram_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            cntrlProgram.IsExpanded = false;
-        }
-
         private void cpNavigator_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Navigator n = new Navigator();
@@ -58,26 +74,304 @@ namespace Fusion_v2.LandingPages
             title.Text = "Navigator";
         }
 
-        private void homeGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Home h = new Home();
-            h.Show();
-            this.Close();
-            title.Text = "";
-        }
-
         private void ctrlPgrmLogout_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to Logout?", "Fusion Logout", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to Logout?", "Fusion Logout", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                {
+                    MainWindow mw = new MainWindow();
+                    mw.Show();
+                    this.Close();
+                }
+                else
+                {
+
+                }
+            }
+            catch (OutOfMemoryException)
             {
 
             }
-            else
+        }
+
+        
+        private void ApplicationGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SetupApplication sa = new SetupApplication();
+            PageFrame.Content = sa.Content;
+            title.Text = "Setup";
+        }
+       private void setUpGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = true;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.Khaki;
+            setUpTB.Foreground = Brushes.Khaki;
+
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.White;
+
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void machGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.White; 
+            macimg.Foreground = Brushes.Khaki;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.White;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.Khaki;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void cpGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (cntrlProgram.IsSelected == true)
             {
-                MainWindow mw = new MainWindow();
-                mw.Show();
-                this.Close();
+                ctrlPgrmNav.IsSelected = true;
             }
+            
+            Navigator n = new Navigator();
+            PageFrame.Content = n.Content;
+            this.Title = "Control Program Navigator";
+            title.Text = "Navigator";
+
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = true;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.White;
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.Khaki;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.White;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.Khaki;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void ifmGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.White;
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.Khaki;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.White;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.Khaki;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void processGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = true;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.White;
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.Khaki;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.White;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.Khaki;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void rfDNCGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.White;
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.Khaki;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.White;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.Khaki;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void sendBrowGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.White;
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.Khaki;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.White;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.Khaki;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void ReportsGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = true;
+            Diagnostics.IsExpanded = false;
+
+            setupIcon.Foreground = Brushes.White;
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.Khaki;
+            DiagIcon.Foreground = Brushes.White;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.Khaki;
+            DiagTB.Foreground = Brushes.White;
+        }
+
+        private void diagGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            setUp.IsExpanded = false;
+            cntrlProgram.IsExpanded = false;
+            Process.IsExpanded = false;
+            Reports.IsExpanded = false;
+            Diagnostics.IsExpanded = true;
+
+            setupIcon.Foreground = Brushes.White;
+            macimg.Foreground = Brushes.White;
+            cpIcon.Foreground = Brushes.White;
+            ifmIcon.Foreground = Brushes.White;
+            processIcon.Foreground = Brushes.White;
+            readFDNCicon.Foreground = Brushes.White;
+            sendBroIcon.Foreground = Brushes.White;
+            repICon.Foreground = Brushes.White;
+            DiagIcon.Foreground = Brushes.Khaki;
+
+            setUpTB.Foreground = Brushes.White;
+            mactb.Foreground = Brushes.White;
+            ctrlPgrmTB.Foreground = Brushes.White;
+            ifmTb.Foreground = Brushes.White;
+            cpProcess.Foreground = Brushes.White;
+            TBrfDNC.Foreground = Brushes.White;
+            sendBroTB.Foreground = Brushes.White;
+            reportsTB.Foreground = Brushes.White;
+            DiagTB.Foreground = Brushes.Khaki;
         }
     }
 }

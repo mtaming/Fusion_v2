@@ -10,7 +10,7 @@ using Fusion_v2;
 using MahApps.Metro.Controls;
 using ControlzEx.Theming;
 using System.Windows.Controls;
-
+using Fusion_v2.LandingPages;
 namespace Fusion_v2
 {
     /// <summary>
@@ -126,8 +126,9 @@ namespace Fusion_v2
             if (count == 1)
             {
                 MessageBox.Show("Login Successful", "Fusion Production Document Organizer", MessageBoxButton.OK, MessageBoxImage.Information);
-                Home hp = new Home();
-                hp.Show();
+                //Home hp = new Home();
+                LandingPages.CtrlPgrmLandingPage cp = new LandingPages.CtrlPgrmLandingPage();
+                cp.Show();
                 System.Threading.Thread.Sleep(100);
                 this.Close();
             }
@@ -179,6 +180,16 @@ namespace Fusion_v2
             LogInSaveData();
         }
 
-        
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (txtPassword.Password.Length == 0)
+            {
+                txtPassWatermark.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                txtPassWatermark.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
