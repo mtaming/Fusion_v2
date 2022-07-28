@@ -100,6 +100,7 @@ namespace Fusion_v2
             cbFilter.Items.Add("Control Program Files");
             cbFilter.Items.Add("Reference ID");
             cbFilter.Items.Add("Remote Request ID");
+            
             cbFilter.SelectedIndex = 0;
             dgProgramFiles.ItemsSource = contProgram().DefaultView;
             dgProgramFiles.IsEnabled = true;

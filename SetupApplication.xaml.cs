@@ -29,7 +29,7 @@ namespace Fusion_v2
         {
             InitializeComponent();
 
-            //usePAOApp.IsChecked = true;
+            usePAOApp.IsChecked = true;
 
             if (Properties.Settings.Default.defaultHome == "Navigator")
             {
@@ -44,10 +44,9 @@ namespace Fusion_v2
                 usePAOApp.IsChecked = true;
             }
 
-            
+            //gbFolderSettingsQuery();
         }
 
-       
         private void restoreDefault_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Restore to Default Settings?", "Application Settings", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
@@ -60,48 +59,26 @@ namespace Fusion_v2
 
         private void saveLocApp_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (usePAOApp.IsChecked == true)
             {
-               Properties.Settings.Default.defaultHome = "";
-               Properties.Settings.Default.Save();
+                Properties.Settings.Default.defaultHome = "";
+                Properties.Settings.Default.Save();
             }
-            else if(useCPNApp.IsChecked == true)
+            else if (useCPNApp.IsChecked == true)
             {
-               Properties.Settings.Default.defaultHome = "Navigator";
-               Properties.Settings.Default.Save();
+                Properties.Settings.Default.defaultHome = "Navigator";
+                Properties.Settings.Default.Save();
             }
             else
             {
-               Properties.Settings.Default.defaultHome = "IFM";
-               Properties.Settings.Default.Save();
+                Properties.Settings.Default.defaultHome = "IFM";
+                Properties.Settings.Default.Save();
             }
             MessageBox.Show("Settings successfully saved.", "Application Settings", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        //private void FoldersBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    FoldersGrid.Visibility = Visibility.Visible;
-        //    PreferencesGrid.Visibility = Visibility.Collapsed;
-        //    FlashDNCGrid.Visibility = Visibility.Collapsed;
-        //}
-
-        //private void PreferencesBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    FoldersGrid.Visibility = Visibility.Collapsed;
-        //    PreferencesGrid.Visibility = Visibility.Visible;
-        //    FlashDNCGrid.Visibility = Visibility.Collapsed;
-        //}
-
-        //private void FlashDNCBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    FoldersGrid.Visibility = Visibility.Collapsed;
-        //    PreferencesGrid.Visibility = Visibility.Collapsed;
-        //    FlashDNCGrid.Visibility = Visibility.Visible;
-        //}
-
-
-        ////FOLDER SETTINGS - GLOBAL
+        //FOLDER SETTINGS - GLOBAL
         //private void gbFolderSettingsQuery()
         //{
         //    SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
@@ -138,6 +115,28 @@ namespace Fusion_v2
 
         //    dr.Close();
         //    sqlCon.Close();
+        //}
+
+        //private void gbFolderBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    FolderBrowserDialog diag = new FolderBrowserDialog();
+        //    diag.Description = "Please select NC Program Folder";
+        //    if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        string folder = diag.SelectedPath;  //selected folder path
+        //        gbNCProgFolderTb.Text = folder;
+        //    }
+        //}
+
+        //private void gbIFMFolderBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    FolderBrowserDialog diag = new FolderBrowserDialog();
+        //    diag.Description = "Please select Incoming File Manager Folder";
+        //    if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        string folder = diag.SelectedPath;  //selected folder path
+        //        gbIFMFolderTb.Text = folder;
+        //    }
         //}
 
         //private void gbPrefSettingsQuery()

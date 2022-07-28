@@ -70,7 +70,6 @@ namespace Fusion_v2.LandingPages
         {
             Navigator n = new Navigator();
             PageFrame.Content = n.Content;
-            this.Title = "Control Program Navigator";
             title.Text = "Navigator";
         }
 
@@ -100,7 +99,7 @@ namespace Fusion_v2.LandingPages
         {
             SetupApplication sa = new SetupApplication();
             PageFrame.Content = sa.Content;
-            title.Text = "Setup";
+            title.Text = "Setup >> Application";
         }
        private void setUpGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -372,6 +371,13 @@ namespace Fusion_v2.LandingPages
             sendBroTB.Foreground = Brushes.White;
             reportsTB.Foreground = Brushes.White;
             DiagTB.Foreground = Brushes.Khaki;
+        }
+
+        private void ServiceGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Service sv = new Service();
+            PageFrame.Content = sv.Content;
+            title.Text = "Setup >> Service";
         }
     }
 }

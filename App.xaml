@@ -12,7 +12,7 @@
                 <!-- Theme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
 
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
@@ -20,13 +20,13 @@
 
 
             <!--PRIMARY -->
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#90AFC5"/>
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFE6BD51"/>
             <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#333333"/>
 
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#336B87"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD59A00"/>
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
 
-            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#2A3132"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FF745401"/>
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
 
             <!--ACCENT-->
@@ -34,8 +34,8 @@
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
 
             <!--GLOBAL FONT FAMILY-->
-            <Style TargetType="{x:Type Window}">
-                <Setter Property="FontFamily" Value="Trebuchet"/>
+            <Style TargetType="{x:Type Window}" >
+                <Setter Property="FontFamily" Value="Font/tt norms pro regular.otf #TT Norms Pro Regular"/>
             </Style>
 
             <Style TargetType="{x:Type Expander}">
@@ -46,6 +46,29 @@
                 </Style.Triggers>
             </Style>
 
+            
+            <Style TargetType="{x:Type TextBlock}">
+                
+                <Setter Property="FontFamily" Value="Century Gothic"/>
+            </Style>
+            
+            <Style TargetType="{x:Type Label}">
+
+                <Setter Property="FontFamily" Value="Century Gothic"/>
+            </Style>
+
+            
+
+            <Style TargetType="{x:Type ToggleButton}">
+
+                <Setter Property="FontFamily" Value="Century Gothic"/>
+            </Style>
+
+
+           
+            
         </ResourceDictionary>
+
+        
     </Application.Resources>
 </Application>
