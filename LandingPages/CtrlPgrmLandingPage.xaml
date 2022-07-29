@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:Fusion_v2.LandingPages"
         mc:Ignorable="d"
         Title="Fusion Production Document Organizer" Width="1500"
-      Height="800" WindowStartupLocation="CenterScreen"  MinWidth="1100" MinHeight="650" >
+      Height="800" WindowStartupLocation="CenterScreen"  MinWidth="1100" MinHeight="650" FontFamily="Century Gothic">
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
             <Image Source="/Images/fusionlogo_outline.ico" />
@@ -47,14 +47,10 @@
     </Window.Resources>
 
     <Window.Background>
-
-        <VisualBrush>
-            <VisualBrush.Visual>
-                <Image Source="/Images/bg6.jpg" />
-
-            </VisualBrush.Visual>
-        </VisualBrush>
-
+        <LinearGradientBrush>
+            <GradientStop Color="#FF2C6078" Offset="0.0" />
+            <GradientStop Color="#FF04161E" Offset="1.5" />
+        </LinearGradientBrush>
     </Window.Background>
 
 
@@ -64,7 +60,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="grid" Width="300" Background="#FF292826" RenderTransformOrigin="0.5,0.5" Grid.Column="0" >
+        <Grid x:Name="grid" Width="300"  RenderTransformOrigin="0.5,0.5" Grid.Column="0" >
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF0D5677" Offset="0.0" />
+                    <GradientStop Color="#FF04161E" Offset="1.5" />
+                </LinearGradientBrush>
+            </Grid.Background>
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
                     <TreeView>
@@ -354,13 +356,13 @@
 
         <Grid Grid.Column="1">
 
-            <Button x:Name="button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0" Style="{StaticResource MaterialDesignFlatDarkButton}" Click="Button_Click" Foreground="#FFF9D342" Width="75" >
+            <Button x:Name="button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,3,0,0" Style="{StaticResource MaterialDesignFlatDarkButton}" Click="Button_Click" Foreground="#FFF9D342" Width="50" >
 
 
                 <DynamicResource ResourceKey="close"/>
             </Button>
 
-            <TextBlock Name="title"  FontWeight="Bold" Margin="65,10,0,0"   HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="15"/>
+            <TextBlock Name="title"  Margin="65,10,0,0"   HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="15" Foreground="White"/>
 
             <Frame x:Name="PageFrame" NavigationUIVisibility="Hidden" Margin="10,35,10,10" Grid.ColumnSpan="2" />
 

@@ -52,8 +52,7 @@ namespace Fusion_v2
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
 
-            ProgressBar1.Minimum = 1;
-            ProgressBar1.Maximum = 10;
+            ProgressBar1.Maximum = 100;
             worker.RunWorkerAsync();
             dgProgramFiles.IsEnabled = false;
            
@@ -66,7 +65,7 @@ namespace Fusion_v2
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            for (int i = 1; i <= 10; ++i)
+            for (int i = 1; i <= 10;  i++)
             {
                 if (worker.CancellationPending)
                 {
@@ -82,9 +81,11 @@ namespace Fusion_v2
         }
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            double percent = (e.ProgressPercentage * 100) / 50;
+            double percent = (e.ProgressPercentage * 10) / 100;
 
-            ProgressBar1.Value = Math.Round(percent, 0);
+            ProgressBar1.Value = Math.Round(percent);
+
+            //MessageBox.Show(e.ProgressPercentage.ToString());
 
         }
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1300,6 +1301,9 @@ namespace Fusion_v2
                         bread2.BaseStream.Seek(-500, SeekOrigin.End);
                         bread2.Read(lineCont2, 0, 500);
                         bread2.Close();
+
+                        tbEntireFileAdd.Visibility = Visibility.Hidden;
+                        txtAddBotView.IsEnabled = true;
 
                         txtAddTopView.Text = Encoding.UTF8.GetString(lineCont);
                         txtAddBotView.Text = Encoding.UTF8.GetString(lineCont2);

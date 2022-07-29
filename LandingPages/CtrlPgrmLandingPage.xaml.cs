@@ -99,7 +99,7 @@ namespace Fusion_v2.LandingPages
         {
             SetupApplication sa = new SetupApplication();
             PageFrame.Content = sa.Content;
-            title.Text = "Setup >> Application";
+            title.Text = "Setup | Application";
         }
        private void setUpGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -377,7 +377,7 @@ namespace Fusion_v2.LandingPages
         {
             Service sv = new Service();
             PageFrame.Content = sv.Content;
-            title.Text = "Setup >> Service";
+            title.Text = "Setup | Service";
         }
     }
 }

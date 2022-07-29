@@ -10,15 +10,12 @@
       Width="1096"
       Height="708" 
       Title="Service"
-      Foreground="White">
+      FontFamily="Century Gothic">
     <Page.Background>
-
-        <VisualBrush>
-            <VisualBrush.Visual>
-                <Image Source="/Images/bg6.jpg" />
-
-            </VisualBrush.Visual>
-        </VisualBrush>
+        <LinearGradientBrush>
+            <GradientStop Color="#FF2C6078" Offset="0.0" />
+            <GradientStop Color="#FF04161E" Offset="1.5" />
+        </LinearGradientBrush>
 
     </Page.Background>
     
@@ -33,16 +30,22 @@
                     <Border BorderBrush="Transparent" BorderThickness="2" Margin="10" >
                         <Grid>
                             <StackPanel Margin="5 50 5 0">
-                                <Border Name="serBorder" CornerRadius="10" BorderThickness="3" BorderBrush="#FFF9D342">
+                                <Border Name="serBorder" CornerRadius="10" BorderThickness="3" BorderBrush="#FFFFF0B7">
                                     <Grid>
-                                        <Border Background="#FF292826" BorderBrush="Black" Margin="5" CornerRadius="10">
+                                        <Border BorderBrush="Black" Margin="5" CornerRadius="10">
+                                            <Border.Background>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="#FF277193" Offset="0.0" />
+                                                    <GradientStop Color="#FF074968" Offset="0.8" />
+                                                </LinearGradientBrush>
+                                            </Border.Background>
                                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                                 <StackPanel>
                                                     <StackPanel Orientation="Horizontal">
                                                         <materialDesign:PackIcon Kind="PowerSocket" Width="30" Height="30" Margin="15 15 5 0" Foreground="White"/>
-                                                        <Label Content="Socket Port Configuration" FontSize="20" FontWeight="Bold" Margin="0 12 0 10" Foreground="White">
+                                                        <Label Content="Socket Port Configuration" FontSize="20" FontWeight="Bold" Margin="0 12 0 10"  Foreground="White"/>
 
-                                                        </Label>
+
                                                     </StackPanel>
                                                     <DockPanel Height="30" Margin="35 0 35 0">
                                                         <Grid>
@@ -53,7 +56,7 @@
                                                                 <ColumnDefinition Width="*"/>
                                                             </Grid.ColumnDefinitions>
                                                             <TextBlock Grid.Column="0" Text="*Server Host Name:" FontSize="15" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Foreground="White"/>
-                                                            <TextBox Grid.Column="1" Name="servername" FontSize="15" BorderThickness="1" Background="AliceBlue" Padding="5 2" Foreground="Black"/>
+                                                            <TextBox Grid.Column="1" Name="servername" FontSize="15" BorderThickness="1" Background="AliceBlue" Padding="5 2" />
                                                             <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="Black"  Height="30" Width="30" FontWeight="Bold" HorizontalAlignment="Right" ToolTip="Click to Refresh Socket Server IP Address">
                                                                 <Grid Margin="-8,-5">
                                                                     <materialDesign:PackIcon Kind="Refresh" Width="20" Height="20" FontWeight="Bold" Margin="-3 0 0 0"/>
@@ -73,7 +76,7 @@
                                                                 <ColumnDefinition Width="*"/>
                                                             </Grid.ColumnDefinitions>
                                                             <TextBlock Grid.Column="0" Text=" Server Host IP: " FontSize="15" Foreground="White"/>
-                                                            <TextBox Grid.Column="1" Name="serverip" MaxLength="15" IsReadOnly="True" Padding="5 2" FontSize="15" BorderThickness="1" Background="AliceBlue" Foreground="Black"/>
+                                                            <TextBox Grid.Column="1" Name="serverip" MaxLength="15" IsReadOnly="True" Padding="5 2" FontSize="15" BorderThickness="1" Background="AliceBlue" />
 
                                                             <TextBlock Grid.Column="2" Text="*Orion Port:" FontSize="15" Margin="19  0 0 0" Foreground="White"/>
                                                             <TextBox Grid.Column="3" Name="orionport" FontSize="15" Padding="5 2" BorderThickness="1" Background="AliceBlue" Foreground="Black"/>
@@ -83,18 +86,18 @@
 
                                                     <Separator Margin="35 10 35 10" FontWeight="ExtraBold"></Separator>
                                                     <Border BorderBrush="#FFF9D342" BorderThickness="1" Margin="35 0 35 10">
-                                                        <TabControl  Margin="10 10"  Style="{DynamicResource MahApps.Styles.TabControl.Animated}" mah:TabControlHelper.Transition="Right" TabStripPlacement="Top" Background="#FF2B2C28" >
+                                                        <TabControl  Margin="10 10"  Style="{DynamicResource MahApps.Styles.TabControl.Animated}" mah:TabControlHelper.Transition="Right" TabStripPlacement="Top">
                                                             <TabItem Background="#FFF9D342" HorizontalAlignment="Left" Width="133">
                                                                 <TabItem.Header>
                                                                     <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="SettingsApplications" Width="20" Height="20" Margin="0 0 0 0" Foreground="White"/>
-                                                                        <Label Content="Properties" FontSize="15" FontWeight="Bold" Margin="0 -5 0 0" Foreground="White"/>
+                                                                        <materialDesign:PackIcon Kind="SettingsApplications" Width="20" Height="20" Margin="0 0 0 0" Foreground="Black"/>
+                                                                        <Label Content="Properties" FontSize="15" FontWeight="Bold" Margin="0 -5 0 0" />
                                                                     </StackPanel>
                                                                 </TabItem.Header>
                                                                 <StackPanel>
                                                                     <DockPanel Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,20,0">
-                                                                        <TextBlock Text="Service Version: " FontSize="15" Foreground="White"/>
-                                                                        <TextBlock Name="serviceVersion" Text="1.0.000" FontSize="15" Foreground="White"/>
+                                                                        <TextBlock Text="Service Version: " FontSize="15" />
+                                                                        <TextBlock Name="serviceVersion" Text="1.0.000" FontSize="15" />
                                                                     </DockPanel>
                                                                     <DockPanel Margin="20 15 20 5">
                                                                         <Grid>
@@ -103,9 +106,9 @@
                                                                                 <ColumnDefinition Width="*"/>
                                                                                 <ColumnDefinition Width="50"/>
                                                                             </Grid.ColumnDefinitions>
-                                                                            <TextBlock Grid.Column="0" Text="*Service Log Files Folder:" FontSize="15" Foreground="White"/>
-                                                                            <TextBox Grid.Column="1" Name="logFilesFolder" Background="AliceBlue" BorderThickness="1" FontSize="15" Padding="5 2" Margin="0 0 5 0" Foreground="Black"/>
-                                                                            <Button Grid.Column="2" Name="searchLogFilesFolder">
+                                                                            <TextBlock Grid.Column="0" Text="*Service Log Files Folder:" FontSize="15" />
+                                                                            <TextBox Grid.Column="1" Name="logFilesFolder" Background="AliceBlue" BorderThickness="1" FontSize="15" Padding="5 2" Margin="0 0 5 0" />
+                                                                            <Button Grid.Column="2" Name="searchLogFilesFolder" BorderBrush="Black" BorderThickness="1">
                                                                                 <materialDesign:PackIcon Kind="Search" Width="20" Height="20"/>
                                                                             </Button>
                                                                         </Grid>
@@ -118,9 +121,9 @@
                                                                                 <ColumnDefinition Width="*"/>
                                                                                 <ColumnDefinition Width="50"/>
                                                                             </Grid.ColumnDefinitions>
-                                                                            <TextBlock Grid.Column="0" Text="*Service Working Folder:" FontSize="15" Grid.ColumnSpan="2" Foreground="White"/>
+                                                                            <TextBlock Grid.Column="0" Text="*Service Working Folder:" FontSize="15" Grid.ColumnSpan="2" />
                                                                             <TextBox Grid.Column="1" Name="workingFolder" Background="AliceBlue" BorderThickness="1" FontSize="15" Padding="5 2" Margin="0 0 5 0" Foreground="Black"/>
-                                                                            <Button Grid.Column="2" Name="searchWorkingFolder">
+                                                                            <Button Grid.Column="2" Name="searchWorkingFolder" BorderBrush="Black" BorderThickness="1">
                                                                                 <materialDesign:PackIcon Kind="Search" Width="20" Height="20"/>
                                                                             </Button>
                                                                         </Grid>
@@ -131,8 +134,8 @@
                                                                                 <ColumnDefinition Width="110"/>
                                                                                 <ColumnDefinition Width="*"/>
                                                                             </Grid.ColumnDefinitions>
-                                                                            <TextBlock Grid.Column="0" Text="Service Status:   " FontSize="15" Margin="0,6,0,0" Foreground="White"/>
-                                                                            <TextBlock Grid.Column="1" Name="serviceStat" Text="--------------------" Margin="0,6,0,0" FontSize="15" Foreground="White"/>
+                                                                            <TextBlock Grid.Column="0" Text="Service Status:   " FontSize="15" Margin="0,6,0,0" />
+                                                                            <TextBlock Grid.Column="1" Name="serviceStat" Text="--------------------" Margin="0,6,0,0" FontSize="15" />
                                                                         </Grid>
                                                                     </DockPanel>
 
@@ -165,13 +168,13 @@
                                                                                 <ColumnDefinition Width="*"/>
                                                                                 <ColumnDefinition Width="*"/>
                                                                             </Grid.ColumnDefinitions>
-                                                                            <Button Grid.Column="0" Name="restoreDef"  Margin="5 0 0 0">
+                                                                            <Button Grid.Column="0" Name="restoreDef"  Margin="5 0 0 0" BorderBrush="Black" BorderThickness="1">
                                                                                 <DockPanel>
                                                                                     <materialDesign:PackIcon Kind="Restore" Width="20" Height="20"/>
                                                                                     <TextBlock Text="Restore Default" FontSize="15" Margin="10,0,0,0"/>
                                                                                 </DockPanel>
                                                                             </Button>
-                                                                            <Button Grid.Column="1" Name="saveSett"  Margin="5 0 0 0" >
+                                                                            <Button Grid.Column="1" Name="saveSett"  Margin="5 0 0 0" BorderBrush="Black" BorderThickness="1">
                                                                                 <DockPanel>
                                                                                     <materialDesign:PackIcon Kind="ContentSaveAll" Width="20" Height="20"/>
                                                                                     <TextBlock Text="Save Settings" FontSize="15" Margin="10,0,0,0" FontWeight="Bold"/>
@@ -185,15 +188,15 @@
                                                             <TabItem Background="#FFF9D342">
                                                                 <TabItem.Header>
                                                                     <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="EmailBox" Width="20" Height="20" Margin="0 0 0 0" Foreground="White"/>
-                                                                        <Label Content="Email Notifications" FontSize="15" FontWeight="Bold" Margin="0 -5 0 0" Foreground="White"/>
+                                                                        <materialDesign:PackIcon Kind="EmailBox" Width="20" Height="20" Margin="0 0 0 0" Foreground="Black"/>
+                                                                        <Label Content="Email Notifications" FontSize="15" FontWeight="Bold" Margin="0 -5 0 0" />
                                                                     </StackPanel>
                                                                 </TabItem.Header>
                                                                 <StackPanel>
-                                                                    <CheckBox Name="enableEmNotif" Content="Enable Email Notifications" VerticalAlignment="Top" FontSize="15" Margin="20,5,0,0" Foreground="White"/>
-                                                                    <TextBlock Text="Choose Service: " FontSize="16" Margin="20,10,0,0" FontWeight="DemiBold" Foreground="White"/>
-                                                                    <RadioButton Name="msExchangeServerrb" Content="Microsoft Exchange Server or Compatible Services (Connect to an Exchange account to access emails.)" FontSize="15" Margin="20,5,0,0" Foreground="White" />
-                                                                    <RadioButton Name="imapAcctrb" Content="POP or IMAP Account (Connect to POP or IMAP email account.)" FontSize="15" Margin="20,5,0,0" Foreground="White"/>
+                                                                    <CheckBox Name="enableEmNotif" Content="Enable Email Notifications" VerticalAlignment="Top" FontSize="15" Margin="20,5,0,0" />
+                                                                    <TextBlock Text="Choose Service: " FontSize="16" Margin="20,10,0,0" FontWeight="DemiBold" />
+                                                                    <RadioButton Name="msExchangeServerrb" Content="Microsoft Exchange Server or Compatible Services (Connect to an Exchange account to access emails.)" FontSize="15" Margin="20,5,0,0" />
+                                                                    <RadioButton Name="imapAcctrb" Content="POP or IMAP Account (Connect to POP or IMAP email account.)" FontSize="15" Margin="20,5,0,0" />
 
                                                                     <DockPanel Margin="20 15 20 0">
                                                                         <Grid>
@@ -203,7 +206,7 @@
 
                                                                             </Grid.ColumnDefinitions>
                                                                             <StackPanel Grid.Column="0" Margin="5">
-                                                                                <TextBlock Text="SMTP Email Address" FontSize="15" Foreground="White"/>
+                                                                                <TextBlock Text="SMTP Email Address" FontSize="15" />
                                                                                 <TextBox Name="emailAdd"  BorderThickness="1" Background="AliceBlue" Padding="5 2" Height="30" FontSize="15" Foreground="Black"/>
                                                                                 <TextBlock IsHitTestVisible="False" Text="example@yourDomain.com" FontSize="15" VerticalAlignment="Center" Foreground="DarkGray" Margin="10 -32 0 0">
                                                                                     <TextBlock.Style>
@@ -219,7 +222,7 @@
                                                                                 </TextBlock>
                                                                             </StackPanel>
                                                                             <StackPanel Grid.Column="1" Margin="5">
-                                                                                <TextBlock Text="SMTP Server Host" FontSize="15" Foreground="White"/>
+                                                                                <TextBlock Text="SMTP Server Host" FontSize="15" />
                                                                                 <TextBox Name="servHost" BorderThickness="1" Background="AliceBlue" Padding="5 2" Height="30" FontSize="15" Foreground="Black"/>
                                                                                 <TextBlock IsHitTestVisible="False" Text="smtp.yourDomain.com" FontSize="15" VerticalAlignment="Center" Foreground="DarkGray" Margin="10 -32 0 0">
                                                                                     <TextBlock.Style>
@@ -244,11 +247,11 @@
 
                                                                             </Grid.ColumnDefinitions>
                                                                             <StackPanel Grid.Column="0" Margin="5">
-                                                                                <TextBlock Text="Password" FontSize="15" Foreground="White"/>
+                                                                                <TextBlock Text="Password" FontSize="15" />
                                                                                 <TextBox Name="password"  BorderThickness="1" Background="AliceBlue" Padding="5 2" Height="30" FontSize="15" Foreground="Black"/>
                                                                             </StackPanel>
                                                                             <StackPanel Grid.Column="1" Margin="5">
-                                                                                <TextBlock Text="SMTP Server Port" FontSize="15" Foreground="White"/>
+                                                                                <TextBlock Text="SMTP Server Port" FontSize="15"/>
                                                                                 <TextBox Name="servPort" BorderThickness="1" Background="AliceBlue" Padding="5 2" Height="30" FontSize="15" Foreground="Black"/>
                                                                             </StackPanel>
                                                                         </Grid>
@@ -272,13 +275,13 @@
                                                                                         <ColumnDefinition Width="*"/>
                                                                                         <ColumnDefinition Width="*"/>
                                                                                     </Grid.ColumnDefinitions>
-                                                                                    <Button Grid.Column="0" Name="restDef"  Margin="5 0 0 0">
+                                                                                    <Button Grid.Column="0" Name="restDef"  Margin="5 0 0 0" BorderBrush="Black" BorderThickness="1">
                                                                                         <DockPanel>
                                                                                             <materialDesign:PackIcon Kind="Restore" Width="20" Height="20"/>
                                                                                             <TextBlock Text="Restore Default" FontSize="15"/>
                                                                                         </DockPanel>
                                                                                     </Button>
-                                                                                    <Button Grid.Column="1" Name="saveAcctSett"  Margin="5 0 0 0">
+                                                                                    <Button Grid.Column="1" Name="saveAcctSett"  Margin="5 0 0 0" BorderBrush="Black" BorderThickness="1">
                                                                                         <DockPanel>
                                                                                             <materialDesign:PackIcon Kind="ContentSaveAll" Width="20" Height="20"/>
                                                                                             <TextBlock Text="Save Settings" FontSize="15" Margin="10,0,0,0" FontWeight="Bold"/>
@@ -295,14 +298,14 @@
                                                             <TabItem Background="#FFF9D342">
                                                                 <TabItem.Header>
                                                                     <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="Server" Width="20" Height="20" Margin="0 0 0 0" Foreground="White"/>
-                                                                        <Label Content="FTP Server Settings" FontSize="15" FontWeight="Bold" Margin="0 -5 0 0" Foreground="White"/>
+                                                                        <materialDesign:PackIcon Kind="Server" Width="20" Height="20" Margin="0 0 0 0" Foreground="Black"/>
+                                                                        <Label Content="FTP Server Settings" FontSize="15" FontWeight="Bold" Margin="0 -5 0 0" />
                                                                     </StackPanel>
                                                                 </TabItem.Header>
                                                                 <StackPanel>
                                                                     <DockPanel Margin="20,15,0,0">
-                                                                        <TextBlock Text="Switch Server" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
-                                                                        <mah:ToggleSwitch Margin="10 0 0 0" Foreground="White"/>
+                                                                        <TextBlock Text="Switch Server" FontSize="15" VerticalAlignment="Center"/>
+                                                                        <mah:ToggleSwitch Margin="10 0 0 0" />
                                                                         <TextBlock Name="ftpServerSwitchVal" Text="FTP Server is not running." Foreground="Red" FontSize="15" VerticalAlignment="Center" Margin="-50 0 0 0"/>
                                                                     </DockPanel>
                                                                     <DockPanel Margin="20,15,20,0">
@@ -312,9 +315,9 @@
                                                                                 <ColumnDefinition Width="*"/>
                                                                                 <ColumnDefinition Width="100"/>
                                                                             </Grid.ColumnDefinitions>
-                                                                            <TextBlock Grid.Column="0" Text="Root Directory: " FontSize="15" Foreground="White"/>
+                                                                            <TextBlock Grid.Column="0" Text="Root Directory: " FontSize="15"/>
                                                                             <TextBox Grid.Column="1" Name="ftprootDir" Margin="10,0,0,0" FontSize="15" BorderThickness="1" Padding="5 2" Background="AliceBlue" Foreground="Black"/>
-                                                                            <Button Grid.Column="2" Name="ftprootDirSearch" Margin="10,0,0,0" >
+                                                                            <Button Grid.Column="2" Name="ftprootDirSearch" Margin="10,0,0,0" BorderBrush="Black" BorderThickness="1">
                                                                                 <materialDesign:PackIcon Kind="Search" Width="20" Height="20"/>
                                                                             </Button>
                                                                         </Grid>
@@ -327,18 +330,18 @@
                                                                                 <ColumnDefinition Width="100"/>
                                                                                 <ColumnDefinition Width="*"/>
                                                                             </Grid.ColumnDefinitions>
-                                                                            <TextBlock Grid.Column="0" Text="Port: " FontSize="15" HorizontalAlignment="Right" Foreground="White"/>
+                                                                            <TextBlock Grid.Column="0" Text="Port: " FontSize="15" HorizontalAlignment="Right" />
                                                                             <TextBox Grid.Column="1" Name="ftpPortNum" BorderThickness="1" FontSize="15" Background="AliceBlue" Padding="5 2" Foreground="Black"/>
 
-                                                                            <TextBlock Grid.Column="2" Text="Timeout: " FontSize="15" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="White"/>
+                                                                            <TextBlock Grid.Column="2" Text="Timeout: " FontSize="15" VerticalAlignment="Center" Margin="40,0,0,0" />
                                                                             <TextBox Grid.Column="3" Name="ftpTimeout" BorderThickness="1" Margin="10,0,0,0" FontSize="15" Background="AliceBlue" Padding="5 2" Foreground="Black"/>
                                                                         </Grid>
                                                                     </DockPanel>
                                                                     <DockPanel Margin="20,25,20,0">
-                                                                        <TextBlock Text="Server Options: " FontSize="15" Margin="0,0,10,0" Foreground="White"/>
-                                                                        <CheckBox Name="serverOpLocal" Content="Local User" FontSize="15" Margin="0,0,50,0" Foreground="White"/>
-                                                                        <CheckBox Name="serverOpMulti" Content="Multi User" FontSize="15" Margin="0,0,50,0" Foreground="White"/>
-                                                                        <CheckBox Name="serverOpRest" Content="Restricted Access" FontSize="15" Foreground="White"/>
+                                                                        <TextBlock Text="Server Options: " FontSize="15" Margin="0,0,10,0" />
+                                                                        <CheckBox Name="serverOpLocal" Content="Local User" FontSize="15" Margin="0,0,50,0" />
+                                                                        <CheckBox Name="serverOpMulti" Content="Multi User" FontSize="15" Margin="0,0,50,0" />
+                                                                        <CheckBox Name="serverOpRest" Content="Restricted Access" FontSize="15" />
                                                                     </DockPanel>
 
                                                                     <DockPanel Margin="0 30 20 20">
@@ -357,13 +360,13 @@
                                                                                         <ColumnDefinition Width="*"/>
                                                                                     </Grid.ColumnDefinitions>
                                                                                 </Grid>
-                                                                                <Button Grid.Column="0" Name="restDefFTP" Margin="10 0 0 0">
+                                                                                <Button Grid.Column="0" Name="restDefFTP" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
                                                                                     <DockPanel>
                                                                                         <materialDesign:PackIcon Kind="Restore" Width="20" Height="20" Margin="0,0,10,0"/>
                                                                                         <TextBlock Text="Restore Default" VerticalAlignment="Center" />
                                                                                     </DockPanel>
                                                                                 </Button>
-                                                                                <Button Grid.Column="1" Name="saveftpserver" Margin="10 0 0 0" >
+                                                                                <Button Grid.Column="1" Name="saveftpserver" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
                                                                                     <DockPanel>
                                                                                         <materialDesign:PackIcon Kind="ContentSave" Width="20" Height="20" Margin="0,0,10,0"/>
                                                                                         <TextBlock Text="Save Settings" VerticalAlignment="Center" FontWeight="Bold"/>

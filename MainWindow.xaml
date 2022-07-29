@@ -8,12 +8,13 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Fusion_v2"
         mc:Ignorable="d"
-        Title="Fusion Production Document Organizer" Height="800" Width="1500" WindowStartupLocation="CenterScreen">
+        Title="Fusion Production Document Organizer" Height="800" Width="1500" WindowStartupLocation="CenterScreen" FontFamily="Century Gothic">
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
             <Image Source="/Images/fusionlogo_outline.ico" />
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
+
     <Window.Background>
 
         <VisualBrush>
@@ -50,7 +51,7 @@
                         <Border HorizontalAlignment="Center" Background="White" Height="50" CornerRadius="10" Width="350">
                             <DockPanel>
                                 <materialDesign:PackIcon Kind="User" Foreground="Black" Width="30" Height="25" Margin="35,12,20,0" />
-                                <TextBox x:Name="txtUserName" Width="250" FontSize="16" Foreground="Black" VerticalContentAlignment="Center" CaretBrush="Black" Margin="-15,0,40,10" BorderThickness="0"/>
+                                <TextBox x:Name="txtUserName" Width="250" FontSize="16" Foreground="Black" VerticalContentAlignment="Center" CaretBrush="Black" Margin="-15,10,40,10" BorderThickness="0"/>
                                 <TextBlock IsHitTestVisible="False" Text="Username" FontSize="15" VerticalAlignment="Center" Margin="-280,0,0,0" Foreground="DarkGray">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
@@ -69,7 +70,7 @@
                         <Border HorizontalAlignment="Center" Background="White" Height="50" CornerRadius="10" Margin="0,10,0,0" Width="350">
                             <DockPanel HorizontalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Password" Foreground="Black" Width="30" Height="25" Margin="35,10,20,0" />
-                                <PasswordBox x:Name="txtPassword" Width="250" FontSize="16" VerticalContentAlignment="Center"  Foreground="Black" CaretBrush="Black" Margin="-15,0,40,10" BorderThickness="0" PasswordChanged="txtPassword_PasswordChanged"  >
+                                <PasswordBox x:Name="txtPassword" Width="250" FontSize="16" VerticalContentAlignment="Center"  Foreground="Black" CaretBrush="Black" Margin="-15,10,40,10" BorderThickness="0" PasswordChanged="txtPassword_PasswordChanged"  >
                                     
                                 </PasswordBox>
                                 <TextBlock Name="txtPassWatermark" Text="Password" FontSize="15" VerticalAlignment="Center" Margin="-280,0,0,0" Foreground="DarkGray"/>
@@ -80,7 +81,7 @@
 
                         <Button Width="350" Margin="0,15,0,0" HorizontalAlignment="Center" x:Name="login" Foreground="White" Height="40" BorderThickness="0" Click="Login_Click"  IsDefault="True">
                             <DockPanel>
-                                <TextBlock Text="SUBMIT" FontSize="15" Margin="10,0,5,0"/>
+                                <TextBlock Text="SUBMIT" FontSize="17" Margin="10,0,5,0" FontFamily="Bold"/>
                                 <materialDesign:PackIcon Kind="Login" Width="20" Height="20" HorizontalAlignment="Center"/>
                             </DockPanel>
                         </Button>
