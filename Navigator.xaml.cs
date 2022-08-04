@@ -45,51 +45,20 @@ namespace Fusion_v2
         {
             InitializeComponent();
             //loadDataQuery();
-            worker = new BackgroundWorker();
-            worker.DoWork += worker_DoWork;
-            worker.ProgressChanged += worker_ProgressChanged;
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
+            //worker = new BackgroundWorker();
+            //worker.DoWork += worker_DoWork;
+            //worker.ProgressChanged += worker_ProgressChanged;
+            //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            //worker.WorkerReportsProgress = true;
+            //worker.WorkerSupportsCancellation = true;
 
-            ProgressBar1.Maximum = 100;
-            worker.RunWorkerAsync();
+            //ProgressBar1.Maximum = 100;
+            //worker.RunWorkerAsync();
             dgProgramFiles.IsEnabled = false;
            
             FillComboBoxCntrlPgrmGrp(cmbBoxCntrlPgrm);
             FillComboBoxAssocCust(cmbBoxAssocCust);
-        }
 
-
-        //background worker
-        void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            for (int i = 1; i <= 10;  i++)
-            {
-                if (worker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-                    System.Threading.Thread.Sleep(100);
-                    worker.ReportProgress(i);
-                }
-            }
-        }
-        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            double percent = (e.ProgressPercentage * 10) / 100;
-
-            ProgressBar1.Value = Math.Round(percent);
-
-            //MessageBox.Show(e.ProgressPercentage.ToString());
-
-        }
-        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
             ProgressBar1.Visibility = Visibility.Hidden;
             Loading.Visibility = Visibility.Hidden;
             cbRemReqId.IsChecked = true;
@@ -101,7 +70,7 @@ namespace Fusion_v2
             cbFilter.Items.Add("Control Program Files");
             cbFilter.Items.Add("Reference ID");
             cbFilter.Items.Add("Remote Request ID");
-            
+
             cbFilter.SelectedIndex = 0;
             dgProgramFiles.ItemsSource = contProgram().DefaultView;
             dgProgramFiles.IsEnabled = true;
@@ -121,6 +90,68 @@ namespace Fusion_v2
             btnRemove.IsEnabled = true;
             btnEdit.IsEnabled = true;
         }
+
+
+        //background worker
+        //void worker_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    BackgroundWorker worker = sender as BackgroundWorker;
+        //    for (int i = 1; i <= 10;  i++)
+        //    {
+        //        if (worker.CancellationPending)
+        //        {
+        //            e.Cancel = true;
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            System.Threading.Thread.Sleep(100);
+        //            worker.ReportProgress(i);
+        //        }
+        //    }
+        //}
+        //void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        //{
+        //    double percent = (e.ProgressPercentage * 10) / 100;
+
+        //    ProgressBar1.Value = Math.Round(percent);
+
+        //    //MessageBox.Show(e.ProgressPercentage.ToString());
+
+        //}
+        //void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    ProgressBar1.Visibility = Visibility.Hidden;
+        //    Loading.Visibility = Visibility.Hidden;
+        //    cbRemReqId.IsChecked = true;
+        //    cbRefId.IsChecked = true;
+        //    cbCpg.IsChecked = true;
+        //    cbAssCus.IsChecked = true;
+        //    cbFileNm.IsChecked = true;
+        //    cbDesc.IsChecked = true;
+        //    cbFilter.Items.Add("Control Program Files");
+        //    cbFilter.Items.Add("Reference ID");
+        //    cbFilter.Items.Add("Remote Request ID");
+            
+        //    cbFilter.SelectedIndex = 0;
+        //    dgProgramFiles.ItemsSource = contProgram().DefaultView;
+        //    dgProgramFiles.IsEnabled = true;
+        //    dgProgramFiles.SelectedIndex = 0;
+
+        //    //dgProgramFiles.ScrollIntoView(dgProgramFiles.SelectedItem);
+        //    dgProgramFiles.Focus();
+
+        //    refID.ItemsSource = referenceID().DefaultView;
+        //    reqID.ItemsSource = requestID().DefaultView;
+
+        //    //MessageBox.Show(Properties.Settings.Default.dgLastSelected.ToString());
+        //    //LoadTextBoxesData();
+        //    btnSendToMach.IsEnabled = true;
+        //    btnRefresh.IsEnabled = true;
+        //    btnCreateNew.IsEnabled = true;
+        //    btnRemove.IsEnabled = true;
+        //    btnEdit.IsEnabled = true;
+        //}
         //end background worker
         
         private DataTable contProgram()

@@ -47,9 +47,10 @@
     </Window.Resources>
 
     <Window.Background>
-        <LinearGradientBrush>
-            <GradientStop Color="#FF2C6078" Offset="0.0" />
-            <GradientStop Color="#FF04161E" Offset="1.5" />
+        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+            <GradientStop Color="#FF252526" Offset="1.0"/>
+            <GradientStop Color="#FF003B67" Offset="0.5"/>
+            <GradientStop Color="#FF006CBC" Offset="0.0"/>
         </LinearGradientBrush>
     </Window.Background>
 
@@ -61,10 +62,12 @@
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="grid" Width="300"  RenderTransformOrigin="0.5,0.5" Grid.Column="0" >
-            <Grid.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="#FF0D5677" Offset="0.0" />
-                    <GradientStop Color="#FF04161E" Offset="1.5" />
+            <Grid.Background >
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF252526" Offset="0.0"/>
+                    <GradientStop Color="#FF003B67" Offset="0.5"/>
+                    <GradientStop Color="#FF006CBC" Offset="1.0"/>
+                    <GradientStop Color="#FF252526" Offset="1.5"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
@@ -75,15 +78,15 @@
                             <TreeViewItem.Header>
                                 <Grid Name="setUpGrid" Background="Transparent" MouseDown="setUpGrid_MouseDown" >
                                     <StackPanel Orientation="Horizontal"  Width="160">
-                                        <materialDesign:PackIcon Kind="SettingsVertical" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFF9D342" Name="setupIcon"/>
-                                        <TextBlock Text="Setup" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,0,4" FontSize="18" Foreground="#FFF9D342" FontWeight="Regular" Name="setUpTB"/>
+                                        <materialDesign:PackIcon Kind="SettingsVertical" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Name="setupIcon"/>
+                                        <TextBlock Text="Setup" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,0,4" FontSize="18" Foreground="White" FontWeight="Regular" Name="setUpTB"/>
                                     </StackPanel>
                                 </Grid>
                             </TreeViewItem.Header>
 
                             <TreeViewItem Margin="16 0 0 0">
                                 <TreeViewItem.Header>
-                                    <Grid Name="setUpLicence" Background="Transparent" >
+                                    <Grid Name="setUpLicence" Background="Transparent" MouseDown="setUpLicence_MouseDown" >
                                         <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
                                             <materialDesign:PackIcon Kind="DriversLicense" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                             <TextBlock Text="License" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
@@ -116,7 +119,7 @@
 
                             <TreeViewItem Margin="16 0 0 0">
                                 <TreeViewItem.Header>
-                                    <Grid Name="dncEvents" Background="Transparent" >
+                                    <Grid Name="dncEvents" Background="Transparent" MouseDown="dncEvents_MouseDown" >
                                         <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
                                             <materialDesign:PackIcon Kind="Events" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                             <TextBlock Text="DNC Events" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
@@ -127,7 +130,7 @@
 
                             <TreeViewItem Margin="16 0 0 0">
                                 <TreeViewItem.Header>
-                                    <Grid Name="Users" Background="Transparent" >
+                                    <Grid Name="Users" Background="Transparent" MouseDown="Users_MouseDown" >
                                         <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
                                             <materialDesign:PackIcon Kind="Users" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                             <TextBlock Text="Users" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
@@ -356,7 +359,7 @@
 
         <Grid Grid.Column="1">
 
-            <Button x:Name="button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,3,0,0" Style="{StaticResource MaterialDesignFlatDarkButton}" Click="Button_Click" Foreground="#FFF9D342" Width="50" >
+            <Button x:Name="button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0" Style="{StaticResource MaterialDesignFlatDarkButton}" Click="Button_Click" Foreground="#FFF9D342" Width="50" >
 
 
                 <DynamicResource ResourceKey="close"/>

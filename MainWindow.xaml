@@ -35,7 +35,7 @@
 
                 <Border Width="600" Height="400" CornerRadius="10">
                     <Border.Background>
-                        <SolidColorBrush Color="Black" Opacity="0.3"></SolidColorBrush>
+                        <SolidColorBrush Color="Black" Opacity="0.5"></SolidColorBrush>
                     </Border.Background>
                 </Border>
 

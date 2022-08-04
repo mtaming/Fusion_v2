@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      Width="1500"
-      Height="800" 
+      Width="1096"
+      Height="708" 
       Title="Navigator"
       FontFamily="Century Gothic">
 
@@ -18,7 +18,13 @@
     </Page.Background>
 
     <Page.Resources>
-
+        <Style x:Key="{x:Type DataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontFamily" Value="Tahoma" />
+        </Style>
         <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -36,7 +42,7 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#90AFC5"/>
+                    <Setter Property="Background" Value="#FF57A6E6"/>
                     <Setter Property="BorderBrush" Value="Transparent" />
                 </Trigger>
             </Style.Triggers>
@@ -116,7 +122,7 @@
 
 
                 <!-- -->
-                <Border BorderThickness="3" BorderBrush="#FFFFF0B7" Margin="5,60,5,80" CornerRadius="10" >
+                <Border BorderThickness="3" BorderBrush="#FFFFF0B7" Margin="5,60,5,80" CornerRadius="10" Background="GhostWhite">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="521*"/>
@@ -131,9 +137,9 @@
 
                             <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="2" CornerRadius="10,0,0,0">
                                 <Border.Background>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#FF277193" Offset="0.0" />
-                                        <GradientStop Color="#FF074968" Offset="0.8" />
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FF205E8D" Offset="0.0" />
+                                        <GradientStop Color="#FF003B67" Offset="0.8" />
                                     </LinearGradientBrush>
                                 </Border.Background>
                                 <Grid>
@@ -234,9 +240,9 @@
 
                             <Border Grid.Row="1" BorderBrush="Transparent" BorderThickness="2" CornerRadius="0,0,0,10" >
                                 <Border.Background>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#FF277193" Offset="0.0" />
-                                        <GradientStop Color="#FF074968" Offset="0.8" />
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FF205E8D" Offset="0.0" />
+                                        <GradientStop Color="#FF003B67" Offset="0.8" />
                                     </LinearGradientBrush>
                                 </Border.Background>
                                 <Grid>
@@ -264,9 +270,9 @@
                         <Grid Grid.Column="1">
                             <Border BorderBrush="Transparent" BorderThickness="2" CornerRadius="0,10,10,0" >
                                 <Border.Background>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#FF277193" Offset="0.0" />
-                                        <GradientStop Color="#FF074968" Offset="0.8" />
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FF205E8D" Offset="0.0" />
+                                        <GradientStop Color="#FF003B67" Offset="0.8" />
                                     </LinearGradientBrush>
                                 </Border.Background>
                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -521,9 +527,9 @@
                 <ScrollViewer>
                     <Grid >
 
-                        <StackPanel VerticalAlignment="Center" Margin="200 20">
-                            <Border Name="addCtrlProg" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="3"  Background="#FF063847" Visibility="Visible">
-                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Width="Auto" >
+                        <StackPanel VerticalAlignment="Center" Margin="150 20">
+                            <Border Name="addCtrlProg" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="3"  Background="#FF2D4E8C" Visibility="Visible">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                     <StackPanel>
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -733,8 +739,8 @@
                 <ScrollViewer>
                     <Grid>
 
-                        <StackPanel VerticalAlignment="Center" Margin="200 20">
-                            <Border Name="editCtrlProg" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="2"  Background="#FF063847" Visibility="Visible">
+                        <StackPanel VerticalAlignment="Center" Margin="150 20">
+                            <Border Name="editCtrlProg" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="2"  Background="#FF2D4E8C" Visibility="Visible">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                     <StackPanel>
                                         <Grid>
@@ -811,7 +817,7 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
 
-                                                    <DockPanel Grid.Column="0" Margin="5">
+                                                    <DockPanel Grid.Column="0" Margin="5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                                                         <Border  CornerRadius="0,0,0,20"   VerticalAlignment="Top">
                                                             <StackPanel>
                                                                 <Label Content="Remote Request ID Creation Rules" FontWeight="Bold" FontSize="12" Foreground="White"/>
@@ -875,7 +881,7 @@
                                                         </Border>
                                                     </DockPanel>
 
-                                                    <DockPanel Grid.Column="1" Margin="5">
+                                                    <DockPanel Grid.Column="1" Margin="5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                                                         <Border BorderThickness="3" CornerRadius="0,0,20,0"  VerticalAlignment="Top">
                                                             <StackPanel>
                                                                 <StackPanel>
@@ -883,7 +889,7 @@
                                                                     <ComboBox Name="cbCPEdit" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="10 5 5 5" ToolTip="Control Program Group" Background="WhiteSmoke" BorderThickness="0" Height="25" Margin="10 2 10 0"/>
                                                                     <Label Content="Customers Group" FontWeight="Bold" FontSize="12" Foreground="White"/>
                                                                     <ComboBox Name="cbCustEdit" FontFamily="Trebuchet" FontWeight="DemiBold" Padding="10 5 5 5" ToolTip="Associated Customers" Background="WhiteSmoke" BorderThickness="0" Height="25" Margin="10 2 10 0"/>
-                                                                    <Label Content="Revision" FontWeight="Bold" FontSize="12"/>
+                                                                    <Label Content="Revision" FontWeight="Bold" FontSize="12" Foreground="White"/>
                                                                     <TextBox Name="txtRevEdit" FontSize="14" BorderThickness="1" Background="WhiteSmoke" Padding="5,5" TextWrapping="Wrap"  Margin="10 2 10 0"/>
                                                                     <Label Content="Description" FontWeight="Bold" FontSize="12" Foreground="White"/>
                                                                     <TextBox Name="txtDescEdit" FontSize="12" BorderThickness="1" Background="WhiteSmoke" Padding="5,5" TextWrapping="Wrap"  Margin="10 2 10 0" Height="80"/>
@@ -939,7 +945,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" >
-                    <Border Name="noPgrmPointer" BorderBrush="#FFFFF0B7" BorderThickness="3"   Width="500" Height="120" Visibility="Visible" Background="#FF063847" CornerRadius="10">
+                    <Border Name="noPgrmPointer" BorderBrush="#FFFFF0B7" BorderThickness="3"   Width="500" Height="120" Visibility="Visible" Background="#FF2D4E8C" CornerRadius="10">
                         <StackPanel>
                             <DockPanel HorizontalAlignment="Center" Margin="0 10 0 0">
                                 <Label Content="Program Specified by pointer does not exist." FontSize="15" FontWeight="DemiBold" Foreground="White"/>
@@ -984,12 +990,12 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <Border Name="cntrlPgrmFilter" BorderBrush="#FFFFF0B7" BorderThickness="3" Background="#FF063847" Width="500" Height="100" CornerRadius="10" Visibility="Collapsed">
-                        
+                    <Border Name="cntrlPgrmFilter" BorderBrush="#FFFFF0B7" BorderThickness="3" Background="#FF2D4E8C" Width="500" Height="100" CornerRadius="10" Visibility="Collapsed">
+
                         <StackPanel Orientation="Vertical">
                             <DockPanel HorizontalAlignment="Left">
                                 <Label Content="Control Program Group" FontSize="17" FontWeight="DemiBold" Margin="25,5,0,0" Foreground="White"/>
-                                <Button Name="cntrlPgrmClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="240,0,0,0" BorderThickness="0" Foreground="Red" Click="cntrlPgrmClose_Click">
+                                <Button Name="cntrlPgrmClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="240,0,0,0" BorderThickness="0" Foreground="Red" FontWeight="Bold" Click="cntrlPgrmClose_Click">
                                     <Grid Margin="-10,-5">
                                         <materialDesign:PackIcon Kind="Close" Width="17" Height="17"/>
                                     </Grid>
@@ -1009,11 +1015,11 @@
                 </Grid>
 
                 <Grid Grid.Column="0">
-                    <Border Name="assocCustFilter" BorderBrush="#FFFFF0B7" BorderThickness="2" Background="#FF063847" Width="500" Height="100" CornerRadius="10" Visibility="Collapsed">
+                    <Border Name="assocCustFilter" BorderBrush="#FFFFF0B7" BorderThickness="2" Background="#FF2D4E8C" Width="500" Height="100" CornerRadius="10" Visibility="Collapsed">
                         <StackPanel Orientation="Vertical">
                             <DockPanel HorizontalAlignment="Left">
                                 <Label Content="Associated Customers" FontSize="17" FontWeight="DemiBold" Margin="25,5,0,0" Foreground="White"/>
-                                <Button Name="assocCustClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="250,0,0,0" BorderThickness="0" Foreground="Red" Click="assocCustClose_Click">
+                                <Button Name="assocCustClose" Height="30" Width="30" ToolTip="Close" Background="Transparent" Margin="250,0,0,0" BorderThickness="0" Foreground="Red" FontWeight="Bold" Click="assocCustClose_Click">
                                     <Grid Margin="-10,-5">
                                         <materialDesign:PackIcon Kind="Close" Width="17" Height="17"/>
                                     </Grid>

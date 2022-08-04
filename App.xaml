@@ -20,13 +20,13 @@
 
 
             <!--PRIMARY -->
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFE6BD51"/>
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FF0F9EE8"/>
             <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#333333"/>
 
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD59A00"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FF0070CB"/>
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
 
-            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FF745401"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FF031D32"/>
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
 
             <!--ACCENT-->

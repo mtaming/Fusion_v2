@@ -106,6 +106,15 @@
     <Compile Include="SetupApplication.xaml.cs">
       <DependentUpon>SetupApplication.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SetupDNCEvents.xaml.cs">
+      <DependentUpon>SetupDNCEvents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupLicense.xaml.cs">
+      <DependentUpon>SetupLicense.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupUsers.xaml.cs">
+      <DependentUpon>SetupUsers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlMenuItem.xaml.cs">
       <DependentUpon>UserControlMenuItem.xaml</DependentUpon>
     </Compile>
@@ -158,6 +167,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SetupApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupDNCEvents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupLicense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,6 +241,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bg6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\nexas america.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

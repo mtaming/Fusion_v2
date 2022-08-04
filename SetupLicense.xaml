@@ -1,0 +1,153 @@
+﻿<Page x:Class="Fusion_v2.SetupLicense"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Fusion_v2"
+      mc:Ignorable="d" 
+      Width="1096"
+      Height="708" 
+      Title="SetupLicense"
+      FontFamily="Century Gothic">
+
+    <Grid>
+        <Grid Name="MainGrid">
+            <Grid Name="LicenseGrid">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Border BorderBrush="Transparent" BorderThickness="2" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Grid>
+                            <StackPanel>
+                                <Border Name="licenceBorder" CornerRadius="10" BorderThickness="3" BorderBrush="#FFFFF0B7">
+                                    <Grid>
+                                        <Border CornerRadius="10" Margin="5" Background="AliceBlue">
+                                            <StackPanel>
+                                                <Image Source="Images/latestlogo.png" Height="180" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                                                <DockPanel HorizontalAlignment="Center" Margin="0 -15 0 0">
+                                                    <TextBlock Text="Version " VerticalAlignment="Top" FontSize="15" Margin="0,-40,0,0"/>
+                                                    <TextBlock Text="0.0" Name="versionNum" VerticalAlignment="Top" FontSize="15" Margin="0,-40,0,0"/>
+                                                </DockPanel>
+                                                <Border CornerRadius="10" Margin="10" BorderThickness="3" BorderBrush="Black">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                            <GradientStop Color="#FF205E8D" Offset="0.0" />
+                                                            <GradientStop Color="#FF003B67" Offset="0.8" />
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                    <StackPanel>
+                                                        <DockPanel Margin="20,20,10,10" Height="30" VerticalAlignment="Top">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="150"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Grid.Column="0" Text="Current License Key:  " FontSize="15" Margin="0,6,0,0" FontWeight="DemiBold" Foreground="White"/>
+                                                                <TextBox Grid.Column="1" Name="licenseKeytb1" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5"  IsReadOnly="True" />
+                                                                <TextBox Grid.Column="2" Name="licenseKeytb2" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" IsReadOnly="True" />
+                                                                <TextBox Grid.Column="3" Name="licenseKeytb3" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" IsReadOnly="True" />
+                                                                <TextBox Grid.Column="4" Name="licenseKeytb4" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" IsReadOnly="True" />
+                                                                <TextBox Grid.Column="5" Name="licenseKeytb5" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5"  IsReadOnly="True" />
+                                                                <TextBox Grid.Column="6" Name="licenseKeytb6" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" IsReadOnly="True" />
+                                                                <TextBox Grid.Column="7" Name="licenseKeytb7" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="2" IsReadOnly="True" />
+                                                            </Grid>
+                                                        </DockPanel>
+
+                                                        <DockPanel Margin="35,10,10,20" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                                                            <Button Name="activateLicenseKey" Width="150" Height="25" Margin="20,-7,5,0" IsEnabled="False">
+                                                                <TextBlock Text="Activate"/>
+                                                            </Button>
+                                                            <Button Name="clearLicenseKey" Width="150" Height="25" Margin="0,-7,0,0" HorizontalAlignment="Right" IsEnabled="False">
+                                                                <TextBlock Text="Clear All"/>
+                                                            </Button>
+                                                        </DockPanel>
+
+                                                        <DockPanel Margin="20,0,0,0" Height="30" VerticalAlignment="Top">
+                                                            <TextBlock Text="Version Range:" FontSize="15" Margin="0,6,45,0" FontWeight="DemiBold" Foreground="White"/>
+                                                            <TextBlock Name="versrange" Text="-------------" FontSize="15" Margin="0,6,0,0" Foreground="White"/>
+                                                        </DockPanel>
+
+                                                        <DockPanel Margin="20 0 0 0" >
+                                                            <TextBlock Text="Base License:" FontSize="15" Margin="0,6,56,0" FontWeight="DemiBold" Foreground="White"/>
+                                                            <TextBlock Name="baseLicense" Text="-------------" FontSize="15" Margin="0,6,0,0" Foreground="White"/>
+                                                        </DockPanel>
+
+                                                        <DockPanel Margin="20 20 0 10" Width="800" HorizontalAlignment="Left">
+                                                            <StackPanel Width="200">
+                                                                <TextBlock Text="Machine Licenses:" FontSize="15" Margin="0,6,0,0" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="Level 1" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="Level 2" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="Level 3" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                            </StackPanel>
+                                                            <StackPanel Margin="100 0 0 0" Width="200">
+                                                                <TextBlock Text="Available:" FontSize="15" Margin="0,6,0,0" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="-----" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="-----" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="-----" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                            </StackPanel>
+                                                            <StackPanel Margin="0 0 0 0" Width="200">
+                                                                <TextBlock Text="In Use:" FontSize="15" Margin="0,6,0,0" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="-----" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="-----" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                                <TextBlock Text="-----" FontSize="14" Margin="0,4,0,0" Foreground="White" HorizontalAlignment="Center"/>
+                                                            </StackPanel>
+                                                        </DockPanel>
+
+
+
+                                                    </StackPanel>
+
+                                                </Border>
+                                                <DockPanel Margin="20,20,10,10" Height="30" VerticalAlignment="Top">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Text="New License Key:  " FontSize="15" Margin="0,6,0,0" FontWeight="DemiBold" Foreground="Black"/>
+                                                        <TextBox Grid.Column="1" Name="newlicenseKeytb1" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" />
+                                                        <TextBox Grid.Column="2" Name="newlicenseKeytb2" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" />
+                                                        <TextBox Grid.Column="3" Name="newlicenseKeytb3" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" />
+                                                        <TextBox Grid.Column="4" Name="newlicenseKeytb4" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" />
+                                                        <TextBox Grid.Column="5" Name="newlicenseKeytb5" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" />
+                                                        <TextBox Grid.Column="6" Name="newlicenseKeytb6" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="5" />
+                                                        <TextBox Grid.Column="7" Name="newlicenseKeytb7" Background="White" BorderThickness="1" Height="25" VerticalAlignment="Top" Margin="0,0,5,0" FontSize="15" HorizontalContentAlignment="Center" MaxLength="2"/>
+                                                    </Grid>
+                                                </DockPanel>
+
+                                                <DockPanel Margin="35,25,10,20" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                                    <Button Name="activateLicenseKeyNew" Width="150" Height="30" Margin="20,-7,5,0">
+                                                        <TextBlock Text="Activate"/>
+                                                    </Button>
+                                                    <Button Name="clearLicenseKeyNew" Width="150" Height="30" Margin="0,-7,0,0" HorizontalAlignment="Right">
+                                                        <TextBlock Text="Clear All"/>
+                                                    </Button>
+                                                </DockPanel>
+
+                                                <TextBlock Text="a product of" FontSize="8" Margin="35 -98 0 0" Height="10" Width="50" HorizontalAlignment="Left"/>
+                                                <DockPanel HorizontalAlignment="Left" Margin="10 -50 0 10" >
+                                                    <Image Source="Images/nexas america.png" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                                                </DockPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

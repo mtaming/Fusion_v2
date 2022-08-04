@@ -26,6 +26,8 @@ namespace Fusion_v2.LandingPages
             {
                 Navigator np = new Navigator();
                 PageFrame.Content = np.Content;
+                cpIcon.Foreground = Brushes.Khaki;
+                ctrlPgrmTB.Foreground = Brushes.Khaki;
             }
             else if (Properties.Settings.Default.defaultHome == "IFM")
             {
@@ -103,6 +105,9 @@ namespace Fusion_v2.LandingPages
         }
        private void setUpGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            SetupApplication sa = new SetupApplication();
+            PageFrame.Content = sa.Content;
+            title.Text = "Setup | Application";
             setUp.IsExpanded = true;
             cntrlProgram.IsExpanded = false;
             Process.IsExpanded = false;
@@ -169,8 +174,7 @@ namespace Fusion_v2.LandingPages
             
             Navigator n = new Navigator();
             PageFrame.Content = n.Content;
-            this.Title = "Control Program Navigator";
-            title.Text = "Navigator";
+            title.Text = "Control Programs | Navigator";
 
             setUp.IsExpanded = false;
             cntrlProgram.IsExpanded = true;
@@ -378,6 +382,27 @@ namespace Fusion_v2.LandingPages
             Service sv = new Service();
             PageFrame.Content = sv.Content;
             title.Text = "Setup | Service";
+        }
+
+        private void dncEvents_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SetupDNCEvents dnc = new SetupDNCEvents();
+            PageFrame.Content = dnc.Content;
+            title.Text = "Setup | DNC Events";
+        }
+
+        private void Users_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SetupUsers user = new SetupUsers();
+            PageFrame.Content = user.Content;
+            title.Text = "Setup | Users";
+        }
+
+        private void setUpLicence_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SetupLicense license = new SetupLicense();
+            PageFrame.Content = license.Content;
+            title.Text = "Setup | License";
         }
     }
 }
