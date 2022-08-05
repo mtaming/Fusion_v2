@@ -252,7 +252,7 @@
 
                             <TreeViewItem Margin="16 0 0 0">
                                 <TreeViewItem.Header>
-                                    <Grid Name="processCusMngr" Background="Transparent" >
+                                    <Grid Name="processCusMngr" Background="Transparent" MouseDown="processCusMngr_MouseDown" >
                                         <StackPanel Orientation="Horizontal" Width="200" Margin="30 0 0 0">
                                             <materialDesign:PackIcon Kind="CustomerService" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                             <TextBlock Text="Customer Manager" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White"/>

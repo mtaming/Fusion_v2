@@ -298,10 +298,83 @@ namespace Fusion_v2
                 levelchoice = 1;
             }
 
-            string encPass = encryptProcess(passwordtxt.Password);
+            string strChkItems = "";
+            string strSearchPerm = "";
+            if (cbCtrlPgrmAddEditRem.IsChecked == true)
+            {
+                strChkItems += "1-";
+            }
+            if (cbIFM.IsChecked == true)
+            {
+                strChkItems += "2-";
+            }
+            if (cbPartOpCus.IsChecked == true)
+            {
+                strChkItems += "3-";
+            }
+            if (cbMachSet.IsChecked == true)
+            {
+                strChkItems += "4-";
+            }
+            if (cbAppSerSet.IsChecked == true)
+            {
+                strChkItems += "5-";
+            }
+            if (cbLockUnlockPer.IsChecked == true)
+            {
+                strChkItems += "6-";
+            }
+            if (cbAllowCtrlPgrmEditing.IsChecked == true)
+            {
+                strChkItems += "7-";
+            }
+            if (cbAllowIFEdit.IsChecked == true)
+            {
+                strChkItems += "8-";
+            }
+            if (cbAllowSendFile.IsChecked == true)
+            {
+                strChkItems += "9-";
+            }
+            if (cbShowCtrlPgrmFnamePath.IsChecked == true)
+            {
+                strChkItems += "A-";
+            }
+            if (cbAllowCPSearching.IsChecked == true)
+            {
+                strChkItems += "B";
+            }
+
+            if (cbRemReqId.IsChecked == true)
+            {
+                strSearchPerm += "C1";
+            }
+            if (cbRefId.IsChecked == true)
+            {
+                strSearchPerm += "-C2";
+            }
+            if (cbCtrlPgrmGroup.IsChecked == true)
+            {
+                strSearchPerm += "-C3";
+            }
+            if (cbAssocCust.IsChecked == true)
+            {
+                strSearchPerm += "-C4";
+            }
+            if (cbFilename.IsChecked == true)
+            {
+                strSearchPerm += "-C5";
+            }
+            if (cbDesc.IsChecked == true)
+            {
+                strSearchPerm += "-C6";
+            }
+
+            string passToEnc = passwordtxt.Password;
+            string encPass = encryptProcess(passToEnc.ToString());
             SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
             sqlCon.Open();
-            String query = "INSERT INTO Users (Username, Password, fkUserLevel, Email) VALUES ('" + usernametxt.Text + "', '" + encPass + "', '" + levelchoice + "', '" + emailtxt.Text + "')";
+            String query = "INSERT INTO Users (Username, Password, fkUserLevel, Email, Permissions1, SearchPermission) VALUES ('" + usernametxt.Text + "', '" + encPass + "', '" + levelchoice + "', '" + emailtxt.Text + "', '"+strChkItems+"', '"+strSearchPerm+"')";
             SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
             sqlCmd.ExecuteNonQuery();
 
@@ -318,6 +391,10 @@ namespace Fusion_v2
             if (!isValidEmail && email != "")
             {
                 MessageBox.Show("Please enter a valid email address.", "User Manager", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (cbAllowCPSearching.IsChecked == true && cbRemReqId.IsChecked == false && cbRefId.IsChecked == false && cbCtrlPgrmGroup.IsChecked == false && cbAssocCust.IsChecked == false && cbFilename.IsChecked == false && cbDesc.IsChecked == false)
+            {
+                MessageBox.Show("Please select at least one Search Permission.", "User Manager", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -350,11 +427,27 @@ namespace Fusion_v2
             passwordtxt.Clear();
             ConPasswordTxt.Clear();
             emailtxt.Clear();
-            lvlcombo.Text = "";
 
             cbCtrlPgrmAddEditRem.IsChecked = false;
+            cbIFM.IsChecked = false;
+            cbPartOpCus.IsChecked = false;
+            cbMachSet.IsChecked = false;
+            cbAppSerSet.IsChecked = false;
+            cbLockUnlockPer.IsEnabled = false;
+            cbLockUnlockPer.IsChecked = false;
             cbAllowCtrlPgrmEditing.IsChecked = false;
+            cbAllowIFEdit.IsChecked = false;
+            cbAllowSendFile.IsChecked = false;
+            cbShowCtrlPgrmFnamePath.IsChecked = false;
             cbAllowCPSearching.IsChecked = false;
+
+            cbRemReqId.IsEnabled = false;
+            cbRefId.IsEnabled = false;
+            cbCtrlPgrmGroup.IsEnabled = false;
+            cbAssocCust.IsEnabled = false;
+            cbFilename.IsEnabled = false;
+            cbDesc.IsEnabled = false;
+
             cbRemReqId.IsChecked = false;
             cbRefId.IsChecked = false;
             cbCtrlPgrmGroup.IsChecked = false;
@@ -441,9 +534,10 @@ namespace Fusion_v2
             }
 
             string permissions = "";
+            string searchPer = "";
             SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
             sqlCon.Open();
-            String query = "SELECT Permissions1 FROM Users WHERE ID = '" + userhiddenid.Text + "' ";
+            String query = "SELECT Permissions1, SearchPermission FROM Users WHERE ID = '" + userhiddenid.Text + "' ";
             SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
             var dr = sqlCmd.ExecuteReader();
 
@@ -452,14 +546,81 @@ namespace Fusion_v2
                 while (dr.Read())
                 {
                     permissions = dr["Permissions1"].ToString();
+                    searchPer = dr["SearchPermission"].ToString();
                     if (permissions.Contains("1"))
                     {
                         CbCtrlPgrmAddEditRem_Edit.IsChecked = true;
                     }
+                    if (permissions.Contains("2"))
+                    {
+                        cbIFM_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("3"))
+                    {
+                        cbPartOpCus_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("4"))
+                    {
+                        cbMachSet_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("5"))
+                    {
+                        cbAppSerSet_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("6"))
+                    {
+                        cbLockUnlockPer_Edit.IsEnabled = true;
+                        cbLockUnlockPer_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("7"))
+                    {
+                        cbAllowCtrlPgrmEditing_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("8"))
+                    {
+                        cbAllowIFMEditing_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("9"))
+                    {
+                        cbAllowSendFile_Edit.IsChecked = true;
+                    }
+                    if (permissions.Contains("A"))
+                    {
+                        cbShowCPFilenamePath_Edit.IsChecked = true;
+                    }
                     if (permissions.Contains("B"))
                     {
                         cbAllowCPSearch_Edit.IsChecked = true;
-
+                        cbRemReqId_Edit.IsEnabled = true;
+                        cbRefId_Edit.IsEnabled = true;
+                        cbCtrlPgrmGroup_Edit.IsEnabled = true;
+                        cbAssCust_Edit.IsEnabled = true;
+                        cbFilename_Edit.IsEnabled = true;
+                        cbDesc_Edit.IsEnabled = true;
+                        if (searchPer.Contains("C1"))
+                        {
+                            cbRemReqId_Edit.IsChecked = true;
+                        }
+                        if (searchPer.Contains("C2"))
+                        {
+                            cbRefId_Edit.IsChecked = true;
+                        }
+                        if (searchPer.Contains("C3"))
+                        {
+                            cbCtrlPgrmGroup_Edit.IsChecked = true;
+                        }
+                        if (searchPer.Contains("C4"))
+                        {
+                            cbAssCust_Edit.IsChecked = true;
+                        }
+                        if (searchPer.Contains("C5"))
+                        {
+                            cbFilename_Edit.IsChecked = true;
+                        }
+                        if (searchPer.Contains("C6"))
+                        {
+                            cbDesc_Edit.IsChecked = true;
+                        }
                     }
                 }
             }
@@ -470,19 +631,10 @@ namespace Fusion_v2
         private void closeedituserBtn_Click(object sender, RoutedEventArgs e)
         {
             EditUserGrid.Visibility = Visibility.Collapsed;
-            CbCtrlPgrmAddEditRem_Edit.IsChecked = false;
-            cbAllowCPSearch_Edit.IsChecked = false;
-            //cbAllowCPSearching.IsChecked = false;
-            //cbRemReqId.IsChecked = false;
-            //cbRefId.IsChecked = false;
-            //cbCtrlPgrmGroup.IsChecked = false;
-            //cbAssocCust.IsChecked = false;
-            //cbFilename.IsChecked = false;
-            //cbDesc.IsChecked = false;
+            clearEdit();
         }
         private void EditUserQuery()
         {
-            
             //MessageBox.Show("Update successful.");
             int levelchoice;
             if (editlevel.Text == "User")
@@ -494,16 +646,14 @@ namespace Fusion_v2
                 levelchoice = 1;
             }
 
-          
-                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-                sqlCon.Open();
-                String query = "UPDATE Users SET fkUserLevel = '" + levelchoice + "', Email = '" + editemail.Text + "' " +  " WHERE ID = '" + userhiddenid.Text + "' ";
-                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                sqlCmd.ExecuteNonQuery();
+            SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+            String query = "UPDATE Users SET fkUserLevel = '" + levelchoice + "', Email = '" + editemail.Text + "' " +  "  WHERE ID = '" + userhiddenid.Text + "' ";
+            SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+            sqlCmd.ExecuteNonQuery();
 
-                MessageBox.Show("'" + userhiddenuname.Text + "' was successfully updated.", "User Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-                sqlCon.Close();
-            
+            MessageBox.Show("'" + userhiddenuname.Text + "' was successfully updated.", "User Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+            sqlCon.Close();
         }
 
         private void BtnUserUpdate_Click(object sender, RoutedEventArgs e)
@@ -521,7 +671,38 @@ namespace Fusion_v2
                 EditUserGrid.Visibility = Visibility.Collapsed;
                 EditUserQuery();
                 UserQuery();
+                clearEdit();
             }
+        }
+
+        private void clearEdit()
+        {
+            CbCtrlPgrmAddEditRem_Edit.IsChecked = false;
+            cbIFM_Edit.IsChecked = false;
+            cbPartOpCus_Edit.IsChecked = false;
+            cbMachSet_Edit.IsChecked = false;
+            cbAppSerSet_Edit.IsChecked = false;
+            cbLockUnlockPer_Edit.IsEnabled = false;
+            cbLockUnlockPer_Edit.IsChecked = false;
+            cbAllowCtrlPgrmEditing_Edit.IsChecked = false;
+            cbAllowIFMEditing_Edit.IsChecked = false;
+            cbAllowSendFile_Edit.IsChecked = false;
+            cbShowCPFilenamePath_Edit.IsChecked = false;
+            cbAllowCPSearch_Edit.IsChecked = false;
+
+            cbRemReqId_Edit.IsEnabled = false;
+            cbRefId_Edit.IsEnabled = false;
+            cbCtrlPgrmGroup_Edit.IsEnabled = false;
+            cbAssCust_Edit.IsEnabled = false;
+            cbFilename_Edit.IsEnabled = false;
+            cbDesc_Edit.IsEnabled = false;
+
+            cbRemReqId_Edit.IsChecked = false;
+            cbRefId_Edit.IsChecked = false;
+            cbCtrlPgrmGroup_Edit.IsChecked = false;
+            cbAssCust_Edit.IsChecked = false;
+            cbFilename_Edit.IsChecked = false;
+            cbDesc_Edit.IsChecked = false;
         }
 
         private void currentuserpassword_PasswordChanged(object sender, RoutedEventArgs e)

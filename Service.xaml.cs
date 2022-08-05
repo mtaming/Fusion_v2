@@ -25,6 +25,7 @@ namespace Fusion_v2
         public Service()
         {
             InitializeComponent();
+            LoadData();
         }
 
         public class ftpuserlistsett
@@ -60,6 +61,45 @@ namespace Fusion_v2
         }
 
         //********************************** PROPERTIES **********************************\\
+        private void LoadData()
+        {
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                String query2 = "SELECT * FROM WindowServiceConfiguration";
+                SqlCommand sqlCmd2 = new SqlCommand(query2, sqlCon);
+                var reader2 = sqlCmd2.ExecuteReader();
+
+                if (reader2.HasRows)
+                {
+                    while (reader2.Read())
+                    {
+                        string hostnm = reader2["HostName"].ToString();
+                        string hostip = reader2["HostIPResolve"].ToString();
+                        string logsfl = reader2["LogFilesPath"].ToString();
+                        string workfl = reader2["WorkingFldr"].ToString();
+                        string hostpt = reader2["HostPort"].ToString();
+                        string orionp = reader2["OrionPort"].ToString();
+
+                        servername.Text = hostnm;
+                        serverip.Text = hostip;
+                        logFilesFolder.Text = logsfl;
+                        workingFolder.Text = workfl;
+                        hostport.Text = hostpt;
+                        orionport.Text = orionp;
+                    }
+                }
+
+                reader2.Close();
+                sqlCon.Close();
+            }
+            catch(Exception ex) { ex.ToString(); }
+
+            //service version
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(@"C:\Program Files (x86)\Nexas America\Fusion Service\Fusion Communication Window Service.exe");
+            serviceVersion.Text = myFileVersionInfo.FileVersion.ToString();
+        }
         private void BtnOpenServices_Click(object sender, RoutedEventArgs e)
         {
             

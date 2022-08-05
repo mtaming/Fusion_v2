@@ -286,16 +286,6 @@ namespace Fusion_v2
             ofd.Filter = "Executable files (*.exe)|*.exe";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string selectedDirectory = System.IO.Path.GetDirectoryName(ofd.FileName);
-                //OpenFileDialog ofd = new OpenFileDialog();
-                //ofd.InitialDirectory = @"C:\Program Files(x86)\ExamDiff";
-                //ofd.Filter = "Executable files (*.exe)|*.exe";
-
-                //if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                //{
-                //    TxtBoxCompareProgLocal.Text = ofd.FileName;
-                //}
-
                 TxtBoxCompareProgLocal.Text = ofd.FileName;
             }
         }

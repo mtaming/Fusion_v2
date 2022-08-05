@@ -85,21 +85,21 @@
                                                 </DataGrid>
 
                                                 <DockPanel HorizontalAlignment="Right" Margin="0,0,20,10">
-                                                    <Button Name="createUserBtn" Margin="10,0,0,0" Width="175" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" Click="createUserBtn_Click">
+                                                    <Button Name="createUserBtn" Margin="10,0,0,0" Width="175" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" ToolTip="Add new user" Click="createUserBtn_Click">
                                                         <DockPanel>
                                                             <materialDesign:PackIcon Kind="UserAdd" Width="20" Height="20" VerticalAlignment="Center"/>
                                                             <Label Content="Create New User" Foreground="White"/>
                                                         </DockPanel>
                                                     </Button>
 
-                                                    <Button Name="editUserBtn" Margin="10,0,0,0" Width="150" HorizontalAlignment="Left" Foreground="White" BorderBrush="Black" BorderThickness="1" Click="editUserBtn_Click">
+                                                    <Button Name="editUserBtn" Margin="10,0,0,0" Width="150" HorizontalAlignment="Left" Foreground="White" BorderBrush="Black" BorderThickness="1" ToolTip="Edit the selected user" Click="editUserBtn_Click">
                                                         <DockPanel>
                                                             <materialDesign:PackIcon Kind="UserEdit" Width="20" Height="20" VerticalAlignment="Center"/>
                                                             <Label Content="Edit Selected" Foreground="white"/>
                                                         </DockPanel>
                                                     </Button>
 
-                                                    <Button Name="BtnDelUser" Margin="10,0,0,0" Width="140" HorizontalAlignment="Left" Background="Firebrick" BorderBrush="Black" BorderThickness="1" Click="BtnDelUser_Click">
+                                                    <Button Name="BtnDelUser" Margin="10,0,0,0" Width="140" HorizontalAlignment="Left" Background="Firebrick" BorderBrush="Black" BorderThickness="1" ToolTip="Delete seleted user" Click="BtnDelUser_Click">
                                                         <DockPanel>
                                                             <materialDesign:PackIcon Kind="UserRemove" Width="20" Height="20" VerticalAlignment="Center"/>
                                                             <Label Content="Delete User" Foreground="White"/>
@@ -116,7 +116,7 @@
                 </Grid>
             </ScrollViewer>
 
-            <Grid Name="AddUserGrid" Visibility="Visible" >
+            <Grid Name="AddUserGrid" Visibility="Collapsed" >
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.2" />
                 </Grid.Background>
@@ -235,17 +235,17 @@
 
                                                 <DockPanel>
                                                     <CheckBox Name="cbRefId" Content="Reference ID" Margin="30,5,0,0" IsEnabled="False"/>
-                                                    <CheckBox Content="Allow Send File to Any Machine" Margin="134,5,0,0"/>
+                                                    <CheckBox Name="cbAllowSendFile" Content="Allow Send File to Any Machine" Margin="134,5,0,0"/>
                                                 </DockPanel>
 
                                                 <DockPanel>
                                                     <CheckBox Name="cbCtrlPgrmGroup" Content="Control Program Group" Margin="30,5,0,0" IsEnabled="False"/>
-                                                    <CheckBox Content="Machine Settings" Margin="73,5,0,0" />
+                                                    <CheckBox Name="cbMachSet" Content="Machine Settings" Margin="73,5,0,0" />
                                                 </DockPanel>
 
                                                 <DockPanel>
                                                     <CheckBox Name="cbAssocCust" Content="Associated Customers" Margin="30,5,0,0" IsEnabled="False"/>
-                                                    <CheckBox Content="Application and Service Settings" Margin="81,5,0,0" />
+                                                    <CheckBox Name="cbAppSerSet" Content="Application and Service Settings" Margin="81,5,0,0" />
                                                 </DockPanel>
 
                                                 <DockPanel>
@@ -304,7 +304,7 @@
                                     <TextBlock Name="userhiddenemail" Visibility="Collapsed" />
                                     
                                     
-                                    <DockPanel Margin="50 10 50 0">
+                                    <DockPanel Margin="20 10 15 0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150"/>
@@ -317,7 +317,7 @@
                                         </Grid>
                                     </DockPanel>
 
-                                    <DockPanel Margin="50 10 50 0">
+                                    <DockPanel Margin="20 10 15 0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150"/>
@@ -329,7 +329,7 @@
                                         </Grid>
                                     </DockPanel>
 
-                                    <DockPanel Margin="50 10 50 0">
+                                    <DockPanel Margin="20 10 15 0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150"/>
@@ -341,7 +341,7 @@
                                         </Grid>
                                     </DockPanel>
 
-                                    <DockPanel Margin="50 10 50 0">
+                                    <DockPanel Margin="20 10 15 0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150"/>
@@ -364,7 +364,7 @@
                                         </Grid>
                                     </DockPanel>
 
-                                    <DockPanel Margin="50 10 50 0">
+                                    <DockPanel Margin="20 10 15 0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150"/>
@@ -378,53 +378,59 @@
                                         </Grid>
                                     </DockPanel>
 
-                                    <TextBlock Text="Permissions" FontSize="16" Margin="20,20,0,0" FontWeight="DemiBold" Foreground="White"/>
-                                    <DockPanel >
-                                        <CheckBox Name="CbCtrlPgrmAddEditRem_Edit" Content="Control Programs(Add/Edit/Remove)" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Allow Control Program Editing" Margin="15,5,0,0" Foreground="White"/>
-                                    </DockPanel>
+                                    <StackPanel>
+                                        <Border Margin="15 10 15 10" Background="AliceBlue" CornerRadius="10" Height="280">
+                                            <StackPanel>
+                                                <TextBlock Text="Permissions" FontSize="16" Margin="10,20,0,0" FontWeight="DemiBold" />
+                                                <DockPanel >
+                                                    <CheckBox Name="CbCtrlPgrmAddEditRem_Edit" Content="Control Programs(Add/Edit/Remove)" Margin="10,5,0,0" />
+                                                    <CheckBox Name="cbAllowCtrlPgrmEditing_Edit" Content="Allow Control Program Editing" Margin="15,5,0,0"/>
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <CheckBox Name="cbAllowCPSearch_Edit" Content="Allow Control Program Searching" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Show Control Program Filename &#10; and Path" Margin="37,5,0,0" Foreground="White"/>
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <CheckBox Name="cbAllowCPSearch_Edit" Content="Allow Control Program Searching" Margin="10,5,0,0"/>
+                                                    <CheckBox Name="cbShowCPFilenamePath_Edit" Content="Show Control Program Filename &#10; and Path" Margin="37,5,0,0" />
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <TextBlock Text="Search Permissions" FontSize="12" Margin="20 0 0 0" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
-                                        <CheckBox Content="Incoming File Manager" Margin="142,5,0,0" Foreground="White"/>
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <TextBlock Text="Search Permissions" FontSize="12" Margin="30 0 0 0"  FontWeight="Bold" VerticalAlignment="Center"/>
+                                                    <CheckBox Name="cbIFM_Edit" Content="Incoming File Manager" Margin="122,5,0,0" />
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <CheckBox Content="Remote Request ID" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Allow Incoming File Editing" Margin="119,5,0,0" Foreground="White" />
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <CheckBox Name="cbRemReqId_Edit" Content="Remote Request ID" Margin="30,5,0,0" IsEnabled="False"/>
+                                                    <CheckBox Name="cbAllowIFMEditing_Edit" Content="Allow Incoming File Editing" Margin="99,5,0,0" />
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <CheckBox Content="Reference ID" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Allow Send File to Any Machine" Margin="154,5,0,0" Foreground="White"/>
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <CheckBox Name="cbRefId_Edit" Content="Reference ID" Margin="30,5,0,0" IsEnabled="False"/>
+                                                    <CheckBox Name="cbAllowSendFile_Edit" Content="Allow Send File to Any Machine" Margin="134,5,0,0"/>
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <CheckBox Content="Control Program Group" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Machine Settings" Margin="93,5,0,0" Foreground="White"/>
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <CheckBox Name="cbCtrlPgrmGroup_Edit" Content="Control Program Group" Margin="30,5,0,0" IsEnabled="False"/>
+                                                    <CheckBox Name="cbMachSet_Edit" Content="Machine Settings" Margin="73,5,0,0" />
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <CheckBox Content="Associated Customers" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Application and Service Settings" Margin="101,5,0,0" Foreground="White"/>
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <CheckBox Name="cbAssCust_Edit" Content="Associated Customers" Margin="30,5,0,0" IsEnabled="False"/>
+                                                    <CheckBox Name="cbAppSerSet_Edit" Content="Application and Service Settings" Margin="81,5,0,0"/>
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <CheckBox Content="Filename" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Parts, Operations and Customers" Margin="177,0,0,0" Foreground="White"/>
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <CheckBox Name="cbFilename_Edit" Content="Filename" Margin="30,5,0,0" IsEnabled="False"/>
+                                                    <CheckBox Name="cbPartOpCus_Edit" Content="Parts, Operations and Customers" Margin="157,0,0,0" />
+                                                </DockPanel>
 
-                                    <DockPanel>
-                                        <CheckBox Content="Description" Margin="20,5,0,0" Foreground="White"/>
-                                        <CheckBox Content="Lock/Unlock Permissions" Margin="180,5,0,0" Foreground="White" IsEnabled="False"/>
-                                    </DockPanel>
+                                                <DockPanel>
+                                                    <CheckBox Name="cbDesc_Edit" Content="Description" Margin="30,5,0,0" IsEnabled="False"/>
+                                                    <CheckBox Name="cbLockUnlockPer_Edit" Content="Lock/Unlock Permissions" Margin="160,5,0,0" IsEnabled="False"/>
+                                                </DockPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
 
-                                    <DockPanel Margin="0,20,10,10" HorizontalAlignment="Right">
+                                    <DockPanel Margin="0,0,10,10" HorizontalAlignment="Right">
                                         <Button Name="BtnUserUpdate" Margin="130,0,0,0" Width="150" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" Click="BtnUserUpdate_Click">
                                             <DockPanel>
                                                 <materialDesign:PackIcon Kind="UserEdit" Width="20" Height="20" VerticalAlignment="Center"/>

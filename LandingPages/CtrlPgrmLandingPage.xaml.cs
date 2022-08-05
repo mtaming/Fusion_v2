@@ -404,5 +404,12 @@ namespace Fusion_v2.LandingPages
             PageFrame.Content = license.Content;
             title.Text = "Setup | License";
         }
+
+        private void processCusMngr_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            CustManager cusmngr = new CustManager();
+            PageFrame.Content = cusmngr.Content;
+            title.Text = "Process | Customer Manager";
+        }
     }
 }
