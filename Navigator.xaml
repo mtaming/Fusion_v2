@@ -4,11 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
       mc:Ignorable="d" 
       Width="1096"
       Height="708" 
       Title="Navigator"
       FontFamily="Century Gothic">
+
+    
 
     <Page.Background>
         <LinearGradientBrush>
@@ -18,6 +21,10 @@
     </Page.Background>
 
     <Page.Resources>
+        <!--
+        <cm:BackgroundWorker x:Key="backgroundWorker" DoWork="worker_DoWork" RunWorkerCompleted="worker_RunWorkerCompleted" WorkerReportsProgress="True" ProgressChanged="worker_ProgressChanged"/>
+        -->
+        
         <Style x:Key="{x:Type DataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Height" Value="40" />
@@ -303,7 +310,7 @@
                                                             <TextBlock Grid.Column="0" Text="Control Program Group" Margin="10,0,0,0" FontSize="13" FontWeight="Medium" Foreground="White"/>
 
 
-                                                            <TextBox Grid.Column="1" Name="txtBoxCntrllPgrmGrp" Width="465" HorizontalAlignment="Left" FontSize="13" Height="30" Margin="0,0,0,0" Background="WhiteSmoke" BorderThickness="1" IsReadOnly="True" Padding="5"/>
+                                                            <TextBox Grid.Column="1" Name="txtBoxCntrllPgrmGrp" Width="464" HorizontalAlignment="Left" FontSize="13" Height="30" Margin="0,0,0,0" Background="WhiteSmoke" BorderThickness="1" IsReadOnly="True" Padding="5"/>
                                                             <Label Name="lblCtrlPG" Visibility="Hidden"/>
                                                             <Button Grid.Column="1" Name="cntrlPgrmCancel" Width="30" Height="25" HorizontalAlignment="Right" Margin="0 0 5 0" ToolTip="Cancel" Background="Red" BorderThickness="0" Visibility="Hidden" Click="cntrlPgrmCancel_Click">
                                                                 <Grid Margin="-9,-2">
@@ -525,7 +532,7 @@
                     <SolidColorBrush Color="Black" Opacity="0.4" />
                 </Grid.Background>
                 <ScrollViewer>
-                    <Grid >
+                    <Grid HorizontalAlignment="Center" Width="1100">
 
                         <StackPanel VerticalAlignment="Center" Margin="150 20">
                             <Border Name="addCtrlProg" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="3"  Background="#FF2D4E8C" Visibility="Visible">
@@ -737,7 +744,7 @@
                 </Grid.Background>
 
                 <ScrollViewer>
-                    <Grid>
+                    <Grid HorizontalAlignment="Center" Width="1100">
 
                         <StackPanel VerticalAlignment="Center" Margin="150 20">
                             <Border Name="editCtrlProg" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="2"  Background="#FF2D4E8C" Visibility="Visible">
@@ -789,7 +796,7 @@
                                                 <DockPanel>
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="640"/>
                                                             <ColumnDefinition Width="152"/>
                                                         </Grid.ColumnDefinitions>
 
@@ -799,7 +806,7 @@
                                                         </DockPanel>
 
                                                         <DockPanel Grid.Column="1">
-                                                            <Button Name="editPgrmPointer" Height="30"  ToolTip="Browse File"  Margin="10,10,10,0" BorderThickness="0" Click="editPrgrmPointerBrowse_Click">
+                                                            <Button Name="editPgrmPointer" Height="30"  ToolTip="Browse File"  Margin="10,10,15,0" BorderThickness="0" Click="editPrgrmPointerBrowse_Click">
                                                                 <Grid Margin="-10,-5">
                                                                     <materialDesign:PackIcon Kind="Search" Width="17" Height="17" />
                                                                     <TextBlock Text="Browse" Margin="25 0 0 0"/>

@@ -646,6 +646,11 @@ namespace Fusion_v2
                 levelchoice = 1;
             }
 
+            if (cbAllowCPSearch_Edit.IsChecked == true)
+            {
+
+            }
+
             SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
             sqlCon.Open();
             String query = "UPDATE Users SET fkUserLevel = '" + levelchoice + "', Email = '" + editemail.Text + "' " +  "  WHERE ID = '" + userhiddenid.Text + "' ";

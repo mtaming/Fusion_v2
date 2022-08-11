@@ -94,6 +94,9 @@
     <Compile Include="LandingPages\CtrlPgrmLandingPage.xaml.cs">
       <DependentUpon>CtrlPgrmLandingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Machine.xaml.cs">
+      <DependentUpon>Machine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="nav.xaml.cs">
       <DependentUpon>nav.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LandingPages\CtrlPgrmLandingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Machine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

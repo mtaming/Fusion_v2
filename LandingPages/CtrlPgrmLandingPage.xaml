@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:Fusion_v2.LandingPages"
         mc:Ignorable="d"
         Title="Fusion Production Document Organizer" Width="1500"
-      Height="800" WindowStartupLocation="CenterScreen"  MinWidth="1100" MinHeight="650" FontFamily="Century Gothic">
+      Height="800" WindowStartupLocation="CenterScreen" MinWidth="1100" MinHeight="650" FontFamily="Century Gothic">
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
             <Image Source="/Images/fusionlogo_outline.ico" />

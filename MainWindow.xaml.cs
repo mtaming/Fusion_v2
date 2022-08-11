@@ -125,8 +125,6 @@ namespace Fusion_v2
             int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
             if (count == 1)
             {
-                MessageBox.Show("Login Successful", "Fusion Production Document Organizer", MessageBoxButton.OK, MessageBoxImage.Information);
-                //Home hp = new Home();
                 LandingPages.CtrlPgrmLandingPage cp = new LandingPages.CtrlPgrmLandingPage();
                 cp.Show();
                 System.Threading.Thread.Sleep(100);
