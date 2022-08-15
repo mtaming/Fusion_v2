@@ -196,6 +196,7 @@ namespace Fusion_v2
             addCustomerDock.Visibility = Visibility.Hidden;
             cusManName.Text = cusManHiddenNm.Content.ToString();
             cusManNote.Text = cusManHiddenNte.Content.ToString();
+            cusManName.SelectAll();
             cusManName.IsReadOnly = false;
             cusManNote.IsReadOnly = false;
             cusManName.Focus();

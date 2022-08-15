@@ -16,6 +16,7 @@
         <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontFamily" Value="Trebuchet"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
@@ -71,35 +72,38 @@
                                             <RowDefinition Height="284*"/>
                                             <RowDefinition Height="70"/>
                                         </Grid.RowDefinitions>
-                                        <ListBox ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Grid.Column="0" Grid.RowSpan="2" x:Name="MachListBox" BorderThickness="2,2,2,2" Margin="10,10,9,10" Background="AliceBlue" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" FontSize="13" FontFamily="Trebuchet" Padding="5"/>
+                                        <ListBox ItemContainerStyle="{StaticResource _ListBoxItemStyle}" Grid.Column="0" Grid.RowSpan="2" x:Name="MachListBox" BorderThickness="2,2,2,2" Margin="10,10,9,10" Background="AliceBlue" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" FontSize="13" Padding="5" SelectionChanged="MachListBox_SelectionChanged" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" TextSearch.TextPath="machName">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <TextBlock Text="{Binding machId}"  Visibility="Hidden"/>
+                                                        <TextBlock Text="{Binding machName}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
 
                                         <TabControl Grid.Column="1" Margin="0 10 10 10" Style="{DynamicResource MahApps.Styles.TabControl.Animated}" mah:TabControlHelper.Transition="Right" TabStripPlacement="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
 
-                                            <TabItem  Background="#FFF9D342">
+                                            <TabItem Name="tabItemGeneral" Background="#FFF9D342">
                                                 <TabItem.Header>
                                                     <StackPanel Orientation="Horizontal">
                                                         <Label Content="General" FontSize="12" FontWeight="Bold" />
                                                     </StackPanel>
                                                 </TabItem.Header>
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                                    <Grid>
+                                                    <Grid Background="#FFF3F0F0">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="34*"/>
                                                             <ColumnDefinition Width="121*"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <Grid.Background>
-                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                                <GradientStop Color="AliceBlue" Offset="0.0"/>
-                                                                <GradientStop Color="#FF154672" Offset="1.0"/>
-
-                                                            </LinearGradientBrush>
-                                                        </Grid.Background>
+                                                        
                                                         <StackPanel Grid.ColumnSpan="2">
                                                             <DockPanel HorizontalAlignment="Left">
                                                                 <Label Content="Machine License Level:*" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="15" FontWeight="Bold"/>
-                                                                <RadioButton Content="Level 1" Margin="20 20" Foreground="Black" FontSize="15"/>
-                                                                <RadioButton Content="Level 2" Margin="20 20" Foreground="Black" FontSize="15"/>
-                                                                <RadioButton Content="Level 3" Margin="20 20" Foreground="Black" FontSize="15"/>
+                                                                <RadioButton Name="rbMachLvl1" Content="Level 1" Margin="20 20" Foreground="Black" FontSize="15" IsEnabled="False"/>
+                                                                <RadioButton Name="rbMachLvl2" Content="Level 2" Margin="20 20" Foreground="Black" FontSize="15" IsEnabled="False"/>
+                                                                <RadioButton Name="rbMachLvl3" Content="Level 3" Margin="20 20" Foreground="Black" FontSize="15" IsEnabled="False"/>
                                                             </DockPanel>
 
                                                             <DockPanel Margin="20 20 20 0">
@@ -109,7 +113,8 @@
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Label Grid.Column="0" Content="Machine Name:*" Foreground="Black" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                                    <TextBox Grid.Column="1" Name="TxtBoxMachName" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0"/>
+                                                                    <TextBlock Name="selID" Visibility="Hidden"/>
+                                                                    <TextBox Grid.Column="1" Name="TxtBoxMachName" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
                                                                 </Grid>
                                                             </DockPanel>
 
@@ -120,7 +125,7 @@
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Label Grid.Column="0" Content="Control Program Group:" Foreground="Black" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                                    <TextBox Grid.Column="1" Name="TxtBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0"/>
+                                                                    <TextBox Grid.Column="1" Name="TxtBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
                                                                 </Grid>
                                                             </DockPanel>
 
@@ -131,7 +136,7 @@
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Label Grid.Column="0" Content="Facility ID:" Foreground="Black" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                                    <TextBox Grid.Column="1" Name="TxtBoxFacId" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0"/>
+                                                                    <TextBox Grid.Column="1" Name="TxtBoxFacId" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
                                                                 </Grid>
                                                             </DockPanel>
 
@@ -142,13 +147,9 @@
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Label Grid.Column="0" Content="Notes:" Foreground="Black" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                                    <RichTextBox Grid.Column="1" Name="TxtBoxNotes" Height="200" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
-                                                                        <FlowDocument>
-                                                                            <Paragraph>
-                                                                                <Run Text=""/>
-                                                                            </Paragraph>
-                                                                        </FlowDocument>
-                                                                    </RichTextBox>
+                                                                    <TextBox Grid.Column="1" Name="TxtBoxNotes" Height="200" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True" >
+                                                                        
+                                                                    </TextBox>
                                                                 </Grid>
                                                             </DockPanel>
                                                         </StackPanel>
@@ -162,30 +163,15 @@
                                                     </StackPanel>
                                                 </TabItem.Header>
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                                    <Grid>
-                                                        <Grid.Background>
-                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                                <GradientStop Color="AliceBlue" Offset="0.0"/>
-                                                                <GradientStop Color="#FF154672" Offset="1.0"/>
-
-                                                            </LinearGradientBrush>
-                                                        </Grid.Background>
+                                                    <Grid Background="#FFF3F0F0">
+                                                        
                                                         <StackPanel Margin="20">
                                                             <DockPanel>
-                                                                <Grid>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <RadioButton Grid.Column="0" Name="rbComNone" Content="None" IsChecked="True" Foreground="Black" FontSize="15" FontWeight="Bold" Click="rbComNone_Click"/>
-                                                                    <RadioButton Grid.Column="1" Name="rbComFlashDNC" Content="Flash DNC" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Checked="rbComFlashDNC_Checked"/>
-                                                                    <RadioButton Grid.Column="2" Name="rbComFocas" Content="Focas" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Checked="rbComFocas_Checked"/>
-                                                                    <RadioButton Grid.Column="3" Name="rbComSocket" Content="Socket" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Checked="rbComSocket_Checked"/>
-                                                                    <RadioButton Grid.Column="4" Name="rbComFolderWatch" Content="Folder Watch" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Checked="rbComFolderWatch_Checked"/>
-                                                                </Grid>
+                                                                <RadioButton Name="rbComNone" Content="None" IsChecked="True" Foreground="Black" FontSize="15" FontWeight="Bold" Click="rbComNone_Click"/>
+                                                                <RadioButton Name="rbComFlashDNC" Content="Flash DNC" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="rbComFlashDNC_Checked"/>
+                                                                <RadioButton Name="rbComFocas" Content="Focas" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="rbComFocas_Checked"/>
+                                                                <RadioButton Name="rbComSocket" Content="Socket" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="rbComSocket_Checked"/>
+                                                                <RadioButton Name="rbComFolderWatch" Content="Folder Watch" Foreground="Black" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="rbComFolderWatch_Checked"/>
                                                             </DockPanel>
 
 
@@ -620,10 +606,11 @@
                                                     </StackPanel>
                                                 </TabItem.Header>
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                                    <Grid>
+                                                    <Grid Background="#FFF3F0F0">
+                                                        
                                                         <StackPanel>
                                                             <Grid Margin="10">
-
+                                                                
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="*"/>
@@ -777,7 +764,7 @@
                                                         <Label Content="Incoming File" FontSize="12" FontWeight="Bold" />
                                                     </StackPanel>
                                                 </TabItem.Header>
-                                                <Grid>
+                                                <Grid Background="#FFF3F0F0">
                                                     <StackPanel>
                                                         <Label x:Name="label2_Copy1" Content="Incoming File Communication" HorizontalAlignment="Left" Margin="12,2,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black" d:LayoutOverrides="HorizontalAlignment" FontSize="17" FontWeight="Bold"/>
 
@@ -800,14 +787,8 @@
                                                     </StackPanel>
                                                 </TabItem.Header>
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                                    <Grid>
-                                                        <Grid.Background>
-                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                                <GradientStop Color="AliceBlue" Offset="0.0"/>
-                                                                <GradientStop Color="#FF154672" Offset="1.0"/>
-
-                                                            </LinearGradientBrush>
-                                                        </Grid.Background>
+                                                    <Grid Background="#FFF3F0F0">
+                                                        
                                                         <StackPanel>
                                                             <DockPanel Width="500" HorizontalAlignment="Left" Margin="10">
                                                                 <Button Name="BtnModifyFnameExt" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
@@ -838,7 +819,7 @@
                                                                     <Grid Grid.Column="0" Grid.Row="0">
 
                                                                         <GroupBox Header="Remote Request Lookup Not Found" Margin="5">
-                                                                            <RichTextBox  Height="80" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                            <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
                                                                                 <FlowDocument>
                                                                                     <Paragraph>
                                                                                         <Run Text=""/>
@@ -849,7 +830,7 @@
                                                                     </Grid>
                                                                     <Grid Grid.Column="0" Grid.Row="1">
                                                                         <GroupBox Header="Remote Request File Lock" Margin="5">
-                                                                            <RichTextBox  Height="80" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                            <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
                                                                                 <FlowDocument>
                                                                                     <Paragraph>
                                                                                         <Run Text=""/>
@@ -860,7 +841,7 @@
                                                                     </Grid>
                                                                     <Grid Grid.Column="0" Grid.Row="2">
                                                                         <GroupBox Header="Remote Request On Hold" Margin="5">
-                                                                            <RichTextBox  Height="80" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                            <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
                                                                                 <FlowDocument>
                                                                                     <Paragraph>
                                                                                         <Run Text=""/>
@@ -875,7 +856,7 @@
 
                                                                     <Grid Grid.Column="1" Grid.Row="0">
                                                                         <GroupBox Header="Remote Request Failed" Margin="5">
-                                                                            <RichTextBox  Height="80" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                            <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
                                                                                 <FlowDocument>
                                                                                     <Paragraph>
                                                                                         <Run Text=""/>
@@ -887,7 +868,7 @@
 
                                                                     <Grid Grid.Column="1" Grid.Row="1">
                                                                         <GroupBox Header="Remote Request File Not Found" Margin="5">
-                                                                            <RichTextBox  Height="80" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                            <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
                                                                                 <FlowDocument>
                                                                                     <Paragraph>
                                                                                         <Run Text=""/>
@@ -899,7 +880,7 @@
 
                                                                     <Grid Grid.Column="1" Grid.Row="2">
                                                                         <GroupBox Header="Remote Request Folder Not Found" Margin="5">
-                                                                            <RichTextBox  Height="80" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                            <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
                                                                                 <FlowDocument>
                                                                                     <Paragraph>
                                                                                         <Run Text=""/>
@@ -921,33 +902,35 @@
                                                     </StackPanel>
                                                 </TabItem.Header>
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="700" Margin="10 10">
-                                                        <Border Background="#FF42425B" CornerRadius="15">
-                                                            <StackPanel>
-                                                                <DataGrid  IsReadOnly="True" AutoGenerateColumns="False" VerticalGridLinesBrush="Transparent" 
+                                                    <Grid Background="#FFF3F0F0">
+                                                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="700" Margin="10 10">
+                                                            <Border Background="#FF42425B" CornerRadius="15">
+                                                                <StackPanel>
+                                                                    <DataGrid  IsReadOnly="True" AutoGenerateColumns="False" VerticalGridLinesBrush="Transparent" 
                                             FontSize="15"  Margin="15" BorderBrush="#89615555"  SelectionUnit="FullRow"  IsTextSearchCaseSensitive="False" IsTextSearchEnabled="True" TextSearch.TextPath="personnel" SelectionMode="Single" Height="300" ColumnWidth="*">
-                                                                    <DataGrid.Columns>
-                                                                        <DataGridTextColumn Header="ID" Width="250" Visibility="Hidden" Binding="{Binding perid}"/>
-                                                                        <DataGridTextColumn Header="Personnel Name" Width="250" Binding="{Binding pername}"/>
-                                                                        <DataGridTextColumn Header="Email Address" Width="250" Binding="{Binding peremail}"/>
-                                                                    </DataGrid.Columns>
-                                                                </DataGrid>
+                                                                        <DataGrid.Columns>
+                                                                            <DataGridTextColumn Header="ID" Width="250" Visibility="Hidden" Binding="{Binding perid}"/>
+                                                                            <DataGridTextColumn Header="Personnel Name" Width="250" Binding="{Binding pername}"/>
+                                                                            <DataGridTextColumn Header="Email Address" Width="250" Binding="{Binding peremail}"/>
+                                                                        </DataGrid.Columns>
+                                                                    </DataGrid>
 
-                                                                <DockPanel Margin="0 0 10 10" HorizontalAlignment="Right">
-                                                                    <Button Name="BtnAssignPersonnel" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
-                                                                        <DockPanel>
-                                                                            <TextBlock Text="Assign" VerticalAlignment="Center" FontWeight="Bold" />
-                                                                        </DockPanel>
-                                                                    </Button>
+                                                                    <DockPanel Margin="0 0 10 10" HorizontalAlignment="Right">
+                                                                        <Button Name="BtnAssignPersonnel" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
+                                                                            <DockPanel>
+                                                                                <TextBlock Text="Assign" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                            </DockPanel>
+                                                                        </Button>
 
-                                                                    <Button Name="BtnRemovePersonnel" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
-                                                                        <DockPanel>
-                                                                            <TextBlock Text="Remove" VerticalAlignment="Center" FontWeight="Bold" />
-                                                                        </DockPanel>
-                                                                    </Button>
-                                                                </DockPanel>
-                                                            </StackPanel>
-                                                        </Border>
+                                                                        <Button Name="BtnRemovePersonnel" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
+                                                                            <DockPanel>
+                                                                                <TextBlock Text="Remove" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                            </DockPanel>
+                                                                        </Button>
+                                                                    </DockPanel>
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </Grid>
                                                     </Grid>
                                                 </ScrollViewer>
                                             </TabItem>
@@ -960,15 +943,15 @@
                                                     <Grid>
 
                                                         <DockPanel HorizontalAlignment="Center" Margin="5">
-                                                            <Button x:Name="btnLicense" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="License Manager">
+                                                            <Button x:Name="btnOpenMachLicMngr" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Click to open Machine License Manager" Click="btnOpenMachLicMngr_Click">
                                                                 <materialDesign:PackIcon Kind="DriversLicense" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                             </Button>
 
-                                                            <Button x:Name="btnAdd" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Add New Machine" Margin="5 0 0 0">
+                                                            <Button x:Name="btnAddNewMach" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Add New Machine" Margin="5 0 0 0" Click="btnAddNewMach_Click">
                                                                 <materialDesign:PackIcon Kind="AddBox" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                             </Button>
 
-                                                            <Button x:Name="btnEdit" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Edit Selected Machine" Margin="5 0 0 0">
+                                                            <Button x:Name="btnEdit" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Edit Selected Machine" Margin="5 0 0 0" Click="btnEdit_Click">
                                                                 <materialDesign:PackIcon Kind="EditBox" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                             </Button>
 
@@ -976,11 +959,11 @@
                                                                 <materialDesign:PackIcon Kind="ContentCopy" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                             </Button>
 
-                                                            <Button x:Name="btnDelete" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Delete Selected Machine" Margin="5 0 0 0">
+                                                            <Button x:Name="btnDelete" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Delete Selected Machine" Margin="5 0 0 0" Click="btnDelete_Click">
                                                                 <materialDesign:PackIcon Kind="Delete" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                             </Button>
 
-                                                            <Button x:Name="btnCancel" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Cancel" Margin="5 0 0 0">
+                                                            <Button x:Name="btnCancel" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Cancel" Margin="5 0 0 0" IsEnabled="False" Click="btnCancel_Click">
                                                                 <materialDesign:PackIcon Kind="Cancel" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                             </Button>
                                                         </DockPanel>
@@ -994,6 +977,166 @@
                         </Border>
                     </Grid>
                 </Border>
+            </Grid>
+
+
+            <Grid Name="MachLicenseManagerGrid" Visibility="Collapsed">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.2" />
+                </Grid.Background>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid HorizontalAlignment="Center" Width="1100">
+                        <StackPanel VerticalAlignment="Center" Margin="150 20">
+                            <Border Name="machLicenseBorder" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="3"  Background="#FF2D4E8C" Visibility="Visible">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                    <StackPanel>
+                                        <Label Content="Machine License Manager" FontSize="17" FontWeight="Bold" Margin="25,10,0,0" Foreground="White"/>
+                                        <Separator></Separator>
+                                        <DockPanel Margin="10 5 10 5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0">
+                                                    <Label Content="Level 1 Machines" FontSize="15" FontWeight="Bold" Foreground="Gold" HorizontalAlignment="Center" />
+                                                    <DockPanel HorizontalAlignment="Center">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <DockPanel Grid.Column="0">
+                                                                <TextBlock Text="Available:" FontSize="12" Foreground="White"/>
+                                                                <TextBlock Text="Unlimited" FontSize="12" Foreground="White" Margin="5 0 0 0"/>
+                                                            </DockPanel>
+                                                            <DockPanel Grid.Column="1" Margin="20 0 0 0">
+                                                                <TextBlock Text="Used:" FontSize="12" Foreground="White"/>
+                                                                <TextBlock Text="1000" FontSize="12" Foreground="White" Margin="5 0 0 0"/>
+                                                            </DockPanel>
+                                                        </Grid>
+                                                        
+                                                    </DockPanel>
+                                                    <ListBox Name="LstBoxMachLvl1" ItemContainerStyle="{StaticResource _ListBoxItemStyle}" Background="White" Height="300" Margin="5" BorderBrush="Black" BorderThickness="1">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <TextBlock Text="{Binding MachLvl1_ID}"  Visibility="Hidden"/>
+                                                                    <TextBlock Text="{Binding MachLvl1_Name}" />
+                                                                    <TextBlock Text="{Binding MachLvl1_Level}" Visibility="Hidden"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1">
+                                                    <Label Content="Level 2 Machines" FontSize="15" FontWeight="Bold" Foreground="Gold" HorizontalAlignment="Center"/>
+                                                    <DockPanel HorizontalAlignment="Center">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <DockPanel Grid.Column="0">
+                                                                <TextBlock Text="Available:" FontSize="12" Foreground="White"/>
+                                                                <TextBlock Text="1000" FontSize="12" Foreground="White" Margin="5 0 0 0"/>
+                                                            </DockPanel>
+                                                            <DockPanel Grid.Column="1" Margin="20 0 0 0">
+                                                                <TextBlock Text="Used:" FontSize="12" Foreground="White"/>
+                                                                <TextBlock Text="1000" FontSize="12" Foreground="White" Margin="5 0 0 0"/>
+                                                            </DockPanel>
+                                                        </Grid>
+
+                                                    </DockPanel>
+                                                    <ListBox Name="LstBoxMachLvl2" ItemContainerStyle="{StaticResource _ListBoxItemStyle}" Background="White" Height="300" Margin="5" BorderBrush="Black" BorderThickness="1">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <TextBlock Text="{Binding MachLvl2_ID}"  Visibility="Hidden"/>
+                                                                    <TextBlock Text="{Binding MachLvl2_Name}" />
+                                                                    <TextBlock Text="{Binding MachLvl2_Level}" Visibility="Hidden"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="2">
+                                                    <Label Content="Level 3 Machines" FontSize="15" FontWeight="Bold" Foreground="Gold" HorizontalAlignment="Center"/>
+                                                    <DockPanel HorizontalAlignment="Center">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <DockPanel Grid.Column="0">
+                                                                <TextBlock Text="Available:" FontSize="12" Foreground="White"/>
+                                                                <TextBlock Text="1000" FontSize="12" Foreground="White" Margin="5 0 0 0"/>
+                                                            </DockPanel>
+                                                            <DockPanel Grid.Column="1" Margin="20 0 0 0">
+                                                                <TextBlock Text="Used:" FontSize="12" Foreground="White"/>
+                                                                <TextBlock Text="1000" FontSize="12" Foreground="White" Margin="5 0 0 0"/>
+                                                            </DockPanel>
+                                                        </Grid>
+
+                                                    </DockPanel>
+                                                    <ListBox Name="LstBoxMachLvl3" ItemContainerStyle="{StaticResource _ListBoxItemStyle}" Background="White" Height="300" Margin="5" BorderBrush="Black" BorderThickness="1" SelectionMode="Extended">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <TextBlock Text="{Binding MachLvl3_ID}"  Visibility="Hidden"/>
+                                                                    <TextBlock Text="{Binding MachLvl3_Name}" />
+                                                                    <TextBlock Text="{Binding MachLvl3_Level}" Visibility="Hidden"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DockPanel>
+
+                                        <Border Background="#FFAFDDEC" Margin="10 0 10 10" CornerRadius="15" BorderBrush="Khaki" BorderThickness="2">
+                                            <StackPanel>
+                                                <DockPanel> 
+                                                    <materialDesign:PackIcon Kind="InformationCircle" Foreground="#FF002EFF" Width="30" Height="30" Margin="10 5 5 5"/>
+                                                    <Label Content="To assign machines to other levels:" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                                </DockPanel>
+                                                <Label Content="(1) Drag and Drop item(s) from one list to another OR" VerticalAlignment="Center"  FontSize="13" Margin="50 -10 0 0"/>
+                                                <Label Content="(2) Right Click then Select where to assign your machine(s)." VerticalAlignment="Center"  FontSize="13" Margin="50 -5 0 0"/>
+
+                                                <Separator Margin="5" FontWeight="Black"/>
+
+                                                <DockPanel>
+                                                    <materialDesign:PackIcon Kind="Note" Foreground="#FF002EFF" Width="30" Height="30" Margin="10 5 5 5"/>
+                                                    <Label Content="Note:" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                                </DockPanel>
+                                                <Label Content="- Level 2 Machines assigned to other levels will not allow the use of Virtual Commands in File Transport." VerticalAlignment="Center"  FontSize="13" Margin="50 -10 0 0" />
+                                                <Label Content="- Level 3  Machines assigned to other levels will not allow the use of TCP/IP Sockets and DNC Link in File Transport." VerticalAlignment="Center"  FontSize="13" Margin="50 -5 0 5"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <DockPanel HorizontalAlignment="Right" Margin="0 0 10 10">
+                                            <Button Name="BtnSaveMachLicenceMngr" Height="30" Width="100" ToolTip="Save Changes" Margin="0,10,0,0" BorderThickness="0" >
+                                                <Grid Margin="-10,-5">
+                                                    <materialDesign:PackIcon Kind="ContentSave" Width="17" Height="17" />
+                                                    <TextBlock Text="Save" Margin="25 0 0 0"/>
+                                                </Grid>
+                                            </Button>
+                                            <Button Name="BtnCloseMachLicenseMngr" Height="30" Width="100" ToolTip="Close Machine License Manager" Background="Red" Margin="10,10,0,0" BorderThickness="0"  HorizontalAlignment="Left" Click="BtnCloseMachLicenseMngr_Click" >
+                                                <Grid Margin="-10,-5">
+                                                    <materialDesign:PackIcon Kind="CloseBold" Width="17" Height="17" />
+                                                    <TextBlock Text="Close" Margin="25 0 0 0"/>
+                                                </Grid>
+                                            </Button>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+                
             </Grid>
         </Grid>
     </Grid>

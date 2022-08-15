@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -27,30 +28,121 @@ namespace Fusion_v2
             LoadMachinesQuery();
         }
 
+        public class Machines
+        {
+            public int machId { get; set; }
+            public string machName { get; set; }
+        }
+
+        IList<Machines> mach = new List<Machines>();
+
         public void LoadMachinesQuery()
         {
-            MachListBox.Items.Clear();
+            MachListBox.ItemsSource = null;
+            mach = new List<Machines>();
             try
             {
                 SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
                 sqlCon.Open();
-                string mach_query = "SELECT machine_name FROM MACHINE ORDER BY machine_name";
+                string mach_query = "SELECT * FROM MACHINE ORDER BY machine_name";
                 SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "MACHINE");
+
+                Machines m = new Machines();
+                mach = new List<Machines>();
+                foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    while (reader.Read())
+                    
+                    mach.Add(new Machines()
                     {
-                        string mach_name = reader["machine_name"].ToString();
-                        MachListBox.Items.Add(mach_name);
-                    }
+                        machId = int.Parse(dr["machine_id"].ToString()),
+                        machName = dr["machine_name"].ToString()
+                    }); ;
                 }
+                MachListBox.ItemsSource = mach;
                 MachListBox.SelectedIndex = 0;
+
+                da.Dispose();
+                ds.Dispose();
+                sqlCon.Close();
+
             }
             catch (Exception ex) { ex.Message.ToString(); }
         }
 
-       
+        private void MachListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            try
+            {
+                if (e.AddedItems != null && e.AddedItems.Count > 0)
+                {
+                    var item = (ListBox)sender;
+                    var sel_mach = (Machines)item.SelectedItem;
+                    int id = sel_mach.machId;
+
+                    SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                    sqlCon.Open();
+                    string mach_query = "SELECT * FROM MACHINE WHERE machine_id = '" + id + "'";
+                    SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            string machine_level = dr["machineLevel"].ToString();
+                            string machine_name = dr["machine_name"].ToString();
+                            string facility_id = dr["AlternateID"].ToString();
+                            string notes = dr["note"].ToString();
+
+                            int MachId = int.Parse(dr["machine_id"].ToString());
+                            selID.Text = MachId.ToString();
+
+                            //Fill controls
+                            if (machine_level == "1")
+                            {
+                                rbMachLvl1.IsEnabled = true;
+                                rbMachLvl2.IsEnabled = false;
+                                rbMachLvl3.IsEnabled = false;
+                                rbMachLvl1.IsChecked = true;
+                            }
+                            else if (machine_level == "2")
+                            {
+                                rbMachLvl1.IsEnabled = false;
+                                rbMachLvl2.IsEnabled = true;
+                                rbMachLvl3.IsEnabled = false;
+                                rbMachLvl2.IsChecked = true;
+                            }
+                            else if (machine_level == "3")
+                            {
+                                rbMachLvl1.IsEnabled = false;
+                                rbMachLvl2.IsEnabled = false;
+                                rbMachLvl3.IsEnabled = true;
+                                rbMachLvl3.IsChecked = true;
+                            }
+                            else
+                            {
+                                rbMachLvl1.IsEnabled = false;
+                                rbMachLvl2.IsEnabled = false;
+                                rbMachLvl3.IsEnabled = false;
+                            }//machine level
+
+                            TxtBoxMachName.Text = machine_name;
+                            TxtBoxFacId.Text = facility_id;
+                            TxtBoxNotes.Text = notes;
+                        }
+                    }
+
+                    dr.Close();
+                    sqlCon.Close();
+                }
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+
+        }
+
         private void rbComNone_Click(object sender, RoutedEventArgs e)
         {
             FlashDNCGrid.Visibility = Visibility.Collapsed;
@@ -91,6 +183,227 @@ namespace Fusion_v2
             FolderWatchGrid.Visibility = Visibility.Visible;
         }
 
+        private void btnOpenMachLicMngr_Click(object sender, RoutedEventArgs e)
+        {
+            MachLicenseManagerGrid.Visibility = Visibility.Visible;
+            MachLevel1Query();
+            MachLevel2Query();
+            MachLevel3Query();
+        }
+
+        private void BtnCloseMachLicenseMngr_Click(object sender, RoutedEventArgs e)
+        {
+            MachLicenseManagerGrid.Visibility = Visibility.Collapsed;
+        }
+
         
+        //Machine License Manager Content
+        
+        public class MachLevel1
+        {
+            public int MachLvl1_ID { get; set; }
+            public string MachLvl1_Name { get; set; }
+            public string MachLvl1_Level { get; set; }
+        }
+
+        public class MachLevel2
+        {
+            public int MachLvl2_ID { get; set; }
+            public string MachLvl2_Name { get; set; }
+            public string MachLvl2_Level { get; set; }
+        }
+        public class MachLevel3
+        {
+            public int MachLvl3_ID { get; set; }
+            public string MachLvl3_Name { get; set; }
+            public string MachLvl3_Level { get; set; }
+        }
+
+        IList<MachLevel1> machLvl1 = new List<MachLevel1>();
+        IList<MachLevel2> machLvl2 = new List<MachLevel2>();
+        IList<MachLevel3> machLvl3 = new List<MachLevel3>();
+
+        public void MachLevel1Query()
+        {
+            LstBoxMachLvl1.ItemsSource = null;
+            machLvl1 = new List<MachLevel1>();
+
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 1 ORDER BY machine_name";
+                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "MACHINE");
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    machLvl1.Add(new MachLevel1()
+                    {
+                        MachLvl1_ID = int.Parse(dr["machine_id"].ToString()),
+                        MachLvl1_Name = dr["machine_name"].ToString(),
+                        MachLvl1_Level = dr["machineLevel"].ToString()
+                    });
+                }
+                LstBoxMachLvl1.ItemsSource = machLvl1;
+                
+                da.Dispose();
+                ds.Dispose();
+                sqlCon.Close();
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+        }
+
+        public void MachLevel2Query()
+        {
+            LstBoxMachLvl2.ItemsSource = null;
+            machLvl2 = new List<MachLevel2>();
+
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 2 ORDER BY machine_name";
+                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "MACHINE");
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    machLvl2.Add(new MachLevel2()
+                    {
+                        MachLvl2_ID = int.Parse(dr["machine_id"].ToString()),
+                        MachLvl2_Name = dr["machine_name"].ToString(),
+                        MachLvl2_Level = dr["machineLevel"].ToString()
+                    });
+                }
+                LstBoxMachLvl2.ItemsSource = machLvl2;
+
+                da.Dispose();
+                ds.Dispose();
+                sqlCon.Close();
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+        }
+
+        public void MachLevel3Query()
+        {
+            LstBoxMachLvl3.ItemsSource = null;
+            machLvl3 = new List<MachLevel3>();
+
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 3 ORDER BY machine_name";
+                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "MACHINE");
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    machLvl3.Add(new MachLevel3()
+                    {
+                        MachLvl3_ID = int.Parse(dr["machine_id"].ToString()),
+                        MachLvl3_Name = dr["machine_name"].ToString(),
+                        MachLvl3_Level = dr["machineLevel"].ToString()
+                    });
+                }
+                LstBoxMachLvl3.ItemsSource = machLvl3;
+
+                da.Dispose();
+                ds.Dispose();
+                sqlCon.Close();
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+        }
+
+
+        //add new machine
+        private void btnAddNewMach_Click(object sender, RoutedEventArgs e)
+        {
+            rbMachLvl1.IsEnabled = true;
+            rbMachLvl2.IsEnabled = true;
+            rbMachLvl3.IsEnabled = true;
+            rbMachLvl1.IsChecked = true;
+            TxtBoxMachName.IsReadOnly = false;
+            TxtBoxCtrlPgrmGrp.IsReadOnly = false;
+            TxtBoxFacId.IsReadOnly = false;
+            TxtBoxNotes.IsReadOnly = false;
+            TxtBoxMachName.Text = "";
+            TxtBoxCtrlPgrmGrp.Text = "";
+            TxtBoxFacId.Text = "";
+            TxtBoxNotes.Text = "";
+            btnOpenMachLicMngr.IsEnabled = false;
+            btnEdit.IsEnabled = false;
+            btnDuplicate.IsEnabled = false;
+            btnDelete.IsEnabled = false;
+            btnCancel.IsEnabled = true;
+            MachListBox.IsEnabled = false;
+            tabItemGeneral.IsSelected = true;
+            tabItemGeneral.Focus();
+            TxtBoxMachName.Focus();
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            rbMachLvl1.IsEnabled = false;
+            rbMachLvl2.IsEnabled = false;
+            rbMachLvl3.IsEnabled = false;
+            rbMachLvl1.IsChecked = false;
+            TxtBoxMachName.IsReadOnly = true;
+            TxtBoxCtrlPgrmGrp.IsReadOnly = true;
+            TxtBoxFacId.IsReadOnly = true;
+            TxtBoxNotes.IsReadOnly = true;
+            btnOpenMachLicMngr.IsEnabled = true;
+            btnAddNewMach.IsEnabled = true;
+            btnEdit.IsEnabled = true;
+            btnDuplicate.IsEnabled = true;
+            btnDelete.IsEnabled = true;
+            btnCancel.IsEnabled = false;
+            MachListBox.IsEnabled = true;
+            LoadMachinesQuery();
+        }
+
+
+        //edit selected machine
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            TxtBoxMachName.IsReadOnly = false;
+            TxtBoxCtrlPgrmGrp.IsReadOnly = false;
+            TxtBoxFacId.IsReadOnly = false;
+            TxtBoxNotes.IsReadOnly = false;
+            btnOpenMachLicMngr.IsEnabled = false;
+            btnAddNewMach.IsEnabled = false;
+            btnDuplicate.IsEnabled = false;
+            btnDelete.IsEnabled = false;
+            btnCancel.IsEnabled = true;
+            MachListBox.IsEnabled = false;
+            TxtBoxMachName.Focus();
+            TxtBoxMachName.SelectAll();
+        }
+
+
+        //delete selected machine
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete selected machine.", "Fusion PDO - Machine Manager", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                string del_query = "DELETE FROM MACHINE WHERE machine_id = '"+ selID.Text +"' ";
+                SqlCommand sqlCmd = new SqlCommand(del_query, sqlCon);
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+
+                MessageBox.Show("Selected Machine successfully deleted.", "Fusion PDO - Machine Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadMachinesQuery();
+                MachListBox.ScrollIntoView(MachListBox.SelectedItem);
+            }
+        }
     }
 }
