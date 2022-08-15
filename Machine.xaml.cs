@@ -85,7 +85,7 @@ namespace Fusion_v2
 
                     SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
                     sqlCon.Open();
-                    string mach_query = "SELECT * FROM MACHINE WHERE machine_id = '" + id + "'";
+                    string mach_query = "SELECT * FROM MACHINE INNER JOIN Machine_Group_Assoc ON MACHINE.machine_id=Machine_Group_Assoc.FK_machine_id INNER JOIN Machine_Groups ON Machine_Groups.machine_group_id=Machine_Group_Assoc.FK_machine_group_id WHERE MACHINE.machine_id = '" + id + "'";
                     SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
@@ -94,6 +94,8 @@ namespace Fusion_v2
                         {
                             string machine_level = dr["machineLevel"].ToString();
                             string machine_name = dr["machine_name"].ToString();
+                            int cpg_id = int.Parse(dr["machine_group_id"].ToString());
+                            string ctrlPgrmGrp = dr["machine_group_name"].ToString();
                             string facility_id = dr["AlternateID"].ToString();
                             string notes = dr["note"].ToString();
 
@@ -130,6 +132,8 @@ namespace Fusion_v2
                             }//machine level
 
                             TxtBoxMachName.Text = machine_name;
+                            txtCPG_id.Text = cpg_id.ToString(); //ID OF CONTROL PROGRAM GROUP
+                            TxtBoxCtrlPgrmGrp.Text = ctrlPgrmGrp;
                             TxtBoxFacId.Text = facility_id;
                             TxtBoxNotes.Text = notes;
                         }
@@ -186,9 +190,7 @@ namespace Fusion_v2
         private void btnOpenMachLicMngr_Click(object sender, RoutedEventArgs e)
         {
             MachLicenseManagerGrid.Visibility = Visibility.Visible;
-            MachLevel1Query();
-            MachLevel2Query();
-            MachLevel3Query();
+            MachineLicenseLevels();
         }
 
         private void BtnCloseMachLicenseMngr_Click(object sender, RoutedEventArgs e)
@@ -197,7 +199,7 @@ namespace Fusion_v2
         }
 
         
-        //Machine License Manager Content
+        //Machine License Manager Functions
         
         public class MachLevel1
         {
@@ -223,100 +225,153 @@ namespace Fusion_v2
         IList<MachLevel2> machLvl2 = new List<MachLevel2>();
         IList<MachLevel3> machLvl3 = new List<MachLevel3>();
 
-        public void MachLevel1Query()
+        public void MachineLicenseLevels()
         {
             LstBoxMachLvl1.ItemsSource = null;
-            machLvl1 = new List<MachLevel1>();
-
-            try
-            {
-                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-                sqlCon.Open();
-                string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 1 ORDER BY machine_name";
-                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "MACHINE");
-
-                foreach (DataRow dr in ds.Tables[0].Rows)
-                {
-                    machLvl1.Add(new MachLevel1()
-                    {
-                        MachLvl1_ID = int.Parse(dr["machine_id"].ToString()),
-                        MachLvl1_Name = dr["machine_name"].ToString(),
-                        MachLvl1_Level = dr["machineLevel"].ToString()
-                    });
-                }
-                LstBoxMachLvl1.ItemsSource = machLvl1;
-                
-                da.Dispose();
-                ds.Dispose();
-                sqlCon.Close();
-            }
-            catch (Exception ex) { ex.Message.ToString(); }
-        }
-
-        public void MachLevel2Query()
-        {
             LstBoxMachLvl2.ItemsSource = null;
-            machLvl2 = new List<MachLevel2>();
-
-            try
-            {
-                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-                sqlCon.Open();
-                string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 2 ORDER BY machine_name";
-                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "MACHINE");
-
-                foreach (DataRow dr in ds.Tables[0].Rows)
-                {
-                    machLvl2.Add(new MachLevel2()
-                    {
-                        MachLvl2_ID = int.Parse(dr["machine_id"].ToString()),
-                        MachLvl2_Name = dr["machine_name"].ToString(),
-                        MachLvl2_Level = dr["machineLevel"].ToString()
-                    });
-                }
-                LstBoxMachLvl2.ItemsSource = machLvl2;
-
-                da.Dispose();
-                ds.Dispose();
-                sqlCon.Close();
-            }
-            catch (Exception ex) { ex.Message.ToString(); }
-        }
-
-        public void MachLevel3Query()
-        {
             LstBoxMachLvl3.ItemsSource = null;
+            machLvl1 = new List<MachLevel1>();
+            machLvl2 = new List<MachLevel2>();
             machLvl3 = new List<MachLevel3>();
 
             try
             {
                 SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
                 sqlCon.Open();
-                string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 3 ORDER BY machine_name";
+                string mach_query = "SELECT * FROM MACHINE ORDER BY machine_name";
                 SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "MACHINE");
-
-                foreach (DataRow dr in ds.Tables[0].Rows)
+                var dr = cmd.ExecuteReader();
+                if (dr.HasRows)
                 {
-                    machLvl3.Add(new MachLevel3()
+                    while (dr.Read())
                     {
-                        MachLvl3_ID = int.Parse(dr["machine_id"].ToString()),
-                        MachLvl3_Name = dr["machine_name"].ToString(),
-                        MachLvl3_Level = dr["machineLevel"].ToString()
-                    });
+                        int mach_id = int.Parse(dr["machine_id"].ToString());
+                        string mach_name = dr["machine_name"].ToString();
+                        string mach_level = dr["machineLevel"].ToString();
+                        
+                        if (mach_level == "1")
+                        {
+                            machLvl1.Add(new MachLevel1()
+                            {
+                                MachLvl1_ID = mach_id,
+                                MachLvl1_Name = mach_name,
+                                MachLvl1_Level = mach_level
+                            });
+                        }
+                        else if (mach_level == "2")
+                        {
+                            machLvl2.Add(new MachLevel2()
+                            {
+                                MachLvl2_ID = mach_id,
+                                MachLvl2_Name = mach_name,
+                                MachLvl2_Level = mach_level
+                            });
+                        }
+                        else
+                        {
+                            machLvl3.Add(new MachLevel3()
+                            {
+                                MachLvl3_ID = mach_id,
+                                MachLvl3_Name = mach_name,
+                                MachLvl3_Level = mach_level
+                            });
+                        }
+                    }
                 }
+                LstBoxMachLvl1.ItemsSource = machLvl1;
+                LstBoxMachLvl2.ItemsSource = machLvl2;
                 LstBoxMachLvl3.ItemsSource = machLvl3;
+                
+               
+                sqlCon.Close();
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+        }
 
+        //public void MachLevel2Query()
+        //{
+        //    LstBoxMachLvl2.ItemsSource = null;
+        //    machLvl2 = new List<MachLevel2>();
+
+        //    try
+        //    {
+        //        SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+        //        sqlCon.Open();
+        //        string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 2 ORDER BY machine_name";
+        //        SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //        DataSet ds = new DataSet();
+        //        da.Fill(ds, "MACHINE");
+
+        //        foreach (DataRow dr in ds.Tables[0].Rows)
+        //        {
+        //            machLvl2.Add(new MachLevel2()
+        //            {
+        //                MachLvl2_ID = int.Parse(dr["machine_id"].ToString()),
+        //                MachLvl2_Name = dr["machine_name"].ToString(),
+        //                MachLvl2_Level = dr["machineLevel"].ToString()
+        //            });
+        //        }
+        //        LstBoxMachLvl2.ItemsSource = machLvl2;
+
+        //        da.Dispose();
+        //        ds.Dispose();
+        //        sqlCon.Close();
+        //    }
+        //    catch (Exception ex) { ex.Message.ToString(); }
+        //}
+
+        //public void MachLevel3Query()
+        //{
+        //    LstBoxMachLvl3.ItemsSource = null;
+        //    machLvl3 = new List<MachLevel3>();
+
+        //    try
+        //    {
+        //        SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+        //        sqlCon.Open();
+        //        string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 3 ORDER BY machine_name";
+        //        SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //        DataSet ds = new DataSet();
+        //        da.Fill(ds, "MACHINE");
+
+        //        foreach (DataRow dr in ds.Tables[0].Rows)
+        //        {
+        //            machLvl3.Add(new MachLevel3()
+        //            {
+        //                MachLvl3_ID = int.Parse(dr["machine_id"].ToString()),
+        //                MachLvl3_Name = dr["machine_name"].ToString(),
+        //                MachLvl3_Level = dr["machineLevel"].ToString()
+        //            });
+        //        }
+        //        LstBoxMachLvl3.ItemsSource = machLvl3;
+
+        //        da.Dispose();
+        //        ds.Dispose();
+        //        sqlCon.Close();
+        //    }
+        //    catch (Exception ex) { ex.Message.ToString(); }
+        //}
+
+        //ComboBox Control Program Group
+        public void FillComboBoxCntrlPgrmGrp(ComboBox comBoxName)
+        {
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                String query = "SELECT * from Machine_Groups";
+                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                SqlDataAdapter da = new SqlDataAdapter(sqlCmd);
+                DataSet ds = new DataSet();
+
+                da.Fill(ds);
+                comBoxName.ItemsSource = ds.Tables[0].DefaultView;
+                comBoxName.DisplayMemberPath = ds.Tables[0].Columns["machine_group_name"].ToString();
+                comBoxName.SelectedValuePath = ds.Tables[0].Columns["machine_group_id"].ToString();
+                comBoxName.SelectedIndex = 0;
                 da.Dispose();
-                ds.Dispose();
                 sqlCon.Close();
             }
             catch (Exception ex) { ex.Message.ToString(); }
@@ -331,7 +386,7 @@ namespace Fusion_v2
             rbMachLvl3.IsEnabled = true;
             rbMachLvl1.IsChecked = true;
             TxtBoxMachName.IsReadOnly = false;
-            TxtBoxCtrlPgrmGrp.IsReadOnly = false;
+            TxtBoxCtrlPgrmGrp.IsReadOnly = true;
             TxtBoxFacId.IsReadOnly = false;
             TxtBoxNotes.IsReadOnly = false;
             TxtBoxMachName.Text = "";
@@ -339,6 +394,8 @@ namespace Fusion_v2
             TxtBoxFacId.Text = "";
             TxtBoxNotes.Text = "";
             btnOpenMachLicMngr.IsEnabled = false;
+            btnAddNewMach.Visibility = Visibility.Collapsed;
+            btnSaveAdd.Visibility = Visibility.Visible;
             btnEdit.IsEnabled = false;
             btnDuplicate.IsEnabled = false;
             btnDelete.IsEnabled = false;
@@ -347,6 +404,9 @@ namespace Fusion_v2
             tabItemGeneral.IsSelected = true;
             tabItemGeneral.Focus();
             TxtBoxMachName.Focus();
+            CmbBoxCtrlPgrmGrp.Visibility = Visibility.Visible;
+            TxtBoxCtrlPgrmGrp.Visibility = Visibility.Collapsed;
+            FillComboBoxCntrlPgrmGrp(CmbBoxCtrlPgrmGrp);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -360,12 +420,16 @@ namespace Fusion_v2
             TxtBoxFacId.IsReadOnly = true;
             TxtBoxNotes.IsReadOnly = true;
             btnOpenMachLicMngr.IsEnabled = true;
+            btnAddNewMach.Visibility = Visibility.Visible;
+            btnSaveAdd.Visibility = Visibility.Collapsed;
             btnAddNewMach.IsEnabled = true;
             btnEdit.IsEnabled = true;
             btnDuplicate.IsEnabled = true;
             btnDelete.IsEnabled = true;
             btnCancel.IsEnabled = false;
             MachListBox.IsEnabled = true;
+            CmbBoxCtrlPgrmGrp.Visibility = Visibility.Collapsed;
+            TxtBoxCtrlPgrmGrp.Visibility = Visibility.Visible;
             LoadMachinesQuery();
         }
 
@@ -374,7 +438,7 @@ namespace Fusion_v2
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             TxtBoxMachName.IsReadOnly = false;
-            TxtBoxCtrlPgrmGrp.IsReadOnly = false;
+            TxtBoxCtrlPgrmGrp.IsReadOnly = true;
             TxtBoxFacId.IsReadOnly = false;
             TxtBoxNotes.IsReadOnly = false;
             btnOpenMachLicMngr.IsEnabled = false;
@@ -385,6 +449,10 @@ namespace Fusion_v2
             MachListBox.IsEnabled = false;
             TxtBoxMachName.Focus();
             TxtBoxMachName.SelectAll();
+            CmbBoxCtrlPgrmGrp.Visibility = Visibility.Visible;
+            TxtBoxCtrlPgrmGrp.Visibility = Visibility.Collapsed;
+            FillComboBoxCntrlPgrmGrp(CmbBoxCtrlPgrmGrp);
+            CmbBoxCtrlPgrmGrp.SelectedIndex = int.Parse(txtCPG_id.Text) - 1;
         }
 
 
@@ -395,7 +463,7 @@ namespace Fusion_v2
             {
                 SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
                 sqlCon.Open();
-                string del_query = "DELETE FROM MACHINE WHERE machine_id = '"+ selID.Text +"' ";
+                string del_query = "DELETE FROM MACHINE WHERE machine_id = '"+ selID.Text +"'; DELETE FROM Machine_Group_Assoc WHERE FK_machine_id = '"+ selID.Text +"' ";
                 SqlCommand sqlCmd = new SqlCommand(del_query, sqlCon);
                 sqlCmd.ExecuteNonQuery();
                 sqlCon.Close();

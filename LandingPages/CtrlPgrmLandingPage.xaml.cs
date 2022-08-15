@@ -138,7 +138,7 @@ namespace Fusion_v2.LandingPages
 
         private void machGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Machine m = new Machine();
+            MachineManager m = new MachineManager();
             PageFrame.Content = m.Content;
             title.Text = "Machine";
 

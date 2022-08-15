@@ -125,7 +125,12 @@
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Label Grid.Column="0" Content="Control Program Group:" Foreground="Black" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                                                    
                                                                     <TextBox Grid.Column="1" Name="TxtBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
+
+                                                                    <ComboBox Grid.Column="1" Name="CmbBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" Background="AliceBlue" Margin="5 0 0 0" Visibility="Collapsed"/>
+
+                                                                    <TextBlock Grid.Column="1" Name="txtCPG_id" Visibility="Hidden"/>
                                                                 </Grid>
                                                             </DockPanel>
 
@@ -329,7 +334,7 @@
                                                                 </Border>
                                                             </Grid>
 
-                                                            <Grid Name="SocketGrid" Margin="10" Visibility="Collapsed">
+                                                            <Grid Name="SocketGrid" Margin="10" Visibility="Visible">
                                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                                                     <Border Background="#FF42425B" CornerRadius="15">
                                                                         <StackPanel Margin="20">
@@ -949,6 +954,10 @@
 
                                                             <Button x:Name="btnAddNewMach" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Add New Machine" Margin="5 0 0 0" Click="btnAddNewMach_Click">
                                                                 <materialDesign:PackIcon Kind="AddBox" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                            </Button>
+
+                                                            <Button x:Name="btnSaveAdd" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Save New Machine" Margin="5 0 0 0" Visibility="Collapsed">
+                                                                <materialDesign:PackIcon Kind="ContentSave" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                             </Button>
 
                                                             <Button x:Name="btnEdit" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Edit Selected Machine" Margin="5 0 0 0" Click="btnEdit_Click">

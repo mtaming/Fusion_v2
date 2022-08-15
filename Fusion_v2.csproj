@@ -97,6 +97,9 @@
     <Compile Include="Machine.xaml.cs">
       <DependentUpon>Machine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MachineManager.xaml.cs">
+      <DependentUpon>MachineManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="nav.xaml.cs">
       <DependentUpon>nav.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Machine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MachineManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
