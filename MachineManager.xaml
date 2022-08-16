@@ -12,7 +12,35 @@
       FontFamily="Century Gothic"
       Title="MachineManager">
 
+
+
     <Page.Resources>
+
+        <Style x:Key="ExpanderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="IsEnabled" Value="True" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid x:Name="Button" Margin="0,4,0,0" HorizontalAlignment="Right" 
+                                   VerticalAlignment="Top" Width="16" Height="16">
+                            <Rectangle Stroke="#FF027BA6" HorizontalAlignment="Stretch" 
+                                       VerticalAlignment="Stretch" Width="Auto" Height="Auto" 
+                                       RadiusX="3" RadiusY="3" Fill="#FF00A2DC">
+                            </Rectangle>
+                            <Rectangle x:Name="CollapsedVisual" HorizontalAlignment="Left" 
+                                       VerticalAlignment="Top" Width="2" Height="8" RadiusX="0" 
+                                       RadiusY="0" Fill="#FFFFFFFF" Margin="7,4,0,0" />
+                            <Rectangle RadiusX="0" RadiusY="0" Fill="#FFFFFFFF" 
+                                       HorizontalAlignment="Left" Margin="4,7,0,0" 
+                                       VerticalAlignment="Top" Width="8" Height="2" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Padding" Value="5"/>
@@ -75,7 +103,7 @@
                                                 <RowDefinition Height="70"/>
                                             </Grid.RowDefinitions>
 
-                                            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF234B6A" Margin="5 10 10 5" CornerRadius="15 0 0 0">
+                                            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF234B6A" Margin="10 10 10 5" CornerRadius="15 0 0 0">
 
                                             </Border>
 
@@ -98,8 +126,8 @@
                                             </ListBox>
 
                                             <Grid Grid.Column="0">
-                                                <StackPanel>
-                                                    <TreeView materialDesign:BottomDashedLineAdorner.Brush="AliceBlue">
+                                                <StackPanel Margin="2 0 0 0">
+                                                    <TreeView >
                                                         <TreeViewItem Name="GeneralTvI" Foreground="White" Margin="32 10 0 0">
                                                             <TreeViewItem.Header >
                                                                 <Grid Name="GeneralGrid" Background="Transparent" Width="180" Height="25" MouseDown="GeneralGrid_MouseDown">
@@ -145,7 +173,7 @@
 
                                                             <TreeViewItem Margin="16 0 0 0">
                                                                 <TreeViewItem.Header>
-                                                                    <Grid Name="SocketGrid" Background="Transparent" Width="180">
+                                                                    <Grid Name="SocketGrid" Background="Transparent" Width="180" MouseDown="SocketGrid_MouseDown">
                                                                         <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
                                                                             <materialDesign:PackIcon Kind="PlugSocket" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                                                             <TextBlock Text="Socket" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
@@ -156,7 +184,7 @@
 
                                                             <TreeViewItem Margin="16 0 0 0">
                                                                 <TreeViewItem.Header>
-                                                                    <Grid Name="FolderWatchGrid" Background="Transparent" Width="180">
+                                                                    <Grid Name="FolderWatchGrid" Background="Transparent" Width="180" MouseDown="FolderWatchGrid_MouseDown" >
                                                                         <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
                                                                             <materialDesign:PackIcon Kind="Folder" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                                                             <TextBlock Text="Folder Watch" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
@@ -190,7 +218,7 @@
 
                                                             <TreeViewItem Margin="16 0 0 0">
                                                                 <TreeViewItem.Header>
-                                                                    <Grid Name="ParsingRulesGrid" Background="Transparent">
+                                                                    <Grid Name="ParsingRulesGrid" Background="Transparent" Width="180">
                                                                         <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
                                                                             <materialDesign:PackIcon Kind="ArrowLeftRight" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                                                             <TextBlock Text="Parsing Rules" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
@@ -202,10 +230,21 @@
 
                                                         <TreeViewItem Name="OperatorMessages" Foreground="White" Margin="32 0 0 0">
                                                             <TreeViewItem.Header>
-                                                                <Grid Name="OpMessGrid" Background="Transparent">
+                                                                <Grid Name="OpMessGrid" Background="Transparent" Width="180">
                                                                     <StackPanel Orientation="Horizontal">
                                                                         <materialDesign:PackIcon Kind="MessageFast" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="opmessicon"/>
                                                                         <TextBlock Text="Operator Messages" Name="opmesstb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
+                                                                    </StackPanel>
+                                                                </Grid>
+                                                            </TreeViewItem.Header>
+                                                        </TreeViewItem>
+
+                                                        <TreeViewItem Name="Personnel" Foreground="White" Margin="32 0 0 0">
+                                                            <TreeViewItem.Header>
+                                                                <Grid Name="PersonnelGrid" Background="Transparent" Width="180">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <materialDesign:PackIcon Kind="Person" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="personsicon"/>
+                                                                        <TextBlock Text="Personnel" Name="persontb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
                                                                     </StackPanel>
                                                                 </Grid>
                                                             </TreeViewItem.Header>
@@ -220,7 +259,7 @@
                                                 <Border Margin="5" BorderThickness="2 0 0 0" BorderBrush="#FFD1D1A6">
                                                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                                         <Grid>
-                                                            <Grid Name="GenSetGrid" Visibility="Visible">
+                                                            <Grid Name="GenSetGrid" Visibility="Collapsed">
                                                                 <Border >
                                                                     <StackPanel>
 
@@ -236,9 +275,9 @@
                                                                                 </StackPanel>
                                                                                 <DockPanel HorizontalAlignment="Left">
                                                                                     <Label Content="Machine License Level:*" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" FontWeight="Bold"/>
-                                                                                    <RadioButton Name="rbMachLvl1" Content="Level 1" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
-                                                                                    <RadioButton Name="rbMachLvl2" Content="Level 2" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
-                                                                                    <RadioButton Name="rbMachLvl3" Content="Level 3" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
+                                                                                    <RadioButton Name="rbMachLvl1" Content="Level 1" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="True"/>
+                                                                                    <RadioButton Name="rbMachLvl2" Content="Level 2" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="True"/>
+                                                                                    <RadioButton Name="rbMachLvl3" Content="Level 3" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="True"/>
                                                                                 </DockPanel>
 
                                                                                 <DockPanel Margin="20 20 20 0">
@@ -497,7 +536,7 @@
                                                                             <StackPanel>
                                                                                 <Label Content="Socket Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
                                                                             </StackPanel>
-                                                                            <CheckBox Name="CbxSocket" Content="Enable Socket" Foreground="BlanchedAlmond" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" />
+                                                                            <CheckBox Name="CbxSocket" Content="Enable Socket" Background="#FFF9F6F6" Foreground="BlanchedAlmond" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="CbxSocket_Checked" Unchecked="CbxSocket_Unchecked" />
 
                                                                             <Grid Name="Socket" Margin="15" Visibility="Collapsed">
                                                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -512,44 +551,28 @@
                                                                                                         <ColumnDefinition Width="*"/>
                                                                                                     </Grid.ColumnDefinitions>
 
-                                                                                                    <RadioButton Grid.Column="0" x:Name="sockStaticOpt" Content="Static IP" Foreground="White" FontSize="13" VerticalAlignment="Center"/>
+                                                                                                    <StackPanel Grid.Column="0">
+                                                                                                        <RadioButton Grid.Column="0" x:Name="sockStaticOpt" Content="Static IP" Background="#FFF9F6F6" Foreground="White" FontSize="13" VerticalAlignment="Center" Height="30" IsChecked="True"/>
+                                                                                                        <RadioButton x:Name="sockDynamicOpt" Content="Dynamic" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30"/>
 
-                                                                                                    <TextBox Grid.Column="1" Height="30" Background="AliceBlue" />
+                                                                                                        <RadioButton x:Name="sockNportOpt" Content="Nport" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30"/>
+                                                                                                    </StackPanel>
 
-                                                                                                </Grid>
-                                                                                            </DockPanel>
 
-                                                                                            <DockPanel Margin="0 5 0 0">
-                                                                                                <Grid>
-                                                                                                    <Grid.ColumnDefinitions>
-                                                                                                        <ColumnDefinition Width="150"/>
-                                                                                                        <ColumnDefinition Width="*"/>
-                                                                                                    </Grid.ColumnDefinitions>
-
-                                                                                                    <RadioButton x:Name="sockDynamicOpt" Content="Dynamic" Foreground="White" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0"/>
-
-                                                                                                    <TextBox Grid.Column="1" Height="30" Background="AliceBlue" />
+                                                                                                    <StackPanel Grid.Column="1">
+                                                                                                        <TextBox Grid.Column="1" Height="30" Background="AliceBlue" />
+                                                                                                        <TextBox Grid.Column="1" Height="30" Background="AliceBlue" Margin="0 5 0 0" IsEnabled="False"/>
+                                                                                                        <TextBox Grid.Column="1" Height="30" Background="AliceBlue" Margin="0 5 0 0" IsEnabled="False"/>
+                                                                                                    </StackPanel>
 
                                                                                                 </Grid>
                                                                                             </DockPanel>
 
-                                                                                            <DockPanel Margin="0 5 0 0">
-                                                                                                <Grid>
-                                                                                                    <Grid.ColumnDefinitions>
-                                                                                                        <ColumnDefinition Width="150"/>
-                                                                                                        <ColumnDefinition Width="*"/>
-                                                                                                    </Grid.ColumnDefinitions>
+                                                                                            
 
-                                                                                                    <RadioButton x:Name="sockNportOpt" Content="Nport" Foreground="White" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0"/>
-
-                                                                                                    <TextBox Grid.Column="1" Height="30" Background="AliceBlue" />
-
-                                                                                                </Grid>
-                                                                                            </DockPanel>
-
-                                                                                            <StackPanel Orientation="Horizontal">
-                                                                                                <CheckBox Name="CbxDNC" Content="DNC" Background="#FFF9F6F6" Foreground="White" FontSize="13" Margin="20 5 0 5" />
-                                                                                                <CheckBox Name="CbxBarcodeRequest" Background="#FFF9F6F6" Content="Barcode Request" Foreground="White" FontSize="13" Margin="230 5 0 5" />
+                                                                                            <StackPanel Orientation="Horizontal" Visibility="Collapsed">
+                                                                                                <CheckBox Name="CbxDNC" Content="DNC" Background="#FFF9F6F6" Foreground="White" FontSize="13" Margin="20 5 0 5" IsEnabled="False"/>
+                                                                                                <CheckBox Name="CbxBarcodeRequest" Background="#FFF9F6F6" Content="Barcode Request" Foreground="White" FontSize="13" Margin="230 5 0 5" IsEnabled="False"/>
                                                                                             </StackPanel>
 
 
@@ -625,12 +648,31 @@
                                                                     </ScrollViewer>
                                                                 </Border>
                                                             </Grid>
+
+                                                            <Grid Name="FolderWtchSetGrid" Visibility="Collapsed">
+                                                                <Border>
+                                                                    <StackPanel>
+                                                                        <StackPanel>
+                                                                            <Label Content="Folder Watch Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
+                                                                        </StackPanel>
+                                                                        <CheckBox Name="CbxFldrWtch" Content="Enable Folder Watch" Background="#FFF9F6F6" Foreground="BlanchedAlmond" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="CbxFldrWtch_Checked" Unchecked="CbxFldrWtch_Unchecked" />
+
+                                                                        <Grid Name="FldrWtch" Margin="15" Visibility="Visible">
+                                                                            <Border Background="#FF52779C" CornerRadius="15">
+                                                                                <StackPanel>
+                                                                                    
+                                                                                </StackPanel>
+                                                                            </Border>
+                                                                        </Grid>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </Grid>
                                                         </Grid>
                                                     </ScrollViewer>
                                                 </Border>
                                             </Grid>
 
-                                            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5 0 0 0">
+                                            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10 0 0 0">
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                                                     <Border Background="#FF234B6A" Margin="0 0 10 10" CornerRadius="0 0 10 0">
                                                         <Grid>

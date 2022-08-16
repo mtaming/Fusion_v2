@@ -378,6 +378,9 @@ namespace Fusion_v2
         }
 
 
+
+
+
         //add new machine
         private void btnAddNewMach_Click(object sender, RoutedEventArgs e)
         {
@@ -401,8 +404,8 @@ namespace Fusion_v2
             btnDelete.IsEnabled = false;
             btnCancel.IsEnabled = true;
             MachListBox.IsEnabled = false;
-            tabItemGeneral.IsSelected = true;
-            tabItemGeneral.Focus();
+            //tabItemGeneral.IsSelected = true;
+            //tabItemGeneral.Focus();
             TxtBoxMachName.Focus();
             CmbBoxCtrlPgrmGrp.Visibility = Visibility.Visible;
             TxtBoxCtrlPgrmGrp.Visibility = Visibility.Collapsed;

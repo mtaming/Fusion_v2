@@ -30,6 +30,8 @@ namespace Fusion_v2
             GenSetGrid.Visibility = Visibility.Visible;
             FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.Khaki;
             gentb.Foreground = Brushes.Khaki;
@@ -54,6 +56,8 @@ namespace Fusion_v2
             FlashDNCSetGrid.Visibility = Visibility.Visible;
             FocasSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
 
             commIcon.Foreground = Brushes.Khaki;
             commtb.Foreground = Brushes.Khaki;
@@ -77,6 +81,8 @@ namespace Fusion_v2
             FocasSetGrid.Visibility = Visibility.Visible;
             FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
 
             commIcon.Foreground = Brushes.Khaki;
             commtb.Foreground = Brushes.Khaki;
@@ -93,6 +99,56 @@ namespace Fusion_v2
         private void CbxFocas_Unchecked(object sender, RoutedEventArgs e)
         {
             Focas.Visibility = Visibility.Collapsed;
+        }
+
+        private void SocketGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SocketSetGrid.Visibility = Visibility.Visible;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            GenSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+
+            commIcon.Foreground = Brushes.Khaki;
+            commtb.Foreground = Brushes.Khaki;
+
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
+        }
+
+        private void CbxSocket_Checked(object sender, RoutedEventArgs e)
+        {
+            Socket.Visibility = Visibility.Visible;
+        }
+
+        private void CbxSocket_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Socket.Visibility = Visibility.Collapsed;
+        }
+
+        private void FolderWatchGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FolderWtchSetGrid.Visibility = Visibility.Visible;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            GenSetGrid.Visibility = Visibility.Collapsed;
+
+            commIcon.Foreground = Brushes.Khaki;
+            commtb.Foreground = Brushes.Khaki;
+
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
+        }
+
+        private void CbxFldrWtch_Checked(object sender, RoutedEventArgs e)
+        {
+            FldrWtch.Visibility = Visibility.Visible;
+        }
+
+        private void CbxFldrWtch_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FldrWtch.Visibility = Visibility.Collapsed;
         }
     }
 }
