@@ -657,10 +657,53 @@
                                                                         </StackPanel>
                                                                         <CheckBox Name="CbxFldrWtch" Content="Enable Folder Watch" Background="#FFF9F6F6" Foreground="BlanchedAlmond" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="CbxFldrWtch_Checked" Unchecked="CbxFldrWtch_Unchecked" />
 
-                                                                        <Grid Name="FldrWtch" Margin="15" Visibility="Visible">
+                                                                        <Grid Name="FldrWtch" Margin="15" Visibility="Collapsed">
                                                                             <Border Background="#FF52779C" CornerRadius="15">
                                                                                 <StackPanel>
-                                                                                    
+                                                                                    <DockPanel Margin="10">
+                                                                                        <TextBlock Text="Event Trigger via:" Foreground="White" FontSize="13" VerticalAlignment="Center"/>
+
+                                                                                        <RadioButton Background="#FFF9F6F6" Margin="10 0 10 0">
+                                                                                            <Label Foreground="White" FontSize="13" Content="Timer Event Based"/>
+                                                                                        </RadioButton>
+
+                                                                                        <RadioButton Background="#FFF9F6F6">
+                                                                                            <Label Foreground="White" FontSize="13">
+                                                                                                Windows Event Based
+                                                                                            </Label>
+                                                                                        </RadioButton>
+                                                                                    </DockPanel>
+
+                                                                                    <DockPanel Margin="5 0 5 5">
+                                                                                        <Grid>
+                                                                                            <Grid.ColumnDefinitions>
+                                                                                                <ColumnDefinition Width="*"/>
+                                                                                                <ColumnDefinition Width="75"/>
+                                                                                            </Grid.ColumnDefinitions>
+                                                                                            <TextBox Grid.Column="0" FontSize="13" FontWeight="Normal" Background="White" BorderBrush="Black" BorderThickness="2" Height="30"></TextBox>
+
+                                                                                            <Button Grid.Column="1" Height="Auto" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="5 0 5 0">
+                                                                                                <materialDesign:PackIcon Kind="Folder" Width="30" Height="30" Foreground="#FFE6B920"/>
+                                                                                            </Button>
+                                                                                        </Grid>
+                                                                                    </DockPanel>
+                                                                                    <TextBlock x:Name="FldrInstruct"  Text="When a new file is detected in the Watch Folder, move it to the Fusion Incoming File Manager." Foreground="White" FontWeight="Normal" FontSize="11" Margin="5 0 0 0"/>
+
+                                                                                    <DockPanel Margin="0 10 0 0 ">
+                                                                                        <RadioButton Background="#FFF9F6F6" Margin="10 0 10 0">
+                                                                                            <Label Foreground="White" FontSize="12" Content="Move to Incoming File Manager"/>
+                                                                                        </RadioButton>
+                                                                                        <RadioButton Background="#FFF9F6F6" Margin="10 0 10 0">
+                                                                                            <Label Foreground="White" FontSize="12" Content="DNC Link"/>
+                                                                                        </RadioButton>
+                                                                                        <RadioButton Background="#FFF9F6F6" Margin="10 0 10 0">
+                                                                                            <Label Foreground="White" FontSize="12" Content="TCP Transfer"/>
+                                                                                        </RadioButton>
+                                                                                    </DockPanel>
+
+                                                                                    <StackPanel>
+                                                                                        
+                                                                                    </StackPanel>
                                                                                 </StackPanel>
                                                                             </Border>
                                                                         </Grid>
