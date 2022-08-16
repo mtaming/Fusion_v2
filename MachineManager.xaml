@@ -102,11 +102,11 @@
                                             <RowDefinition Height="70"/>
                                         </Grid.RowDefinitions>
 
-                                        <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF234B6A" Margin="10 10 10 5" CornerRadius="15 0 0 0">
+                                        <Border Grid.Column="1" Grid.ColumnSpan="2" Background="#FF234B6A" Margin="10 10 10 5" CornerRadius="0 0 15 0">
 
                                         </Border>
 
-                                        <Grid Grid.Column="0" Grid.Row="0">
+                                        <Grid Grid.Column="2" Grid.Row="0">
                                             <Border>
                                                 <StackPanel Margin="2 0 0 0">
                                                     <TreeView >
@@ -239,10 +239,10 @@
 
 
                                         <Grid Grid.Column="1" Grid.Row="0" Margin="0 5 0 0">
-                                            <Border Margin="5" BorderThickness="2 0 0 0" BorderBrush="#FFD1D1A6">
+                                            <Border Margin="5" BorderThickness="0 0 2 0" BorderBrush="#FFD1D1A6">
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                                     <Grid>
-                                                        <Grid Name="GenSetGrid" Visibility="Visible">
+                                                        <Grid Name="GenSetGrid" Visibility="Collapsed">
                                                             <Border >
                                                                 <StackPanel>
 
@@ -899,7 +899,7 @@
                                                         </Grid>
 
                                                         <Grid Name="RemRequestSetGrid">
-                                                            <Grid Name="RemReqSett" Visibility="Collapsed">
+                                                            <Grid Name="RemReqSett" Visibility="Visible">
                                                                 <Border>
                                                                     <StackPanel>
                                                                         <Label Content="Remote Request Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
@@ -941,18 +941,142 @@
                                                                                     </StackPanel>
                                                                                 </Grid>
                                                                             </DockPanel>
+
+                                                                            <Separator Margin="0 10 0 0"></Separator>
+
+                                                                            <DockPanel Margin="0 5 0 0">
+                                                                                <Label Content="Persistency Rate: (mins)" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0 10 0 0"/>
+                                                                                <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Background="AliceBlue" Width="80" BorderThickness="1" Padding="5 5" Height="30" Margin="0 10 0 0"/>
+                                                                                <Label Content="Revision Hold" Foreground="White" FontSize="13" FontWeight="Bold" Margin="45 0 5 0"/>
+                                                                                <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="-90 20 0 0">
+                                                                                    <Label Foreground="White" Content="Enable" FontSize="12"/>
+                                                                                </CheckBox>
+
+                                                                                <Label Content="Send Notification" Foreground="White" FontSize="13" FontWeight="Bold" Margin="45 0 5 0"/>
+                                                                                <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="-110 20 0 0">
+                                                                                    <Label Foreground="White" Content="Enable" FontSize="12"/>
+                                                                                </CheckBox>
+                                                                            </DockPanel>
                                                                         </StackPanel>
                                                                     </StackPanel>
                                                                 </Border>
                                                             </Grid>
+                                                        </Grid>
+
+                                                        <Grid Name="OpMessageGrid" Visibility="Collapsed">
+                                                            <Border>
+                                                                <StackPanel>
+                                                                    <DockPanel Width="500" HorizontalAlignment="Left" Margin="10">
+                                                                        <Button Name="BtnModifyFnameExt" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
+                                                                            <DockPanel>
+                                                                                <TextBlock Text="Modify Filename and Extension" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                            </DockPanel>
+                                                                        </Button>
+
+                                                                        <Button Name="BtnApplyToMach" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
+                                                                            <DockPanel>
+                                                                                <TextBlock Text="Apply to other Machines" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                            </DockPanel>
+                                                                        </Button>
+                                                                    </DockPanel>
+                                                                    <Grid Margin="5" Background="#FF16143E">
+
+                                                                        <Grid>
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="*"/>
+                                                                                <ColumnDefinition Width="*"/>
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="*"/>
+                                                                                <RowDefinition Height="*"/>
+                                                                                <RowDefinition Height="*"/>
+                                                                            </Grid.RowDefinitions>
+
+                                                                            <Grid Grid.Column="0" Grid.Row="0">
+
+                                                                                <GroupBox Header="Remote Request Lookup Not Found" Margin="5">
+                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                        <FlowDocument>
+                                                                                            <Paragraph>
+                                                                                                <Run Text=""/>
+                                                                                            </Paragraph>
+                                                                                        </FlowDocument>
+                                                                                    </RichTextBox>
+                                                                                </GroupBox>
+                                                                            </Grid>
+                                                                            <Grid Grid.Column="0" Grid.Row="1">
+                                                                                <GroupBox Header="Remote Request File Lock" Margin="5">
+                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                        <FlowDocument>
+                                                                                            <Paragraph>
+                                                                                                <Run Text=""/>
+                                                                                            </Paragraph>
+                                                                                        </FlowDocument>
+                                                                                    </RichTextBox>
+                                                                                </GroupBox>
+                                                                            </Grid>
+                                                                            <Grid Grid.Column="0" Grid.Row="2">
+                                                                                <GroupBox Header="Remote Request On Hold" Margin="5">
+                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                        <FlowDocument>
+                                                                                            <Paragraph>
+                                                                                                <Run Text=""/>
+                                                                                            </Paragraph>
+                                                                                        </FlowDocument>
+                                                                                    </RichTextBox>
+                                                                                </GroupBox>
+                                                                            </Grid>
+
+
+                                                                            <!-- column 1 -->
+
+                                                                            <Grid Grid.Column="1" Grid.Row="0">
+                                                                                <GroupBox Header="Remote Request Failed" Margin="5">
+                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                        <FlowDocument>
+                                                                                            <Paragraph>
+                                                                                                <Run Text=""/>
+                                                                                            </Paragraph>
+                                                                                        </FlowDocument>
+                                                                                    </RichTextBox>
+                                                                                </GroupBox>
+                                                                            </Grid>
+
+                                                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                                                <GroupBox Header="Remote Request File Not Found" Margin="5">
+                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                        <FlowDocument>
+                                                                                            <Paragraph>
+                                                                                                <Run Text=""/>
+                                                                                            </Paragraph>
+                                                                                        </FlowDocument>
+                                                                                    </RichTextBox>
+                                                                                </GroupBox>
+                                                                            </Grid>
+
+                                                                            <Grid Grid.Column="1" Grid.Row="2">
+                                                                                <GroupBox Header="Remote Request Folder Not Found" Margin="5">
+                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                        <FlowDocument>
+                                                                                            <Paragraph>
+                                                                                                <Run Text=""/>
+                                                                                            </Paragraph>
+                                                                                        </FlowDocument>
+                                                                                    </RichTextBox>
+                                                                                </GroupBox>
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </StackPanel>
+                                                            </Border>
                                                         </Grid>
                                                     </Grid>
                                                 </ScrollViewer>
                                             </Border>
                                         </Grid>
 
-                                        <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
-                                            <ListBox ItemContainerStyle="{StaticResource _ListBoxItemStyle}"  Grid.Column="3" Grid.RowSpan="2" x:Name="MachListBox" BorderThickness="3" BorderBrush="Black" Margin="0,10,10,10" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" FontSize="13" Padding="5" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" TextSearch.TextPath="machName" SelectionChanged="MachListBox_SelectionChanged" >
+                                        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+                                            <ListBox ItemContainerStyle="{StaticResource _ListBoxItemStyle}"  Grid.Column="3" Grid.RowSpan="2" x:Name="MachListBox" BorderThickness="3" BorderBrush="Black" Margin="10,10,0,10" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" FontSize="13" Padding="5" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" TextSearch.TextPath="machName" SelectionChanged="MachListBox_SelectionChanged" >
                                                 <ListBox.Background>
                                                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                                         <GradientStop Color="#FF98B5CB" Offset="0.0" />
@@ -971,7 +1095,7 @@
 
                                         </Grid>
 
-                                        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10 0 0 0">
+                                        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="10 0 0 0">
                                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                                                 <Border Background="#FF234B6A" Margin="0 0 10 10" CornerRadius="0 0 0 10">
                                                     <Grid>
