@@ -48,7 +48,7 @@
     <Grid>
         <Grid Name="MainGrid">
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            
                 <Grid Name="MachGrid">
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <materialDesign:PackIcon Kind="Server" Width="30" Height="30" Margin="5 8 0 0" Foreground="White"/>
@@ -336,7 +336,7 @@
                                                                     </Border>
                                                                 </Grid>
 
-                                                                <Grid Name="SocketGrid" Margin="10" Visibility="Visible">
+                                                                <Grid Name="SocketGrid" Margin="10" Visibility="Collapsed">
                                                                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                                                         <Border Background="#FF42425B" CornerRadius="15">
                                                                             <StackPanel Margin="20">
@@ -944,7 +944,7 @@
 
                                             </TabControl>
 
-                                            <Grid Grid.Column="1" Grid.Row="1" >
+                                            <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                                                     <Border Background="#FF185583" Margin="0 0 10 10" CornerRadius="0 0 10 0">
                                                         <Grid>
@@ -989,7 +989,7 @@
                         </Grid>
                     </Border>
                 </Grid>
-            </ScrollViewer>
+
 
             <Grid Name="MachLicenseManagerGrid" Visibility="Collapsed">
                 <Grid.Background>
