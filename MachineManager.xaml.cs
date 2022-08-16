@@ -35,6 +35,7 @@ namespace Fusion_v2
             FocasSetGrid.Visibility = Visibility.Collapsed;
             SocketSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.Khaki;
             gentb.Foreground = Brushes.Khaki;
@@ -67,6 +68,7 @@ namespace Fusion_v2
             GenSetGrid.Visibility = Visibility.Collapsed;
             SocketSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
 
             commIcon.Foreground = Brushes.Khaki;
             commtb.Foreground = Brushes.Khaki;
@@ -95,6 +97,7 @@ namespace Fusion_v2
             GenSetGrid.Visibility = Visibility.Collapsed;
             SocketSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
 
             commIcon.Foreground = Brushes.Khaki;
             commtb.Foreground = Brushes.Khaki;
@@ -123,6 +126,8 @@ namespace Fusion_v2
             FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
+
 
             commIcon.Foreground = Brushes.Khaki;
             commtb.Foreground = Brushes.Khaki;
@@ -151,6 +156,7 @@ namespace Fusion_v2
             FocasSetGrid.Visibility = Visibility.Collapsed;
             FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
 
             commIcon.Foreground = Brushes.Khaki;
             commtb.Foreground = Brushes.Khaki;
@@ -184,6 +190,17 @@ namespace Fusion_v2
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
+        }
+
+        private void RemReqSetGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            RemReqSettGrid.Visibility = Visibility.Visible;
+
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            GenSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
         }
 
 
@@ -598,6 +615,6 @@ namespace Fusion_v2
             }
         }
 
-       
+        
     }
 }

@@ -189,7 +189,7 @@
 
                                                             <TreeViewItem Margin="16 0 0 0">
                                                                 <TreeViewItem.Header>
-                                                                    <Grid Name="RemReqSetGrid" Background="Transparent" Width="180">
+                                                                    <Grid Name="RemReqSetGrid" Background="Transparent" Width="180" MouseDown="RemReqSetGrid_MouseDown" >
                                                                         <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
                                                                             <materialDesign:PackIcon Kind="Settings" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
                                                                             <TextBlock Text="Remote Request &#10; Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
@@ -242,7 +242,7 @@
                                             <Border Margin="5" BorderThickness="0 0 2 0" BorderBrush="#FFD1D1A6">
                                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                                     <Grid>
-                                                        <Grid Name="GenSetGrid" Visibility="Collapsed">
+                                                        <Grid Name="GenSetGrid" Visibility="Visible">
                                                             <Border >
                                                                 <StackPanel>
 
@@ -899,7 +899,7 @@
                                                         </Grid>
 
                                                         <Grid Name="RemRequestSetGrid">
-                                                            <Grid Name="RemReqSett" Visibility="Visible">
+                                                            <Grid Name="RemReqSettGrid" Visibility="Collapsed">
                                                                 <Border>
                                                                     <StackPanel>
                                                                         <Label Content="Remote Request Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
