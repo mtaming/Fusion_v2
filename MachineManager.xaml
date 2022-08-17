@@ -75,249 +75,246 @@
 
     <Grid>
         <Grid Name="MainGrid">
-            <Grid Name="MachManagerGrid">
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <materialDesign:PackIcon Kind="StateMachine" Width="30" Height="30" Margin="5 8 0 0" Foreground="White"/>
-                    <Label Content="Machine Setup" FontSize="25" Margin="5 0 0 0" FontWeight="Bold" Foreground="White" VerticalAlignment="Top"/>
-                </StackPanel>
-                <Border BorderBrush="Transparent" BorderThickness="2" Margin="10 50 10 0" >
-                    <Grid>
-                        <Border Name="serBorder" CornerRadius="10" BorderThickness="3" BorderBrush="#FFFFF0B7">
-                            <Grid >
-                                <Border BorderBrush="Black" Margin="5" CornerRadius="10">
-                                    <Border.Background>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                            <GradientStop Color="#FF205E8D" Offset="0.0" />
-                                            <GradientStop Color="#FF003B67" Offset="0.8" />
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                    <Grid >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="230"/>
-                                            <ColumnDefinition Width="*"  MinWidth="500"/>
-                                            <ColumnDefinition Width="230"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="70"/>
-                                        </Grid.RowDefinitions>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <Grid Name="MachManagerGrid">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <materialDesign:PackIcon Kind="StateMachine" Width="30" Height="30" Margin="5 8 0 0" Foreground="White"/>
+                        <Label Content="Machine Setup" FontSize="25" Margin="5 0 0 0" FontWeight="Bold" Foreground="White" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <Border BorderBrush="Transparent" BorderThickness="2" Margin="10 50 10 0" >
+                        <Grid>
+                            <Border Name="serBorder" CornerRadius="10" BorderThickness="3" BorderBrush="#FFFFF0B7">
+                                <Grid >
+                                    <Border BorderBrush="Black" Margin="5" CornerRadius="10">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#FF205E8D" Offset="0.0" />
+                                                <GradientStop Color="#FF003B67" Offset="0.8" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="230"/>
+                                                <ColumnDefinition Width="*"  MinWidth="500"/>
+                                                <ColumnDefinition Width="240"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="70"/>
+                                            </Grid.RowDefinitions>
 
-                                        <Border Grid.Column="1" Grid.ColumnSpan="2" Background="#FF234B6A" Margin="10 10 10 5" CornerRadius="0 0 15 0">
+                                            <Border Grid.Column="1" Grid.ColumnSpan="2" Background="#FF234B6A" Margin="10 10 10 5" CornerRadius="0 15 0 0">
 
-                                        </Border>
-
-                                        <Grid Grid.Column="2" Grid.Row="0">
-                                            <Border>
-                                                <StackPanel Margin="2 0 0 0">
-                                                    <TreeView >
-                                                        <TreeViewItem Name="GeneralTvI" Foreground="White" Margin="32 10 0 0">
-                                                            <TreeViewItem.Header >
-                                                                <Grid Name="GeneralGrid" Background="Transparent" Width="180" Height="25" MouseDown="GeneralGrid_MouseDown">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="SettingsApplications" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="Khaki" Name="genIcon"/>
-                                                                        <TextBlock Text="General" Name="gentb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="Khaki"/>
-                                                                    </StackPanel>
-                                                                </Grid>
-                                                            </TreeViewItem.Header>
-                                                        </TreeViewItem>
-
-                                                        <TreeViewItem Name="CommunicationsTvI" Foreground="White">
-                                                            <TreeViewItem.Header>
-                                                                <Grid Name="CommGrid" Background="Transparent" Width="180" Height="25" MouseDown="CommGrid_MouseDown">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="FileArrowLeftRight" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="commIcon"/>
-                                                                        <TextBlock Text="Communications" Name="commtb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White"/>
-                                                                    </StackPanel>
-                                                                </Grid>
-                                                            </TreeViewItem.Header>
-
-                                                            <TreeViewItem Margin="16 0 0 0">
-                                                                <TreeViewItem.Header>
-                                                                    <Grid Name="FlashDNCGrid" Background="Transparent" Width="180" MouseDown="FlashDNCGrid_MouseDown">
-                                                                        <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
-                                                                            <materialDesign:PackIcon Kind="UsbFlashDrive" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                                            <TextBlock Text="Flash DNC" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </TreeViewItem.Header>
-                                                            </TreeViewItem>
-
-                                                            <TreeViewItem Margin="16 0 0 0">
-                                                                <TreeViewItem.Header>
-                                                                    <Grid Name="FocasGrid" Background="Transparent" Width="180" MouseDown="FocasGrid_MouseDown">
-                                                                        <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
-                                                                            <materialDesign:PackIcon Kind="Settings" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                                            <TextBlock Text="Focas" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </TreeViewItem.Header>
-                                                            </TreeViewItem>
-
-                                                            <TreeViewItem Margin="16 0 0 0">
-                                                                <TreeViewItem.Header>
-                                                                    <Grid Name="SocketGrid" Background="Transparent" Width="180" MouseDown="SocketGrid_MouseDown">
-                                                                        <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
-                                                                            <materialDesign:PackIcon Kind="PlugSocket" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                                            <TextBlock Text="Socket" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </TreeViewItem.Header>
-                                                            </TreeViewItem>
-
-                                                            <TreeViewItem Margin="16 0 0 0">
-                                                                <TreeViewItem.Header>
-                                                                    <Grid Name="FolderWatchGrid" Background="Transparent" Width="180" MouseDown="FolderWatchGrid_MouseDown" >
-                                                                        <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
-                                                                            <materialDesign:PackIcon Kind="Folder" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                                            <TextBlock Text="Folder Watch" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </TreeViewItem.Header>
-                                                            </TreeViewItem>
-
-                                                        </TreeViewItem>
-
-                                                        <TreeViewItem Name="RemoteRequestTvI" Foreground="White">
-                                                            <TreeViewItem.Header>
-                                                                <Grid Name="RemReqGrid" Background="Transparent" Width="180" MouseDown="RemReqGrid_MouseDown">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="RemoteDesktop" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="remreqicon"/>
-                                                                        <TextBlock Text="Remote Request" Name="remreqtb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
-                                                                    </StackPanel>
-                                                                </Grid>
-                                                            </TreeViewItem.Header>
-
-                                                            <TreeViewItem Margin="16 0 0 0">
-                                                                <TreeViewItem.Header>
-                                                                    <Grid Name="RemReqSetGrid" Background="Transparent" Width="180" MouseDown="RemReqSetGrid_MouseDown" >
-                                                                        <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
-                                                                            <materialDesign:PackIcon Kind="Settings" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                                            <TextBlock Text="Remote Request &#10; Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </TreeViewItem.Header>
-                                                            </TreeViewItem>
-
-                                                            <TreeViewItem Margin="16 0 0 0">
-                                                                <TreeViewItem.Header>
-                                                                    <Grid Name="ParsingRulesGrid" Background="Transparent" Width="180">
-                                                                        <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
-                                                                            <materialDesign:PackIcon Kind="ArrowLeftRight" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                                            <TextBlock Text="Parsing Rules" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </TreeViewItem.Header>
-                                                            </TreeViewItem>
-                                                        </TreeViewItem>
-
-                                                        <TreeViewItem Name="OperatorMessages" Foreground="White" Margin="32 0 0 0">
-                                                            <TreeViewItem.Header>
-                                                                <Grid Name="OpMessGrid" Background="Transparent" Width="180">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="MessageFast" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="opmessicon"/>
-                                                                        <TextBlock Text="Operator Messages" Name="opmesstb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
-                                                                    </StackPanel>
-                                                                </Grid>
-                                                            </TreeViewItem.Header>
-                                                        </TreeViewItem>
-
-                                                        <TreeViewItem Name="Personnel" Foreground="White" Margin="32 0 0 0">
-                                                            <TreeViewItem.Header>
-                                                                <Grid Name="PersonnelGrid" Background="Transparent" Width="180">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <materialDesign:PackIcon Kind="Person" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="personsicon"/>
-                                                                        <TextBlock Text="Personnel" Name="persontb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
-                                                                    </StackPanel>
-                                                                </Grid>
-                                                            </TreeViewItem.Header>
-                                                        </TreeViewItem>
-                                                    </TreeView>
-                                                </StackPanel>
                                             </Border>
-                                        </Grid>
 
+                                            <Grid Grid.Column="2" Grid.Row="0">
+                                                <Border Margin="0 0 10 0">
+                                                    <StackPanel Margin="2 0 0 0">
+                                                        <TreeView >
+                                                            <TreeViewItem Name="GeneralTvI" Foreground="White" Margin="32 10 0 0" IsSelected="True">
+                                                                <TreeViewItem.Header >
+                                                                    <Grid Name="GeneralGrid" Background="Transparent" Width="180" Height="25" MouseDown="GeneralGrid_MouseDown">
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <materialDesign:PackIcon Kind="SettingsApplications" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="Khaki" Name="genIcon"/>
+                                                                            <TextBlock Text="General" Name="gentb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="Khaki"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </TreeViewItem.Header>
+                                                            </TreeViewItem>
 
+                                                            <TreeViewItem Name="CommunicationsTvI" Foreground="White">
+                                                                <TreeViewItem.Header>
+                                                                    <Grid Name="CommGrid" Background="Transparent" Width="180" Height="25" MouseDown="CommGrid_MouseDown">
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <materialDesign:PackIcon Kind="FileArrowLeftRight" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="commIcon"/>
+                                                                            <TextBlock Text="Communications" Name="commtb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </TreeViewItem.Header>
 
-                                        <Grid Grid.Column="1" Grid.Row="0" Margin="0 5 0 0">
-                                            <Border Margin="5" BorderThickness="0 0 2 0" BorderBrush="#FFD1D1A6">
-                                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                                                <TreeViewItem Margin="16 0 0 0">
+                                                                    <TreeViewItem.Header>
+                                                                        <Grid Name="FlashDNCGrid" Background="Transparent" Width="180" MouseDown="FlashDNCGrid_MouseDown">
+                                                                            <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+                                                                                <materialDesign:PackIcon Kind="UsbFlashDrive" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                                                <TextBlock Text="Flash DNC" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </TreeViewItem.Header>
+                                                                </TreeViewItem>
+
+                                                                <TreeViewItem Margin="16 0 0 0">
+                                                                    <TreeViewItem.Header>
+                                                                        <Grid Name="FocasGrid" Background="Transparent" Width="180" MouseDown="FocasGrid_MouseDown">
+                                                                            <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+                                                                                <materialDesign:PackIcon Kind="Settings" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                                                <TextBlock Text="Focas" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </TreeViewItem.Header>
+                                                                </TreeViewItem>
+
+                                                                <TreeViewItem Margin="16 0 0 0">
+                                                                    <TreeViewItem.Header>
+                                                                        <Grid Name="SocketGrid" Background="Transparent" Width="180" MouseDown="SocketGrid_MouseDown">
+                                                                            <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+                                                                                <materialDesign:PackIcon Kind="PlugSocket" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                                                <TextBlock Text="Socket" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </TreeViewItem.Header>
+                                                                </TreeViewItem>
+
+                                                                <TreeViewItem Margin="16 0 0 0">
+                                                                    <TreeViewItem.Header>
+                                                                        <Grid Name="FolderWatchGrid" Background="Transparent" Width="180" MouseDown="FolderWatchGrid_MouseDown" >
+                                                                            <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+                                                                                <materialDesign:PackIcon Kind="Folder" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                                                <TextBlock Text="Folder Watch" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </TreeViewItem.Header>
+                                                                </TreeViewItem>
+
+                                                            </TreeViewItem>
+
+                                                            <TreeViewItem Name="RemoteRequestTvI" Foreground="White">
+                                                                <TreeViewItem.Header>
+                                                                    <Grid Name="RemReqGrid" Background="Transparent" Width="180" MouseDown="RemReqGrid_MouseDown">
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <materialDesign:PackIcon Kind="RemoteDesktop" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="remreqicon"/>
+                                                                            <TextBlock Text="Remote Request" Name="remreqtb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </TreeViewItem.Header>
+
+                                                                <TreeViewItem Margin="16 0 0 0">
+                                                                    <TreeViewItem.Header>
+                                                                        <Grid Name="RemReqSetGrid" Background="Transparent" Width="180" MouseDown="RemReqSetGrid_MouseDown" >
+                                                                            <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+                                                                                <materialDesign:PackIcon Kind="Settings" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                                                <TextBlock Text="Remote Request &#10; Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </TreeViewItem.Header>
+                                                                </TreeViewItem>
+
+                                                                <TreeViewItem Margin="16 0 0 0">
+                                                                    <TreeViewItem.Header>
+                                                                        <Grid Name="ParsingRulesGrid" Background="Transparent" Width="180" MouseDown="ParsingRulesGrid_MouseDown">
+                                                                            <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+                                                                                <materialDesign:PackIcon Kind="ArrowLeftRight" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                                                <TextBlock Text="Parsing Rules" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13" Foreground="White" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </TreeViewItem.Header>
+                                                                </TreeViewItem>
+                                                            </TreeViewItem>
+
+                                                            <TreeViewItem Name="OperatorMessages" Foreground="White" Margin="32 0 0 0">
+                                                                <TreeViewItem.Header>
+                                                                    <Grid Name="OpMessGrid" Background="Transparent" Width="180" MouseDown="OpMessGrid_MouseDown">
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <materialDesign:PackIcon Kind="MessageFast" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="opmessicon"/>
+                                                                            <TextBlock Text="Operator Messages" Name="opmesstb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </TreeViewItem.Header>
+                                                            </TreeViewItem>
+
+                                                            <TreeViewItem Name="Personnel" Foreground="White" Margin="32 0 0 0">
+                                                                <TreeViewItem.Header>
+                                                                    <Grid Name="PersonnelGrid" Background="Transparent" Width="180" MouseDown="PersonnelGrid_MouseDown" >
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <materialDesign:PackIcon Kind="Person" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="personsicon"/>
+                                                                            <TextBlock Text="Personnel" Name="persontb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14" Foreground="White" />
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </TreeViewItem.Header>
+                                                            </TreeViewItem>
+                                                        </TreeView>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- GRID -->
+
+                                            <Grid Grid.Column="1" Grid.Row="0" Margin="0 5 0 0">
+                                                <Border Margin="10 5 5 5" BorderThickness="0 0 2 0" BorderBrush="#FFD1D1A6">
                                                     <Grid>
                                                         <Grid Name="GenSetGrid" Visibility="Visible">
                                                             <Border >
-                                                                <StackPanel>
+                                                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                                                    <StackPanel>
 
-                                                                    <Grid >
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="34*"/>
-                                                                            <ColumnDefinition Width="121*"/>
-                                                                        </Grid.ColumnDefinitions>
-
-                                                                        <StackPanel Grid.ColumnSpan="2">
+                                                                        <Grid>
                                                                             <StackPanel>
-                                                                                <Label Content="General Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
+                                                                                <StackPanel>
+                                                                                    <Label Content="General Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
+                                                                                </StackPanel>
+                                                                                <DockPanel HorizontalAlignment="Left">
+                                                                                    <Label Content="Machine License Level:*" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" FontWeight="Bold"/>
+                                                                                    <RadioButton Name="rbMachLvl1" Content="Level 1" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
+                                                                                    <RadioButton Name="rbMachLvl2" Content="Level 2" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
+                                                                                    <RadioButton Name="rbMachLvl3" Content="Level 3" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
+                                                                                </DockPanel>
+
+                                                                                <DockPanel Margin="20 20 20 0">
+                                                                                    <Grid>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition Width="200"/>
+                                                                                            <ColumnDefinition Width="*"/>
+                                                                                        </Grid.ColumnDefinitions>
+                                                                                        <Label Grid.Column="0" Content="Machine Name:*" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                                                                        <TextBlock Name="selID" Visibility="Hidden"/>
+                                                                                        <TextBox Grid.Column="1" Name="TxtBoxMachName" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
+                                                                                    </Grid>
+                                                                                </DockPanel>
+
+                                                                                <DockPanel Margin="20 20 20 0">
+                                                                                    <Grid>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition Width="200"/>
+                                                                                            <ColumnDefinition Width="*"/>
+                                                                                        </Grid.ColumnDefinitions>
+                                                                                        <Label Grid.Column="0" Content="Control Program Group:" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
+
+                                                                                        <TextBox Grid.Column="1" Name="TxtBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
+
+                                                                                        <ComboBox Grid.Column="1" Name="CmbBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" Background="AliceBlue" Margin="5 0 0 0" Visibility="Collapsed"/>
+
+                                                                                        <TextBlock Grid.Column="1" Name="txtCPG_id" Visibility="Hidden"/>
+                                                                                    </Grid>
+                                                                                </DockPanel>
+
+                                                                                <DockPanel Margin="20 20 20 0">
+                                                                                    <Grid>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition Width="200"/>
+                                                                                            <ColumnDefinition Width="*"/>
+                                                                                        </Grid.ColumnDefinitions>
+                                                                                        <Label Grid.Column="0" Content="Facility ID:" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                                                                        <TextBox Grid.Column="1" Name="TxtBoxFacId" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
+                                                                                    </Grid>
+                                                                                </DockPanel>
+
+                                                                                <DockPanel Margin="20 20 20 20">
+                                                                                    <Grid>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition Width="200"/>
+                                                                                            <ColumnDefinition Width="*"/>
+                                                                                        </Grid.ColumnDefinitions>
+                                                                                        <Label Grid.Column="0" Content="Notes:" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                                                                        <TextBox Grid.Column="1" Name="TxtBoxNotes" Height="200" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True" >
+
+                                                                                        </TextBox>
+                                                                                    </Grid>
+                                                                                </DockPanel>
                                                                             </StackPanel>
-                                                                            <DockPanel HorizontalAlignment="Left">
-                                                                                <Label Content="Machine License Level:*" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" FontWeight="Bold"/>
-                                                                                <RadioButton Name="rbMachLvl1" Content="Level 1" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
-                                                                                <RadioButton Name="rbMachLvl2" Content="Level 2" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
-                                                                                <RadioButton Name="rbMachLvl3" Content="Level 3" Margin="20 20" Foreground="Wheat" FontSize="15" IsEnabled="False"/>
-                                                                            </DockPanel>
+                                                                        </Grid>
 
-                                                                            <DockPanel Margin="20 20 20 0">
-                                                                                <Grid>
-                                                                                    <Grid.ColumnDefinitions>
-                                                                                        <ColumnDefinition Width="200"/>
-                                                                                        <ColumnDefinition Width="*"/>
-                                                                                    </Grid.ColumnDefinitions>
-                                                                                    <Label Grid.Column="0" Content="Machine Name:*" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                                                    <TextBlock Name="selID" Visibility="Hidden"/>
-                                                                                    <TextBox Grid.Column="1" Name="TxtBoxMachName" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
-                                                                                </Grid>
-                                                                            </DockPanel>
-
-                                                                            <DockPanel Margin="20 20 20 0">
-                                                                                <Grid>
-                                                                                    <Grid.ColumnDefinitions>
-                                                                                        <ColumnDefinition Width="200"/>
-                                                                                        <ColumnDefinition Width="*"/>
-                                                                                    </Grid.ColumnDefinitions>
-                                                                                    <Label Grid.Column="0" Content="Control Program Group:" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-
-                                                                                    <TextBox Grid.Column="1" Name="TxtBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
-
-                                                                                    <ComboBox Grid.Column="1" Name="CmbBoxCtrlPgrmGrp" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" Background="AliceBlue" Margin="5 0 0 0" Visibility="Collapsed"/>
-
-                                                                                    <TextBlock Grid.Column="1" Name="txtCPG_id" Visibility="Hidden"/>
-                                                                                </Grid>
-                                                                            </DockPanel>
-
-                                                                            <DockPanel Margin="20 20 20 0">
-                                                                                <Grid>
-                                                                                    <Grid.ColumnDefinitions>
-                                                                                        <ColumnDefinition Width="200"/>
-                                                                                        <ColumnDefinition Width="*"/>
-                                                                                    </Grid.ColumnDefinitions>
-                                                                                    <Label Grid.Column="0" Content="Facility ID:" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                                                    <TextBox Grid.Column="1" Name="TxtBoxFacId" Height="30" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1" TextWrapping="Wrap" Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True"/>
-                                                                                </Grid>
-                                                                            </DockPanel>
-
-                                                                            <DockPanel Margin="20 20 20 20">
-                                                                                <Grid>
-                                                                                    <Grid.ColumnDefinitions>
-                                                                                        <ColumnDefinition Width="200"/>
-                                                                                        <ColumnDefinition Width="*"/>
-                                                                                    </Grid.ColumnDefinitions>
-                                                                                    <Label Grid.Column="0" Content="Notes:" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                                                    <TextBox Grid.Column="1" Name="TxtBoxNotes" Height="200" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0" IsReadOnly="True" >
-
-                                                                                    </TextBox>
-                                                                                </Grid>
-                                                                            </DockPanel>
-                                                                        </StackPanel>
-                                                                    </Grid>
-
-                                                                </StackPanel>
+                                                                    </StackPanel>
+                                                                </ScrollViewer>
                                                             </Border>
                                                         </Grid>
 
@@ -331,7 +328,7 @@
                                                                             </StackPanel>
                                                                             <CheckBox Name="CbxFlashDNC" Content="Enable Flash DNC" Background="#FFF9F6F6" Foreground="BlanchedAlmond" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="CbxFlashDNC_Checked" Unchecked="CbxFlashDNC_Unchecked" />
 
-                                                                            <Grid Name="FlashDNC" Margin="10" IsEnabled="False">
+                                                                            <Grid Name="FlashDNC" Margin="10" IsEnabled="False" Visibility="Visible">
                                                                                 <Border Background="#FF52779C" CornerRadius="15" Margin="5">
                                                                                     <StackPanel Margin="15">
                                                                                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Content="To change FlashDNC Settings, go to Setup &gt; Application &gt; Global &gt; FlashDNC Tab." d:LayoutOverrides="VerticalAlignment" FontSize="12"/>
@@ -355,11 +352,22 @@
                                                                                                 <Label Grid.Column="1" Foreground="#FF14FF34" Content=".TXT .NC" FontSize="13"/>
                                                                                             </Grid>
                                                                                         </DockPanel>
-                                                                                        <CheckBox Background="#FFF9F6F6" HorizontalAlignment="Left" Margin="0 10 0 0">
-                                                                                            <Label Foreground="#FFF7F3F3" FontFamily="DokChampa" FontSize="13">
-                                                                                                Send INI with Programs
-                                                                                            </Label>
-                                                                                        </CheckBox>
+                                                                                        <DockPanel>
+                                                                                            <CheckBox Name="CbxFlashDNCSendINI" Background="#FFF9F6F6" HorizontalAlignment="Left" Margin="0 10 0 0" Checked="CbxFlashDNCSendINI_Checked" Unchecked="CbxFlashDNCSendINI_Unchecked">
+                                                                                                <Label Foreground="#FFF7F3F3" FontFamily="DokChampa" FontSize="13">
+                                                                                                    Send INI with Programs
+                                                                                                </Label>
+                                                                                            </CheckBox>
+
+                                                                                            <Button Name="BtnBrowseINIFile" HorizontalAlignment="Left" Height="30" Width="180" Margin="10,10,0,0" BorderThickness="1" BorderBrush="Black" Visibility="Collapsed" Click="BtnBrowseINIFile_Click" >
+                                                                                                <Grid Margin="-10,-5">
+                                                                                                    <materialDesign:PackIcon Kind="Search" Width="17" Height="17" />
+                                                                                                    <TextBlock Text="Browse for INI File" Margin="25 0 0 0"/>
+                                                                                                </Grid>
+                                                                                            </Button>
+                                                                                        </DockPanel>
+
+                                                                                        <TextBlock Name="txtINIFname" Text="" Margin="175 5 0 0" Width="330" HorizontalAlignment="Left" FontSize="12" TextWrapping="Wrap" Foreground="#FF14FF34" Visibility="Collapsed"/>
                                                                                     </StackPanel>
                                                                                 </Border>
                                                                             </Grid>
@@ -451,7 +459,7 @@
                                                                                             <Label Foreground="White" FontSize="12" Content="Overwrite Existing File"/>
                                                                                         </CheckBox>
 
-                                                                                        <CheckBox x:Name="FEnabledFldrWatch" Background="#FFF9F6F6" >
+                                                                                        <CheckBox Name="cbxFocasEnFldrWatch" Background="#FFF9F6F6" Checked="cbxFocasEnFldrWatch_Checked" Unchecked="cbxFocasEnFldrWatch_Unchecked_1" >
                                                                                             <Label Foreground="White" FontSize="15" Content="Enabled Folder Watch"/>
                                                                                         </CheckBox>
                                                                                         <DockPanel>
@@ -460,8 +468,8 @@
                                                                                                     <ColumnDefinition Width="*"/>
                                                                                                     <ColumnDefinition Width="75"/>
                                                                                                 </Grid.ColumnDefinitions>
-                                                                                                <TextBox Grid.Column="0" x:Name="FfldrWatch" Height="30" FontSize="14" Background="White" Padding="5"/>
-                                                                                                <Button Grid.Column="1" Height="Auto" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5 0 5 0">
+                                                                                                <TextBox Grid.Column="0" Name="TxtBoxFocasfldrWatch" Height="30" FontSize="14" Background="White" Padding="5"/>
+                                                                                                <Button Name="BtnFocasFldrWtch" Grid.Column="1" Height="Auto" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5 0 5 0" IsEnabled="False" Click="BtnFocasFldrWtch_Click">
                                                                                                     <materialDesign:PackIcon Kind="Folder" Width="30" Height="30" Foreground="#FFE6B920"/>
                                                                                                 </Button>
                                                                                             </Grid>
@@ -536,10 +544,10 @@
                                                                                                     </Grid.ColumnDefinitions>
 
                                                                                                     <StackPanel Grid.Column="0">
-                                                                                                        <RadioButton Grid.Column="0" x:Name="sockStaticOpt" Content="Static IP" Background="#FFF9F6F6" Foreground="White" FontSize="13" VerticalAlignment="Center" Height="30" IsChecked="True"/>
-                                                                                                        <RadioButton x:Name="sockDynamicOpt" Content="Dynamic" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30"/>
+                                                                                                        <RadioButton Grid.Column="0" x:Name="sockStaticOpt" Content="Static IP" Background="#FFF9F6F6" Foreground="White" FontSize="13" VerticalAlignment="Center" Height="30" Checked="sockStaticOpt_Checked" />
+                                                                                                        <RadioButton x:Name="sockDynamicOpt" Content="Dynamic" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30" Checked="sockDynamicOpt_Checked"/>
 
-                                                                                                        <RadioButton x:Name="sockNportOpt" Content="Nport" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30"/>
+                                                                                                        <RadioButton x:Name="sockNportOpt" Content="Nport" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30" Checked="sockNportOpt_Checked"/>
                                                                                                     </StackPanel>
 
 
@@ -554,9 +562,9 @@
 
 
 
-                                                                                            <StackPanel Orientation="Horizontal" Visibility="Visible">
-                                                                                                <CheckBox Name="CbxDNC" Content="DNC" Background="#FFF9F6F6" Foreground="White" FontSize="13" Margin="20 5 0 5" IsEnabled="False"/>
-                                                                                                <CheckBox Name="CbxBarcodeRequest" Background="#FFF9F6F6" Content="Barcode Request" Foreground="White" FontSize="13" Margin="230 5 0 5" IsEnabled="False"/>
+                                                                                            <StackPanel Name="NportChkBxs" Orientation="Horizontal" Visibility="Visible" IsEnabled="False">
+                                                                                                <CheckBox Name="CbxDNC" Content="DNC" Background="#FFF9F6F6" Foreground="White" FontSize="13" Margin="20 5 0 5" Checked="CbxDNC_Checked" Unchecked="CbxDNC_Unchecked"/>
+                                                                                                <CheckBox Name="CbxBarcodeRequest" Background="#FFF9F6F6" Content="Barcode Request" Foreground="White" FontSize="13" Margin="230 5 0 5" Checked="CbxBarcodeRequest_Checked" Unchecked="CbxBarcodeRequest_Unchecked"/>
                                                                                             </StackPanel>
 
 
@@ -568,7 +576,7 @@
                                                                                                             <ColumnDefinition Width="*"/>
                                                                                                         </Grid.ColumnDefinitions>
 
-                                                                                                        <Grid Name="DNC" Visibility="Collapsed" Grid.Column="0">
+                                                                                                        <Grid Name="showDNCGrid" Visibility="Collapsed" Grid.Column="0">
                                                                                                             <StackPanel>
 
                                                                                                                 <DockPanel Margin="20 0 0 0">
@@ -604,7 +612,7 @@
                                                                                                             </StackPanel>
                                                                                                         </Grid>
 
-                                                                                                        <Grid Name="BarcodeRequest" Visibility="Collapsed" Grid.Column="1">
+                                                                                                        <Grid Name="showBarReqGrid" Visibility="Collapsed" Grid.Column="1">
                                                                                                             <StackPanel>
                                                                                                                 <Label Content="Send to: Nport DNC" FontStyle="Italic" FontSize="10" Foreground="BlanchedAlmond" Margin="70 -10 0 0"></Label>
                                                                                                                 <DockPanel Margin="15 0 0 0">
@@ -832,9 +840,9 @@
                                                                                                 <ColumnDefinition Width="*"/>
                                                                                                 <ColumnDefinition Width="75"/>
                                                                                             </Grid.ColumnDefinitions>
-                                                                                            <TextBox Grid.Column="0" FontSize="13" FontWeight="Normal" Background="White" BorderBrush="Black" BorderThickness="2" Height="30"></TextBox>
+                                                                                            <TextBox Name="TxtBoxFldrWtchFldrDes" Grid.Column="0" FontSize="13" FontWeight="Normal" Background="White" BorderBrush="Black" BorderThickness="2" Height="30"></TextBox>
 
-                                                                                            <Button Grid.Column="1" Height="Auto" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="5 0 5 0">
+                                                                                            <Button Name="BtnFldrWtchFolderDes" Grid.Column="1" Height="Auto" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="5 0 5 0" Click="BtnFldrWtchFolderDes_Click">
                                                                                                 <materialDesign:PackIcon Kind="Folder" Width="30" Height="30" Foreground="#FFE6B920"/>
                                                                                             </Button>
                                                                                         </Grid>
@@ -901,249 +909,475 @@
                                                         <Grid Name="RemRequestSetGrid">
                                                             <Grid Name="RemReqSettGrid" Visibility="Collapsed">
                                                                 <Border>
-                                                                    <StackPanel>
-                                                                        <Label Content="Remote Request Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
+                                                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                                                        <StackPanel>
+                                                                            <Label Content="Remote Request Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
 
-                                                                        <StackPanel Margin="15">
+                                                                            <StackPanel Margin="15">
 
-                                                                            <DockPanel>
+                                                                                <DockPanel>
 
-                                                                                <Grid>
-                                                                                    <Grid.ColumnDefinitions>
-                                                                                        <ColumnDefinition Width="250"/>
-                                                                                        <ColumnDefinition Width="*"/>
-                                                                                    </Grid.ColumnDefinitions>
-                                                                                    <StackPanel Grid.Column="0">
-                                                                                        <Label Content="Remote Request Identification*" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                                                                                        <DockPanel>
-                                                                                            <CheckBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White">
-                                                                                                <Label Foreground="White" Content="Max File Size" Margin="0 0 20 0"/>
-                                                                                            </CheckBox>
-                                                                                            <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="5" Background="AliceBlue" BorderThickness="1" Padding="5 5"/>
+                                                                                    <Grid>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition Width="250"/>
+                                                                                            <ColumnDefinition Width="*"/>
+                                                                                        </Grid.ColumnDefinitions>
+                                                                                        <StackPanel Grid.Column="0">
+                                                                                            <Label Content="Remote Request Identification*" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                                                                                            <DockPanel>
+                                                                                                <CheckBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White">
+                                                                                                    <Label Foreground="White" Content="Max File Size" Margin="0 0 20 0"/>
+                                                                                                </CheckBox>
+                                                                                                <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="5" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30"/>
+                                                                                            </DockPanel>
+
+                                                                                            <DockPanel Margin="0 5 0 0">
+                                                                                                <CheckBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White">
+                                                                                                    <Label Foreground="White" Content="Max Line Count"/>
+                                                                                                </CheckBox>
+                                                                                                <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="5" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30"/>
+                                                                                            </DockPanel>
+                                                                                        </StackPanel>
+
+                                                                                        <StackPanel Grid.Column="1" Margin="50 0 0 0">
+                                                                                            <Label Content="Specific Program Name*" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                                                                                            <DockPanel>
+                                                                                                <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White">
+                                                                                                    <Label Foreground="White" Content="Require Program Name" FontSize="12"/>
+                                                                                                </CheckBox>
+                                                                                                <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="O1000"  Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30"/>
+                                                                                            </DockPanel>
+                                                                                        </StackPanel>
+                                                                                    </Grid>
+                                                                                </DockPanel>
+
+                                                                                <Separator Margin="0 10 0 0"></Separator>
+
+                                                                                <DockPanel Margin="0 5 0 0">
+                                                                                    <Label Content="Persistency Rate: (mins)" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0 10 0 0"/>
+                                                                                    <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Background="AliceBlue" Width="80" BorderThickness="1" Padding="5 5" Height="30" Margin="0 10 0 0"/>
+                                                                                    <Label Content="Revision Hold" Foreground="White" FontSize="13" FontWeight="Bold" Margin="45 0 5 0"/>
+                                                                                    <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="-90 20 0 0">
+                                                                                        <Label Foreground="White" Content="Enable" FontSize="12"/>
+                                                                                    </CheckBox>
+
+                                                                                    <Label Content="Send Notification" Foreground="White" FontSize="13" FontWeight="Bold" Margin="45 0 5 0"/>
+                                                                                    <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="-110 20 0 0">
+                                                                                        <Label Foreground="White" Content="Enable" FontSize="12"/>
+                                                                                    </CheckBox>
+                                                                                </DockPanel>
+
+                                                                                <StackPanel Margin="0 5 0 0">
+                                                                                    <Label x:Name="label2_Copy1" Content="Incoming File Communication" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" d:LayoutOverrides="HorizontalAlignment" FontSize="13" FontWeight="Bold"/>
+
+                                                                                    <CheckBox x:Name="checkBox_Copy4"   Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" >
+                                                                                        <Label Foreground="White" Content="Received '%' to '%' Only" FontSize="12"/>
+                                                                                    </CheckBox>
+                                                                                    <CheckBox x:Name="checkBox_Copy5"   Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" >
+                                                                                        <Label Foreground="White" Content="Automatically Convert 'Line Feeds' to 'Carriage Return/Line Feeed'" FontSize="12"/>
+                                                                                    </CheckBox>
+                                                                                    <CheckBox Name="CbxRedirInFile"   Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Checked="CbxRedirInFile_Checked" Unchecked="CbxRedirInFile_Unchecked" >
+                                                                                        <Label Foreground="White" Content="Redirect Incoming Files to specified filename and folder" FontSize="12"/>
+                                                                                    </CheckBox>
+
+                                                                                    <StackPanel Name="IFMStackPanel" Visibility="Collapsed">
+                                                                                        <DockPanel Margin="19 5 0 0">
+                                                                                            <Label Content="IFM Folder: " Foreground="White" FontSize="14" />
+                                                                                            <Grid>
+                                                                                                <Grid.ColumnDefinitions>
+                                                                                                    <ColumnDefinition Width="*"/>
+                                                                                                    <ColumnDefinition Width="75"/>
+                                                                                                </Grid.ColumnDefinitions>
+                                                                                                <TextBox Grid.Column="0" TextWrapping="Wrap" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30"/>
+                                                                                                <Button Grid.Column="1" Name="BtnRemReqIFMFldr" Margin="5 0 0 0" ToolTip="Browse IFM Folder">
+                                                                                                    <Grid Margin="-8,-5">
+                                                                                                        <materialDesign:PackIcon Kind="Magnify" Width="17" Height="17"/>
+                                                                                                    </Grid>
+                                                                                                </Button>
+                                                                                            </Grid>
                                                                                         </DockPanel>
 
-                                                                                        <DockPanel Margin="0 5 0 0">
-                                                                                            <CheckBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White">
-                                                                                                <Label Foreground="White" Content="Max Line Count"/>
-                                                                                            </CheckBox>
-                                                                                            <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="5" Background="AliceBlue" BorderThickness="1" Padding="5 5"/>
+                                                                                        <DockPanel Margin="19 10 0 0">
+                                                                                            <Grid>
+                                                                                                <Grid.ColumnDefinitions>
+                                                                                                    <ColumnDefinition Width="150"/>
+                                                                                                    <ColumnDefinition Width="150"/>
+                                                                                                    <ColumnDefinition Width="*"/>
+                                                                                                </Grid.ColumnDefinitions>
+                                                                                                <RadioButton Grid.Column="0" Name="rbUseOgName" Content="Use Original Name" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30"/>
+                                                                                                <RadioButton Grid.Column="1" Name="rbUseBaseFName" Content="Use Base Filename" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30"/>
+                                                                                                <TextBox Grid.Column="2" TextWrapping="Wrap" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30"/>
+                                                                                            </Grid>
                                                                                         </DockPanel>
                                                                                     </StackPanel>
-
-                                                                                    <StackPanel Grid.Column="1" Margin="50 0 0 0">
-                                                                                        <Label Content="Specific Program Name*" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                                                                                        <DockPanel>
-                                                                                            <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White">
-                                                                                                <Label Foreground="White" Content="Require Program Name" FontSize="12"/>
-                                                                                            </CheckBox>
-                                                                                            <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="O1000"  Background="AliceBlue" BorderThickness="1" Padding="5 5"/>
-                                                                                        </DockPanel>
-                                                                                    </StackPanel>
-                                                                                </Grid>
-                                                                            </DockPanel>
-
-                                                                            <Separator Margin="0 10 0 0"></Separator>
-
-                                                                            <DockPanel Margin="0 5 0 0">
-                                                                                <Label Content="Persistency Rate: (mins)" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0 10 0 0"/>
-                                                                                <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Background="AliceBlue" Width="80" BorderThickness="1" Padding="5 5" Height="30" Margin="0 10 0 0"/>
-                                                                                <Label Content="Revision Hold" Foreground="White" FontSize="13" FontWeight="Bold" Margin="45 0 5 0"/>
-                                                                                <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="-90 20 0 0">
-                                                                                    <Label Foreground="White" Content="Enable" FontSize="12"/>
-                                                                                </CheckBox>
-
-                                                                                <Label Content="Send Notification" Foreground="White" FontSize="13" FontWeight="Bold" Margin="45 0 5 0"/>
-                                                                                <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="-110 20 0 0">
-                                                                                    <Label Foreground="White" Content="Enable" FontSize="12"/>
-                                                                                </CheckBox>
-                                                                            </DockPanel>
+                                                                                </StackPanel>
+                                                                            </StackPanel>
                                                                         </StackPanel>
-                                                                    </StackPanel>
+                                                                    </ScrollViewer>
+                                                                </Border>
+                                                            </Grid>
+
+                                                            <Grid Name="ParRulesSetGrid" Visibility="Collapsed">
+                                                                <Border>
+                                                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                                                        <StackPanel>
+                                                                            <Label Content="Parsing Rules Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
+
+                                                                            <StackPanel Margin="15">
+                                                                                <DockPanel>
+                                                                                    <Label Content="Search Command String beginning at line" Foreground="White" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
+                                                                                    <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="1" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30" Width="50" HorizontalAlignment="Left" Margin="5  0 0 0" FontSize="14"/>
+                                                                                </DockPanel>
+
+                                                                                <StackPanel>
+                                                                                    <RadioButton x:Name="rbClsSingCmd" Content="Classic Single Command" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30" FontWeight="Bold" Checked="rbClsSingCmd_Checked"/>
+
+                                                                                    <Grid Name="ClsSingCmdGrid" IsEnabled="False" Visibility="Collapsed">
+                                                                                        <StackPanel>
+                                                                                            <DockPanel>
+                                                                                                <Grid>
+                                                                                                    <Grid.ColumnDefinitions>
+                                                                                                        <ColumnDefinition Width="*"/>
+                                                                                                        <ColumnDefinition Width="75"/>
+                                                                                                    </Grid.ColumnDefinitions>
+                                                                                                    <Label Grid.Column="0" Content="CNC Folder" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                                                                                                    <TextBox Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30" FontSize="14" Margin="90 0 0 0"/>
+
+                                                                                                    <Button Grid.Column="1" BorderBrush="Black" BorderThickness="1" Height="30" Margin="5 0 0 0">
+                                                                                                        <Grid Margin="-8,-5">
+                                                                                                            <materialDesign:PackIcon Kind="Magnify" Width="17" Height="17"/>
+                                                                                                        </Grid>
+                                                                                                    </Button>
+                                                                                                </Grid>
+                                                                                            </DockPanel>
+
+                                                                                            <StackPanel Margin="0 10 0 0" >
+                                                                                                <GroupBox Header="Request Type">
+                                                                                                    <DockPanel>
+                                                                                                        <RadioButton Content="File Request" Foreground="White" Background="#FFF9F6F6" FontSize="15" VerticalAlignment="Center" ></RadioButton>
+                                                                                                        <CheckBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="20 0 20 0">
+                                                                                                            <Label Foreground="White" Content="Enable Translate" />
+                                                                                                        </CheckBox>
+                                                                                                        <CheckBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFF9F6F6" Foreground="White" Margin="20 0 20 0">
+                                                                                                            <Label Foreground="White" Content="Folder Request" />
+                                                                                                        </CheckBox>
+                                                                                                    </DockPanel>
+                                                                                                </GroupBox>
+
+                                                                                                <GroupBox Header="NC Program Search Option" Margin="0 5 0 0">
+                                                                                                    <StackPanel>
+                                                                                                        <DockPanel>
+                                                                                                            <RadioButton Content="Specified Folder Only" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" ></RadioButton>
+                                                                                                            <RadioButton Content="Specified Folders + Subfolders" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="20 0 0 0"></RadioButton>
+                                                                                                        </DockPanel>
+                                                                                                        <DockPanel Margin="0 10 0 10">
+                                                                                                            <Grid>
+                                                                                                                <Grid.ColumnDefinitions>
+                                                                                                                    <ColumnDefinition Width="*"/>
+                                                                                                                    <ColumnDefinition Width="*"/>
+                                                                                                                </Grid.ColumnDefinitions>
+                                                                                                                <DockPanel Margin="5" Grid.Column="0">
+                                                                                                                    <Label Content="Single Command String:" FontSize="14" Foreground="White"/>
+                                                                                                                    <TextBox Margin="5 0 0 0" Background="AliceBlue" BorderBrush="Black" BorderThickness="1" Height="30"/>
+                                                                                                                </DockPanel>
+                                                                                                                <DockPanel Margin="5" Grid.Column="1">
+                                                                                                                    <Label Content="File Extension:" FontSize="14" Foreground="White"/>
+                                                                                                                    <Label Content="." FontSize="20" FontWeight="Bold" Foreground="White"/>
+                                                                                                                    <TextBox Margin="0 0 0 0" Background="AliceBlue" BorderBrush="Black" BorderThickness="1" Height="30"/>
+                                                                                                                </DockPanel>
+                                                                                                            </Grid>
+                                                                                                        </DockPanel>
+                                                                                                    </StackPanel>
+
+                                                                                                </GroupBox>
+                                                                                            </StackPanel>
+                                                                                        </StackPanel>
+
+                                                                                    </Grid>
+
+                                                                                    <Separator Margin="0 15 0 0"/>
+
+                                                                                    <RadioButton Name="rbShrtLookup" Content="Shortcut Lookup" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30" FontWeight="Bold" Checked="rbShrtLookup_Checked" />
+
+                                                                                    <Grid Name="ShrtCutLookupGrid" IsEnabled="True" Visibility="Visible">
+                                                                                        <StackPanel>
+                                                                                            <DockPanel>
+                                                                                                <Grid>
+                                                                                                    <Grid.ColumnDefinitions>
+                                                                                                        <ColumnDefinition Width="200"/>
+                                                                                                        <ColumnDefinition Width="*"/>
+                                                                                                    </Grid.ColumnDefinitions>
+
+                                                                                                    <StackPanel Grid.Column="0">
+                                                                                                        <Label Content="Shortcut Command String:" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="13" Margin="0 5 5 0"/>
+                                                                                                        <Label Content="Shortcut Terminator:" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="13" Margin="0 5 5 0"/>
+                                                                                                    </StackPanel>
+
+                                                                                                    <StackPanel Grid.Column="1">
+                                                                                                        <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="P" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30" FontSize="13"/>
+                                                                                                        <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30" FontSize="13" Margin="0 5 0 0"/>
+                                                                                                    </StackPanel>
+                                                                                                </Grid>
+                                                                                            </DockPanel>
+                                                                                        </StackPanel>
+                                                                                    </Grid>
+
+                                                                                    <Separator Margin="0 15 0 0"/>
+
+                                                                                    <RadioButton Name="rbPartsOpLookup" Content="Parts and Operations Lookup" Foreground="White" Background="#FFF9F6F6" FontSize="13" VerticalAlignment="Center" Margin="0 5 0 0" Height="30" FontWeight="Bold" Checked="rbPartsOpLookup_Checked"/>
+
+                                                                                    <Grid Name="PartsOpLookUpGrid" IsEnabled="False" Visibility="Collapsed">
+                                                                                        <StackPanel>
+                                                                                            <DockPanel>
+                                                                                                <Grid>
+                                                                                                    <Grid.ColumnDefinitions>
+                                                                                                        <ColumnDefinition Width="200"/>
+                                                                                                        <ColumnDefinition Width="*"/>
+                                                                                                    </Grid.ColumnDefinitions>
+
+                                                                                                    <StackPanel Grid.Column="0">
+                                                                                                        <Label Content="Parts Command String:" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="13" Margin="0 5 5 0"/>
+                                                                                                        <Label Content="Operations Command String:" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="13" Margin="0 5 5 0"/>
+                                                                                                    </StackPanel>
+
+                                                                                                    <StackPanel Grid.Column="1">
+                                                                                                        <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30" FontSize="13"/>
+                                                                                                        <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30" FontSize="13" Margin="0 5 0 0"/>
+                                                                                                    </StackPanel>
+                                                                                                </Grid>
+                                                                                            </DockPanel>
+                                                                                        </StackPanel>
+                                                                                    </Grid>
+                                                                                </StackPanel>
+                                                                            </StackPanel>
+                                                                        </StackPanel>
+                                                                    </ScrollViewer>
                                                                 </Border>
                                                             </Grid>
                                                         </Grid>
 
-                                                        <Grid Name="OpMessageGrid" Visibility="Collapsed">
+                                                        <Grid Name="OpMessageSetGrid" Visibility="Collapsed">
                                                             <Border>
-                                                                <StackPanel>
-                                                                    <DockPanel Width="500" HorizontalAlignment="Left" Margin="10">
-                                                                        <Button Name="BtnModifyFnameExt" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
-                                                                            <DockPanel>
-                                                                                <TextBlock Text="Modify Filename and Extension" VerticalAlignment="Center" FontWeight="Bold" />
-                                                                            </DockPanel>
-                                                                        </Button>
+                                                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                                                    <StackPanel>
+                                                                        <Label Content="Operator Messages Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
+                                                                        <DockPanel Width="500" HorizontalAlignment="Left" Margin="10">
+                                                                            <Button Name="BtnModifyFnameExt" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1" Click="BtnModifyFnameExt_Click">
+                                                                                <DockPanel>
+                                                                                    <TextBlock Text="Modify Filename and Extension" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                                </DockPanel>
+                                                                            </Button>
 
-                                                                        <Button Name="BtnApplyToMach" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
-                                                                            <DockPanel>
-                                                                                <TextBlock Text="Apply to other Machines" VerticalAlignment="Center" FontWeight="Bold" />
-                                                                            </DockPanel>
-                                                                        </Button>
-                                                                    </DockPanel>
-                                                                    <Grid Margin="5" Background="#FF16143E">
+                                                                            <Button Name="BtnApplyToMach" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1" Click="BtnApplyToMach_Click">
+                                                                                <DockPanel>
+                                                                                    <TextBlock Text="Apply to other Machines" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                                </DockPanel>
+                                                                            </Button>
+                                                                        </DockPanel>
+                                                                        <Grid Margin="5" Background="#FF16143E">
 
-                                                                        <Grid>
-                                                                            <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="*"/>
-                                                                                <ColumnDefinition Width="*"/>
-                                                                            </Grid.ColumnDefinitions>
-                                                                            <Grid.RowDefinitions>
-                                                                                <RowDefinition Height="*"/>
-                                                                                <RowDefinition Height="*"/>
-                                                                                <RowDefinition Height="*"/>
-                                                                            </Grid.RowDefinitions>
+                                                                            <Grid>
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="*"/>
+                                                                                    <ColumnDefinition Width="*"/>
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <Grid.RowDefinitions>
+                                                                                    <RowDefinition Height="*"/>
+                                                                                    <RowDefinition Height="*"/>
+                                                                                    <RowDefinition Height="*"/>
+                                                                                </Grid.RowDefinitions>
 
-                                                                            <Grid Grid.Column="0" Grid.Row="0">
+                                                                                <Grid Grid.Column="0" Grid.Row="0">
 
-                                                                                <GroupBox Header="Remote Request Lookup Not Found" Margin="5">
-                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
-                                                                                        <FlowDocument>
-                                                                                            <Paragraph>
-                                                                                                <Run Text=""/>
-                                                                                            </Paragraph>
-                                                                                        </FlowDocument>
-                                                                                    </RichTextBox>
-                                                                                </GroupBox>
-                                                                            </Grid>
-                                                                            <Grid Grid.Column="0" Grid.Row="1">
-                                                                                <GroupBox Header="Remote Request File Lock" Margin="5">
-                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
-                                                                                        <FlowDocument>
-                                                                                            <Paragraph>
-                                                                                                <Run Text=""/>
-                                                                                            </Paragraph>
-                                                                                        </FlowDocument>
-                                                                                    </RichTextBox>
-                                                                                </GroupBox>
-                                                                            </Grid>
-                                                                            <Grid Grid.Column="0" Grid.Row="2">
-                                                                                <GroupBox Header="Remote Request On Hold" Margin="5">
-                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
-                                                                                        <FlowDocument>
-                                                                                            <Paragraph>
-                                                                                                <Run Text=""/>
-                                                                                            </Paragraph>
-                                                                                        </FlowDocument>
-                                                                                    </RichTextBox>
-                                                                                </GroupBox>
-                                                                            </Grid>
+                                                                                    <GroupBox Header="Remote Request Lookup Not Found" Margin="5">
+                                                                                        <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                            <FlowDocument>
+                                                                                                <Paragraph>
+                                                                                                    <Run Text=""/>
+                                                                                                </Paragraph>
+                                                                                            </FlowDocument>
+                                                                                        </RichTextBox>
+                                                                                    </GroupBox>
+                                                                                </Grid>
+                                                                                <Grid Grid.Column="0" Grid.Row="1">
+                                                                                    <GroupBox Header="Remote Request File Lock" Margin="5">
+                                                                                        <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                            <FlowDocument>
+                                                                                                <Paragraph>
+                                                                                                    <Run Text=""/>
+                                                                                                </Paragraph>
+                                                                                            </FlowDocument>
+                                                                                        </RichTextBox>
+                                                                                    </GroupBox>
+                                                                                </Grid>
+                                                                                <Grid Grid.Column="0" Grid.Row="2">
+                                                                                    <GroupBox Header="Remote Request On Hold" Margin="5">
+                                                                                        <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                            <FlowDocument>
+                                                                                                <Paragraph>
+                                                                                                    <Run Text=""/>
+                                                                                                </Paragraph>
+                                                                                            </FlowDocument>
+                                                                                        </RichTextBox>
+                                                                                    </GroupBox>
+                                                                                </Grid>
 
 
-                                                                            <!-- column 1 -->
+                                                                                <!-- column 1 -->
 
-                                                                            <Grid Grid.Column="1" Grid.Row="0">
-                                                                                <GroupBox Header="Remote Request Failed" Margin="5">
-                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
-                                                                                        <FlowDocument>
-                                                                                            <Paragraph>
-                                                                                                <Run Text=""/>
-                                                                                            </Paragraph>
-                                                                                        </FlowDocument>
-                                                                                    </RichTextBox>
-                                                                                </GroupBox>
-                                                                            </Grid>
+                                                                                <Grid Grid.Column="1" Grid.Row="0">
+                                                                                    <GroupBox Header="Remote Request Failed" Margin="5">
+                                                                                        <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                            <FlowDocument>
+                                                                                                <Paragraph>
+                                                                                                    <Run Text=""/>
+                                                                                                </Paragraph>
+                                                                                            </FlowDocument>
+                                                                                        </RichTextBox>
+                                                                                    </GroupBox>
+                                                                                </Grid>
 
-                                                                            <Grid Grid.Column="1" Grid.Row="1">
-                                                                                <GroupBox Header="Remote Request File Not Found" Margin="5">
-                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
-                                                                                        <FlowDocument>
-                                                                                            <Paragraph>
-                                                                                                <Run Text=""/>
-                                                                                            </Paragraph>
-                                                                                        </FlowDocument>
-                                                                                    </RichTextBox>
-                                                                                </GroupBox>
-                                                                            </Grid>
+                                                                                <Grid Grid.Column="1" Grid.Row="1">
+                                                                                    <GroupBox Header="Remote Request File Not Found" Margin="5">
+                                                                                        <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                            <FlowDocument>
+                                                                                                <Paragraph>
+                                                                                                    <Run Text=""/>
+                                                                                                </Paragraph>
+                                                                                            </FlowDocument>
+                                                                                        </RichTextBox>
+                                                                                    </GroupBox>
+                                                                                </Grid>
 
-                                                                            <Grid Grid.Column="1" Grid.Row="2">
-                                                                                <GroupBox Header="Remote Request Folder Not Found" Margin="5">
-                                                                                    <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
-                                                                                        <FlowDocument>
-                                                                                            <Paragraph>
-                                                                                                <Run Text=""/>
-                                                                                            </Paragraph>
-                                                                                        </FlowDocument>
-                                                                                    </RichTextBox>
-                                                                                </GroupBox>
+                                                                                <Grid Grid.Column="1" Grid.Row="2">
+                                                                                    <GroupBox Header="Remote Request Folder Not Found" Margin="5">
+                                                                                        <RichTextBox  Height="100" Padding="5 5" BorderBrush="Black" FontSize="14" BorderThickness="1"  Background="AliceBlue" Margin="5 0 0 0">
+                                                                                            <FlowDocument>
+                                                                                                <Paragraph>
+                                                                                                    <Run Text=""/>
+                                                                                                </Paragraph>
+                                                                                            </FlowDocument>
+                                                                                        </RichTextBox>
+                                                                                    </GroupBox>
+                                                                                </Grid>
                                                                             </Grid>
                                                                         </Grid>
+                                                                    </StackPanel>
+                                                                </ScrollViewer>
+                                                            </Border>
+                                                        </Grid>
+
+                                                        <Grid Name="PersonnelSetGrid" Visibility="Collapsed">
+                                                            <Border>
+                                                                <Grid>
+                                                                    <Label Content="Personnel Settings" HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" Foreground="#FFE8FF00" FontSize="20" FontWeight="Bold"/>
+                                                                    <Grid >
+                                                                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 10">
+                                                                            <Border Background="#FF42425B" CornerRadius="15">
+                                                                                <StackPanel>
+                                                                                    <DataGrid  IsReadOnly="True" AutoGenerateColumns="False" VerticalGridLinesBrush="Transparent" 
+                                            FontSize="15"  Margin="15" BorderBrush="#89615555"  SelectionUnit="FullRow"  IsTextSearchCaseSensitive="False" IsTextSearchEnabled="True" TextSearch.TextPath="personnel" SelectionMode="Single" Height="300" ColumnWidth="*">
+                                                                                        <DataGrid.Columns>
+                                                                                            <DataGridTextColumn Header="ID" Width="250" Visibility="Hidden" Binding="{Binding perid}"/>
+                                                                                            <DataGridTextColumn Header="Personnel Name" Width="250" Binding="{Binding pername}"/>
+                                                                                            <DataGridTextColumn Header="Email Address" Width="250" Binding="{Binding peremail}"/>
+                                                                                        </DataGrid.Columns>
+                                                                                    </DataGrid>
+
+                                                                                    <DockPanel Margin="0 0 10 10" HorizontalAlignment="Right">
+                                                                                        <Button Name="BtnAssignPersonnel" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
+                                                                                            <DockPanel>
+                                                                                                <TextBlock Text="Assign" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                                            </DockPanel>
+                                                                                        </Button>
+
+                                                                                        <Button Name="BtnRemovePersonnel" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1">
+                                                                                            <DockPanel>
+                                                                                                <TextBlock Text="Remove" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                                            </DockPanel>
+                                                                                        </Button>
+                                                                                    </DockPanel>
+                                                                                </StackPanel>
+                                                                            </Border>
+                                                                        </Grid>
                                                                     </Grid>
-                                                                </StackPanel>
+                                                                </Grid>
                                                             </Border>
                                                         </Grid>
                                                     </Grid>
-                                                </ScrollViewer>
-                                            </Border>
-                                        </Grid>
-
-                                        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
-                                            <ListBox ItemContainerStyle="{StaticResource _ListBoxItemStyle}"  Grid.Column="3" Grid.RowSpan="2" x:Name="MachListBox" BorderThickness="3" BorderBrush="Black" Margin="10,10,0,10" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" FontSize="13" Padding="5" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" TextSearch.TextPath="machName" SelectionChanged="MachListBox_SelectionChanged" >
-                                                <ListBox.Background>
-                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                        <GradientStop Color="#FF98B5CB" Offset="0.0" />
-                                                        <GradientStop Color="#FFB5CFE2" Offset="0.8" />
-                                                    </LinearGradientBrush>
-                                                </ListBox.Background>
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Grid>
-                                                            <TextBlock Text="{Binding machId}"  Visibility="Hidden"/>
-                                                            <TextBlock Text="{Binding machName}" />
-                                                        </Grid>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
-
-                                        </Grid>
-
-                                        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="10 0 0 0">
-                                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                                                <Border Background="#FF234B6A" Margin="0 0 10 10" CornerRadius="0 0 0 10">
-                                                    <Grid>
-
-                                                        <DockPanel HorizontalAlignment="Center" Margin="5">
-                                                            <Button x:Name="btnOpenMachLicMngr" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Click to open Machine License Manager" Click="btnOpenMachLicMngr_Click" >
-                                                                <materialDesign:PackIcon Kind="DriversLicense" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-
-                                                            <Button x:Name="btnAddNewMach" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Add New Machine" Margin="5 0 0 0" Click="btnAddNewMach_Click" >
-                                                                <materialDesign:PackIcon Kind="AddBox" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-
-                                                            <Button x:Name="btnSaveAdd" Background="Green" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Save New Machine" Margin="5 0 0 0" Visibility="Collapsed">
-                                                                <materialDesign:PackIcon Kind="ContentSave" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-
-                                                            <Button x:Name="btnEdit" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Edit Selected Machine" Margin="5 0 0 0" Click="btnEdit_Click" >
-                                                                <materialDesign:PackIcon Kind="EditBox" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-
-                                                            <Button x:Name="btnSaveEdit" Background="Green" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Save New Machine" Margin="5 0 0 0" Visibility="Collapsed">
-                                                                <materialDesign:PackIcon Kind="ContentSave" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-
-                                                            <Button x:Name="btnDuplicate" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Duplicate and Rename Machine" Margin="5 0 0 0">
-                                                                <materialDesign:PackIcon Kind="ContentCopy" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-
-                                                            <Button x:Name="btnDelete" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Delete Selected Machine" Margin="5 0 0 0">
-                                                                <materialDesign:PackIcon Kind="Delete" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-
-                                                            <Button x:Name="btnCancel" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Cancel" Margin="5 0 0 0" IsEnabled="False" Click="btnCancel_Click">
-                                                                <materialDesign:PackIcon Kind="Cancel" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                                            </Button>
-                                                        </DockPanel>
-                                                    </Grid>
                                                 </Border>
-                                            </ScrollViewer>
+                                            </Grid>
+
+                                            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+                                                <ListBox ItemContainerStyle="{StaticResource _ListBoxItemStyle}"  Grid.Column="3" Grid.RowSpan="2" x:Name="MachListBox" BorderThickness="3" BorderBrush="Black" Margin="10,10,0,10" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" FontSize="13" Padding="5" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" TextSearch.TextPath="machName" SelectionChanged="MachListBox_SelectionChanged" >
+                                                    <ListBox.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                            <GradientStop Color="#FF98B5CB" Offset="0.0" />
+                                                            <GradientStop Color="#FFB5CFE2" Offset="0.8" />
+                                                        </LinearGradientBrush>
+                                                    </ListBox.Background>
+                                                    <ListBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <TextBlock Text="{Binding machId}"  Visibility="Hidden"/>
+                                                                <TextBlock Text="{Binding machName}" />
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </ListBox.ItemTemplate>
+                                                </ListBox>
+
+                                            </Grid>
+
+                                            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="10 0 0 0">
+                                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                                                    <Border Background="#FF234B6A" Margin="0 0 10 10" CornerRadius="0 0 0 10">
+                                                        <Grid>
+
+                                                            <DockPanel HorizontalAlignment="Center" Margin="5">
+                                                                <Button x:Name="btnOpenMachLicMngr" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Click to open Machine License Manager" Click="btnOpenMachLicMngr_Click" >
+                                                                    <materialDesign:PackIcon Kind="DriversLicense" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+
+                                                                <Button x:Name="btnAddNewMach" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Add New Machine" Margin="5 0 0 0" Click="btnAddNewMach_Click" >
+                                                                    <materialDesign:PackIcon Kind="AddBox" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+
+                                                                <Button x:Name="btnSaveAdd" Background="Green" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Save New Machine" Margin="5 0 0 0" Visibility="Collapsed">
+                                                                    <materialDesign:PackIcon Kind="ContentSave" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+
+                                                                <Button x:Name="btnEdit" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Edit Selected Machine" Margin="5 0 0 0" Click="btnEdit_Click" >
+                                                                    <materialDesign:PackIcon Kind="EditBox" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+
+                                                                <Button x:Name="btnSaveEdit" Background="Green" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Save New Machine" Margin="5 0 0 0" Visibility="Collapsed">
+                                                                    <materialDesign:PackIcon Kind="ContentSave" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+
+                                                                <Button x:Name="btnDuplicate" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Duplicate and Rename Machine" Margin="5 0 0 0">
+                                                                    <materialDesign:PackIcon Kind="ContentCopy" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+
+                                                                <Button x:Name="btnDelete" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Delete Selected Machine" Margin="5 0 0 0">
+                                                                    <materialDesign:PackIcon Kind="Delete" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+
+                                                                <Button x:Name="btnCancel" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="65" Height="50" ToolTip="Cancel" Margin="5 0 0 0" IsEnabled="False" Click="btnCancel_Click">
+                                                                    <materialDesign:PackIcon Kind="Cancel" Foreground="White" Height="35"  Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Button>
+                                                            </DockPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </ScrollViewer>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Border>
-                    </Grid>
-                </Border>
-            </Grid>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ScrollViewer>
 
             <Grid Name="MachLicenseManagerGrid" Visibility="Collapsed">
                 <Grid.Background>
@@ -1302,6 +1536,143 @@
                     </Grid>
                 </ScrollViewer>
 
+            </Grid>
+
+            <Grid Name="modifyFnameExtGrid" Visibility="Collapsed">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.2" />
+                </Grid.Background>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid HorizontalAlignment="Center" Width="1100">
+                        <StackPanel VerticalAlignment="Center" Margin="250 20">
+                            <Border Name="modFnameExtBorder" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="3"  Background="#FF2D4E8C" Visibility="Visible">
+                                <StackPanel>
+                                    <Label Content="Change Filename and Extension of Operator Messages" FontSize="17" FontWeight="Bold" Margin="25,10,0,0" Foreground="White"/>
+                                    <Separator/>
+
+                                    <DockPanel Margin="25 5 10 5">
+                                        <Label Content="Default Messaging Extension" FontSize="15" Foreground="White" VerticalAlignment="Center"/>
+                                        <Label Content="." FontSize="15" Foreground="Yellow" FontWeight="Bold" Margin="10 5 0 0"/>
+                                        <TextBox Name="TxtBxDefMesExt" Background="White" BorderBrush="Black" BorderThickness="1" Text="txt" FontSize="15" Padding="5" Height="30" Width="150" HorizontalAlignment="Left"/>
+                                    </DockPanel>
+
+                                    <StackPanel Margin="25 5 25 5">
+                                        <Border BorderBrush="Black" BorderThickness="1" >
+                                            <StackPanel>
+                                                <Label Content="Remote Request Lookup Not Found" FontSize="14" FontStyle="Italic" Background="Khaki" BorderThickness="0 0 0 2"/>
+                                                <TextBox Name="TxtBoxRemReqLkUpNtFnd" Background="White" FontSize="15" FontWeight="Bold" Padding="5" Height="30" TextWrapping="Wrap" TextAlignment="Center" Text="LookUpFailed"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border BorderBrush="Black" BorderThickness="1" Margin="0 5 0 0">
+                                            <StackPanel>
+                                                <Label Content="Remote Request Failed" FontSize="14" FontStyle="Italic" Background="Khaki" BorderThickness="0 0 0 2"/>
+                                                <TextBox Name="TxtBoxRemReqFailed" Background="White" FontSize="15" FontWeight="Bold" Padding="5" Height="30" TextWrapping="Wrap" TextAlignment="Center" Text="InvalidRemoteRequest"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border BorderBrush="Black" BorderThickness="1" Margin="0 5 0 0">
+                                            <StackPanel>
+                                                <Label Content="Remote Request File Lock" FontSize="14" FontStyle="Italic" Background="Khaki" BorderThickness="0 0 0 2"/>
+                                                <TextBox Name="TxtBoxRemReqFileLock" Background="White" FontSize="15" FontWeight="Bold" Padding="5" Height="30" TextWrapping="Wrap" TextAlignment="Center" Text="RequestFileLocked"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border BorderBrush="Black" BorderThickness="1" Margin="0 5 0 0">
+                                            <StackPanel>
+                                                <Label Content="Remote Request File Not Found" FontSize="14" FontStyle="Italic" Background="Khaki" BorderThickness="0 0 0 2"/>
+                                                <TextBox Name="TxtBoxRemReqFileNtFnd" Background="White" FontSize="15" FontWeight="Bold" Padding="5" Height="30" TextWrapping="Wrap" TextAlignment="Center" Text="RequestFileNotFound"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border BorderBrush="Black" BorderThickness="1" Margin="0 5 0 0">
+                                            <StackPanel>
+                                                <Label Content="Remote Request On Hold" FontSize="14" FontStyle="Italic" Background="Khaki" BorderThickness="0 0 0 2"/>
+                                                <TextBox Name="TxtBoxRemReqOnHld" Background="White" FontSize="15" FontWeight="Bold" Padding="5" Height="30" TextWrapping="Wrap" TextAlignment="Center" Text="RequestFileOnHold"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border BorderBrush="Black" BorderThickness="1" Margin="0 5 0 0">
+                                            <StackPanel>
+                                                <Label Content="Remote Request Folder Not Found" FontSize="14" FontStyle="Italic" Background="Khaki" BorderThickness="0 0 0 2"/>
+                                                <TextBox Name="TxtBoxRemReqFldrNtFnd" Background="White" FontSize="15" FontWeight="Bold" Padding="5" Height="30" TextWrapping="Wrap" TextAlignment="Center" Text="RequestFolderNotFound"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                    <Separator/>
+
+                                    <DockPanel HorizontalAlignment="Right" Margin="0 0 25 10">
+                                        <Button Name="BtnOkChangeFnameExt" Height="30" Width="100" ToolTip="Save Changes" Margin="0,10,0,0" BorderThickness="1" BorderBrush="Black" Click="BtnOkChangeFnameExt_Click" >
+                                            <Grid Margin="-10,-5">
+                                                <materialDesign:PackIcon Kind="CheckBold" Width="17" Height="17" />
+                                                <TextBlock Text="OK" Margin="25 0 0 0"/>
+                                            </Grid>
+                                        </Button>
+                                        <Button Name="BtnUndoChangeFnameExt" Height="30" Width="100" ToolTip="Cancel"  Margin="10,10,0,0" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Click="BtnUndoChangeFnameExt_Click" >
+                                            <Grid Margin="-10,-5">
+                                                <materialDesign:PackIcon Kind="Undo" Width="17" Height="17" />
+                                                <TextBlock Text="Undo" Margin="25 0 0 0"/>
+                                            </Grid>
+                                        </Button>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid Name="ApplyToMachGrid" Visibility="Collapsed">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.2" />
+                </Grid.Background>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid HorizontalAlignment="Center" Width="1100">
+                        <StackPanel VerticalAlignment="Center" Margin="150 20">
+                            <Border Name="applytomachborder" CornerRadius="20" BorderBrush="#FFFFF0B7" BorderThickness="3"  Background="#FF2D4E8C" Visibility="Visible">
+                                <StackPanel>
+                                    <ListBox Name="ApplyToMachListBox" Background="White" BorderThickness="3" BorderBrush="Black" Margin="15 15 15 0"  FontSize="13" Padding="5" Height="300" SelectionMode="Multiple">
+
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <CheckBox IsChecked="{Binding isChecked}">
+                                                        <Label Content="{Binding machName}" Visibility="Visible"/>
+                                                    </CheckBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+
+                                    </ListBox>
+
+                                    <Label Content="Apply the operator messages changes on the selected Machine(s)." FontSize="15" FontWeight="Bold" Foreground="White" Margin="15 0 0 0"/>
+
+                                    <DockPanel>
+                                        <CheckBox Name="cbxSelAll" Content="Select All" Background="#FFF9F6F6" Foreground="BlanchedAlmond" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="cbxSelAll_Checked" />
+                                        <CheckBox Name="cbxDeselAll" Content="Deselect All" Background="#FFF9F6F6" Foreground="BlanchedAlmond" FontSize="15" FontWeight="Bold" Margin="20 0 0 0" Checked="cbxDeselAll_Checked" />
+                                    </DockPanel>
+
+                                    <DockPanel HorizontalAlignment="Right" Margin="0 0 25 10">
+                                        <Button Name="BtnOpMessApplyToMach" Height="30" Width="100" ToolTip="Save Changes" Margin="0,10,0,0" BorderThickness="1" BorderBrush="Black" >
+                                            <Grid Margin="-10,-5">
+                                                <materialDesign:PackIcon Kind="CheckBold" Width="17" Height="17" />
+                                                <TextBlock Text="Apply" Margin="25 0 0 0"/>
+                                            </Grid>
+                                        </Button>
+                                        <Button Name="BtnOpMessCancelApplyToMach" Height="30" Width="100" ToolTip="Cancel"  Margin="10,10,0,0" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Click="BtnOpMessCancelApplyToMach_Click"  >
+                                            <Grid Margin="-10,-5">
+                                                <materialDesign:PackIcon Kind="Cancel" Width="17" Height="17" />
+                                                <TextBlock Text="Cancel" Margin="25 0 0 0"/>
+                                            </Grid>
+                                        </Button>
+                                    </DockPanel>
+
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
             </Grid>
         </Grid>
     </Grid>

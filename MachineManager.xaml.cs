@@ -9,11 +9,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ComboBox = System.Windows.Controls.ComboBox;
+using ListBox = System.Windows.Controls.ListBox;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Fusion_v2
 {
@@ -26,16 +30,23 @@ namespace Fusion_v2
         {
             InitializeComponent();
             LoadMachinesQuery();
+            
         }
 
         private void GeneralGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             GenSetGrid.Visibility = Visibility.Visible;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
             FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             FocasSetGrid.Visibility = Visibility.Collapsed;
             SocketSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
             RemReqSettGrid.Visibility = Visibility.Collapsed;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
+
 
             genIcon.Foreground = Brushes.Khaki;
             gentb.Foreground = Brushes.Khaki;
@@ -45,39 +56,62 @@ namespace Fusion_v2
 
             remreqicon.Foreground = Brushes.White;
             remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
         private void CommGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CommunicationsTvI.IsExpanded = true;
 
-            commIcon.Foreground = Brushes.Khaki;
-            commtb.Foreground = Brushes.Khaki;
-
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
 
+            commIcon.Foreground = Brushes.Khaki;
+            commtb.Foreground = Brushes.Khaki;
+
             remreqicon.Foreground = Brushes.White;
             remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
         private void FlashDNCGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
             FlashDNCSetGrid.Visibility = Visibility.Visible;
             FocasSetGrid.Visibility = Visibility.Collapsed;
-            GenSetGrid.Visibility = Visibility.Collapsed;
             SocketSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
             RemReqSettGrid.Visibility = Visibility.Collapsed;
-
-            commIcon.Foreground = Brushes.Khaki;
-            commtb.Foreground = Brushes.Khaki;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
 
+            commIcon.Foreground = Brushes.Khaki;
+            commtb.Foreground = Brushes.Khaki;
+
             remreqicon.Foreground = Brushes.White;
             remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
         private void CbxFlashDNC_Checked(object sender, RoutedEventArgs e)
@@ -92,21 +126,32 @@ namespace Fusion_v2
 
         private void FocasGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            FocasSetGrid.Visibility = Visibility.Visible;
-            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Visible;
             SocketSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
             RemReqSettGrid.Visibility = Visibility.Collapsed;
-
-            commIcon.Foreground = Brushes.Khaki;
-            commtb.Foreground = Brushes.Khaki;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
 
+            commIcon.Foreground = Brushes.Khaki;
+            commtb.Foreground = Brushes.Khaki;
+
             remreqicon.Foreground = Brushes.White;
             remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
         private void CbxFocas_Checked(object sender, RoutedEventArgs e)
@@ -121,22 +166,33 @@ namespace Fusion_v2
 
         private void SocketGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SocketSetGrid.Visibility = Visibility.Visible;
-            FocasSetGrid.Visibility = Visibility.Collapsed;
-            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Visible;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
             RemReqSettGrid.Visibility = Visibility.Collapsed;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
 
-
-            commIcon.Foreground = Brushes.Khaki;
-            commtb.Foreground = Brushes.Khaki;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
 
+            commIcon.Foreground = Brushes.Khaki;
+            commtb.Foreground = Brushes.Khaki;
+
             remreqicon.Foreground = Brushes.White;
             remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
         private void CbxSocket_Checked(object sender, RoutedEventArgs e)
@@ -151,21 +207,32 @@ namespace Fusion_v2
 
         private void FolderWatchGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            FolderWtchSetGrid.Visibility = Visibility.Visible;
-            SocketSetGrid.Visibility = Visibility.Collapsed;
-            FocasSetGrid.Visibility = Visibility.Collapsed;
-            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Visible;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
             RemReqSettGrid.Visibility = Visibility.Collapsed;
-
-            commIcon.Foreground = Brushes.Khaki;
-            commtb.Foreground = Brushes.Khaki;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
 
+            commIcon.Foreground = Brushes.Khaki;
+            commtb.Foreground = Brushes.Khaki;
+
             remreqicon.Foreground = Brushes.White;
             remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
         private void CbxFldrWtch_Checked(object sender, RoutedEventArgs e)
@@ -176,33 +243,151 @@ namespace Fusion_v2
         private void CbxFldrWtch_Unchecked(object sender, RoutedEventArgs e)
         {
             FldrWtch.IsEnabled = false;
+            TxtBoxFldrWtchFldrDes.Clear();
         }
 
         private void RemReqGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             RemoteRequestTvI.IsExpanded = true;
 
-            remreqicon.Foreground = Brushes.Khaki;
-            remreqtb.Foreground = Brushes.Khaki;
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
 
             commIcon.Foreground = Brushes.White;
             commtb.Foreground = Brushes.White;
 
-            genIcon.Foreground = Brushes.White;
-            gentb.Foreground = Brushes.White;
+            remreqicon.Foreground = Brushes.Khaki;
+            remreqtb.Foreground = Brushes.Khaki;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
         private void RemReqSetGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            RemReqSettGrid.Visibility = Visibility.Visible;
-
-            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
             FocasSetGrid.Visibility = Visibility.Collapsed;
             SocketSetGrid.Visibility = Visibility.Collapsed;
             FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Visible;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
+
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
+
+            commIcon.Foreground = Brushes.White;
+            commtb.Foreground = Brushes.White;
+
+            remreqicon.Foreground = Brushes.Khaki;
+            remreqtb.Foreground = Brushes.Khaki;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
         }
 
+        private void ParsingRulesGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
+            ParRulesSetGrid.Visibility = Visibility.Visible;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
+
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
+
+            commIcon.Foreground = Brushes.White;
+            commtb.Foreground = Brushes.White;
+
+            remreqicon.Foreground = Brushes.Khaki;
+            remreqtb.Foreground = Brushes.Khaki;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
+
+            rbShrtLookup.IsChecked = true;
+        }
+
+
+        private void OpMessGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Visible;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
+
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
+
+            commIcon.Foreground = Brushes.White;
+            commtb.Foreground = Brushes.White;
+
+            remreqicon.Foreground = Brushes.White;
+            remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.Khaki;
+            opmesstb.Foreground = Brushes.Khaki;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
+        }
+
+        private void PersonnelGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Visible;
+
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
+
+            commIcon.Foreground = Brushes.White;
+            commtb.Foreground = Brushes.White;
+
+            remreqicon.Foreground = Brushes.White;
+            remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.Khaki;
+            persontb.Foreground = Brushes.Khaki;
+        }
 
         // *** //
 
@@ -538,7 +723,7 @@ namespace Fusion_v2
             btnDelete.IsEnabled = false;
             btnCancel.IsEnabled = true;
             MachListBox.IsEnabled = false;
-            //tabItemGeneral.IsSelected = true;
+            //GeneralTvI.IsSelected = true;
             //tabItemGeneral.Focus();
             TxtBoxMachName.Focus();
             CmbBoxCtrlPgrmGrp.Visibility = Visibility.Visible;
@@ -615,6 +800,247 @@ namespace Fusion_v2
             }
         }
 
-        
+
+        //socket settings function
+
+        private void sockStaticOpt_Checked(object sender, RoutedEventArgs e)
+        {
+            NportChkBxs.IsEnabled = false;
+            showDNCGrid.IsEnabled = false;
+            showBarReqGrid.IsEnabled = false;
+        }
+        private void sockDynamicOpt_Checked(object sender, RoutedEventArgs e)
+        {
+            NportChkBxs.IsEnabled = false;
+            showDNCGrid.IsEnabled = false;
+            showBarReqGrid.IsEnabled = false;
+        }
+        private void sockNportOpt_Checked(object sender, RoutedEventArgs e)
+        {
+            NportChkBxs.IsEnabled = true;
+            showDNCGrid.IsEnabled = true;
+            showBarReqGrid.IsEnabled = true;
+        }
+
+        private void CbxDNC_Checked(object sender, RoutedEventArgs e)
+        {
+            showDNCGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CbxDNC_Unchecked(object sender, RoutedEventArgs e)
+        {
+            showDNCGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void CbxBarcodeRequest_Checked(object sender, RoutedEventArgs e)
+        {
+            showBarReqGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CbxBarcodeRequest_Unchecked(object sender, RoutedEventArgs e)
+        {
+            showBarReqGrid.Visibility = Visibility.Collapsed;
+        }
+
+
+        //Operator Messages
+        private void BtnModifyFnameExt_Click(object sender, RoutedEventArgs e)
+        {
+            modifyFnameExtGrid.Visibility = Visibility.Visible;
+        }
+
+        private void BtnOkChangeFnameExt_Click(object sender, RoutedEventArgs e)
+        {
+            modifyFnameExtGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void BtnUndoChangeFnameExt_Click(object sender, RoutedEventArgs e)
+        {
+            TxtBxDefMesExt.Text = "txt";
+            TxtBoxRemReqLkUpNtFnd.Text = "LookUpFailed";
+            TxtBoxRemReqFailed.Text = "InvalidRemoteRequest";
+            TxtBoxRemReqFileLock.Text = "RequestFileLocked";
+            TxtBoxRemReqFileNtFnd.Text = "RequestFileNotFound";
+            TxtBoxRemReqOnHld.Text = "RequestFileOnHold";
+            TxtBoxRemReqFldrNtFnd.Text = "RequestFolderNotFound";
+        }
+
+
+        //Flash DNC
+        private void CbxFlashDNCSendINI_Checked(object sender, RoutedEventArgs e)
+        {
+            BtnBrowseINIFile.Visibility = Visibility.Visible;
+            txtINIFname.Visibility = Visibility.Visible;
+        }
+
+        private void CbxFlashDNCSendINI_Unchecked(object sender, RoutedEventArgs e)
+        {
+            BtnBrowseINIFile.Visibility = Visibility.Collapsed;
+            txtINIFname.Visibility = Visibility.Collapsed;
+        }
+
+        private void BtnBrowseINIFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Browse for INI file";
+            ofd.Filter = "INI files (*.ini)|*.ini|All files (*.*)|*.*";
+
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                txtINIFname.Visibility = Visibility.Visible;
+                txtINIFname.Text = ofd.FileName;
+            }
+        }
+
+
+        //Parsing Rules
+        private void rbClsSingCmd_Checked(object sender, RoutedEventArgs e)
+        {
+            ClsSingCmdGrid.IsEnabled = true;
+            ClsSingCmdGrid.Visibility = Visibility.Visible;
+            ShrtCutLookupGrid.IsEnabled = false;
+            ShrtCutLookupGrid.Visibility = Visibility.Collapsed;
+            PartsOpLookUpGrid.IsEnabled = false;
+            PartsOpLookUpGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void rbShrtLookup_Checked(object sender, RoutedEventArgs e)
+        {
+            ClsSingCmdGrid.IsEnabled = false;
+            ClsSingCmdGrid.Visibility = Visibility.Collapsed;
+            ShrtCutLookupGrid.IsEnabled = true;
+            ShrtCutLookupGrid.Visibility = Visibility.Visible;
+            PartsOpLookUpGrid.IsEnabled = false;
+            PartsOpLookUpGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void rbPartsOpLookup_Checked(object sender, RoutedEventArgs e)
+        {
+            ClsSingCmdGrid.IsEnabled = false;
+            ClsSingCmdGrid.Visibility = Visibility.Collapsed;
+            ShrtCutLookupGrid.IsEnabled = false;
+            ShrtCutLookupGrid.Visibility = Visibility.Collapsed;
+            PartsOpLookUpGrid.IsEnabled = true;
+            PartsOpLookUpGrid.Visibility = Visibility.Visible;
+        }
+
+
+        //Focas
+        private void cbxFocasEnFldrWatch_Checked(object sender, RoutedEventArgs e)
+        {
+            BtnFocasFldrWtch.IsEnabled = true;
+        }
+
+        private void cbxFocasEnFldrWatch_Unchecked_1(object sender, RoutedEventArgs e)
+        {
+            BtnFocasFldrWtch.IsEnabled = false;
+            TxtBoxFocasfldrWatch.Clear();
+        }
+
+        private void BtnFocasFldrWtch_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog diag = new FolderBrowserDialog();
+            diag.Description = "Please select a folder destination. When a new file is detected in the selected Watch Folder, Fusion processes it using the Fusion DNC Link methods.";
+            if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                TxtBoxFocasfldrWatch.Text = diag.SelectedPath;
+            }
+        }
+
+
+        //Folder Watch
+        private void BtnFldrWtchFolderDes_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog diag = new FolderBrowserDialog();
+            diag.Description = "Please select a folder destination.";
+            if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                TxtBoxFldrWtchFldrDes.Text = diag.SelectedPath;
+            }
+        }
+
+
+        //Remote Request
+        private void CbxRedirInFile_Checked(object sender, RoutedEventArgs e)
+        {
+            IFMStackPanel.Visibility = Visibility.Visible;
+            rbUseOgName.IsChecked = true;
+        }
+
+        private void CbxRedirInFile_Unchecked(object sender, RoutedEventArgs e)
+        {
+            IFMStackPanel.Visibility = Visibility.Collapsed;
+            rbUseOgName.IsChecked = false;
+        }
+
+
+        //APPLY TO MACHINE
+
+        public class ApplyToMachine
+        {
+            public int machId { get; set; }
+            public string machName { get; set; }
+
+            public bool isChecked { get; set; }
+
+        }
+
+        IList<ApplyToMachine> apptomach = new List<ApplyToMachine>();
+
+        public void ApplyToMach()
+        {
+            ApplyToMachListBox.ItemsSource = null;
+            apptomach = new List<ApplyToMachine>();
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                string mach_query = "SELECT * FROM MACHINE ORDER BY machine_name";
+                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "MACHINE");
+
+                foreach(DataRow dr in ds.Tables[0].Rows)
+                {
+                    apptomach.Add(new ApplyToMachine()
+                    {
+                        machId = int.Parse(dr["machine_id"].ToString()),
+                        machName = dr["machine_name"].ToString(),
+                        isChecked = false
+                    });
+                }
+
+                ApplyToMachListBox.ItemsSource = apptomach;
+
+                da.Dispose();
+                ds.Dispose();
+                sqlCon.Close();
+
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+        }
+
+        private void BtnApplyToMach_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyToMachGrid.Visibility = Visibility.Visible;
+            ApplyToMach();
+        }
+
+        private void BtnOpMessCancelApplyToMach_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyToMachGrid.Visibility = Visibility.Collapsed;
+        }
+    
+        private void cbxSelAll_Checked(object sender, RoutedEventArgs e)
+        {
+            cbxDeselAll.IsChecked = false;
+
+        }
+
+        private void cbxDeselAll_Checked(object sender, RoutedEventArgs e)
+        {
+            cbxSelAll.IsChecked = false;
+        }
     }
 }

@@ -268,14 +268,14 @@ namespace Fusion_v2
 
         private void BtnBrowseEditor_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = @"C:\Windows\System32";
-            ofd.Filter = "Executable files (*.exe)|*.exe";
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.InitialDirectory = @"C:\Windows\System32";
+                ofd.Filter = "Executable files (*.exe)|*.exe";
 
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                ncProgEditor.Text = ofd.FileName;
-            }
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    ncProgEditor.Text = ofd.FileName;
+                }
         }
 
         private void BtnSearchComPgrm_Click(object sender, RoutedEventArgs e)
