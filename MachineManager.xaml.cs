@@ -471,6 +471,7 @@ namespace Fusion_v2
                             string ctrlPgrmGrp = dr["machine_group_name"].ToString();
                             string facility_id = dr["AlternateID"].ToString();
                             string notes = dr["note"].ToString();
+                            string commOpt = dr["CommunicationOption"].ToString();
 
                             int MachId = int.Parse(dr["machine_id"].ToString());
                             selMachID.Text = MachId.ToString();
@@ -504,6 +505,53 @@ namespace Fusion_v2
                                 rbMachLvl3.IsEnabled = false;
                             }//machine level
 
+                            //communication option
+                            if (commOpt.Contains("flashDNC"))//flashDNC
+                            {
+                                FlashDNCStckPnl.IsEnabled = false;
+                                CbxFlashDNC.IsChecked = true;
+                            }
+                            else
+                            {
+                                FlashDNCStckPnl.IsEnabled = false;
+                                CbxFlashDNC.IsChecked = false;
+                            }
+
+                            if (commOpt.Contains("Focas"))//focas
+                            {
+                                CommFocasStckPnl.IsEnabled = false;
+                                CbxFocas.IsChecked = true;
+                            }
+                            else
+                            {
+                                CommFocasStckPnl.IsEnabled = false;
+                                CbxFocas.IsChecked = false;
+                            }
+
+                            if (commOpt.Contains("Socket"))//socket
+                            {
+                                CommSockStkPnl.IsEnabled = false;
+                                CbxSocket.IsChecked = true;
+                            }
+                            else
+                            {
+                                CommSockStkPnl.IsEnabled = false;
+                                CbxSocket.IsChecked = false;
+                            }
+
+                            if (commOpt.Contains("DncLink"))//folder watch
+                            {
+                                CommFldrWtchStkPnl.IsEnabled = false;
+                                CbxFldrWtch.IsChecked = true;
+                            }
+                            else
+                            {
+                                CommFldrWtchStkPnl.IsEnabled = false;
+                                CbxFldrWtch.IsChecked = false;
+                            }
+
+                            
+                            //General Controls
                             TxtBoxMachName.Text = machine_name;
                             txtCPG_id.Text = cpg_id.ToString(); //ID OF CONTROL PROGRAM GROUP
                             TxtBoxCtrlPgrmGrp.Text = ctrlPgrmGrp;
