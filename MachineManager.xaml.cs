@@ -15,7 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CheckBox = System.Windows.Controls.CheckBox;
 using ComboBox = System.Windows.Controls.ComboBox;
+using DragDropEffects = System.Windows.DragDropEffects;
 using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
 
@@ -431,6 +433,16 @@ namespace Fusion_v2
                 ds.Dispose();
                 sqlCon.Close();
 
+                //MAX MACHINE ID
+                sqlCon.Open();
+                string maxMachQuery = "SELECT MAX(machine_id) as maxMachId FROM MACHINE";
+                SqlCommand cmd2 = new SqlCommand(maxMachQuery, sqlCon);
+                var dr2 = cmd2.ExecuteReader();
+                dr2.Read();
+                maxMachId.Text = dr2["maxMachId"].ToString();
+                sqlCon.Close();
+                dr2.Close();
+
             }
             catch (Exception ex) { ex.Message.ToString(); }
         }
@@ -461,7 +473,7 @@ namespace Fusion_v2
                             string notes = dr["note"].ToString();
 
                             int MachId = int.Parse(dr["machine_id"].ToString());
-                            selID.Text = MachId.ToString();
+                            selMachID.Text = MachId.ToString();
 
                             //Fill controls
                             if (machine_level == "1")
@@ -607,6 +619,10 @@ namespace Fusion_v2
             catch (Exception ex) { ex.Message.ToString(); }
         }
 
+        public object lb_item = null;
+
+
+
         //public void MachLevel2Query()
         //{
         //    LstBoxMachLvl2.ItemsSource = null;
@@ -731,7 +747,67 @@ namespace Fusion_v2
             FillComboBoxCntrlPgrmGrp(CmbBoxCtrlPgrmGrp);
         }
 
+        private void btnSaveAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewMachineQuery();
+           
+        }
+
+        public void AddNewMachineQuery()
+        {
+            if (TxtBoxMachName.Text == "")
+            {
+                MessageBox.Show("Please fill out required fields.", "Fusion PDO - Machine Manager", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                TxtBoxMachName.Focus();
+            }
+            else
+            {
+                try
+                {
+                    //GENERAL CONTROLS
+                    int newMachId = int.Parse(maxMachId.Text) + 1;
+                    string newMachName = TxtBoxMachName.Text;
+                    int newMachGrpId = int.Parse(CmbBoxCtrlPgrmGrp.SelectedValue.ToString());
+                    string newFacId = TxtBoxFacId.Text;
+                    string newMachNote = TxtBoxNotes.Text;
+                    string tmpMachLicLvl = "";
+                    if (rbMachLvl1.IsChecked == true)
+                    {
+                        tmpMachLicLvl = "1";
+                    }
+                    else if (rbMachLvl2.IsChecked == true)
+                    {
+                        tmpMachLicLvl = "2";
+                    }
+                    else if (rbMachLvl3.IsChecked == true)
+                    {
+                        tmpMachLicLvl = "3";
+                    }
+                    string newMachLicLvl = tmpMachLicLvl;
+
+                    SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
+                    sqlCon.Open();
+                    string inMachQuery = "INSERT INTO MACHINE(machine_id, machine_name, note, AlternateID, machineLevel) VALUES('" + newMachId + "', '" + newMachName + "', '" + newMachNote + "', '" + newFacId + "', '" + newMachLicLvl + "'); INSERT INTO Machine_Group_Assoc(FK_machine_id, FK_machine_group_id) VALUES('" + newMachId + "', '" + newMachGrpId + "')";
+                    SqlCommand cmd = new SqlCommand(inMachQuery, sqlCon);
+                    cmd.ExecuteNonQuery();
+                    sqlCon.Close();
+
+                    MessageBox.Show("New Machine successfully added.", "Fusion PDO - Machine Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    Cancel();
+                }
+                catch (Exception ex) { ex.Message.ToString(); }
+            }
+        }
+
+
+        //Cancel Action - Add, Update
         private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Cancel();
+        }
+        
+        public void Cancel()
         {
             rbMachLvl1.IsEnabled = false;
             rbMachLvl2.IsEnabled = false;
@@ -761,6 +837,9 @@ namespace Fusion_v2
         //edit selected machine
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            rbMachLvl1.IsEnabled = true;
+            rbMachLvl2.IsEnabled = true;
+            rbMachLvl3.IsEnabled = true;
             TxtBoxMachName.IsReadOnly = false;
             TxtBoxCtrlPgrmGrp.IsReadOnly = true;
             TxtBoxFacId.IsReadOnly = false;
@@ -781,15 +860,67 @@ namespace Fusion_v2
             CmbBoxCtrlPgrmGrp.SelectedIndex = int.Parse(txtCPG_id.Text) - 1;
         }
 
+        private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
+        {
+            SaveUpdateSelMach();
+        }
+
+        //note, AlternateID, machineLevel
+        public void SaveUpdateSelMach()
+        {
+            if (TxtBoxMachName.Text == "")
+            {
+                MessageBox.Show("Please fill out required fields.", "Fusion PDO - Machine Manager", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                TxtBoxMachName.Focus();
+            }
+            else
+            {
+                try
+                {
+                    //GENERAL CONTROLS
+                    string editMachName = TxtBoxMachName.Text;
+                    int editMachGrpId = int.Parse(CmbBoxCtrlPgrmGrp.SelectedValue.ToString());
+                    string editFacId = TxtBoxFacId.Text;
+                    string editMachNote = TxtBoxNotes.Text;
+                    string tmpMachLicLvl = "";
+                    if (rbMachLvl1.IsChecked == true)
+                    {
+                        tmpMachLicLvl = "1";
+                    }
+                    else if (rbMachLvl2.IsChecked == true)
+                    {
+                        tmpMachLicLvl = "2";
+                    }
+                    else if (rbMachLvl3.IsChecked == true)
+                    {
+                        tmpMachLicLvl = "3";
+                    }
+                    string editMachLicLvl = tmpMachLicLvl;
+
+                    SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
+                    sqlCon.Open();
+                    string inMachQuery = "UPDATE MACHINE SET machine_name = '"+ editMachName +"', note = '"+ editMachNote +"', AlternateID = '"+ editFacId +"', machineLevel = '"+ editMachLicLvl +"' WHERE machine_id = '"+ selMachID.Text +"'; UPDATE Machine_Group_Assoc SET FK_machine_group_id = '"+ editMachGrpId +"' WHERE FK_machine_id = '"+ selMachID.Text+ "'";
+                    SqlCommand cmd = new SqlCommand(inMachQuery, sqlCon);
+                    cmd.ExecuteNonQuery();
+                    sqlCon.Close();
+
+                    MessageBox.Show("Selected Machine successfully updated.", "Fusion PDO - Machine Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Cancel();
+                }
+                catch (Exception ex) { ex.Message.ToString(); }
+            }
+        }
+
 
         //delete selected machine
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+
+        private void btnDelete_Click_1(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete selected machine.", "Fusion PDO - Machine Manager", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.dbConnString);
                 sqlCon.Open();
-                string del_query = "DELETE FROM MACHINE WHERE machine_id = '" + selID.Text + "'; DELETE FROM Machine_Group_Assoc WHERE FK_machine_id = '" + selID.Text + "' ";
+                string del_query = "DELETE FROM MACHINE WHERE machine_id = '" + selMachID.Text + "'; DELETE FROM Machine_Group_Assoc WHERE FK_machine_id = '" + selMachID.Text + "' ";
                 SqlCommand sqlCmd = new SqlCommand(del_query, sqlCon);
                 sqlCmd.ExecuteNonQuery();
                 sqlCon.Close();
@@ -842,8 +973,28 @@ namespace Fusion_v2
             showBarReqGrid.Visibility = Visibility.Collapsed;
         }
 
+        private void chkBxSockComOutFldrWtch_Checked(object sender, RoutedEventArgs e)
+        {
+            SockComOutFldrWtchStckPnl.Visibility = Visibility.Visible;
+        }
 
-        //Operator Messages
+        private void chkBxSockComOutFldrWtch_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SockComOutFldrWtchStckPnl.Visibility = Visibility.Collapsed;
+        }
+
+        private void chkBxSockComOutFocas_Checked(object sender, RoutedEventArgs e)
+        {
+            SockComOutFocasStckPnl.Visibility = Visibility.Visible;
+        }
+
+        private void chkBxSockComOutFocas_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SockComOutFocasStckPnl.Visibility = Visibility.Collapsed;
+        }
+
+
+        //Modify Filename and Extension - Operator Messages
         private void BtnModifyFnameExt_Click(object sender, RoutedEventArgs e)
         {
             modifyFnameExtGrid.Visibility = Visibility.Visible;
@@ -864,7 +1015,6 @@ namespace Fusion_v2
             TxtBoxRemReqOnHld.Text = "RequestFileOnHold";
             TxtBoxRemReqFldrNtFnd.Text = "RequestFolderNotFound";
         }
-
 
         //Flash DNC
         private void CbxFlashDNCSendINI_Checked(object sender, RoutedEventArgs e)
@@ -958,6 +1108,15 @@ namespace Fusion_v2
                 TxtBoxFldrWtchFldrDes.Text = diag.SelectedPath;
             }
         }
+        private void chkBFldrWtchComOut_Checked(object sender, RoutedEventArgs e)
+        {
+            FldrWtchComOutStckPnl.Visibility = Visibility.Visible;
+        }
+
+        private void chkBFldrWtchComOut_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FldrWtchComOutStckPnl.Visibility = Visibility.Collapsed;
+        }
 
 
         //Remote Request
@@ -974,8 +1133,7 @@ namespace Fusion_v2
         }
 
 
-        //APPLY TO MACHINE
-
+        //APPLY TO MACHINE - Operator Messages
         public class ApplyToMachine
         {
             public int machId { get; set; }
@@ -1035,12 +1193,70 @@ namespace Fusion_v2
         private void cbxSelAll_Checked(object sender, RoutedEventArgs e)
         {
             cbxDeselAll.IsChecked = false;
-
+            
         }
 
         private void cbxDeselAll_Checked(object sender, RoutedEventArgs e)
         {
             cbxSelAll.IsChecked = false;
         }
+
+        //DUPLICATE RENAME MACHINE
+
+        private void btnDuplicate_Click(object sender, RoutedEventArgs e)
+        {
+            DupRenMachQuery();
+        }
+        private void BtnDupRenMachCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DuplicateRenameGrid.Visibility = Visibility.Collapsed;
+        }
+
+        public void DupRenMachQuery()
+        {
+            DuplicateRenameGrid.Visibility = Visibility.Visible;
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                string mach_query = "SELECT * FROM MACHINE WHERE machine_id = '"+ selMachID.Text + "'";
+                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        string selMachName = reader["machine_name"].ToString();
+                        string selMachLvl = reader["machineLevel"].ToString();
+
+                        lblDupRenMachName.Content = selMachName;
+                        lblDupRenMachLvl.Content = selMachLvl;
+                    }
+                }
+                reader.Close();
+                sqlCon.Close();
+
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+        }
+
+        private void rbDupRenUseHstNm_Checked(object sender, RoutedEventArgs e)
+        {
+            HstNmStckPnl.Visibility = Visibility.Visible;
+            StaticIpStckPnl.Visibility = Visibility.Collapsed;
+        }
+
+        private void rbDupRenUseSttcIp_Checked(object sender, RoutedEventArgs e)
+        {
+            HstNmStckPnl.Visibility = Visibility.Collapsed;
+            StaticIpStckPnl.Visibility = Visibility.Visible;
+        }
+
+        //private void LstBoxMachLvl1_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    LstBoxMachLvl2.DragDrop.Do(LstBoxMachLvl2.SelectedItem.ToString(), DragDropEffects.Copy);
+        //}
+
+
     }
 }
