@@ -20,6 +20,8 @@ using ComboBox = System.Windows.Controls.ComboBox;
 using DragDropEffects = System.Windows.DragDropEffects;
 using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Fusion_v2
 {
@@ -50,6 +52,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.Khaki;
             gentb.Foreground = Brushes.Khaki;
@@ -65,6 +68,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         private void CommGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -85,6 +91,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         private void FlashDNCGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -102,6 +111,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -117,6 +127,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         //private void CbxFlashDNC_Checked(object sender, RoutedEventArgs e)
@@ -144,6 +157,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -159,6 +173,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         private void CbxFocas_Checked(object sender, RoutedEventArgs e)
@@ -186,6 +203,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
 
             genIcon.Foreground = Brushes.White;
@@ -202,18 +220,10 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
-        }
 
-        private void CbxSocket_Checked(object sender, RoutedEventArgs e)
-        {
-            Socket.IsEnabled = true;
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
-
-        private void CbxSocket_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Socket.IsEnabled = false;
-        }
-
         private void FolderWatchGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             GenSetGrid.Visibility = Visibility.Collapsed;
@@ -229,6 +239,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -244,6 +255,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
 
@@ -256,6 +270,16 @@ namespace Fusion_v2
         private void CbxFldrWtch_Unchecked(object sender, RoutedEventArgs e)
         {
             FldrWtch.IsEnabled = false;
+            if (chkBFldrWtchComOut.IsChecked == true)
+            {
+                chkBFldrWtchComOut.IsChecked = false;
+                SockTvI.Visibility = Visibility.Visible;
+            }
+            if (cbxFldrWtchComOutFoc.IsChecked == true)
+            {
+                cbxFldrWtchComOutFoc.IsChecked = false;
+                FocasTvI.Visibility = Visibility.Visible;
+            }
             TxtBoxFldrWtchFldrDes.Clear();
         }
 
@@ -274,6 +298,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Visible;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -289,6 +314,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
         private void FTPGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -305,6 +333,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Visible;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -320,6 +349,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         private void RemReqGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -340,6 +372,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         private void RemReqSetGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -357,6 +392,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -372,6 +408,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         private void ParsingRulesGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -389,6 +428,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -404,6 +444,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
 
             rbShrtLookup.IsChecked = true;
         }
@@ -424,6 +467,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Collapsed;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -439,6 +483,9 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.White;
             persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
         }
 
         private void PersonnelGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -456,6 +503,7 @@ namespace Fusion_v2
             PersonnelSetGrid.Visibility = Visibility.Visible;
             NportSetGrid.Visibility = Visibility.Collapsed;
             FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
 
             genIcon.Foreground = Brushes.White;
             gentb.Foreground = Brushes.White;
@@ -471,6 +519,44 @@ namespace Fusion_v2
 
             personsicon.Foreground = Brushes.Khaki;
             persontb.Foreground = Brushes.Khaki;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
+        }
+        private void InFileGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GenSetGrid.Visibility = Visibility.Collapsed;
+            //CommSetGrid.Visibility = Visibility.Collapsed;
+            //FlashDNCSetGrid.Visibility = Visibility.Collapsed;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            //RemRequestSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSettGrid.Visibility = Visibility.Collapsed;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
+            NportSetGrid.Visibility = Visibility.Collapsed;
+            FTPSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Visible;
+
+            genIcon.Foreground = Brushes.White;
+            gentb.Foreground = Brushes.White;
+
+            commIcon.Foreground = Brushes.White;
+            commtb.Foreground = Brushes.White;
+
+            remreqicon.Foreground = Brushes.White;
+            remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.Khaki;
+            infiletb.Foreground = Brushes.Khaki;
         }
 
         // *** //
@@ -674,7 +760,7 @@ namespace Fusion_v2
             }
             else
             {
-                BtnPrevMach.IsEnabled = false; 
+                BtnPrevMach.IsEnabled = false;
             }
         }
 
@@ -1241,63 +1327,86 @@ namespace Fusion_v2
 
         //socket settings function
 
-        private void sockStaticOpt_Checked(object sender, RoutedEventArgs e)
+        //private void sockStaticOpt_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    NportChkBxs.IsEnabled = false;
+        //    showDNCGrid.IsEnabled = false;
+        //    showBarReqGrid.IsEnabled = false;
+        //}
+        //private void sockDynamicOpt_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    NportChkBxs.IsEnabled = false;
+        //    showDNCGrid.IsEnabled = false;
+        //    showBarReqGrid.IsEnabled = false;
+        //}
+        //private void sockNportOpt_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    NportChkBxs.IsEnabled = true;
+        //    showDNCGrid.IsEnabled = true;
+        //    showBarReqGrid.IsEnabled = true;
+        //}
+
+        //private void CbxDNC_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    showDNCGrid.Visibility = Visibility.Visible;
+        //}
+
+        //private void CbxDNC_Unchecked(object sender, RoutedEventArgs e)
+        //{
+        //    showDNCGrid.Visibility = Visibility.Collapsed;
+        //}
+
+        //private void CbxBarcodeRequest_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    showBarReqGrid.Visibility = Visibility.Visible;
+        //}
+
+        //private void CbxBarcodeRequest_Unchecked(object sender, RoutedEventArgs e)
+        //{
+        //    showBarReqGrid.Visibility = Visibility.Collapsed;
+        //}
+
+        private void CbxSocket_Checked(object sender, RoutedEventArgs e)
         {
-            NportChkBxs.IsEnabled = false;
-            showDNCGrid.IsEnabled = false;
-            showBarReqGrid.IsEnabled = false;
-        }
-        private void sockDynamicOpt_Checked(object sender, RoutedEventArgs e)
-        {
-            NportChkBxs.IsEnabled = false;
-            showDNCGrid.IsEnabled = false;
-            showBarReqGrid.IsEnabled = false;
-        }
-        private void sockNportOpt_Checked(object sender, RoutedEventArgs e)
-        {
-            NportChkBxs.IsEnabled = true;
-            showDNCGrid.IsEnabled = true;
-            showBarReqGrid.IsEnabled = true;
+            Socket.IsEnabled = true;
         }
 
-        private void CbxDNC_Checked(object sender, RoutedEventArgs e)
+        private void CbxSocket_Unchecked(object sender, RoutedEventArgs e)
         {
-            showDNCGrid.Visibility = Visibility.Visible;
-        }
-
-        private void CbxDNC_Unchecked(object sender, RoutedEventArgs e)
-        {
-            showDNCGrid.Visibility = Visibility.Collapsed;
-        }
-
-        private void CbxBarcodeRequest_Checked(object sender, RoutedEventArgs e)
-        {
-            showBarReqGrid.Visibility = Visibility.Visible;
-        }
-
-        private void CbxBarcodeRequest_Unchecked(object sender, RoutedEventArgs e)
-        {
-            showBarReqGrid.Visibility = Visibility.Collapsed;
+            Socket.IsEnabled = false;
         }
 
         private void chkBxSockComOutFldrWtch_Checked(object sender, RoutedEventArgs e)
         {
             SockComOutFldrWtchStckPnl.Visibility = Visibility.Visible;
+            FldrWtchTvI.IsEnabled = false;
         }
 
         private void chkBxSockComOutFldrWtch_Unchecked(object sender, RoutedEventArgs e)
         {
             SockComOutFldrWtchStckPnl.Visibility = Visibility.Collapsed;
+            FldrWtchTvI.IsEnabled = true;
         }
 
         private void chkBxSockComOutFocas_Checked(object sender, RoutedEventArgs e)
         {
             SockComOutFocasStckPnl.Visibility = Visibility.Visible;
+            FocasTvI.IsEnabled = false;
         }
 
         private void chkBxSockComOutFocas_Unchecked(object sender, RoutedEventArgs e)
         {
             SockComOutFocasStckPnl.Visibility = Visibility.Collapsed;
+            FocasTvI.IsEnabled = true;
+        }
+
+        private void BtnGetIP_Click(object sender, RoutedEventArgs e)
+        {
+            string hostname = Dns.GetHostName();
+            //MessageBox.Show(hostname.ToString());
+            string ip = Dns.GetHostByName(hostname).AddressList[0].ToString();
+            LblIp.Content = ip;
+            LblIp.Visibility = Visibility.Visible;
         }
 
 
@@ -1380,6 +1489,10 @@ namespace Fusion_v2
             PartsOpLookUpGrid.IsEnabled = true;
             PartsOpLookUpGrid.Visibility = Visibility.Visible;
         }
+        private void TxtBxLineNum_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
 
 
         //Focas
@@ -1403,6 +1516,30 @@ namespace Fusion_v2
                 TxtBoxFocasfldrWatch.Text = diag.SelectedPath;
             }
         }
+        private void TxtBxFocSttcAdd_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+        private void chkbxFOptHostname_Checked(object sender, RoutedEventArgs e)
+        {
+            TxtBxFocSttcAdd.PreviewTextInput -= TxtBxFocSttcAdd_PreviewTextInput;
+            TxtBxFocSttcAdd.Clear();
+        }
+
+        private void chkbxFOptHostname_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TxtBxFocSttcAdd.PreviewTextInput += TxtBxFocSttcAdd_PreviewTextInput;
+            TxtBxFocSttcAdd.Clear();
+        }
+        private void TxtBxFocPort_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void TxtBxFocSndDly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
 
 
         //Folder Watch
@@ -1418,26 +1555,120 @@ namespace Fusion_v2
         private void chkBFldrWtchComOut_Checked(object sender, RoutedEventArgs e)
         {
             FldrWtchComOutStckPnl.Visibility = Visibility.Visible;
+            SockTvI.IsEnabled = false;
         }
 
         private void chkBFldrWtchComOut_Unchecked(object sender, RoutedEventArgs e)
         {
             FldrWtchComOutStckPnl.Visibility = Visibility.Collapsed;
+            SockTvI.IsEnabled = true;
+        }
+
+        private void cbxFldrWtchComOutFoc_Checked(object sender, RoutedEventArgs e)
+        {
+            FldrWtchComOutFocasStckPnl.Visibility = Visibility.Visible;
+            FocasTvI.IsEnabled = false;
+        }
+
+        private void cbxFldrWtchComOutFoc_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FldrWtchComOutFocasStckPnl.Visibility = Visibility.Collapsed;
+            FocasTvI.IsEnabled = true;
         }
 
 
         //Remote Request
+        private void TxtBoxMxFlSze_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void TxtBxMxLnCnt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void TxtBxPerRate_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
         private void CbxRedirInFile_Checked(object sender, RoutedEventArgs e)
         {
-            IFMStackPanel.Visibility = Visibility.Visible;
-            rbUseOgName.IsChecked = true;
+            IFMStackPanel.IsEnabled = true;
+            //rbUseOgName.IsChecked = true;
         }
 
         private void CbxRedirInFile_Unchecked(object sender, RoutedEventArgs e)
         {
-            IFMStackPanel.Visibility = Visibility.Collapsed;
-            rbUseOgName.IsChecked = false;
+            IFMStackPanel.IsEnabled = false;
+            //rbUseOgName.IsChecked = false;
         }
+
+        //IFM
+        private void rbUseFileNm_Checked(object sender, RoutedEventArgs e)
+        {
+            CrInFileStckPnl.IsEnabled = false;
+        }
+
+        private void rbAssFileNm_Checked(object sender, RoutedEventArgs e)
+        {
+            CrInFileStckPnl.IsEnabled = false;
+        }
+        private void rbCrtInFile_Checked(object sender, RoutedEventArgs e)
+        {
+            CrInFileStckPnl.IsEnabled = true;
+        }
+
+        //nport
+        private void CbxNport_Checked(object sender, RoutedEventArgs e)
+        {
+            Nport.IsEnabled = true;
+        }
+
+        private void CbxNport_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Nport.IsEnabled = false;
+        }
+        private void rbDNC_Checked(object sender, RoutedEventArgs e)
+        {
+            DNCDckPnl.IsEnabled = true;
+            BrCodeDckPnl.IsEnabled = false;
+        }
+
+        private void rbBrCode_Checked(object sender, RoutedEventArgs e)
+        {
+            DNCDckPnl.IsEnabled = false;
+            BrCodeDckPnl.IsEnabled = true;
+        }
+        private void TxtBxDncPort_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void TxtBxBrCodeReq_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+        private void TxtBxTrnsmtDly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+        private void TxtBxNprtPort_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        //ftp
+        private void CbxFTP_Checked(object sender, RoutedEventArgs e)
+        {
+            FTP.IsEnabled = true;
+        }
+
+        private void CbxFTP_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FTP.IsEnabled = false;
+        }
+
 
 
         //APPLY TO MACHINE - Operator Messages
@@ -1560,12 +1791,5 @@ namespace Fusion_v2
         }
 
         
-
-        //private void LstBoxMachLvl1_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    LstBoxMachLvl2.DragDrop.Do(LstBoxMachLvl2.SelectedItem.ToString(), DragDropEffects.Copy);
-        //}
-
-
     }
 }
