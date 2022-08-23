@@ -259,30 +259,6 @@ namespace Fusion_v2
             infileicon.Foreground = Brushes.White;
             infiletb.Foreground = Brushes.White;
         }
-
-
-
-        private void CbxFldrWtch_Checked(object sender, RoutedEventArgs e)
-        {
-            FldrWtch.IsEnabled = true;
-        }
-
-        private void CbxFldrWtch_Unchecked(object sender, RoutedEventArgs e)
-        {
-            FldrWtch.IsEnabled = false;
-            if (chkBFldrWtchComOut.IsChecked == true)
-            {
-                chkBFldrWtchComOut.IsChecked = false;
-                SockTvI.Visibility = Visibility.Visible;
-            }
-            if (cbxFldrWtchComOutFoc.IsChecked == true)
-            {
-                cbxFldrWtchComOutFoc.IsChecked = false;
-                FocasTvI.Visibility = Visibility.Visible;
-            }
-            TxtBoxFldrWtchFldrDes.Clear();
-        }
-
         private void NPortGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             GenSetGrid.Visibility = Visibility.Collapsed;
@@ -454,6 +430,7 @@ namespace Fusion_v2
 
         private void OpMessGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ApplyToMach();
             GenSetGrid.Visibility = Visibility.Collapsed;
             //CommSetGrid.Visibility = Visibility.Collapsed;
             //FlashDNCSetGrid.Visibility = Visibility.Collapsed;
@@ -1374,6 +1351,16 @@ namespace Fusion_v2
         private void CbxSocket_Unchecked(object sender, RoutedEventArgs e)
         {
             Socket.IsEnabled = false;
+            if (chkBxSockComOutFldrWtch.IsChecked == true)
+            {
+                chkBxSockComOutFldrWtch.IsChecked = false;
+                SockTvI.Visibility = Visibility.Visible;
+            }
+            if (chkBxSockComOutFocas.IsChecked == true)
+            {
+                chkBxSockComOutFocas.IsChecked = false;
+                FocasTvI.Visibility = Visibility.Visible;
+            }
         }
 
         private void chkBxSockComOutFldrWtch_Checked(object sender, RoutedEventArgs e)
@@ -1402,23 +1389,57 @@ namespace Fusion_v2
 
         private void BtnGetIP_Click(object sender, RoutedEventArgs e)
         {
-            string hostname = Dns.GetHostName();
-            //MessageBox.Show(hostname.ToString());
-            string ip = Dns.GetHostByName(hostname).AddressList[0].ToString();
-            LblIp.Content = ip;
+            // Getting host name
+            string host = TxtBxDevNm.Text;
+
+            // Getting ip address using host name
+            IPHostEntry ip = Dns.GetHostByName(host);
+            LblIp.Content = "IP: " + ip.AddressList[0].ToString();
             LblIp.Visibility = Visibility.Visible;
+        }
+        private void fldrWatchMoveToIFM_Click(object sender, RoutedEventArgs e)
+        {
+            SockDncStckPnl.Visibility = Visibility.Collapsed;
+            SockTCPDckPnl.Visibility = Visibility.Collapsed;
+            txtInfo.Text = "When a new file is detected in the selected Watch Folder, move it to the Fusion Incoming File Manager.";
+        }
+
+        private void fldrWatchDNCLink_Checked(object sender, RoutedEventArgs e)
+        {
+            SockDncStckPnl.Visibility = Visibility.Visible;
+            SockTCPDckPnl.Visibility = Visibility.Collapsed;
+            txtInfo.Text = "When a new file is detected in the selected Watch Folder. Fusion processes it using the Fusion DNC Link methods.For details, please see the help section on DNC Link and Mapped Drives.";
+        }
+
+        private void fldrWatchTCP_Checked(object sender, RoutedEventArgs e)
+        {
+            SockDncStckPnl.Visibility = Visibility.Collapsed;
+            SockTCPDckPnl.Visibility = Visibility.Visible;
+            txtInfo.Text = "When a new file is detected in the selected Watch Folder, move it via TCP client to the following Server Port and IP Address.";
+        }
+
+        private void SockFldrWtchHstNm_Click(object sender, RoutedEventArgs e)
+        {
+            SockHstNmFldrWtchStckPnl.Visibility = Visibility.Visible;
+            SockIpAddFldrWtchStckPnl.Visibility = Visibility.Collapsed;
+        }
+
+        private void SockFldrWtchIP_Checked(object sender, RoutedEventArgs e)
+        {
+            SockHstNmFldrWtchStckPnl.Visibility = Visibility.Collapsed;
+            SockIpAddFldrWtchStckPnl.Visibility = Visibility.Visible;
         }
 
 
         //Modify Filename and Extension - Operator Messages
         private void BtnModifyFnameExt_Click(object sender, RoutedEventArgs e)
         {
-            modifyFnameExtGrid.Visibility = Visibility.Visible;
+            //modifyFnameExtGrid.Visibility = Visibility.Visible;
         }
 
         private void BtnOkChangeFnameExt_Click(object sender, RoutedEventArgs e)
         {
-            modifyFnameExtGrid.Visibility = Visibility.Collapsed;
+            //modifyFnameExtGrid.Visibility = Visibility.Collapsed;
         }
 
         private void BtnUndoChangeFnameExt_Click(object sender, RoutedEventArgs e)
@@ -1431,6 +1452,7 @@ namespace Fusion_v2
             TxtBoxRemReqOnHld.Text = "RequestFileOnHold";
             TxtBoxRemReqFldrNtFnd.Text = "RequestFolderNotFound";
         }
+
 
         //Flash DNC
         //private void CbxFlashDNCSendINI_Checked(object sender, RoutedEventArgs e)
@@ -1469,8 +1491,7 @@ namespace Fusion_v2
             PartsOpLookUpGrid.IsEnabled = false;
             PartsOpLookUpGrid.Visibility = Visibility.Collapsed;
         }
-
-        private void rbShrtLookup_Checked(object sender, RoutedEventArgs e)
+        private void rbShrtLookup_Click(object sender, RoutedEventArgs e)
         {
             ClsSingCmdGrid.IsEnabled = false;
             ClsSingCmdGrid.Visibility = Visibility.Collapsed;
@@ -1479,7 +1500,6 @@ namespace Fusion_v2
             PartsOpLookUpGrid.IsEnabled = false;
             PartsOpLookUpGrid.Visibility = Visibility.Collapsed;
         }
-
         private void rbPartsOpLookup_Checked(object sender, RoutedEventArgs e)
         {
             ClsSingCmdGrid.IsEnabled = false;
@@ -1493,6 +1513,16 @@ namespace Fusion_v2
         {
             e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
         }
+        private void rbFldrReq_Click(object sender, RoutedEventArgs e)
+        {
+            FldrReqStckPnl.Visibility = Visibility.Visible;
+        }
+
+        private void rbFlReq_Click(object sender, RoutedEventArgs e)
+        {
+            FldrReqStckPnl.Visibility = Visibility.Collapsed;
+        }
+
 
 
         //Focas
@@ -1552,6 +1582,26 @@ namespace Fusion_v2
                 TxtBoxFldrWtchFldrDes.Text = diag.SelectedPath;
             }
         }
+        private void CbxFldrWtch_Checked(object sender, RoutedEventArgs e)
+        {
+            FldrWtch.IsEnabled = true;
+        }
+
+        private void CbxFldrWtch_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FldrWtch.IsEnabled = false;
+            if (chkBFldrWtchComOut.IsChecked == true)
+            {
+                chkBFldrWtchComOut.IsChecked = false;
+                SockTvI.Visibility = Visibility.Visible;
+            }
+            if (cbxFldrWtchComOutFoc.IsChecked == true)
+            {
+                cbxFldrWtchComOutFoc.IsChecked = false;
+                FocasTvI.Visibility = Visibility.Visible;
+            }
+            TxtBoxFldrWtchFldrDes.Clear();
+        }
         private void chkBFldrWtchComOut_Checked(object sender, RoutedEventArgs e)
         {
             FldrWtchComOutStckPnl.Visibility = Visibility.Visible;
@@ -1575,6 +1625,53 @@ namespace Fusion_v2
             FldrWtchComOutFocasStckPnl.Visibility = Visibility.Collapsed;
             FocasTvI.IsEnabled = true;
         }
+
+        private void rbFldrWtchDNC_Checked(object sender, RoutedEventArgs e)
+        {
+            FldrWtchDNCLnkStckPnl.Visibility = Visibility.Visible;
+            TcpTrnsfrStckPnl.Visibility = Visibility.Collapsed;
+            txtInst.Text = "When a new file is detected in the selected Watch Folder. Fusion processes it using the Fusion DNC Link methods. For details, please see the help section on DNC Link and Mapped Drives.";
+        }
+
+        private void rbFldrWthcMvInFile_Click(object sender, RoutedEventArgs e)
+        {
+            FldrWtchDNCLnkStckPnl.Visibility = Visibility.Collapsed;
+            TcpTrnsfrStckPnl.Visibility = Visibility.Collapsed;
+            txtInst.Text = "When a new file is detected in the selected Watch Folder, move it to the Fusion Incoming File Manager.";
+        }
+        private void rbFldrWtchTCP_Checked(object sender, RoutedEventArgs e)
+        {
+            FldrWtchDNCLnkStckPnl.Visibility = Visibility.Collapsed;
+            TcpTrnsfrStckPnl.Visibility = Visibility.Visible;
+            txtInst.Text = "When a new file is detected in the selected Watch Folder, move it via TCP client to the following Server Port and IP Address.";
+        }
+
+        private void cbxDNCUseDesFldr_Checked(object sender, RoutedEventArgs e)
+        {
+            TxtBxDesFldr.IsReadOnly = false;
+            BtnBrwsDesFldr.IsEnabled = true;
+        }
+        
+        private void cbxDNCUseDesFldr_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TxtBxDesFldr.IsReadOnly = true;
+            TxtBxDesFldr.Clear();
+            BtnBrwsDesFldr.IsEnabled = false;
+        }
+
+        private void rbHstNm_Click(object sender, RoutedEventArgs e)
+        {
+            FldrWtchHstNmStckPnl.Visibility = Visibility.Visible;
+            FldrWtchIpAddStckPnl.Visibility = Visibility.Collapsed;
+        }
+
+        private void rbIpAdd_Click(object sender, RoutedEventArgs e)
+        {
+            FldrWtchHstNmStckPnl.Visibility = Visibility.Collapsed;
+            FldrWtchIpAddStckPnl.Visibility = Visibility.Visible;
+        }
+
+        
 
 
         //Remote Request
@@ -1719,13 +1816,13 @@ namespace Fusion_v2
 
         private void BtnApplyToMach_Click(object sender, RoutedEventArgs e)
         {
-            ApplyToMachGrid.Visibility = Visibility.Visible;
+            //ApplyToMachGrid.Visibility = Visibility.Visible;
             ApplyToMach();
         }
 
         private void BtnOpMessCancelApplyToMach_Click(object sender, RoutedEventArgs e)
         {
-            ApplyToMachGrid.Visibility = Visibility.Collapsed;
+            //ApplyToMachGrid.Visibility = Visibility.Collapsed;
         }
     
         private void cbxSelAll_Checked(object sender, RoutedEventArgs e)
@@ -1790,6 +1887,7 @@ namespace Fusion_v2
             StaticIpStckPnl.Visibility = Visibility.Visible;
         }
 
+        //
         
     }
 }

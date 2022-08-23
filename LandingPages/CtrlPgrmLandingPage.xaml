@@ -68,79 +68,85 @@
                     <GradientStop Color="#FF003B67" Offset="0.5"/>
                     <GradientStop Color="#FF006CBC" Offset="1.0"/>
                     <GradientStop Color="#FF252526" Offset="1.5"/>
+
                 </LinearGradientBrush>
             </Grid.Background>
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <StackPanel>
-                        <TreeView >
-                            <Image Source="../Images/logo.png" Width="268" Height="150" Visibility="Visible" Margin="0 0 0 0" />
-                            <TreeViewItem Margin="0 5 0 0" Name="setUp" Foreground="White">
-                                <TreeViewItem.Header>
-                                    <Grid Name="setUpGrid" Background="Transparent" MouseDown="setUpGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal"  Width="160">
-                                            <materialDesign:PackIcon Kind="SettingsVertical" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Name="setupIcon"/>
-                                            <TextBlock Text="Setup" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,0,4" FontSize="18" Foreground="White" FontWeight="Regular" Name="setUpTB"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
+                <StackPanel>
+                    <Grid>
+                        <StackPanel>
+                            <Border >
 
-                                <TreeViewItem Margin="16 0 0 0">
+                                <Image Source="../Images/FusionNew.png" Width="268" Height="150" Visibility="Visible" Margin="0 0 0 0" HorizontalAlignment="Center"/>
+                            </Border>
+                            <TreeView >
+
+                                <TreeViewItem Margin="0 5 0 0" Name="setUp" Foreground="White">
                                     <TreeViewItem.Header>
-                                        <Grid Name="setUpLicence" Background="Transparent" MouseDown="setUpLicence_MouseDown" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="DriversLicense" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="License" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="setUpGrid" Background="Transparent" MouseDown="setUpGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal"  Width="160">
+                                                <materialDesign:PackIcon Kind="SettingsVertical" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Name="setupIcon"/>
+                                                <TextBlock Text="Setup" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,0,4" FontSize="18" Foreground="White" FontWeight="Regular" Name="setUpTB"/>
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
-                                </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
-                                    <TreeViewItem.Header>
-                                        <Grid Name="ApplicationGrid" Background="Transparent" MouseDown="ApplicationGrid_MouseDown" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Application" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Application" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </TreeViewItem.Header>
-                                </TreeViewItem>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="setUpLicence" Background="Transparent" MouseDown="setUpLicence_MouseDown" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="DriversLicense" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="License" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
-                                    <TreeViewItem.Header>
-                                        <Grid Name="ServiceGrid" Background="Transparent" MouseDown="ServiceGrid_MouseDown" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Server" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Service" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </TreeViewItem.Header>
-                                </TreeViewItem>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="ApplicationGrid" Background="Transparent" MouseDown="ApplicationGrid_MouseDown" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Application" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Application" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
-                                    <TreeViewItem.Header>
-                                        <Grid Name="dncEvents" Background="Transparent" MouseDown="dncEvents_MouseDown" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Events" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="DNC Events" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </TreeViewItem.Header>
-                                </TreeViewItem>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="ServiceGrid" Background="Transparent" MouseDown="ServiceGrid_MouseDown" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Server" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Service" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
-                                    <TreeViewItem.Header>
-                                        <Grid Name="Users" Background="Transparent" MouseDown="Users_MouseDown" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Users" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Users" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </TreeViewItem.Header>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="dncEvents" Background="Transparent" MouseDown="dncEvents_MouseDown" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Events" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="DNC Events" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="Users" Background="Transparent" MouseDown="Users_MouseDown" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Users" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Users" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
                                 </TreeViewItem>
-                            </TreeViewItem>
-                            <!--
+                                <!--
                         <TreeViewItem Margin="0,0,0,0">
                             <TreeViewItem.Header>
                                 <Grid Name="homeGrid" Background="Transparent" MouseDown="homeGrid_MouseDown" >
@@ -153,208 +159,209 @@
                         </TreeViewItem>
                         -->
 
-                            <TreeViewItem Margin="32 5 0 0" Name="mach" >
-                                <TreeViewItem.Header>
-                                    <Grid Name="machGrid" Background="Transparent" MouseDown="machGrid_MouseDown">
-                                        <StackPanel Orientation="Horizontal"  Width="160">
-                                            <materialDesign:PackIcon Kind="settings" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="macimg"/>
-                                            <TextBlock Text="Machines" Name="mactb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" />
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
-
-                            <TreeViewItem Margin="0 5 0 0" Name="cntrlProgram" Foreground="White">
-                                <TreeViewItem.Header>
-                                    <Grid Name="cpGrid" Background="Transparent" Width="200" MouseDown="cpGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal" Width="250" HorizontalAlignment="Left">
-                                            <materialDesign:PackIcon Kind="SettingsApplications" Width="20" Height="20" Foreground="White" Name="cpIcon" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                                            <TextBlock Text="Control Programs"  VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" Width="200" Name="ctrlPgrmTB"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
-
-                                <TreeViewItem Margin="16 0 0 0" Name="ctrlPgrmNav">
+                                <TreeViewItem Margin="32 5 0 0" Name="mach" >
                                     <TreeViewItem.Header>
-                                        <Grid Name="cpNavigator" Background="Transparent" MouseDown="cpNavigator_MouseDown" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Navigation" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Navigator" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="machGrid" Background="Transparent" MouseDown="machGrid_MouseDown">
+                                            <StackPanel Orientation="Horizontal"  Width="160">
+                                                <materialDesign:PackIcon Kind="settings" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="macimg"/>
+                                                <TextBlock Text="Machines" Name="mactb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" />
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
                                 </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
+                                <TreeViewItem Margin="0 5 0 0" Name="cntrlProgram" Foreground="White">
                                     <TreeViewItem.Header>
-                                        <Grid Name="cpGroupManager" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="PeopleGroup" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Group Manager" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="cpGrid" Background="Transparent" Width="200" MouseDown="cpGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal" Width="250" HorizontalAlignment="Left">
+                                                <materialDesign:PackIcon Kind="SettingsApplications" Width="20" Height="20" Foreground="White" Name="cpIcon" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                                <TextBlock Text="Control Programs"  VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" Width="200" Name="ctrlPgrmTB"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </TreeViewItem.Header>
+
+                                    <TreeViewItem Margin="16 0 0 0" Name="ctrlPgrmNav">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="cpNavigator" Background="Transparent" MouseDown="cpNavigator_MouseDown" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Navigation" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Navigator" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="cpGroupManager" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="PeopleGroup" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Group Manager" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="cpTools" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Tools" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Tools" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+                                </TreeViewItem>
+
+                                <TreeViewItem Margin="32 5 0 0" Name="ifm" >
+                                    <TreeViewItem.Header>
+                                        <Grid Name="ifmGrid" Background="Transparent" MouseDown="ifmGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal"  Width="220">
+                                                <materialDesign:PackIcon Kind="FileArrowLeftRightOutline" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="ifmIcon"/>
+                                                <TextBlock Text="Incoming File &#10; Manager" Name="ifmTb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White"/>
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
                                 </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
+                                <TreeViewItem Margin="0 5 0 0" Name="Process" Foreground="White">
                                     <TreeViewItem.Header>
-                                        <Grid Name="cpTools" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Tools" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Tools" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="processGrid" Background="Transparent" Width="200" MouseDown="processGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal" Width="200" HorizontalAlignment="Left">
+                                                <materialDesign:PackIcon Kind="ToolTime" Width="20" Height="20" Foreground="White" Name="processIcon" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                                <TextBlock Text="Process" Name="cpProcess" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" Width="150"/>
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
-                                </TreeViewItem>
-                            </TreeViewItem>
 
-                            <TreeViewItem Margin="32 5 0 0" Name="ifm" >
-                                <TreeViewItem.Header>
-                                    <Grid Name="ifmGrid" Background="Transparent" MouseDown="ifmGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal"  Width="220">
-                                            <materialDesign:PackIcon Kind="FileArrowLeftRightOutline" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="ifmIcon"/>
-                                            <TextBlock Text="Incoming File &#10; Manager" Name="ifmTb" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="processPartsAndOperations" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Manufacturing" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Parts and  &#10; Operations" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
 
-                            <TreeViewItem Margin="0 5 0 0" Name="Process" Foreground="White">
-                                <TreeViewItem.Header>
-                                    <Grid Name="processGrid" Background="Transparent" Width="200" MouseDown="processGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal" Width="200" HorizontalAlignment="Left">
-                                            <materialDesign:PackIcon Kind="ToolTime" Width="20" Height="20" Foreground="White" Name="processIcon" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                                            <TextBlock Text="Process" Name="cpProcess" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" Width="150"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="processPartsAndOperationsCust" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Manufacturing" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Parts, Operations &#10; Customer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
-                                    <TreeViewItem.Header>
-                                        <Grid Name="processPartsAndOperations" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Manufacturing" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Parts and  &#10; Operations" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </TreeViewItem.Header>
-                                </TreeViewItem>
-
-                                <TreeViewItem Margin="16 0 0 0">
-                                    <TreeViewItem.Header>
-                                        <Grid Name="processPartsAndOperationsCust" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Manufacturing" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Parts, Operations &#10; Customer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </TreeViewItem.Header>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="processCusMngr" Background="Transparent" MouseDown="processCusMngr_MouseDown" >
+                                                <StackPanel Orientation="Horizontal" Width="200" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="CustomerService" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Customer Manager" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
                                 </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
+                                <TreeViewItem Margin="32 5 0 0" Name="readFlashDNC">
                                     <TreeViewItem.Header>
-                                        <Grid Name="processCusMngr" Background="Transparent" MouseDown="processCusMngr_MouseDown" >
-                                            <StackPanel Orientation="Horizontal" Width="200" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="CustomerService" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Customer Manager" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </TreeViewItem.Header>
-                                </TreeViewItem>
-                            </TreeViewItem>
-
-                            <TreeViewItem Margin="32 5 0 0" Name="readFlashDNC">
-                                <TreeViewItem.Header>
-                                    <Grid Name="rfDNCGrid" Background="Transparent" MouseDown="rfDNCGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal"  Width="160">
-                                            <materialDesign:PackIcon Kind="UsbFlashDrive" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="readFDNCicon"/>
-                                            <TextBlock Text="Read Flash &#10; DNC Media" Name="TBrfDNC" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
-
-                            <TreeViewItem Margin="32 5 0 0" Name="sendBrowse" >
-                                <TreeViewItem.Header>
-                                    <Grid Name="sendBrowGrid" Background="Transparent" MouseDown="sendBrowGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal"  Width="160">
-                                            <materialDesign:PackIcon Kind="Send" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="sendBroIcon"/>
-                                            <TextBlock Text="Send Browse" Name="sendBroTB" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" />
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
-
-                            <TreeViewItem Margin="0 5 0 0" Name="Reports" Foreground="White">
-                                <TreeViewItem.Header>
-                                    <Grid Name="ReportsGrid" Background="Transparent" Width="200" MouseDown="ReportsGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal" Width="200" HorizontalAlignment="Left">
-                                            <materialDesign:PackIcon Kind="Note" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Name="repICon"/>
-                                            <TextBlock Text="Reports" Name="reportsTB" VerticalAlignment="Center" Margin="5 0 0 0" FontSize="18" Foreground="White" Width="150"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
-
-                                <TreeViewItem Margin="16 0 0 0">
-                                    <TreeViewItem.Header>
-                                        <Grid Name="ReportsDNC" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Event" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="DNC Events" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="rfDNCGrid" Background="Transparent" MouseDown="rfDNCGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal"  Width="160">
+                                                <materialDesign:PackIcon Kind="UsbFlashDrive" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="readFDNCicon"/>
+                                                <TextBlock Text="Read Flash &#10; DNC Media" Name="TBrfDNC" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White"/>
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
                                 </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
+                                <TreeViewItem Margin="32 5 0 0" Name="sendBrowse" >
                                     <TreeViewItem.Header>
-                                        <Grid Name="ReportsCtrlProg" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="SettingsBox" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Control Programs" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="sendBrowGrid" Background="Transparent" MouseDown="sendBrowGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal"  Width="160">
+                                                <materialDesign:PackIcon Kind="Send" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="sendBroIcon"/>
+                                                <TextBlock Text="Send Browse" Name="sendBroTB" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" />
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
                                 </TreeViewItem>
 
-                            </TreeViewItem>
-
-                            <TreeViewItem Margin="0 5 0 0" Name="Diagnostics" Foreground="White">
-                                <TreeViewItem.Header>
-                                    <Grid Name="diagGrid" Background="Transparent" MouseDown="diagGrid_MouseDown" >
-                                        <StackPanel Orientation="Horizontal"  Width="160">
-                                            <materialDesign:PackIcon Kind="Tools" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="DiagIcon"/>
-                                            <TextBlock Text="Diagnostics" Name="DiagTB" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" />
-                                        </StackPanel>
-                                    </Grid>
-                                </TreeViewItem.Header>
-
-                                <TreeViewItem Margin="16 0 0 0">
+                                <TreeViewItem Margin="0 5 0 0" Name="Reports" Foreground="White">
                                     <TreeViewItem.Header>
-                                        <Grid Name="EventsLogs" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="Event" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Event Logs" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="ReportsGrid" Background="Transparent" Width="200" MouseDown="ReportsGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal" Width="200" HorizontalAlignment="Left">
+                                                <materialDesign:PackIcon Kind="Note" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Name="repICon"/>
+                                                <TextBlock Text="Reports" Name="reportsTB" VerticalAlignment="Center" Margin="5 0 0 0" FontSize="18" Foreground="White" Width="150"/>
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
+
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="ReportsDNC" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Event" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="DNC Events" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="ReportsCtrlProg" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="SettingsBox" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Control Programs" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
                                 </TreeViewItem>
 
-                                <TreeViewItem Margin="16 0 0 0">
+                                <TreeViewItem Margin="0 5 0 0" Name="Diagnostics" Foreground="White">
                                     <TreeViewItem.Header>
-                                        <Grid Name="MachTest" Background="Transparent" >
-                                            <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
-                                                <materialDesign:PackIcon Kind="StateMachine" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
-                                                <TextBlock Text="Machine Test" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                        <Grid Name="diagGrid" Background="Transparent" MouseDown="diagGrid_MouseDown" >
+                                            <StackPanel Orientation="Horizontal"  Width="160">
+                                                <materialDesign:PackIcon Kind="Tools" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White" Name="DiagIcon"/>
+                                                <TextBlock Text="Diagnostics" Name="DiagTB" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="18" Foreground="White" />
                                             </StackPanel>
                                         </Grid>
                                     </TreeViewItem.Header>
-                                </TreeViewItem>
-                            </TreeViewItem>
 
-                        </TreeView>
-                    </StackPanel>
-                </Grid>
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="EventsLogs" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="Event" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Event Logs" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem Margin="16 0 0 0">
+                                        <TreeViewItem.Header>
+                                            <Grid Name="MachTest" Background="Transparent" >
+                                                <StackPanel Orientation="Horizontal" Width="160" Margin="30 0 0 0">
+                                                    <materialDesign:PackIcon Kind="StateMachine" Width="20" Height="20" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="White"/>
+                                                    <TextBlock Text="Machine Test" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="White" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+                                </TreeViewItem>
+
+                            </TreeView>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
 
