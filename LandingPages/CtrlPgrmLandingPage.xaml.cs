@@ -85,10 +85,7 @@ namespace Fusion_v2.LandingPages
                     mw.Show();
                     this.Close();
                 }
-                else
-                {
-
-                }
+                
             }
             catch (OutOfMemoryException)
             {

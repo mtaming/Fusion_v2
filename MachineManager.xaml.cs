@@ -1516,11 +1516,17 @@ namespace Fusion_v2
         private void rbFldrReq_Click(object sender, RoutedEventArgs e)
         {
             FldrReqStckPnl.Visibility = Visibility.Visible;
+            TxtBxFlReqFlXt.Visibility = Visibility.Collapsed;
+            TxtBxFldrReqFlXt.Visibility = Visibility.Visible;
+            txtFldrReqWtrMrk.Visibility = Visibility.Visible;
         }
 
         private void rbFlReq_Click(object sender, RoutedEventArgs e)
         {
             FldrReqStckPnl.Visibility = Visibility.Collapsed;
+            TxtBxFlReqFlXt.Visibility = Visibility.Visible;
+            TxtBxFldrReqFlXt.Visibility = Visibility.Collapsed;
+            txtFldrReqWtrMrk.Visibility = Visibility.Collapsed;
         }
 
 

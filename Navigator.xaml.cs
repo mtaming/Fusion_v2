@@ -44,14 +44,13 @@ namespace Fusion_v2
         public Navigator()
         {
             InitializeComponent();
-            //worker =(BackgroundWorker)FindResource("backgroundWorker");
+            //worker = (BackgroundWorker)FindResource("backgroundWorker");
             //dgProgramFiles.IsEnabled = false;
-           
+
             FillComboBoxCntrlPgrmGrp(cmbBoxCntrlPgrm);
             FillComboBoxAssocCust(cmbBoxAssocCust);
 
             //worker.RunWorkerAsync(10);
-
             ProgressBar1.Visibility = Visibility.Hidden;
             Loading.Visibility = Visibility.Hidden;
             cbRemReqId.IsChecked = true;
@@ -82,6 +81,7 @@ namespace Fusion_v2
             btnCreateNew.IsEnabled = true;
             btnRemove.IsEnabled = true;
             btnEdit.IsEnabled = true;
+
         }
 
 
@@ -100,7 +100,7 @@ namespace Fusion_v2
         //}
         //void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         //{
-           
+
         //    ProgressBar1.Value = e.ProgressPercentage;
 
         //}

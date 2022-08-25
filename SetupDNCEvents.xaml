@@ -50,7 +50,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Grid Name="MainGrid">
+        <Grid Name="MainGrid" Style="{StaticResource VisibleAnimation}">
             <Grid Name="DNCGrid" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <materialDesign:PackIcon Kind="Event" Width="30" Height="30" Margin="5 8 0 0" Foreground="White"/>

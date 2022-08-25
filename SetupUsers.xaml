@@ -52,7 +52,7 @@
     </Page.Resources>
     
     <Grid>
-        <Grid Name="MainGrid">
+        <Grid Name="MainGrid" Style="{StaticResource VisibleAnimation}">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <Grid Name="UsersGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Width="850">
                     <!--

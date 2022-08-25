@@ -25,6 +25,7 @@
         <cm:BackgroundWorker x:Key="backgroundWorker" DoWork="worker_DoWork" RunWorkerCompleted="worker_RunWorkerCompleted" WorkerReportsProgress="True" ProgressChanged="worker_ProgressChanged"/>
         -->
         
+        
         <Style x:Key="{x:Type DataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Height" Value="40" />
@@ -57,7 +58,7 @@
     </Page.Resources>
 
     <Grid>
-        <Grid Name="MainGrid">
+        <Grid Name="MainGrid" Style="{StaticResource VisibleAnimation}">
             <Grid Name="NavGrid">
 
                 <Grid>
@@ -472,7 +473,7 @@
 
 
 
-            <Grid Name="gridMach" Visibility="Collapsed">
+            <Grid Name="gridMach" Visibility="Collapsed" Style="{StaticResource VisibleAnimation}">
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.2" />
                 </Grid.Background>
@@ -527,7 +528,7 @@
             </Grid>
 
 
-            <Grid Name="addNewGrid"  Visibility="Collapsed">
+            <Grid Name="addNewGrid"  Visibility="Collapsed" Style="{StaticResource VisibleAnimation}">
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.4" />
                 </Grid.Background>
@@ -738,7 +739,7 @@
             </Grid>
 
 
-            <Grid  Name="editGrid" Visibility="Collapsed">
+            <Grid  Name="editGrid" Visibility="Collapsed" Style="{StaticResource VisibleAnimation}">
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.4" />
                 </Grid.Background>
@@ -942,7 +943,7 @@
             </Grid>
 
 
-            <Grid Name="gridNoPgrmPointer" Visibility="Collapsed">
+            <Grid Name="gridNoPgrmPointer" Visibility="Collapsed" Style="{StaticResource VisibleAnimation}">
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0" />
                 </Grid.Background>
@@ -988,7 +989,7 @@
             </Grid>
 
 
-            <Grid Name="gridSearch" Visibility="Collapsed">
+            <Grid Name="gridSearch" Visibility="Collapsed" Style="{StaticResource VisibleAnimation}">
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.2" />
                 </Grid.Background>

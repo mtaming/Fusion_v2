@@ -52,7 +52,7 @@
     </Page.Resources>
 
     <Grid>
-        <Grid Name="MainServiceGrid">
+        <Grid Name="MainServiceGrid" Style="{StaticResource VisibleAnimation}">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <Grid Name="ServiceGrid">
                     <StackPanel Orientation="Horizontal" Margin="5">

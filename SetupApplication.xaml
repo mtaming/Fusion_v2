@@ -19,7 +19,7 @@
     </Page.Background>
 
     <Grid>
-        <Grid Name="MainAppSetGrid">
+        <Grid Name="MainAppSetGrid" Style="{StaticResource VisibleAnimation}">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <Grid Name="AppSetGrid">
                     <StackPanel Orientation="Horizontal" Margin="5">
