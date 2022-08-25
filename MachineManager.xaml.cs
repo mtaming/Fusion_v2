@@ -22,6 +22,8 @@ using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
 using System.Net;
 using System.Text.RegularExpressions;
+using DataFormats = System.Windows.DataFormats;
+using DataObject = System.Windows.DataObject;
 
 namespace Fusion_v2
 {
@@ -37,6 +39,7 @@ namespace Fusion_v2
             
         }
 
+        #region TreeVIew
         private void GeneralGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             GenSetGrid.Visibility = Visibility.Visible;
@@ -467,6 +470,7 @@ namespace Fusion_v2
 
         private void PersonnelGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            LoadPersonnel();
             GenSetGrid.Visibility = Visibility.Collapsed;
             //CommSetGrid.Visibility = Visibility.Collapsed;
             //FlashDNCSetGrid.Visibility = Visibility.Collapsed;
@@ -536,8 +540,11 @@ namespace Fusion_v2
             infiletb.Foreground = Brushes.Khaki;
         }
 
+        #endregion
+
         // *** //
 
+        #region Load Machines
         public class Machines
         {
             public int machId { get; set; }
@@ -594,6 +601,9 @@ namespace Fusion_v2
             catch (Exception ex) { ex.Message.ToString(); }
         }
 
+        #endregion
+
+        #region Machine SelectionChanged
         private void cmbBxMach_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -741,130 +751,10 @@ namespace Fusion_v2
             }
         }
 
-        /*private void MachListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (e.AddedItems != null && e.AddedItems.Count > 0)
-                {
-                    var item = (ListBox)sender;
-                    var sel_mach = (Machines)item.SelectedItem;
-                    int id = sel_mach.machId;
-
-                    SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-                    sqlCon.Open();
-                    string mach_query = "SELECT * FROM MACHINE INNER JOIN Machine_Group_Assoc ON MACHINE.machine_id=Machine_Group_Assoc.FK_machine_id INNER JOIN Machine_Groups ON Machine_Groups.machine_group_id=Machine_Group_Assoc.FK_machine_group_id WHERE MACHINE.machine_id = '" + id + "'";
-                    SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.HasRows)
-                    {
-                        while (dr.Read())
-                        {
-                            string machine_level = dr["machineLevel"].ToString();
-                            string machine_name = dr["machine_name"].ToString();
-                            int cpg_id = int.Parse(dr["machine_group_id"].ToString());
-                            string ctrlPgrmGrp = dr["machine_group_name"].ToString();
-                            string facility_id = dr["AlternateID"].ToString();
-                            string notes = dr["note"].ToString();
-                            string commOpt = dr["CommunicationOption"].ToString();
-
-                            int MachId = int.Parse(dr["machine_id"].ToString());
-                            selMachID.Text = MachId.ToString();
-
-                            //Fill controls
-                            if (machine_level == "1")
-                            {
-                                rbMachLvl1.IsEnabled = true;
-                                rbMachLvl2.IsEnabled = false;
-                                rbMachLvl3.IsEnabled = false;
-                                rbMachLvl1.IsChecked = true;
-                            }
-                            else if (machine_level == "2")
-                            {
-                                rbMachLvl1.IsEnabled = false;
-                                rbMachLvl2.IsEnabled = true;
-                                rbMachLvl3.IsEnabled = false;
-                                rbMachLvl2.IsChecked = true;
-                            }
-                            else if (machine_level == "3")
-                            {
-                                rbMachLvl1.IsEnabled = false;
-                                rbMachLvl2.IsEnabled = false;
-                                rbMachLvl3.IsEnabled = true;
-                                rbMachLvl3.IsChecked = true;
-                            }
-                            else
-                            {
-                                rbMachLvl1.IsEnabled = false;
-                                rbMachLvl2.IsEnabled = false;
-                                rbMachLvl3.IsEnabled = false;
-                            }//machine level
-
-                            //communication option
-                            //if (commOpt.Contains("flashDNC"))//flashDNC
-                            //{
-                            //    FlashDNCStckPnl.IsEnabled = false;
-                            //    CbxFlashDNC.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    FlashDNCStckPnl.IsEnabled = false;
-                            //    CbxFlashDNC.IsChecked = false;
-                            //}
-
-                            //if (commOpt.Contains("Focas"))//focas
-                            //{
-                            //    CommFocasStckPnl.IsEnabled = false;
-                            //    CbxFocas.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    CommFocasStckPnl.IsEnabled = false;
-                            //    CbxFocas.IsChecked = false;
-                            //}
-
-                            //if (commOpt.Contains("Socket"))//socket
-                            //{
-                            //    CommSockStkPnl.IsEnabled = false;
-                            //    CbxSocket.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    CommSockStkPnl.IsEnabled = false;
-                            //    CbxSocket.IsChecked = false;
-                            //}
-
-                            //if (commOpt.Contains("DncLink"))//folder watch
-                            //{
-                            //    CommFldrWtchStkPnl.IsEnabled = false;
-                            //    CbxFldrWtch.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    CommFldrWtchStkPnl.IsEnabled = false;
-                            //    CbxFldrWtch.IsChecked = false;
-                            //}
-
-                            
-                            //General Controls
-                            TxtBoxMachName.Text = machine_name;
-                            txtCPG_id.Text = cpg_id.ToString(); //ID OF CONTROL PROGRAM GROUP
-                            TxtBoxCtrlPgrmGrp.Text = ctrlPgrmGrp;
-                            TxtBoxFacId.Text = facility_id;
-                            TxtBoxNotes.Text = notes;
-                        }
-                    }
-
-                    dr.Close();
-                    sqlCon.Close();
-                }
-            }
-            catch (Exception ex) { ex.Message.ToString(); }
-        }
-        */
+        #endregion
 
         //Machine License Manager Functions
-
+        #region Machine License Manager
         private void btnOpenMachLicMngr_Click(object sender, RoutedEventArgs e)
         {
             MachLicenseManagerGrid.Visibility = Visibility.Visible;
@@ -1057,10 +947,11 @@ namespace Fusion_v2
         }
 
 
-
+        #endregion
 
 
         //add new machine
+        #region Add, Edit, Delete, Cancel
         private void btnAddNewMach_Click(object sender, RoutedEventArgs e)
         {
             rbMachLvl1.IsEnabled = true;
@@ -1301,6 +1192,7 @@ namespace Fusion_v2
             }
         }
 
+        #endregion
 
         //socket settings function
 
@@ -1429,6 +1321,15 @@ namespace Fusion_v2
             SockHstNmFldrWtchStckPnl.Visibility = Visibility.Collapsed;
             SockIpAddFldrWtchStckPnl.Visibility = Visibility.Visible;
         }
+        private void TxtBxSockPortFoc_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void TxtBxSockSndDelFoc_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
 
 
         //Modify Filename and Extension - Operator Messages
@@ -1519,6 +1420,10 @@ namespace Fusion_v2
             TxtBxFlReqFlXt.Visibility = Visibility.Collapsed;
             TxtBxFldrReqFlXt.Visibility = Visibility.Visible;
             txtFldrReqWtrMrk.Visibility = Visibility.Visible;
+            cbxEnTrans.IsEnabled = false;
+            cbxEnTrans.IsChecked = false;
+            ShowEnTrnsIcon.Visibility = Visibility.Collapsed;
+            EnTransStckPnl.Visibility = Visibility.Collapsed;
         }
 
         private void rbFlReq_Click(object sender, RoutedEventArgs e)
@@ -1527,8 +1432,29 @@ namespace Fusion_v2
             TxtBxFlReqFlXt.Visibility = Visibility.Visible;
             TxtBxFldrReqFlXt.Visibility = Visibility.Collapsed;
             txtFldrReqWtrMrk.Visibility = Visibility.Collapsed;
+            cbxEnTrans.IsEnabled = true;
         }
 
+        private void BtnCloseEnTrans_Click(object sender, RoutedEventArgs e)
+        {
+            EnTransStckPnl.Visibility = Visibility.Collapsed;
+        }
+
+        private void cbxEnTrans_Checked(object sender, RoutedEventArgs e)
+        {
+            ShowEnTrnsIcon.Visibility = Visibility.Visible;
+            EnTransStckPnl.Visibility = Visibility.Visible;
+        }
+
+        private void cbxEnTrans_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ShowEnTrnsIcon.Visibility = Visibility.Collapsed;
+            EnTransStckPnl.Visibility = Visibility.Collapsed;
+        }
+        private void ShowEnTrnsIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            EnTransStckPnl.Visibility = Visibility.Visible;
+        }
 
 
         //Focas
@@ -1676,8 +1602,16 @@ namespace Fusion_v2
             FldrWtchHstNmStckPnl.Visibility = Visibility.Collapsed;
             FldrWtchIpAddStckPnl.Visibility = Visibility.Visible;
         }
+        private void TxtBoxComOutFocFldrWtch_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
 
-        
+        private void TxtBxFldrWtchSndDelFoc_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
 
 
         //Remote Request
@@ -1891,9 +1825,101 @@ namespace Fusion_v2
         {
             HstNmStckPnl.Visibility = Visibility.Collapsed;
             StaticIpStckPnl.Visibility = Visibility.Visible;
+        }//
+
+
+        //drag drop functions 
+        private void LstBoxMachLvl1_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            if (e.Data.GetData(DataFormats.FileDrop) is ListBox listItem)
+            {
+                LstBoxMachLvl1.Items.Add(listItem);
+            }
         }
 
-        //
-        
+        private void LstBoxMachLvl1_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Point mPos = e.GetPosition(null);
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                Math.Abs(mPos.X) > SystemParameters.MinimumHorizontalDragDistance &&
+                Math.Abs(mPos.Y) > SystemParameters.MinimumVerticalDragDistance)
+            {
+                try
+                {
+                    var item = (ListBox)sender;
+                    var selectedItem = (Machines)item.SelectedItem;
+
+                    LstBoxMachLvl1.Items.Remove(selectedItem);
+
+                    DragDrop.DoDragDrop(this, new DataObject(DataFormats.FileDrop, selectedItem), DragDropEffects.Copy);
+
+                    LstBoxMachLvl1.Items.Add(selectedItem);
+                }
+                catch { }
+            }
+        }
+
+        private void LstBoxMachLvl1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point startPoint = e.GetPosition(null);
+        }
+
+
+        #region Personnel
+        public class Personnel
+        {
+            public int pid { get; set; }
+            public string pname { get; set; }
+        }
+        List<Personnel> prsnl = new List<Personnel>();
+
+        public void LoadPersonnel()
+        {
+            LstBxPrsnl.ItemsSource = null;
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                string mach_query = "SELECT * FROM Users ORDER BY Username";
+                SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "Users");
+
+                prsnl = new List<Personnel>();
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+
+                    prsnl.Add(new Personnel()
+                    {
+                        pid = int.Parse(dr["ID"].ToString()),
+                        pname = dr["Username"].ToString()
+                    });
+                }
+                LstBxPrsnl.ItemsSource = prsnl;
+
+                da.Dispose();
+                ds.Dispose();
+                sqlCon.Close();
+            }
+            catch(Exception ex) { ex.Message.ToString(); }
+        }
+        //private void CheckBox_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
+        private void BtnSavePrsnl_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < LstBxPrsnl.Items.Count; i++)
+            {
+                MessageBox.Show(LstBxPrsnl.Items[i].ToString());
+
+            }
+        }
+
+        #endregion
+
+
     }
 }

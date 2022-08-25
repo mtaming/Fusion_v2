@@ -229,6 +229,11 @@
     <Resource Include="Font\TT Norms Pro Regular.otf" />
     <Resource Include="Font\CooperHewitt-Book.ttf" />
     <Resource Include="Font\TT Norms Pro Bold.otf" />
+    <Resource Include="Font\Fonts\CENTURY.TTF" />
+    <Resource Include="Font\Fonts\GOTHIC.TTF" />
+    <Resource Include="Font\Fonts\GOTHICB.TTF" />
+    <Resource Include="Font\Fonts\GOTHICBI.TTF" />
+    <Resource Include="Font\Fonts\GOTHICI.TTF" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

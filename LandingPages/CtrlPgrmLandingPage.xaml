@@ -71,11 +71,11 @@
 
                 </LinearGradientBrush>
             </Grid.Background>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <Grid>
+            <Border>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
                         <StackPanel>
-                            <Border >
+                            <Border Background="White">
 
                                 <Image Source="../Images/FusionNew.png" Width="268" Height="150" Visibility="Visible" Margin="0 0 0 0" HorizontalAlignment="Center"/>
                             </Border>
@@ -360,9 +360,9 @@
 
                             </TreeView>
                         </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </ScrollViewer>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
         </Grid>
 
         <Grid Grid.Column="1">

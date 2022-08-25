@@ -38,6 +38,10 @@
                 <Setter Property="FontFamily" Value="Font/tt norms pro regular.otf #TT Norms Pro Regular"/>
             </Style>
 
+            <Style x:Key="PageFont" TargetType="{x:Type Page}" >
+                <Setter Property="FontFamily" Value="Font/Fonts/GOTHIC.TTF #Century Gothic"/>
+            </Style>
+
             <Style TargetType="{x:Type Expander}">
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
@@ -68,6 +72,6 @@
 
         </ResourceDictionary>
 
-        
+
     </Application.Resources>
 </Application>
