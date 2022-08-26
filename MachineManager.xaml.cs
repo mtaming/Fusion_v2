@@ -24,6 +24,9 @@ using System.Net;
 using System.Text.RegularExpressions;
 using DataFormats = System.Windows.DataFormats;
 using DataObject = System.Windows.DataObject;
+using System.ComponentModel;
+using System.Collections;
+using System.Windows.Media.Animation;
 
 namespace Fusion_v2
 {
@@ -32,6 +35,9 @@ namespace Fusion_v2
     /// </summary>
     public partial class MachineManager : Page
     {
+        public const int MACHLEVEL2 = 50;
+        public const int MACHLEVEL3 = 80;
+
         public MachineManager()
         {
             InitializeComponent();
@@ -42,6 +48,8 @@ namespace Fusion_v2
         #region TreeVIew
         private void GeneralGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //Storyboard openMenu = (Storyboard)GeneralGrid.FindResource("OpenMenu");
+            //openMenu.Begin();
             GenSetGrid.Visibility = Visibility.Visible;
             //CommSetGrid.Visibility = Visibility.Collapsed;
             //FlashDNCSetGrid.Visibility = Visibility.Collapsed;
@@ -606,6 +614,7 @@ namespace Fusion_v2
         #region Machine SelectionChanged
         private void cmbBxMach_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string machlvl = "";
             try
             {
                 if (e.AddedItems != null && e.AddedItems.Count > 0)
@@ -633,6 +642,7 @@ namespace Fusion_v2
 
                             int MachId = int.Parse(dr["machine_id"].ToString());
                             selMachID.Text = MachId.ToString();
+                            machlvl = machine_level;
 
                             //Fill controls
                             if (machine_level == "1")
@@ -715,11 +725,36 @@ namespace Fusion_v2
                             TxtBoxCtrlPgrmGrp.Text = ctrlPgrmGrp;
                             TxtBoxFacId.Text = facility_id;
                             TxtBoxNotes.Text = notes;
+
+                            
                         }
                     }
 
                     dr.Close();
                     sqlCon.Close();
+
+                    sqlCon.Open();
+                    string machLvl = "SELECT COUNT(machineLevel) as machlvl FROM MACHINE WHERE machineLevel = '" + machlvl + "'";
+                    SqlCommand cmd3 = new SqlCommand(machLvl, sqlCon);
+                    var dr3 = cmd3.ExecuteReader();
+                    dr3.Read();
+                    string lvl = machlvl;
+                    if (lvl == "1")
+                    {
+                        lblAvMach.Content = "Unlimited";
+                        lblUsMach.Content = dr3["machlvl"].ToString();
+                    }
+                    else if(lvl == "2"){
+                        lblAvMach.Content = MACHLEVEL2 - int.Parse(dr3["machlvl"].ToString());
+                        lblUsMach.Content = dr3["machlvl"].ToString();
+                    }
+                    else
+                    {
+                        lblAvMach.Content = MACHLEVEL3 - int.Parse(dr3["machlvl"].ToString());
+                        lblUsMach.Content = dr3["machlvl"].ToString();
+                    }
+                    sqlCon.Close();
+                    dr3.Close();
                 }
             }
             catch (Exception ex) { ex.Message.ToString(); }
@@ -923,27 +958,68 @@ namespace Fusion_v2
         //    catch (Exception ex) { ex.Message.ToString(); }
         //}
 
-        //ComboBox Control Program Group
-        public void FillComboBoxCntrlPgrmGrp(ComboBox comBoxName)
-        {
-            try
-            {
-                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-                sqlCon.Open();
-                String query = "SELECT * from Machine_Groups";
-                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                SqlDataAdapter da = new SqlDataAdapter(sqlCmd);
-                DataSet ds = new DataSet();
+        //drag drop functions 
 
-                da.Fill(ds);
-                comBoxName.ItemsSource = ds.Tables[0].DefaultView;
-                comBoxName.DisplayMemberPath = ds.Tables[0].Columns["machine_group_name"].ToString();
-                comBoxName.SelectedValuePath = ds.Tables[0].Columns["machine_group_id"].ToString();
-                comBoxName.SelectedIndex = 0;
-                da.Dispose();
-                sqlCon.Close();
+        ListBox dragSource = null;
+
+        private void LstBoxMachLvl1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //ListBox parent = (ListBox)sender;
+            dragSource = LstBoxMachLvl1;
+            object data = GetDataFromListBox(dragSource, e.GetPosition(LstBoxMachLvl1));
+
+            if (data != null)
+            {
+                DragDrop.DoDragDrop(LstBoxMachLvl1, data, DragDropEffects.Move);
             }
-            catch (Exception ex) { ex.Message.ToString(); }
+        }
+        private void LstBoxMachLvl2_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            dragSource = LstBoxMachLvl2;
+            object data = GetDataFromListBox(dragSource, e.GetPosition(LstBoxMachLvl2));
+
+            if (data != null)
+            {
+                DragDrop.DoDragDrop(LstBoxMachLvl2, data, DragDropEffects.Move);
+            }
+        }
+        private void LstBoxMachLvl2_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            //ListBox parent = (ListBox)sender;
+            //LstBoxMachLvl2.ItemsSource = null;
+            //object data = e.Data.GetData(typeof(string));
+            //((IList)LstBoxMachLvl1.ItemsSource).Remove(data);
+            //LstBoxMachLvl1.Items.Add(data);
+        }
+
+        private static object GetDataFromListBox(ListBox source, Point point)
+        {
+            UIElement element = source.InputHitTest(point) as UIElement;
+            if (element != null)
+            {
+                object data = DependencyProperty.UnsetValue;
+                while (data == DependencyProperty.UnsetValue)
+                {
+                    data = source.ItemContainerGenerator.ItemFromContainer(element);
+
+                    if (data == DependencyProperty.UnsetValue)
+                    {
+                        element = VisualTreeHelper.GetParent(element) as UIElement;
+                    }
+
+                    if (element == source)
+                    {
+                        return null;
+                    }
+                }
+
+                if (data != DependencyProperty.UnsetValue)
+                {
+                    return data;
+                }
+            }
+
+            return null;
         }
 
 
@@ -954,6 +1030,7 @@ namespace Fusion_v2
         #region Add, Edit, Delete, Cancel
         private void btnAddNewMach_Click(object sender, RoutedEventArgs e)
         {
+            GeneralGrid.MouseDown += GeneralGrid_MouseDown;
             rbMachLvl1.IsEnabled = true;
             rbMachLvl2.IsEnabled = true;
             rbMachLvl3.IsEnabled = true;
@@ -1126,7 +1203,30 @@ namespace Fusion_v2
             SaveUpdateSelMach();
         }
 
-        //note, AlternateID, machineLevel
+        //ComboBox Control Program Group
+        public void FillComboBoxCntrlPgrmGrp(ComboBox comBoxName)
+        {
+            try
+            {
+                SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+                sqlCon.Open();
+                String query = "SELECT * from Machine_Groups";
+                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                SqlDataAdapter da = new SqlDataAdapter(sqlCmd);
+                DataSet ds = new DataSet();
+
+                da.Fill(ds);
+                comBoxName.ItemsSource = ds.Tables[0].DefaultView;
+                comBoxName.DisplayMemberPath = ds.Tables[0].Columns["machine_group_name"].ToString();
+                comBoxName.SelectedValuePath = ds.Tables[0].Columns["machine_group_id"].ToString();
+                comBoxName.SelectedIndex = 0;
+                da.Dispose();
+                sqlCon.Close();
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
+        }
+
+        
         public void SaveUpdateSelMach()
         {
             if (TxtBoxMachName.Text == "")
@@ -1611,6 +1711,47 @@ namespace Fusion_v2
         {
             e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
         }
+        private void TxtBxPrtFW_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void TxtBxIpFW_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void TxtBoxIpAddIpFW_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+        private void FldWIP1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void FldWIP2_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void FldWIP3_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void FldWIP4_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"[0-9]");
+        }
+
+        private void ClrIp_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FldWIP1.Clear();
+            FldWIP2.Clear();
+            FldWIP3.Clear();
+            FldWIP4.Clear();
+        }
 
 
 
@@ -1639,6 +1780,15 @@ namespace Fusion_v2
         {
             IFMStackPanel.IsEnabled = false;
             //rbUseOgName.IsChecked = false;
+        }
+        private void cbxRemReqPgrmNm_Checked(object sender, RoutedEventArgs e)
+        {
+            TxtBxPgrmNm.IsEnabled = true;
+        }
+
+        private void cbxRemReqPgrmNm_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TxtBxPgrmNm.IsEnabled = false;
         }
 
         //IFM
@@ -1709,12 +1859,47 @@ namespace Fusion_v2
 
 
         //APPLY TO MACHINE - Operator Messages
-        public class ApplyToMachine
-        {
-            public int machId { get; set; }
-            public string machName { get; set; }
+        //public class ApplyToMachine
+        //{
+        //    public int machId { get; set; }
+        //    public string machName { get; set; }
 
-            public bool isChecked { get; set; }
+        //    public bool isChecked { get; set; }
+
+        //}
+        public class ApplyToMachine : INotifyPropertyChanged
+        {
+            private string _machName;
+            private int _machId;
+            private bool _isChecked;
+
+            public string machName
+            {
+                get { return _machName; }
+                set { _machName = value; NotifyPropertyChanged(); }
+            }
+
+            public int machId
+            {
+                get { return _machId; }
+                set { _machId = value; NotifyPropertyChanged(); }
+            }
+
+            public bool isChecked
+            {
+                get { return _isChecked; }
+                set { _isChecked = value; NotifyPropertyChanged(); }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private void NotifyPropertyChanged(string propertyName = "")
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
 
         }
 
@@ -1768,12 +1953,40 @@ namespace Fusion_v2
         private void cbxSelAll_Checked(object sender, RoutedEventArgs e)
         {
             cbxDeselAll.IsChecked = false;
+            //ApplyToMachListBox.SelectAll();
+            foreach (var a in apptomach)
+            {
+                a.isChecked = true;
+                //MessageBox.Show(a.machId.ToString());
+            }
             
         }
 
         private void cbxDeselAll_Checked(object sender, RoutedEventArgs e)
         {
             cbxSelAll.IsChecked = false;
+            //ApplyToMachListBox.UnselectAll();
+            foreach (var a in apptomach)
+            {
+                a.isChecked = false;
+            }
+        }
+
+        //for testing only
+        private void BtnOpMessApplyToMach_Click(object sender, RoutedEventArgs e)
+        {
+            string id = "";
+            string machname = "";
+            foreach (var a in apptomach)
+            {
+                if (a.isChecked == true)
+                {
+                    //MessageBox.Show(a.machId.ToString() + a.machName + a.isChecked);
+                    id += a.machId.ToString();
+                    machname += a.machName;
+                }
+            }
+            MessageBox.Show(id + machname);
         }
 
         //DUPLICATE RENAME MACHINE
@@ -1828,44 +2041,6 @@ namespace Fusion_v2
         }//
 
 
-        //drag drop functions 
-        private void LstBoxMachLvl1_Drop(object sender, System.Windows.DragEventArgs e)
-        {
-            if (e.Data.GetData(DataFormats.FileDrop) is ListBox listItem)
-            {
-                LstBoxMachLvl1.Items.Add(listItem);
-            }
-        }
-
-        private void LstBoxMachLvl1_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Point mPos = e.GetPosition(null);
-
-            if (e.LeftButton == MouseButtonState.Pressed &&
-                Math.Abs(mPos.X) > SystemParameters.MinimumHorizontalDragDistance &&
-                Math.Abs(mPos.Y) > SystemParameters.MinimumVerticalDragDistance)
-            {
-                try
-                {
-                    var item = (ListBox)sender;
-                    var selectedItem = (Machines)item.SelectedItem;
-
-                    LstBoxMachLvl1.Items.Remove(selectedItem);
-
-                    DragDrop.DoDragDrop(this, new DataObject(DataFormats.FileDrop, selectedItem), DragDropEffects.Copy);
-
-                    LstBoxMachLvl1.Items.Add(selectedItem);
-                }
-                catch { }
-            }
-        }
-
-        private void LstBoxMachLvl1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Point startPoint = e.GetPosition(null);
-        }
-
-
         #region Personnel
         public class Personnel
         {
@@ -1918,8 +2093,12 @@ namespace Fusion_v2
             }
         }
 
+
+
+
+
         #endregion
 
-
+        
     }
 }

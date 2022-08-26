@@ -15,7 +15,15 @@
 
 
     <Page.Resources>
-       
+        
+
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="{Binding Path=TranslateTransform.X}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
         <Style x:Key="{x:Type RadioButton}"
        TargetType="{x:Type RadioButton}">
             <Setter Property="SnapsToDevicePixels"
@@ -314,7 +322,7 @@
 
                                             <!-- GRID -->
 
-                                            <Grid Grid.Column="1" Grid.Row="0" Margin="0 5 10 0">
+                                            <Grid Name="grid" Grid.Column="1" Grid.Row="0" Margin="0 5 10 0">
                                                 <Border Margin="10 5 5 5" BorderThickness="2 0 0 0" BorderBrush="#FFD1D1A6">
                                                     <Grid>
                                                         <!--- GENERAL -->
@@ -339,6 +347,14 @@
                                                                                     <RadioButton Name="rbMachLvl3" Margin="20 20" IsEnabled="False">
                                                                                         <Label Content="Level 3" Foreground="Wheat" FontSize="15"/>
                                                                                     </RadioButton>
+                                                                                </DockPanel>
+
+                                                                                <DockPanel Margin="230 0 0 0" HorizontalAlignment="Left">
+                                                                                    <Label Content="Available Machines:" Foreground="White"/>
+                                                                                    <Label Name="lblAvMach" Content="Unlimited" Foreground="Wheat"/>
+                                                                                    <Label Content="|" Foreground="White"/>
+                                                                                    <Label Content="Used:" Foreground="White"/>
+                                                                                    <Label Name="lblUsMach" Content="Unlimited" Foreground="Wheat"/>
                                                                                 </DockPanel>
 
                                                                                 <DockPanel Margin="20 20 20 0">
@@ -1002,14 +1018,14 @@
                                                                                                                                         </Grid.ColumnDefinitions>
                                                                                                                                         <DockPanel Grid.Column="0">
                                                                                                                                             <Label Content="Host Name:" FontSize="13" Foreground="White"/>
-                                                                                                                                            <TextBox Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" />
+                                                                                                                                            <TextBox Name="TxtBxHstNmFW" Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" />
 
                                                                                                                                         </DockPanel>
                                                                                                                                         <materialDesign:PackIcon Kind="ExclamationBold" Foreground="Red" HorizontalAlignment="Right" Width="25" Height="20" Margin="0 5 0 0" ToolTip="Not a valid Host Name"/>
 
                                                                                                                                         <DockPanel Grid.Column="1" Margin="15 0 0 0">
                                                                                                                                             <Label Content="Port:" FontSize="13" Foreground="White"/>
-                                                                                                                                            <TextBox Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" />
+                                                                                                                                            <TextBox Name="TxtBxPrtFW" Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" PreviewTextInput="TxtBxPrtFW_PreviewTextInput" />
                                                                                                                                         </DockPanel>
                                                                                                                                     </Grid>
                                                                                                                                 </DockPanel>
@@ -1040,12 +1056,12 @@
                                                                                                                                     <StackPanel Grid.Column="0">
                                                                                                                                         <DockPanel>
                                                                                                                                             <Label Content="IP:" FontSize="13" Foreground="White"/>
-                                                                                                                                            <TextBox Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="19 0 0 0" />
+                                                                                                                                            <TextBox Name="TxtBxIpFW" Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="19 0 0 0" PreviewTextInput="TxtBxIpFW_PreviewTextInput" />
 
                                                                                                                                         </DockPanel>
                                                                                                                                         <DockPanel Margin="0 5 0 0">
                                                                                                                                             <Label Content="Port:" FontSize="13" Foreground="White"/>
-                                                                                                                                            <TextBox Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" />
+                                                                                                                                            <TextBox Name="TxtBoxIpAddIpFW" Height="30" Padding="5 5" BorderBrush="Black" FontSize="15" BorderThickness="1" TextWrapping="Wrap"  Background="AliceBlue" Margin="5 0 0 0" PreviewTextInput="TxtBoxIpAddIpFW_PreviewTextInput" />
 
                                                                                                                                         </DockPanel>
                                                                                                                                     </StackPanel>
@@ -1111,11 +1127,11 @@
 
                                                                                                                     <StackPanel Grid.Column="1">
                                                                                                                         <DockPanel>
-                                                                                                                            <TextBox x:Name="FldWIP1" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0"/>
-                                                                                                                            <TextBox x:Name="FldWIP2" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0"/>
-                                                                                                                            <TextBox x:Name="FldWIP3" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0"/>
-                                                                                                                            <TextBox x:Name="FldWIP4" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0"/>
-                                                                                                                            <materialDesign:PackIcon Kind="Eraser" Foreground="Black" Cursor="Hand" Margin="5,-1,0,5" Width="32" Height="Auto" VerticalAlignment="Stretch"/>
+                                                                                                                            <TextBox x:Name="FldWIP1" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed " PreviewTextInput="FldWIP1_PreviewTextInput"/>
+                                                                                                                            <TextBox x:Name="FldWIP2" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed " PreviewTextInput="FldWIP2_PreviewTextInput"/>
+                                                                                                                            <TextBox x:Name="FldWIP3" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed " PreviewTextInput="FldWIP3_PreviewTextInput"/>
+                                                                                                                            <TextBox x:Name="FldWIP4" TextWrapping="Wrap" Text="255" HorizontalAlignment="Left" TextAlignment="Center" Width="64" BorderBrush="#FF252323" BorderThickness="1" Background="White" Height="30" VerticalAlignment="Top" Margin="5 0 0 0" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed " PreviewTextInput="FldWIP4_PreviewTextInput"/>
+                                                                                                                            <materialDesign:PackIcon Name="ClrIp" Kind="Eraser" Foreground="Black" Cursor="Hand" Margin="5,-1,0,5" Width="32" Height="Auto" VerticalAlignment="Stretch" MouseDown="ClrIp_MouseDown"/>
                                                                                                                         </DockPanel>
 
                                                                                                                         <TextBox x:Name="comOutSocket" Height="30" Margin="5,0,0,0"  HorizontalAlignment="Left" Width="270" VerticalAlignment="Top" FontSize="12" BorderBrush="#FF252323" BorderThickness="1" Background="White"/>
@@ -1446,10 +1462,10 @@
                                                                                         <StackPanel Grid.Column="1" Margin="50 0 0 0">
                                                                                             <Label Content="Specific Program Name*" Foreground="White" FontSize="14" FontWeight="Bold"/>
                                                                                             <DockPanel>
-                                                                                                <CheckBox  HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White">
+                                                                                                <CheckBox Name="cbxRemReqPgrmNm" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Checked="cbxRemReqPgrmNm_Checked" Unchecked="cbxRemReqPgrmNm_Unchecked">
                                                                                                     <Label Foreground="White" Content="Require Program Name" FontSize="12"/>
                                                                                                 </CheckBox>
-                                                                                                <TextBox TextWrapping="Wrap" VerticalAlignment="Top" Text="O1000"  Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30"/>
+                                                                                                <TextBox Name="TxtBxPgrmNm" TextWrapping="Wrap" VerticalAlignment="Top" Text="O1000"  Background="AliceBlue" BorderThickness="1" Padding="5 5" Height="30" IsEnabled="False"/>
                                                                                             </DockPanel>
                                                                                         </StackPanel>
                                                                                     </Grid>
@@ -2024,9 +2040,10 @@
                                                                                         <ListBox.ItemTemplate>
                                                                                             <DataTemplate>
                                                                                                 <StackPanel>
-                                                                                                    <CheckBox IsChecked="{Binding isChecked}">
-                                                                                                        <Label Content="{Binding machName}" Visibility="Visible"/>
-                                                                                                    </CheckBox>
+                                                                                                    <DockPanel>
+                                                                                                        <Label Content="{Binding machId}" Visibility="Collapsed"/>
+                                                                                                        <CheckBox Content="{Binding machName}" IsChecked="{Binding isChecked}"/>
+                                                                                                    </DockPanel>
                                                                                                 </StackPanel>
                                                                                             </DataTemplate>
                                                                                         </ListBox.ItemTemplate>
@@ -2041,7 +2058,7 @@
                                                                                     </DockPanel>
 
                                                                                     <DockPanel HorizontalAlignment="Right" Margin="0 0 25 10">
-                                                                                        <Button Name="BtnOpMessApplyToMach" Height="30" Width="100" ToolTip="Save Changes" Margin="0,10,0,0" BorderThickness="1" BorderBrush="Black" >
+                                                                                        <Button Name="BtnOpMessApplyToMach" Height="30" Width="100" ToolTip="Save Changes" Margin="0,10,0,0" BorderThickness="1" BorderBrush="Black" Click="BtnOpMessApplyToMach_Click" >
                                                                                             <Grid Margin="-10,-5">
                                                                                                 <materialDesign:PackIcon Kind="CheckBold" Width="17" Height="17" />
                                                                                                 <TextBlock Text="Apply" Margin="25 0 0 0"/>
@@ -2206,7 +2223,7 @@
                                                             <Grid>
                                                                 <Border Margin="0 0 0 0">
                                                                     <StackPanel Margin="2 0 0 0" Background="Transparent">
-                                                                        <TreeView  >
+                                                                        <TreeView>
                                                                             <TreeViewItem Name="GeneralTvI" Foreground="White" Margin="32 10 0 0" IsSelected="True" >
                                                                                 <TreeViewItem.Header >
                                                                                     <Grid Name="GeneralGrid" Background="Transparent" Width="200" Height="25" MouseDown="GeneralGrid_MouseDown">
@@ -2464,16 +2481,29 @@
                                                         </Grid>
 
                                                     </DockPanel>
-                                                    <ListBox Name="LstBoxMachLvl1" Background="White" Height="300" Margin="5" BorderBrush="Black" BorderThickness="1" AllowDrop="True" Drop="LstBoxMachLvl1_Drop" MouseMove="LstBoxMachLvl1_MouseMove" PreviewMouseLeftButtonDown="LstBoxMachLvl1_PreviewMouseLeftButtonDown" >
+                                                    <ListBox Name="LstBoxMachLvl1" Background="White" Height="300" Margin="5" BorderBrush="Black" BorderThickness="1" AllowDrop="True" PreviewMouseLeftButtonDown="LstBoxMachLvl1_PreviewMouseLeftButtonDown" >
                                                         <ListBox.ItemTemplate>
                                                             <DataTemplate>
                                                                 <Grid>
                                                                     <TextBlock Text="{Binding MachLvl1_ID}"  Visibility="Hidden"/>
                                                                     <TextBlock Text="{Binding MachLvl1_Name}" />
                                                                     <TextBlock Text="{Binding MachLvl1_Level}" Visibility="Hidden"/>
+                                                                    
+                                                                    
                                                                 </Grid>
                                                             </DataTemplate>
                                                         </ListBox.ItemTemplate>
+                                                        <ListBox.ContextMenu>
+                                                            <ContextMenu>
+                                                                <MenuItem Header="Assign to Level 1" IsEnabled="False"/>
+                                                                <MenuItem Header="Assign to Level 2"/>
+                                                                <MenuItem Header="Assign to Level 3"/>
+                                                                <Separator/>
+                                                                <MenuItem Header="Select All"/>
+                                                                <MenuItem Header="Deselect All"/>
+                                                            </ContextMenu>
+                                                        </ListBox.ContextMenu>
+
                                                     </ListBox>
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="1">
@@ -2495,7 +2525,7 @@
                                                         </Grid>
 
                                                     </DockPanel>
-                                                    <ListBox Name="LstBoxMachLvl2" Background="White" Height="300" Margin="5" BorderBrush="Black" BorderThickness="1" AllowDrop="True">
+                                                    <ListBox Name="LstBoxMachLvl2" Background="White" Height="300" Margin="5" BorderBrush="Black" BorderThickness="1" AllowDrop="True" PreviewMouseLeftButtonDown="LstBoxMachLvl2_PreviewMouseLeftButtonDown" Drop="LstBoxMachLvl2_Drop">
                                                         <ListBox.ItemTemplate>
                                                             <DataTemplate>
                                                                 <Grid>
