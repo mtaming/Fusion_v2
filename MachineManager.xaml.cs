@@ -27,6 +27,7 @@ using DataObject = System.Windows.DataObject;
 using System.ComponentModel;
 using System.Collections;
 using System.Windows.Media.Animation;
+using System.IO;
 
 namespace Fusion_v2
 {
@@ -642,6 +643,7 @@ namespace Fusion_v2
 
                             int MachId = int.Parse(dr["machine_id"].ToString());
                             selMachID.Text = MachId.ToString();
+                            selMachLvl.Text = machine_level;
                             machlvl = machine_level;
 
                             //Fill controls
@@ -674,49 +676,57 @@ namespace Fusion_v2
                             }//machine level
 
                             //communication option
-                            //if (commOpt.Contains("flashDNC"))//flashDNC
-                            //{
-                            //    FlashDNCStckPnl.IsEnabled = false;
-                            //    CbxFlashDNC.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    FlashDNCStckPnl.IsEnabled = false;
-                            //    CbxFlashDNC.IsChecked = false;
-                            //}
+                            if (commOpt.Contains("None"))
+                            {
+                                FldrWtchTvI.IsEnabled = false;
+                                FocasTvI.IsEnabled = false;
+                                FtpTvI.IsEnabled = false;
+                                NportTvI.IsEnabled = false;
+                                SockTvI.IsEnabled = false;
+                            }
+                            if (commOpt.Contains("DncLink"))//folder watch
+                            {
+                                CbxFldrWtch.IsChecked = true;
+                                CbxFldrWtch.IsEnabled = false;
+                                FldrWtchTvI.IsEnabled = true;
+                                FldrWtch.IsEnabled = false;
 
-                            //if (commOpt.Contains("Focas"))//focas
-                            //{
-                            //    CommFocasStckPnl.IsEnabled = false;
-                            //    CbxFocas.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    CommFocasStckPnl.IsEnabled = false;
-                            //    CbxFocas.IsChecked = false;
-                            //}
-
-                            //if (commOpt.Contains("Socket"))//socket
-                            //{
-                            //    CommSockStkPnl.IsEnabled = false;
-                            //    CbxSocket.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    CommSockStkPnl.IsEnabled = false;
-                            //    CbxSocket.IsChecked = false;
-                            //}
-
-                            //if (commOpt.Contains("DncLink"))//folder watch
-                            //{
-                            //    CommFldrWtchStkPnl.IsEnabled = false;
-                            //    CbxFldrWtch.IsChecked = true;
-                            //}
-                            //else
-                            //{
-                            //    CommFldrWtchStkPnl.IsEnabled = false;
-                            //    CbxFldrWtch.IsChecked = false;
-                            //}
+                            }
+                            else
+                            {
+                                CbxFldrWtch.IsChecked = false;
+                                CbxFldrWtch.IsEnabled = false;
+                                FldrWtchTvI.IsEnabled = false;
+                                FldrWtch.IsEnabled = false;
+                            }
+                            if (commOpt.Contains("Focas"))//focas
+                            {
+                                CbxFocas.IsChecked = true;
+                                CbxFocas.IsEnabled = false;
+                                FocasTvI.IsEnabled = true;
+                                Focas.IsEnabled = false;
+                            }
+                            else
+                            {
+                                CbxFocas.IsChecked = false;
+                                CbxFocas.IsEnabled = false;
+                                FocasTvI.IsEnabled = false;
+                                Focas.IsEnabled = false;
+                            }
+                            if (commOpt.Contains("Socket"))//socket
+                            {
+                                CbxSocket.IsChecked = true;
+                                CbxSocket.IsEnabled = false;
+                                SockTvI.IsEnabled = true;
+                                Socket.IsEnabled = false;
+                            }
+                            else
+                            {
+                                CbxSocket.IsChecked = false;
+                                CbxSocket.IsEnabled = false;
+                                SockTvI.IsEnabled = false;
+                                Socket.IsEnabled = false;
+                            }
 
 
                             //General Controls
@@ -726,40 +736,74 @@ namespace Fusion_v2
                             TxtBoxFacId.Text = facility_id;
                             TxtBoxNotes.Text = notes;
 
-                            
+                            //Folder Watch
+                            TxtBoxFldrWtchFldrDes.Text = dr["FolderWatch"].ToString() ;
+                            string fldrWtchOpt = dr["FolderWatchOption"].ToString();
+                            if (fldrWtchOpt == "optIncoming")
+                            {
+                                rbFldrWthcMvInFile.IsChecked = true;
+                                rbFldrWtchDNC.IsChecked = false;
+                                rbFldrWtchTCP.IsChecked = false;
+                            }
+                            else if (fldrWtchOpt == "optDNC")
+                            {
+                                rbFldrWthcMvInFile.IsChecked = false;
+                                rbFldrWtchDNC.IsChecked = true;
+                                rbFldrWtchTCP.IsChecked = false;
+                            }
+                            else if (fldrWtchOpt == "optTransfer")
+                            {
+                                rbFldrWthcMvInFile.IsChecked = false;
+                                rbFldrWtchDNC.IsChecked = false;
+                                rbFldrWtchTCP.IsChecked = true;
+                            }
+
+                            //Focas
+                            TxtBxFocSttcAdd.Text = "";
+
+                            //socket
+
+
                         }
                     }
 
                     dr.Close();
                     sqlCon.Close();
 
-                    sqlCon.Open();
-                    string machLvl = "SELECT COUNT(machineLevel) as machlvl FROM MACHINE WHERE machineLevel = '" + machlvl + "'";
-                    SqlCommand cmd3 = new SqlCommand(machLvl, sqlCon);
-                    var dr3 = cmd3.ExecuteReader();
-                    dr3.Read();
-                    string lvl = machlvl;
-                    if (lvl == "1")
-                    {
-                        lblAvMach.Content = "Unlimited";
-                        lblUsMach.Content = dr3["machlvl"].ToString();
-                    }
-                    else if(lvl == "2"){
-                        lblAvMach.Content = MACHLEVEL2 - int.Parse(dr3["machlvl"].ToString());
-                        lblUsMach.Content = dr3["machlvl"].ToString();
-                    }
-                    else
-                    {
-                        lblAvMach.Content = MACHLEVEL3 - int.Parse(dr3["machlvl"].ToString());
-                        lblUsMach.Content = dr3["machlvl"].ToString();
-                    }
-                    sqlCon.Close();
-                    dr3.Close();
+                    AvailableMachinePerLevel();
                 }
             }
             catch (Exception ex) { ex.Message.ToString(); }
         }
 
+        public void AvailableMachinePerLevel()
+        {
+            string machlvl = selMachLvl.Text;
+            SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+            string machLvl = "SELECT COUNT(machineLevel) as machlvl FROM MACHINE WHERE machineLevel = '" + machlvl + "'";
+            SqlCommand cmd3 = new SqlCommand(machLvl, sqlCon);
+            var dr3 = cmd3.ExecuteReader();
+            dr3.Read();
+            string lvl = machlvl;
+            if (lvl == "1")
+            {
+                lblAvMach.Content = "Unlimited";
+                lblUsMach.Content = dr3["machlvl"].ToString();
+            }
+            else if (lvl == "2")
+            {
+                lblAvMach.Content = MACHLEVEL2 - int.Parse(dr3["machlvl"].ToString());
+                lblUsMach.Content = dr3["machlvl"].ToString();
+            }
+            else
+            {
+                lblAvMach.Content = MACHLEVEL3 - int.Parse(dr3["machlvl"].ToString());
+                lblUsMach.Content = dr3["machlvl"].ToString();
+            }
+            sqlCon.Close();
+            dr3.Close();
+        }
         private void BtnNextMach_Click(object sender, RoutedEventArgs e)
         {
             if (cmbBxMach.SelectedIndex < cmbBxMach.Items.Count - 1)
@@ -888,78 +932,6 @@ namespace Fusion_v2
             catch (Exception ex) { ex.Message.ToString(); }
         }
 
-        public object lb_item = null;
-
-
-
-        //public void MachLevel2Query()
-        //{
-        //    LstBoxMachLvl2.ItemsSource = null;
-        //    machLvl2 = new List<MachLevel2>();
-
-        //    try
-        //    {
-        //        SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-        //        sqlCon.Open();
-        //        string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 2 ORDER BY machine_name";
-        //        SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        DataSet ds = new DataSet();
-        //        da.Fill(ds, "MACHINE");
-
-        //        foreach (DataRow dr in ds.Tables[0].Rows)
-        //        {
-        //            machLvl2.Add(new MachLevel2()
-        //            {
-        //                MachLvl2_ID = int.Parse(dr["machine_id"].ToString()),
-        //                MachLvl2_Name = dr["machine_name"].ToString(),
-        //                MachLvl2_Level = dr["machineLevel"].ToString()
-        //            });
-        //        }
-        //        LstBoxMachLvl2.ItemsSource = machLvl2;
-
-        //        da.Dispose();
-        //        ds.Dispose();
-        //        sqlCon.Close();
-        //    }
-        //    catch (Exception ex) { ex.Message.ToString(); }
-        //}
-
-        //public void MachLevel3Query()
-        //{
-        //    LstBoxMachLvl3.ItemsSource = null;
-        //    machLvl3 = new List<MachLevel3>();
-
-        //    try
-        //    {
-        //        SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
-        //        sqlCon.Open();
-        //        string mach_query = "SELECT * FROM MACHINE WHERE machineLevel = 3 ORDER BY machine_name";
-        //        SqlCommand cmd = new SqlCommand(mach_query, sqlCon);
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        DataSet ds = new DataSet();
-        //        da.Fill(ds, "MACHINE");
-
-        //        foreach (DataRow dr in ds.Tables[0].Rows)
-        //        {
-        //            machLvl3.Add(new MachLevel3()
-        //            {
-        //                MachLvl3_ID = int.Parse(dr["machine_id"].ToString()),
-        //                MachLvl3_Name = dr["machine_name"].ToString(),
-        //                MachLvl3_Level = dr["machineLevel"].ToString()
-        //            });
-        //        }
-        //        LstBoxMachLvl3.ItemsSource = machLvl3;
-
-        //        da.Dispose();
-        //        ds.Dispose();
-        //        sqlCon.Close();
-        //    }
-        //    catch (Exception ex) { ex.Message.ToString(); }
-        //}
-
-        //drag drop functions 
-
         ListBox dragSource = null;
 
         private void LstBoxMachLvl1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1030,7 +1002,36 @@ namespace Fusion_v2
         #region Add, Edit, Delete, Cancel
         private void btnAddNewMach_Click(object sender, RoutedEventArgs e)
         {
-            GeneralGrid.MouseDown += GeneralGrid_MouseDown;
+            FocasSetGrid.Visibility = Visibility.Collapsed;
+            SocketSetGrid.Visibility = Visibility.Collapsed;
+            FolderWtchSetGrid.Visibility = Visibility.Collapsed;
+            NportSetGrid.Visibility = Visibility.Collapsed;
+            FTPSetGrid.Visibility = Visibility.Collapsed;
+            RemReqSetGrid.Visibility = Visibility.Collapsed;
+            ParRulesSetGrid.Visibility = Visibility.Collapsed;
+            InFileSetGrid.Visibility = Visibility.Collapsed;
+            OpMessageSetGrid.Visibility = Visibility.Collapsed;
+            PersonnelSetGrid.Visibility = Visibility.Collapsed;
+            GenSetGrid.Visibility = Visibility.Visible;
+            GeneralTvI.IsSelected = true;
+            genIcon.Foreground = Brushes.Khaki;
+            gentb.Foreground = Brushes.Khaki;
+
+            commIcon.Foreground = Brushes.White;
+            commtb.Foreground = Brushes.White;
+
+            remreqicon.Foreground = Brushes.White;
+            remreqtb.Foreground = Brushes.White;
+
+            opmessicon.Foreground = Brushes.White;
+            opmesstb.Foreground = Brushes.White;
+
+            personsicon.Foreground = Brushes.White;
+            persontb.Foreground = Brushes.White;
+
+            infileicon.Foreground = Brushes.White;
+            infiletb.Foreground = Brushes.White;
+            mchLstBrdr.IsEnabled = false;
             rbMachLvl1.IsEnabled = true;
             rbMachLvl2.IsEnabled = true;
             rbMachLvl3.IsEnabled = true;
@@ -1060,15 +1061,31 @@ namespace Fusion_v2
 
             if (rbMachLvl1.IsChecked == true)
             {
-                //FlashDNCStckPnl.IsEnabled = true;
-                CommFocasStckPnl.IsEnabled = true;
-                CommSockStkPnl.IsEnabled = true;
-                CommFldrWtchStkPnl.IsEnabled = true;
-
-                //CbxFlashDNC.IsChecked = false;
-                CbxFocas.IsChecked = false;
-                CbxSocket.IsChecked = false;
+                FldrWtchTvI.IsEnabled = true;
+                FocasTvI.IsEnabled = false;
+                SockTvI.IsEnabled = false;
+                CbxFldrWtch.IsEnabled = true;
                 CbxFldrWtch.IsChecked = false;
+            }
+            else if (rbMachLvl2.IsChecked == true)
+            {
+                FldrWtchTvI.IsEnabled = true;
+                FocasTvI.IsEnabled = false;
+                SockTvI.IsEnabled = false;
+                CbxFldrWtch.IsEnabled = true;
+                CbxFldrWtch.IsChecked = false;
+            }
+            else if (rbMachLvl3.IsChecked == true)
+            {
+                FldrWtchTvI.IsEnabled = true;
+                FocasTvI.IsEnabled = true;
+                SockTvI.IsEnabled = true;
+                CbxFldrWtch.IsEnabled = true;
+                CbxFldrWtch.IsChecked = false;
+                CbxFocas.IsEnabled = true;
+                CbxFocas.IsChecked = false;
+                CbxSocket.IsEnabled = true;
+                CbxSocket.IsChecked = false;
             }
         }
 
@@ -1134,6 +1151,7 @@ namespace Fusion_v2
         
         public void Cancel()
         {
+            mchLstBrdr.IsEnabled = true;
             rbMachLvl1.IsEnabled = false;
             rbMachLvl2.IsEnabled = false;
             rbMachLvl3.IsEnabled = false;
@@ -1155,6 +1173,7 @@ namespace Fusion_v2
             //MachListBox.IsEnabled = true;
             CmbBoxCtrlPgrmGrp.Visibility = Visibility.Collapsed;
             TxtBoxCtrlPgrmGrp.Visibility = Visibility.Visible;
+
             LoadMachinesQuery();
         }
 
@@ -1162,6 +1181,7 @@ namespace Fusion_v2
         //edit selected machine
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            mchLstBrdr.IsEnabled = false;
             rbMachLvl1.IsEnabled = true;
             rbMachLvl2.IsEnabled = true;
             rbMachLvl3.IsEnabled = true;
@@ -1184,18 +1204,22 @@ namespace Fusion_v2
             FillComboBoxCntrlPgrmGrp(CmbBoxCtrlPgrmGrp);
             CmbBoxCtrlPgrmGrp.SelectedIndex = int.Parse(txtCPG_id.Text) - 1;
 
-            if (rbMachLvl1.IsChecked == true)
+            if (CbxSocket.IsChecked == true)
             {
-                //FlashDNCStckPnl.IsEnabled = true;
-                CommFocasStckPnl.IsEnabled = true;
-                CommSockStkPnl.IsEnabled = true;
-                CommFldrWtchStkPnl.IsEnabled = true;
-
-                //CbxFlashDNC.IsChecked = false;
-                CbxFocas.IsChecked = false;
-                CbxSocket.IsChecked = false;
-                CbxFldrWtch.IsChecked = false;
+                CbxSocket.IsEnabled = true;
+                Socket.IsEnabled = true;
             }
+            if (CbxFldrWtch.IsChecked == true)
+            {
+                CbxFldrWtch.IsEnabled = true;
+                FldrWtch.IsEnabled = true;
+            }
+            if (CbxFocas.IsChecked == true)
+            {
+                CbxFocas.IsEnabled = true;
+                Focas.IsEnabled = true;
+            }
+
         }
 
         private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
@@ -1293,6 +1317,70 @@ namespace Fusion_v2
         }
 
         #endregion
+
+        //general
+        private void rbMachLvl1_Checked(object sender, RoutedEventArgs e)
+        {
+            FldrWtchTvI.IsEnabled = true;
+            rbFldrWtchDNC.IsEnabled = false;
+            rbFldrWtchTCP.IsEnabled = false;
+            SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+            string machLvl = "SELECT COUNT(machineLevel) as machlvl FROM MACHINE WHERE machineLevel = '1'";
+            SqlCommand cmd3 = new SqlCommand(machLvl, sqlCon);
+            var dr3 = cmd3.ExecuteReader();
+            dr3.Read();
+            lblAvMach.Content = "Unlimited";
+            lblUsMach.Content = dr3["machlvl"].ToString();
+            sqlCon.Close();
+            dr3.Close();
+            FldrWtchTvI.IsEnabled = true;
+            CbxFldrWtch.IsEnabled = true;
+            CbxFldrWtch.IsChecked = false;
+        }
+
+        private void rbMachLvl2_Checked(object sender, RoutedEventArgs e)
+        {
+            rbFldrWtchDNC.IsEnabled = false;
+            rbFldrWtchTCP.IsEnabled = false;
+            SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+            string machLvl = "SELECT COUNT(machineLevel) as machlvl FROM MACHINE WHERE machineLevel = '2'";
+            SqlCommand cmd3 = new SqlCommand(machLvl, sqlCon);
+            var dr3 = cmd3.ExecuteReader();
+            dr3.Read();
+            lblAvMach.Content = MACHLEVEL2 - int.Parse(dr3["machlvl"].ToString());
+            lblUsMach.Content = dr3["machlvl"].ToString();
+            sqlCon.Close();
+            dr3.Close();
+            FldrWtchTvI.IsEnabled = true;
+            CbxFldrWtch.IsEnabled = true;
+            CbxFldrWtch.IsChecked = false;
+        }
+        private void rbMachLvl3_Checked(object sender, RoutedEventArgs e)
+        {
+            rbFldrWtchDNC.IsEnabled = true;
+            rbFldrWtchTCP.IsEnabled = true;
+            SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.dbConnString);
+            sqlCon.Open();
+            string machLvl = "SELECT COUNT(machineLevel) as machlvl FROM MACHINE WHERE machineLevel = '3'";
+            SqlCommand cmd3 = new SqlCommand(machLvl, sqlCon);
+            var dr3 = cmd3.ExecuteReader();
+            dr3.Read();
+            lblAvMach.Content = MACHLEVEL3 - int.Parse(dr3["machlvl"].ToString());
+            lblUsMach.Content = dr3["machlvl"].ToString();
+            sqlCon.Close();
+            dr3.Close();
+            FldrWtchTvI.IsEnabled = true;
+            FocasTvI.IsEnabled = true;
+            SockTvI.IsEnabled = true;
+            CbxFldrWtch.IsEnabled = true;
+            CbxFldrWtch.IsChecked = false;
+            CbxFocas.IsEnabled = true;
+            CbxFocas.IsChecked = false;
+            CbxSocket.IsEnabled = true;
+            CbxSocket.IsChecked = false;
+        }
 
         //socket settings function
 
@@ -1611,7 +1699,18 @@ namespace Fusion_v2
             diag.Description = "Please select a folder destination.";
             if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                TxtBoxFldrWtchFldrDes.Text = diag.SelectedPath;
+                txtSelFldrDes.Text = diag.SelectedPath;
+                string[] files = System.IO.Directory.GetFiles(diag.SelectedPath);
+                string[] subdirectoryEntries = Directory.GetDirectories(diag.SelectedPath);
+                if (files.Length != 0 || subdirectoryEntries.Length != 0)
+                {
+                    txtFolder.Text = txtSelFldrDes.Text;
+                    FolderInfoGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    TxtBoxFldrWtchFldrDes.Text = diag.SelectedPath;
+                }
             }
         }
         private void CbxFldrWtch_Checked(object sender, RoutedEventArgs e)
@@ -1632,7 +1731,7 @@ namespace Fusion_v2
                 cbxFldrWtchComOutFoc.IsChecked = false;
                 FocasTvI.Visibility = Visibility.Visible;
             }
-            TxtBoxFldrWtchFldrDes.Clear();
+            //TxtBoxFldrWtchFldrDes.Clear();
         }
         private void chkBFldrWtchComOut_Checked(object sender, RoutedEventArgs e)
         {
@@ -1666,6 +1765,12 @@ namespace Fusion_v2
         }
 
         private void rbFldrWthcMvInFile_Click(object sender, RoutedEventArgs e)
+        {
+            FldrWtchDNCLnkStckPnl.Visibility = Visibility.Collapsed;
+            TcpTrnsfrStckPnl.Visibility = Visibility.Collapsed;
+            txtInst.Text = "When a new file is detected in the selected Watch Folder, move it to the Fusion Incoming File Manager.";
+        }
+        private void rbFldrWthcMvInFile_Checked(object sender, RoutedEventArgs e)
         {
             FldrWtchDNCLnkStckPnl.Visibility = Visibility.Collapsed;
             TcpTrnsfrStckPnl.Visibility = Visibility.Collapsed;
@@ -1753,6 +1858,44 @@ namespace Fusion_v2
             FldWIP4.Clear();
         }
 
+        private void BtnBrwsDesFldr_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog diag = new FolderBrowserDialog();
+            diag.Description = "Please select a destination folder for the folder watch processed file.";
+            if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //TxtBxDesFldr.Text = diag.SelectedPath;
+                
+            }
+        }
+        private void BtnCancelFldrInfo_Click(object sender, RoutedEventArgs e)
+        {
+            FolderInfoGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void BtnOkFldrInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (rbNo.IsChecked == true)
+            {
+                FolderInfoGrid.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Please remove files and subfolders in your selected Folder.\nOpening specified folder ....", "Fusion PDO - Machine Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if(rbYes.IsChecked == true)
+            {
+                System.IO.DirectoryInfo di = new DirectoryInfo(txtSelFldrDes.Text);
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
+                FolderInfoGrid.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Successfully deleted all files and subfolders. You may now use this folder as your watch folder.", "Fusion PDO - Machine Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+                TxtBoxFldrWtchFldrDes.Text = txtSelFldrDes.Text;
+            }
+        }
 
 
         //Remote Request
